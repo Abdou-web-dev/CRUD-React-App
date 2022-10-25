@@ -30,16 +30,47 @@
         font-size: 30px;
         color: gray;
       }
-      .workout-infos-span2 {
-      }
-      .workout-infos-span3 {
-      }
-      .workout-infos-span4 {
+      .workout-infos-span2-wrapper-div {
+        // padding: 50px 20px 0px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        &:hover {
+          background: rgba(211, 211, 211, 0.193);
+        }
+        padding: 0px 50px;
+        .workout-infos-span2 {
+        }
+        .workout-infos-span3 {
+        }
+        .workout-infos-span4 {
+        }
       }
     }
 
     .workout-infos-howto-do {
+      margin-top: 20px;
       span {
+        display: block;
+      }
+      span.workout-infos-howto-do-span1 {
+      }
+    }
+    .workout-infos-sign {
+      margin-top: 20px;
+      span.workout-infos-sign-span {
+        display: block;
+      }
+      .workout-infos-sign-btn {
+        height: fit-content;
+        border: none;
+        background: none;
+        img {
+          display: block;
+          width: 30px;
+          height: 30px;
+        }
       }
     }
   }

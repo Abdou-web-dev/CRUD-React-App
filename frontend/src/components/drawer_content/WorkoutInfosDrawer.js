@@ -6,7 +6,8 @@ export function WorkoutInfosDrawer({ workoutTitle, setsize }) {
     let infos =
       workoutTitle === "Barbell Flat Bench Press"
         ? {
-            description: "aa",
+            description:
+              "The bench press is a classic exercise. Powerlifters do it to see who has the most pressing strength, gym rats use it to build up their pecs, and athletes utilize the bench for explosive pushing power.            ",
             benefits: {
               b1: "This lift is a necessiry for powerlifters, since it’s one of the three lifts judged in a powerlifting meet.",
               b2: "The bench press recruits muscles in the chest, triceps, and shoulders — so you’ll build a muscular torso",
@@ -51,7 +52,7 @@ export function WorkoutInfosDrawer({ workoutTitle, setsize }) {
         : workoutTitle === "Dumbbell Bench Press"
         ? {
             description:
-              "The dumbbell bench press doesn’t allow you to go as heavy as its barbell counterpart, but there’s a lot to like about this move. For one, you’re controlling two dumbbells, which works your chest (and the smaller stabilizer muscles around your shoulder joint) differently than the bench press.             ",
+              "The dumbbell bench press doesn’t allow you to go as heavy as its barbell counterpart, but there’s a lot to like about this move. For one, you’re controlling two dumbbells, which works your chest (and the smaller stabilizer muscles around your shoulder joint) differently than the bench press.",
             benefits: {
               b1: "It’s easier to find a pressing position that’s more comfortable for someone who may have shoulder or elbow aches. ",
               b2: "You’ll acquire more joint and muscle stability from lifting two separate dumbbells.            ",
@@ -68,7 +69,7 @@ export function WorkoutInfosDrawer({ workoutTitle, setsize }) {
               b2: "You can also really do a lot of pushups, so you’ll accumulate more muscle-building tension over time.            ",
             },
             howToDo:
-              "Get into a plank position, with your hands underneath your shoulders, back flat, and feet together. Screw your palms into the ground. You should feel your chest tighten. Hold this position, and then slowly lower yourself until your chest is about an inch from the floor. Now, drive back up through the palms of your hands.             ",
+              "Get into a plank position, with your hands underneath your shoulders, back flat, and feet together. Screw your palms into the ground. You should feel your chest tighten. Hold this position, and then slowly lower yourself until your chest is about an inch from the floor. Now, drive back up through the palms of your hands.",
           }
         : workoutTitle === "Dip"
         ? {
@@ -93,7 +94,8 @@ export function WorkoutInfosDrawer({ workoutTitle, setsize }) {
           }
         : workoutTitle === "Cable Iron Cross"
         ? {
-            description: "c",
+            description:
+              "The iron cross is a gymnastics classic, but when performed in a cable tree can be great for physique development too. This exercise stretches your chest muscles from the start and takes you through a large range of motion for better chest building potential.",
             benefits: {
               b1: "Keeps tension on the working muscles for better muscle-building potential.             ",
               b2: `Isolates and takes the lower chest muscles through a larger range of motion compared to the dumbbell variation.            `,

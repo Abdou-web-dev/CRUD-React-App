@@ -15,6 +15,8 @@
   .ant-modal-header {
     .ant-modal-title {
       .social-modal-title {
+        margin-top: 10px;
+
         .social-modal-title-span1 {
           font-family: "Inconsolata";
           font-size: 30px;
@@ -33,6 +35,8 @@
     background: pink;
 
     .modal-content {
+      margin-bottom: 20px;
+
       .modal-content-fb {
         border-radius: 10px;
         border: 1px solid #3b5998;
@@ -53,6 +57,14 @@
         border-radius: 10px;
         border: 1px solid #e62117;
       }
+    }
+  }
+
+  .ant-modal-close {
+    .ant-modal-close-x {
+      position: relative;
+      bottom: 30px;
+      left: 30px;
     }
   }
 }
