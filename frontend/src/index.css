@@ -1,0 +1,26 @@
+/* google font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
+
+/* layout */
+:root {
+  --primary: #1aac83;
+  --error: #e7195a;
+}
+body {
+  background: rgba(167, 224, 191, 0.05);
+  margin: 0;
+  font-family: "Poppins";
+  overflow-x: hidden;
+  padding-left: 20px;
+}
+
+.pages {
+  max-width: 1400px;
+  width: 100%;
+  padding: 20px;
+  margin: 0 auto;
+}
+.changeBGColor {
+  /* background-color: rgba(168, 228, 250, 0.1); */
+  /* background-color: white; */
+}

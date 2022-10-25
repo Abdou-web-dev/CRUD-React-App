@@ -1,0 +1,116 @@
+@import "@fontsource/mulish";
+
+.chest-exos-list-container {
+  width: 95%;
+  padding: 40px 30px;
+  margin-left: 30px;
+
+  .chest-exos-paragraph {
+    font-family: "Mulish";
+    font-size: 18px;
+  }
+  .first-three-btns {
+    .first-three-btns-btn {
+      height: 100%;
+
+      .btn-label {
+        white-space: normal;
+      }
+    }
+  }
+  .ellipsis-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* in order for corresponding css styles to work on modal content and footer (when working with antd Modal), we need to specify a className for Modal wrapper, also for  */
+/* its children , but we must not nest it in the css rule selector of the golbal container of the component */
+
+.chest-exos-list-modal {
+  .ant-modal-content {
+    border-radius: 5px;
+    background: #fdfdfbf9;
+    &:hover {
+      background: white;
+    }
+
+    .ant-modal-body {
+      height: 440px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .chest-exos-list-modal-inner {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 150px;
+
+        .close-icon {
+          // margin-top: 50px;
+          display: flex;
+          align-self: flex-end;
+          position: relative;
+          top: 40px;
+          // bottom: 55px;
+          left: 35px;
+
+          .close-icon-btn {
+            &:hover {
+              color: red;
+              transition: 0.6s ease;
+            }
+          }
+        }
+
+        .btns-stack {
+          .chest-modal-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            height: 50px;
+
+            &:hover {
+              background-color: #1aac83a0;
+              color: white;
+              border: none;
+            }
+            .btn-label {
+              white-space: normal;
+            }
+            .modal-btn-eye-icon-wrapper {
+              margin-left: 8px;
+              height: 24px;
+            }
+          }
+          &.chest-exos-modal-btns-stack1 {
+            border: 1px solid lightgray;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 50px;
+          }
+          &.chest-exos-modal-btns-stack2 {
+            border: 1px solid lightgray;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 40px 0px;
+          }
+          &.chest-exos-modal-btns-stack3 {
+            border: 1px solid lightgray;
+            border-radius: 10px;
+            padding: 25px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.ant-modal-title {
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins";
+}

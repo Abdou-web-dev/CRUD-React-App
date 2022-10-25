@@ -1,0 +1,61 @@
+.chest-page-container {
+  width: 100%;
+  max-width: 1400px;
+  height: 100%;
+  //setting minheight to 1400px will prevent the page fro mscrolling to the top when navigating between chest sub pages
+  min-height: 1400px;
+  // padding-bottom: 400px;
+  // border: 1px solid red;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  // display: flex;
+  // flex-direction: row;
+  gap: 30px;
+  .chest-workouts {
+    // flex: 70%;
+  }
+  .chest-form {
+    // flex: 30%;
+  }
+  .divider {
+  }
+}
+.pagination-content-loaded {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 100px 0px;
+  margin-top: 70px;
+}
+
+.skeleton-content-not-loaded {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .pagination-content-not-loaded {
+    align-self: center;
+    transform: scale(1.2);
+  }
+  .spinner {
+    position: absolute;
+    top: 35%;
+    left: 35%;
+    transform: scale(2);
+  }
+}
+
+//by default , components nested inside mui Skeleton component are in the DOM but hidden, so we type this to make the antd Skeleton child be visible
+.MuiSkeleton-root {
+  &.MuiSkeleton-rectangular {
+    &.MuiSkeleton-pulse {
+      &.MuiSkeleton-withChildren {
+        & > * {
+          visibility: visible !important;
+        }
+      }
+    }
+  }
+}
+// html : class="MuiSkeleton-root MuiSkeleton-rectangular MuiSkeleton-pulse MuiSkeleton-withChildren"

@@ -1,0 +1,46 @@
+@import "@fontsource/open-sans";
+@import "@fontsource/inconsolata";
+@import "@fontsource/mulish";
+@import "@fontsource/roboto";
+
+.workout-infos {
+  .workout-infos-title {
+    span {
+      font-family: "Mulish";
+      //   padding: 20px;
+      font-weight: 700;
+      font-size: 30px;
+    }
+  }
+  .workout-infos-other-infos {
+    .workout-infos-span1-wrapper {
+      span {
+        font-family: "Roboto";
+        font-weight: normal;
+        font-size: 20px;
+      }
+    }
+    .workout-infos-span2-wrapper {
+      span {
+        display: block;
+      }
+      .workout-infos-span1 {
+        font-family: "Open-Sans";
+        font-weight: normal;
+        font-size: 30px;
+        color: gray;
+      }
+      .workout-infos-span2 {
+      }
+      .workout-infos-span3 {
+      }
+      .workout-infos-span4 {
+      }
+    }
+
+    .workout-infos-howto-do {
+      span {
+      }
+    }
+  }
+}

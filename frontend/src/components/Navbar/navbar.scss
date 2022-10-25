@@ -1,0 +1,50 @@
+@import "@fontsource/open-sans";
+
+.workout-app-navbar {
+  padding-top: 100px;
+  // background: url(../../assets/videos/vid.mp4);
+
+  .workout-navbar-icon-and-exos {
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+
+    div {
+      .bullet-icon {
+        margin-top: 5px;
+      }
+    }
+
+    .navbar-ul {
+      margin-bottom: 0px;
+      .navbar-ul-li {
+        list-style: none;
+        .nav-router-link {
+          text-decoration: none;
+          &:hover {
+            border-bottom: 0.5px solid black;
+          }
+          span {
+            font-family: "Open Sans";
+            color: black;
+          }
+        }
+      }
+    }
+  }
+
+  .divider {
+    display: flex;
+    justify-content: center;
+    .the-divider {
+      min-width: auto !important;
+    }
+  }
+}
+
+// video#navbar-video {
+//   width: 100%;
+//   z-index: -1;
+//   position: fixed;
+//   opacity: 0.2;
+// }

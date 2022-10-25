@@ -1,0 +1,141 @@
+@import "@fontsource/open-sans";
+@import "@fontsource/inconsolata";
+@import "@fontsource/mulish";
+
+.social-icons-container {
+  display: flex;
+  justify-content: center;
+}
+
+.social-icon-modal-container {
+  .social-icon-btn {
+  }
+}
+.social-icon-ant-modal {
+  .ant-modal-header {
+    .ant-modal-title {
+      .social-modal-title {
+        .social-modal-title-span1 {
+          font-family: "Inconsolata";
+          font-size: 30px;
+        }
+        .social-modal-title-span2 {
+          font-family: "Open Sans";
+          font-size: 34px;
+          letter-spacing: 4px;
+          margin-left: 10px;
+          color: #585e66;
+        }
+      }
+    }
+  }
+  .ant-modal-body {
+    background: pink;
+
+    .modal-content {
+      .modal-content-fb {
+        border-radius: 10px;
+        border: 1px solid #3b5998;
+      }
+      .modal-content-ins {
+        border-radius: 10px;
+        border: 1px solid #dd2a7b;
+      }
+      .modal-content-pin {
+        border-radius: 10px;
+        border: 1px solid #c8232c;
+      }
+      .modal-content-twitter {
+        border-radius: 10px;
+        border: 1px solid #00acee;
+      }
+      .modal-content-yt {
+        border-radius: 10px;
+        border: 1px solid #e62117;
+      }
+    }
+  }
+}
+
+.modal-fb {
+  .ant-modal-header {
+  }
+  .ant-modal-body {
+    background: url(../../assets/img/facebook-bg.svg);
+  }
+}
+.modal-insta {
+  .ant-modal-header {
+  }
+  .ant-modal-body {
+    background: url(../../assets/img/instagram-bg.svg);
+  }
+}
+.modal-yt {
+  .ant-modal-body {
+    background: url(../../assets/img/youtube-bg.svg);
+  }
+}
+.modal-pin {
+  .ant-modal-body {
+    background: url(../../assets/img/pinterest-bg.svg);
+  }
+}
+.modal-twitter {
+  .ant-modal-body {
+    background: url(../../assets/img/twitter-bg.svg);
+  }
+}
+
+// mulish
+// open-sans
+// poppins
+// roboto
+
+.social-mod-cont {
+  .social-mod-cont-left {
+    padding: 20px;
+
+    p {
+      font-family: "Mulish";
+      padding: 20px;
+      font-weight: 700;
+      font-size: 20px;
+    }
+    .social-mod-cont-left-span1 {
+      font-family: "Mulish";
+      padding: 20px;
+      font-weight: 500;
+      font-size: 22px;
+    }
+    .social-mod-cont-left-span2 {
+      font-family: "Mulish";
+      padding: 20px;
+      font-weight: 900;
+      font-size: 26px;
+    }
+  }
+
+  .social-mod-cont-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+    .social-mod-cont-btn {
+      height: fit-content;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      span {
+        font-family: "Mulish";
+        font-weight: 900;
+        font-size: 26px;
+      }
+      img {
+        width: 35px;
+        height: 35px;
+      }
+    }
+  }
+}

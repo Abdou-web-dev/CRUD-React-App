@@ -1,0 +1,113 @@
+.site-drawer-render-in-current-wrapper {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  // border: 1px solid #ebedf0;
+  border-radius: 2px;
+}
+
+.workout-details-container {
+  background-color: white;
+  // background-color: #fdfdfb50;
+  margin-bottom: 20px;
+  border: 1px solid lightgray;
+  // box-shadow: 0 0 0 0.1rem rgba(26, 172, 131, 0.25);
+
+  &.border-selected {
+    border: 3px solid rgb(230, 161, 161);
+    border-radius: 5px;
+    padding: 5px 15px;
+  }
+  .work-details-left-content {
+    .work-details-left-content-inner {
+      border-radius: 4px;
+      margin: 20px auto;
+      padding: 20px;
+      position: relative;
+
+      h4 {
+        margin: 0 0 10px 0;
+        font-size: 1.6em;
+        color: var(--primary);
+        font-weight: bolder;
+      }
+
+      span {
+        margin: 0;
+        font-size: 1.15em;
+        color: #555;
+      }
+    }
+  }
+  .work-details-right-content {
+    margin-top: 12px;
+    margin-right: 12px;
+  }
+}
+
+.workout-details-drawer {
+  &.ant-drawer {
+    &.ant-drawer-open {
+      .ant-drawer-wrapper-body {
+        .ant-drawer-header {
+        }
+        .ant-drawer-body {
+          .workout-details-imgs {
+            img {
+              width: 64px;
+              height: 64px;
+              &:hover {
+                transform: scale(1.2);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.pagination-content-loaded {
+  .ant-pagination-item a {
+    color: #1890ff;
+    font-size: 30px;
+  }
+  .ant-pagination-item {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.ant-pagination-item-active {
+      background-color: #188fff15;
+    }
+  }
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    width: 54px;
+    height: 54px;
+  }
+  .anticon-left,
+  .anticon-right {
+    transform: scale(1.5);
+  }
+}
+
+.workout-details-container0,
+.workout-details-container1,
+.workout-details-container2 {
+  .ant-drawer-content-wrapper {
+    &.ant-drawer-content-wrapper-hidden {
+    }
+  }
+}
+
+// box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
+}
+
+.changeBGColor {
+  background-color: rgba(168, 228, 250, 0.1);
+}
