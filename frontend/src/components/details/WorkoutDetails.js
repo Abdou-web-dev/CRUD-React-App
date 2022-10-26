@@ -11,7 +11,7 @@ import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 import InfoIcon from "@mui/icons-material/Info";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { SocialIcons } from "../drawer_content/SocialIcons";
-import { WorkoutInfosDrawer } from "../drawer_content/WorkoutInfosDrawer";
+import { Stepper } from "../steppers/Stepper";
 import "./workout_details.scss";
 
 export const WorkoutDetails = ({ workout, index }) => {
@@ -88,7 +88,6 @@ export const WorkoutDetails = ({ workout, index }) => {
   const onClose = () => {
     setOpenDrawer(false);
   };
-  const [size, setsize] = useState("default");
 
   return (
     <>
@@ -213,16 +212,18 @@ export const WorkoutDetails = ({ workout, index }) => {
             <SocialIcons workoutTitle={workout.title}></SocialIcons>
           </div>
         </Drawer>
+      </div>
+      <div className="workout-infos-drawer-container">
         <Drawer
           className="workout-infos-drawer"
-          // title="Share on..."
           placement="right"
           closable={true}
           onClose={() => {
             setOpenInfosDrawer(false);
           }}
           open={openInfosDrawer}
-          size={size}
+          size={"large"}
+          // destroyOnClose === Whether to unmount child components on closing drawer or not
           extra={
             <Space>
               <Button
@@ -238,44 +239,10 @@ export const WorkoutDetails = ({ workout, index }) => {
           }
         >
           <div className="workout-infos-wrapper">
-            <WorkoutInfosDrawer
-              {...{ setsize }}
-              workoutTitle={workout.title}
-            ></WorkoutInfosDrawer>
+            <Stepper workoutTitle={workout.title} />
           </div>
         </Drawer>
       </div>
     </>
   );
 };
-
-// <div className={`workout-details ${workout ? "changeBGColor" : ""}`}>
-// className={`workout-details-container ${
-//   showBorder === true ? `border-selected` : ``
-// }  ${
-//   openDrawer === true ? `site-drawer-render-in-current-wrapper` : ``
-// }
-// `}
-// getContainer={
-//   index === 0
-//     ? ".workout-details-container0"
-//     : index === 1
-//     ? ".workout-details-container1"
-//     : index === 2
-//     ? ".workout-details-container2"
-//     : ""
-// }
-
-// className={`workout-details-container site-drawer-render-in-current-wrapper
-// ${
-//   index === 0
-//     ? "workout-details-container0"
-//     : index === 1
-//     ? "workout-details-container1"
-//     : index === 2
-//     ? "workout-details-container2"
-//     : ""
-// }
-//  ${
-//    openDrawer === true ? `site-drawer-render-in-current-wrapper` : ``
-//  }//we can delete this line because this class is added before

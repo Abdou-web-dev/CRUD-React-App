@@ -79,6 +79,9 @@ const Chest = ({}) => {
         <div className="chest-page-container">
           <div className="chest-workouts">
             <WorkoutsSection {...{ workouts, currentPage }}></WorkoutsSection>
+            {/* <div style={{ border: "1px solid red" }}>
+              <video src="https://www.dailymotion.com/video/x8d4w35"></video>
+            </div> */}
           </div>
           <div className="chest-form">
             <WorkoutForm {...{ setCurrentPage }} />
@@ -120,22 +123,3 @@ const Chest = ({}) => {
 };
 
 export default Chest;
-//so the solution to the scrolling prb is either to set the height of the container to 1500px min, or to put the pagination before the container
-//add a Skeleton component for the form and the list of btns in Chest page!!!!!
-// var A = ["Ram", "Z", "k", "geeksforgeeks"];
-// var iterator = A.values();
-// console.log(iterator.next().value);
-// console.log(iterator.next().value);
-
-// console.log(workoutsTitlesArray.values(), "workoutsTitlesArray");
-// console.log(Array.isArray(workoutsTitlesArray), "workoutsTitlesArray");
-// const array1 = [5, 12, 8, 130, 44];
-// const found = array1.find(element => element > 100);
-//this amazing line of code returns an array composed of titles of all workouts without duplicates
-// ['Barbell Incline Bench Press', 'Barbell Flat Bench Pressa', '   Barbell Flat Bench Press', 'Barbell Decline Bench Press', 'Chest Flye', ' Pause Push-Up', 'Barbell Flat Bench Press', 'Barbell Test', ' Cable Iron Cross', ' Close-Grip Push-Up', ' Chest Flye', ' Chaos Push-Up', 'Dip', ' Side-to-Side Landmine Press']
-// const workoutsTitlesArray = [
-//   ...new Set(workouts?.map((workout) => workout.title)),
-// ];
-
-//How can I compare two strings ignoring new line characters, white spaces, non-breaking space?
-//const pureString = str.replace(/(?:\r\n|\r|\n)/g, '');

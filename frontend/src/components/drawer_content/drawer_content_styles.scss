@@ -4,74 +4,110 @@
 @import "@fontsource/roboto";
 
 .workout-infos {
-  .workout-infos-title {
-    span {
-      font-family: "Mulish";
-      //   padding: 20px;
-      font-weight: 700;
-      font-size: 30px;
-    }
-  }
-  .workout-infos-other-infos {
-    .workout-infos-span1-wrapper {
-      span {
-        font-family: "Roboto";
-        font-weight: normal;
-        font-size: 20px;
-      }
-    }
-    .workout-infos-span2-wrapper {
-      span {
-        display: block;
-      }
-      .workout-infos-span1 {
-        font-family: "Open-Sans";
-        font-weight: normal;
-        font-size: 30px;
-        color: gray;
-      }
-      .workout-infos-span2-wrapper-div {
-        // padding: 50px 20px 0px 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100px;
-        &:hover {
-          background: rgba(211, 211, 211, 0.193);
-        }
-        padding: 0px 50px;
-        .workout-infos-span2 {
-        }
-        .workout-infos-span3 {
-        }
-        .workout-infos-span4 {
-        }
-      }
-    }
+  display: flex;
+  flex-direction: row;
 
-    .workout-infos-howto-do {
-      margin-top: 20px;
+  .workout-infos-left {
+    .workout-infos-title {
       span {
-        display: block;
-      }
-      span.workout-infos-howto-do-span1 {
+        font-family: "Mulish";
+        font-weight: 700;
+        font-size: 30px;
+        &::after {
+          content: ""; /* This is necessary for the pseudo element to work. */
+          display: block; /* This will put the pseudo element on its own line. */
+          width: 40%; /* Change this to whatever width you want. */
+          padding-top: 5px; /* This creates some space between the element and the border. */
+          border-bottom: 3px solid #9f2241; /* This creates the border. */
+          margin-left: 20px;
+        }
       }
     }
-    .workout-infos-sign {
-      margin-top: 20px;
-      span.workout-infos-sign-span {
-        display: block;
+    .workout-infos-other-infos {
+      .workout-infos-span1-wrapper {
+        margin: 25px 0px;
+        span {
+          font-family: "Open Sans";
+          font-weight: normal;
+          font-size: 20px;
+        }
       }
-      .workout-infos-sign-btn {
-        height: fit-content;
-        border: none;
-        background: none;
-        img {
+      .workout-infos-span2-wrapper {
+        span {
           display: block;
-          width: 30px;
-          height: 30px;
+        }
+        .workout-infos-span1 {
+          font-family: "Open-Sans";
+          font-weight: normal;
+          font-size: 30px;
+          color: gray;
+        }
+        .workout-infos-span2-wrapper-div {
+          // padding: 50px 20px 0px 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 60px;
+          padding: 0px 25px;
+
+          &:hover {
+            background: rgba(211, 211, 211, 0.193);
+          }
+          .workout-infos-span2 {
+            font-family: "Inconsolata";
+            font-size: 18px;
+          }
+          .workout-infos-span3 {
+            font-family: "Inconsolata";
+            font-size: 18px;
+          }
+          .workout-infos-span4 {
+            font-family: "Inconsolata";
+            font-size: 18px;
+          }
+        }
+      }
+
+      .workout-infos-howto-do {
+        margin-top: 20px;
+        span {
+          display: block;
+        }
+        span.workout-infos-howto-do-span1 {
+          font-family: "Open Sans";
+          font-weight: normal;
+          font-size: 30px;
+          color: gray;
+        }
+      }
+      .workout-infos-sign {
+        margin-top: 20px;
+        span.workout-infos-sign-span {
+          display: block;
+          font-family: "Inconsolata";
+          font-size: 18px;
+        }
+        .workout-infos-sign-btn {
+          height: fit-content;
+          border: none;
+          background: none;
+          img {
+            display: block;
+            width: 30px;
+            height: 30px;
+          }
         }
       }
     }
   }
+  .workout-infos-right {
+    align-self: center;
+  }
+}
+
+.site-infos-drawer-render-in-current-wrapper {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  border: 2px solid red;
 }

@@ -1,8 +1,20 @@
-import { Button } from "antd";
+import { Button, Image, Modal } from "antd";
+import { useState } from "react";
 import shareIcon from "../../assets/img/shareIcon.svg";
+import success from "../../assets/img/success.svg";
 import "./social_links.scss";
 
-export function SocialModalContent({ workoutTitle, exoImageUrl }) {
+export function SocialModalContent({
+  workoutTitle,
+  exoImageUrl,
+  setopenSocial,
+}) {
+  // console.log(exoImageUrl, "exoImageUrl");
+  const [showSharedModal, setShowSharedModal] = useState();
+  const handleShare = () => {
+    setShowSharedModal(true);
+    setopenSocial(false);
+  };
   return (
     <div className="social-mod-cont">
       <div className="social-mod-cont-left">
@@ -14,14 +26,33 @@ export function SocialModalContent({ workoutTitle, exoImageUrl }) {
       </div>
 
       <div className="social-mod-cont-right">
-        <Button className="social-mod-cont-btn">
+        <Button onClick={handleShare} className="social-mod-cont-btn">
           <img src={shareIcon} alt="" />
           <span>Share</span>
         </Button>
+        <div className="social-mod-cont-right-img-wrapper">
+          <Image loading={"lazy"} width={500} src={exoImageUrl} />
+        </div>
       </div>
-      <div className="social-mod-cont-right">
-        <img src={exoImageUrl} alt="" />
-      </div>
+
+      <Modal
+        className={"social-mod-cont-modal"}
+        open={showSharedModal}
+        maskClosable={true}
+        closable={true}
+        keyboard={true}
+        mask={true}
+        onOk={() => setShowSharedModal(false)}
+        onCancel={() => setShowSharedModal(false)}
+        width={"60%"}
+        footer={null}
+        title={""}
+        style={{ height: "516px" }}
+      >
+        <span className="soc-mod-span1">Congratulations !</span>
+        <span className="soc-mod-span2">Workout shared successfully !</span>
+        <img className="soc-mod-img" src={success} alt="" />
+      </Modal>
     </div>
   );
 }

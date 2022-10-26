@@ -7,9 +7,11 @@ import BackWorkouts from "./pages/Back";
 import BicepsWorkouts from "./pages/Biceps";
 import CalvesWorkouts from "./pages/Calves";
 import ChestWorkouts from "./pages/Chest";
+// import ChestVideoWorkouts from "./pages/ChestVideoWorkouts";
 import ForearmsWorkouts from "./pages/Forearms";
 import HamstringsWorkouts from "./pages/Hamstrings";
 import Home from "./pages/Home";
+import NoMatch from "./pages/NoMatch";
 import ShouldersWorkouts from "./pages/Shoulders";
 import TrapeziusWorkouts from "./pages/Trapezius";
 import TricepsWorkouts from "./pages/Triceps";
@@ -24,6 +26,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/chest" element={<ChestWorkouts />} />
+          {/* <Route path="/video-workout" element={<ChestVideoWorkouts />} /> */}
           <Route path="/hamstrings" element={<HamstringsWorkouts />} />
           <Route path="/calves" element={<CalvesWorkouts />} />
           <Route path="/back" element={<BackWorkouts />} />
@@ -33,6 +36,7 @@ function App() {
           <Route path="/forearms" element={<ForearmsWorkouts />} />
           <Route path="/trapezius" element={<TrapeziusWorkouts />} />
           <Route path="/abs" element={<AbsWorkouts />} />
+          <Route path="/*" element={<NoMatch />} />
         </Routes>
       </div>
     </div>

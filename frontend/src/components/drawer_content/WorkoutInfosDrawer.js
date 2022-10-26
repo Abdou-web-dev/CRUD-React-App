@@ -1,7 +1,7 @@
 import "./drawer_content_styles.scss";
 import { WorkoutInfos } from "./WorkoutInfos";
 
-export function WorkoutInfosDrawer({ workoutTitle, setsize }) {
+export function WorkoutInfosDrawer({ workoutTitle }) {
   function infos() {
     let infos =
       workoutTitle === "Barbell Flat Bench Press"
@@ -166,10 +166,13 @@ export function WorkoutInfosDrawer({ workoutTitle, setsize }) {
     return infos;
   }
   return (
-    <WorkoutInfos
-      {...{ setsize }}
-      infos={infos()}
-      workoutTitle={workoutTitle}
-    ></WorkoutInfos>
+    <>
+      <WorkoutInfos
+        {...{
+          workoutTitle,
+        }}
+        infos={infos()}
+      />
+    </>
   );
 }
