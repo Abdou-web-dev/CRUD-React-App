@@ -21,10 +21,46 @@ export const VideoPlayer = () => {
     </svg>
   );
 };
-
 export const InfosvgIcon = () => {
   return <img width={45} height={45} src={infoPNG} alt="" />;
 };
 export const RateIcon = () => {
   return <img width={45} height={45} src={rate} alt="" />;
+};
+
+export const PlayIcon = () => {
+  return (
+    <svg
+      width={68}
+      height={68}
+      version="1.1"
+      id="Capa_1"
+      x="0px"
+      y="0px"
+      viewBox="0 0 201.751 201.751"
+      // style="enable-background:new 0 0 201.751 201.751;"
+    >
+      <g>
+        <path
+          // style="fill:#010002;"
+          d="M39.027,0v201.751l123.696-100.87L39.027,0z M45.516,13.668l106.943,87.217L45.516,188.094V13.668z"
+        />
+      </g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+      <g></g>
+    </svg>
+  );
 };

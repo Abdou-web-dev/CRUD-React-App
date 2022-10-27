@@ -25,7 +25,7 @@ function App() {
       <div className="pages">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/chest" element={<ChestWorkouts />} />
+          <Route index path="/chest" element={<ChestWorkouts />} />
           {/* <Route path="/video-workout" element={<ChestVideoWorkouts />} /> */}
           <Route path="/hamstrings" element={<HamstringsWorkouts />} />
           <Route path="/calves" element={<CalvesWorkouts />} />

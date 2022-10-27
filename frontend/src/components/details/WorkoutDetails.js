@@ -2,6 +2,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShareIcon from "@mui/icons-material/Share";
+import editIcon from "../../assets/img/editer.png";
+
 import { Backdrop, Collapse, Stack } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import { Button, Drawer, message, Popconfirm, Space } from "antd";
@@ -55,6 +57,8 @@ export const WorkoutDetails = ({ workout, index }) => {
   //Concerning the Popconfirm antd
   const [openPopconfirm, setOpenPopconfirm] = useState(false);
   const [showBorder, setshowBorder] = useState(false);
+  const [showBlackBorder, setshowBlackBorder] = useState(false);
+
   const [openBackdrop, setOpenBackdrop] = React.useState(false);
 
   const confirm = () => {
@@ -78,11 +82,16 @@ export const WorkoutDetails = ({ workout, index }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openInfosDrawer, setOpenInfosDrawer] = useState(false);
 
-  const showShareDrawer = () => {
+  const handleShare = () => {
+    setshowBlackBorder(true);
     setOpenDrawer(true);
   };
-  const showInfosDrawer = () => {
+  const handleInfos = () => {
+    setshowBlackBorder(true);
     setOpenInfosDrawer(true);
+  };
+  const handleEdit = () => {
+    setshowBlackBorder(true);
   };
 
   const onClose = () => {
@@ -97,19 +106,16 @@ export const WorkoutDetails = ({ workout, index }) => {
          workout-details-container
          workout-details-container${index}
          ${showBorder === true ? `border-selected` : ``} 
+         ${showBlackBorder === true ? `black-border-selected` : ``} 
                  `}
         style={{ boxShadow: containerBoxShadow }}
       >
         <div className="">
           <Collapse in={showCollapse} collapsedSize="90px">
-            <Stack
-              // style={{ background: "red" }}
-              direction="row"
-              className={className}
-            >
+            <Stack direction="row" className={className}>
               <div
                 style={{
-                  width: "85%",
+                  width: "80%",
                 }}
                 className="work-details-left-content"
               >
@@ -148,7 +154,7 @@ export const WorkoutDetails = ({ workout, index }) => {
               </div>
 
               <div
-                style={{ width: "15%" }}
+                style={{ width: "20%" }}
                 className="work-details-right-content"
               >
                 {/* add a modal to do a prompt check before deleting an item */}
@@ -174,12 +180,26 @@ export const WorkoutDetails = ({ workout, index }) => {
                   </IconButton>
                 </Popconfirm>
 
-                <IconButton onClick={showShareDrawer}>
+                <IconButton
+                  onBlur={() => setshowBlackBorder(false)}
+                  onClick={handleShare}
+                >
                   <ShareIcon></ShareIcon>
                 </IconButton>
 
-                <IconButton onClick={showInfosDrawer}>
+                <IconButton
+                  onClick={handleInfos}
+                  onBlur={() => setshowBlackBorder(false)}
+                >
                   <InfoIcon />
+                </IconButton>
+
+                <IconButton
+                  onBlur={() => setshowBlackBorder(false)}
+                  className="icon-btn-edit"
+                  onClick={handleEdit}
+                >
+                  <img className="edit-img" src={editIcon} alt="" />
                 </IconButton>
               </div>
             </Stack>
@@ -223,6 +243,7 @@ export const WorkoutDetails = ({ workout, index }) => {
           }}
           open={openInfosDrawer}
           size={"large"}
+          destroyOnClose
           // destroyOnClose === Whether to unmount child components on closing drawer or not
           extra={
             <Space>

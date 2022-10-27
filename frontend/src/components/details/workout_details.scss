@@ -18,6 +18,9 @@
     border-radius: 5px;
     padding: 5px 15px;
   }
+  &.black-border-selected {
+    border: 1.5px solid black;
+  }
   .work-details-left-content {
     .work-details-left-content-inner {
       border-radius: 4px;
@@ -42,6 +45,18 @@
   .work-details-right-content {
     margin-top: 12px;
     margin-right: 12px;
+    border-bottom: 1px solid #9f2241; /* This creates the border. */
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .icon-btn-edit {
+      .edit-img {
+        width: 24px;
+        height: 24px;
+        color: gray;
+      }
+    }
   }
 }
 

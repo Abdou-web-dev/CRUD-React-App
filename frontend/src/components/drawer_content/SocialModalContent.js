@@ -4,12 +4,7 @@ import shareIcon from "../../assets/img/shareIcon.svg";
 import success from "../../assets/img/success.svg";
 import "./social_links.scss";
 
-export function SocialModalContent({
-  workoutTitle,
-  exoImageUrl,
-  setopenSocial,
-}) {
-  // console.log(exoImageUrl, "exoImageUrl");
+export function SocialModalContent({ workoutTitle, imagePath, setopenSocial }) {
   const [showSharedModal, setShowSharedModal] = useState();
   const handleShare = () => {
     setShowSharedModal(true);
@@ -31,7 +26,7 @@ export function SocialModalContent({
           <span>Share</span>
         </Button>
         <div className="social-mod-cont-right-img-wrapper">
-          <Image loading={"lazy"} width={500} src={exoImageUrl} />
+          <Image loading={"lazy"} width={500} src={imagePath} />
         </div>
       </div>
 

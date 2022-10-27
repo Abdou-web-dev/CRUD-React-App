@@ -1,0 +1,63 @@
+@import "@fontsource/inconsolata";
+
+.rate-workout {
+  margin-top: 50px;
+
+  .rate-workout-top {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    height: 100px;
+    &:hover {
+      background: rgba(206, 205, 205, 0.146);
+    }
+    .rate-workout-top-title {
+      justify-self: left;
+      span {
+        font-family: "Inconsolata";
+        font-size: 14px;
+      }
+    }
+    .rate-workout-top-btn-and-rate {
+      justify-self: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+
+      .rate-workout-rateantd-div {
+      }
+      .rate-workout-btn {
+        width: fit-content;
+        .rate-workout-antbtn {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          background: none;
+          border: 1px solid lightgray;
+          width: 100%;
+          height: fit-content;
+          padding: 5px 15px;
+          span {
+            font-family: "Inconsolata";
+            font-size: 25px;
+          }
+          img {
+            width: 40px;
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+  .rate-workout-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    span {
+      font-family: "Inconsolata";
+      font-size: 25px;
+    }
+  }
+}

@@ -8,12 +8,40 @@ import "./steps_styles.scss";
 const { Step } = Steps;
 
 export const Stepper = ({ workoutTitle }) => {
-  function videoUrl(url) {
+  function videoUrl() {
     let videoUrl =
       workoutTitle === "Barbell Flat Bench Press"
-        ? { url: "https://www.youtube.com/watch?v=rT7DgCr-3pg" }
+        ? "https://www.youtube.com/watch?v=rT7DgCr-3pg"
+        : workoutTitle === "Barbell Incline Bench Press"
+        ? "https://www.youtube.com/watch?v=SrqOu55lrYU"
+        : workoutTitle === "Barbell Decline Bench Press"
+        ? `https://www.youtube.com/watch?v=LfyQBUKR8SE`
+        : workoutTitle === "Chest Flye"
+        ? `https://www.youtube.com/watch?v=eozdVDA78K0`
+        : workoutTitle === "Dumbbell Bench Press"
+        ? `https://www.youtube.com/watch?v=VmB1G1K7v94`
+        : workoutTitle === "Push-Up"
+        ? `https://www.youtube.com/watch?v=IODxDxX7oi4`
+        : workoutTitle === "Dip"
+        ? `https://www.youtube.com/watch?v=53KM-mmJhic`
+        : workoutTitle === "Svend Press"
+        ? `https://www.youtube.com/watch?v=cIoUZOnypS8`
+        : workoutTitle === "Cable Iron Cross"
+        ? `https://www.youtube.com/watch?v=V1IYJGYj0YM`
+        : workoutTitle === "Chaos Push-Up"
+        ? `https://www.youtube.com/watch?v=Df4Jsk1ayk8`
+        : workoutTitle === "Plyo Push-Up"
+        ? `https://www.youtube.com/watch?v=QlsBDcMK9EY`
+        : workoutTitle === "Dumbbell Floor Press"
+        ? `https://www.youtube.com/watch?v=uUGDRwge4F8`
+        : workoutTitle === "Pause Push-Up"
+        ? `https://www.muscleandstrength.com/exercises/paused-push-up`
+        : workoutTitle === "Side-to-Side Landmine Press"
+        ? `https://www.youtube.com/watch?v=MQ1BFTA2hRI`
+        : workoutTitle === "Close-Grip Push-Up"
+        ? `https://www.youtube.com/watch?v=G2mlaEfpEIM`
         : "";
-    return videoUrl.url;
+    return videoUrl;
   }
   const steps = [
     {
@@ -26,7 +54,7 @@ export const Stepper = ({ workoutTitle }) => {
     },
     {
       title: "",
-      content: <RateWorkout />,
+      content: <RateWorkout workoutTitle={workoutTitle} />,
     },
   ];
   const [current, setCurrent] = useState(0);
@@ -62,7 +90,11 @@ export const Stepper = ({ workoutTitle }) => {
   let RateIconWrapper = (
     <div
       onMouseOver={() => setrateStep(true)}
-      // onMouseLeave={() => setrateStep(false)}
+      onMouseLeave={() =>
+        setTimeout(() => {
+          setrateStep(false);
+        }, 1000)
+      }
     >
       <RateIcon />
     </div>
