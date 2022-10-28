@@ -4,6 +4,7 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import "./pages_styles.scss";
 // components
 import { Skeleton } from "@mui/material";
+import Search from "antd/lib/input/Search";
 import React, { useEffect, useState } from "react";
 import WorkoutForm from "../components/forms/ChestWorkoutForm";
 import { WorkoutsSection } from "../components/sections/WorkoutsSection";
@@ -78,10 +79,8 @@ const Chest = ({}) => {
       <>
         <div className="chest-page-container">
           <div className="chest-workouts">
+            <Search></Search>
             <WorkoutsSection {...{ workouts, currentPage }}></WorkoutsSection>
-            {/* <div style={{ border: "1px solid red" }}>
-              <video src="https://www.dailymotion.com/video/x8d4w35"></video>
-            </div> */}
           </div>
           <div className="chest-form">
             <WorkoutForm {...{ setCurrentPage }} />

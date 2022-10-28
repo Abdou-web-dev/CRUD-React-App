@@ -5,8 +5,9 @@
 
   .rate-workout-top {
     display: grid;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 30% 65% 5%;
     height: 100px;
+
     &:hover {
       background: rgba(206, 205, 205, 0.146);
     }
@@ -24,8 +25,6 @@
       align-items: center;
       gap: 50px;
 
-      .rate-workout-rateantd-div {
-      }
       .rate-workout-btn {
         width: fit-content;
         .rate-workout-antbtn {
@@ -49,15 +48,46 @@
         }
       }
     }
+    .rate-workout-top-close {
+      display: inline-block;
+      justify-self: right;
+
+      img {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        margin-top: 5px;
+        margin-right: 5px;
+      }
+    }
   }
   .rate-workout-bottom {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    gap: 30px;
     margin-top: 100px;
+
     span {
       font-family: "Inconsolata";
       font-size: 25px;
+    }
+
+    .rate-workout-bottom-btn {
+      .rate-workout-bottom-antbtn {
+        background: rgba(255, 0, 0, 0.6);
+        width: fit-content;
+        height: fit-content;
+        &:hover {
+          transform: scale(1.05);
+        }
+        span {
+          font-family: "Inconsolata";
+          font-size: 25px;
+          color: white;
+        }
+      }
     }
   }
 }

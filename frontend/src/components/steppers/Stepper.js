@@ -7,11 +7,16 @@ import { ChestVideoWorkouts } from "../video_components/ChestVideoWorkouts";
 import "./steps_styles.scss";
 const { Step } = Steps;
 
-export const Stepper = ({ workoutTitle }) => {
+export const Stepper = ({
+  workoutTitle,
+  setOpenInfosDrawer,
+  setSectionBorder,
+  setbg,
+}) => {
   function videoUrl() {
     let videoUrl =
       workoutTitle === "Barbell Flat Bench Press"
-        ? "https://www.youtube.com/watch?v=rT7DgCr-3pg"
+        ? "https://www.youtube.com/watch?v=rT7DgCr-3pg" //src="https://www.youtube.com/embed/UDVZg_bd4zM" if iframe tag used
         : workoutTitle === "Barbell Incline Bench Press"
         ? "https://www.youtube.com/watch?v=SrqOu55lrYU"
         : workoutTitle === "Barbell Decline Bench Press"
@@ -54,7 +59,11 @@ export const Stepper = ({ workoutTitle }) => {
     },
     {
       title: "",
-      content: <RateWorkout workoutTitle={workoutTitle} />,
+      content: (
+        <RateWorkout
+          {...{ setOpenInfosDrawer, workoutTitle, setSectionBorder, setbg }}
+        />
+      ),
     },
   ];
   const [current, setCurrent] = useState(0);

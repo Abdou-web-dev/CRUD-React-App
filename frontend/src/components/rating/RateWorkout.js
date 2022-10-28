@@ -1,10 +1,19 @@
 import { Button, Rate } from "antd";
 import React, { useState } from "react";
+import checkMark from "../../assets/img/checkMark.svg";
+import closeIcon from "../../assets/img/closeIcon.svg";
 import ratingIcon from "../../assets/img/ratingIcon.svg";
+
 import "./rate_styles.scss";
 
-export const RateWorkout = ({ workoutTitle }) => {
+export const RateWorkout = ({
+  workoutTitle,
+  setOpenInfosDrawer,
+  setSectionBorder,
+  setbg,
+}) => {
   const [value, setvalue] = useState(1);
+  const [showTop, setShowTop] = useState(true);
   function handleChange() {
     setvalue(value);
   }
@@ -32,41 +41,72 @@ export const RateWorkout = ({ workoutTitle }) => {
 
   return (
     <div className="rate-workout">
-      <div className="rate-workout-top" style={{ border: topBorder }}>
-        {workoutTitle && (
-          <div className="rate-workout-top-title">
-            <span>{workoutTitle}</span>
-          </div>
-        )}
-        <div className="rate-workout-top-btn-and-rate">
-          <div className="rate-workout-rateantd-div" style={{ cursor: cursor }}>
-            <Rate
-              disabled={disabled}
-              className="rate-workout-rateantd"
-              allowClear={true}
-              defaultValue={1}
-              // onChange={handleChange}
-              // value={value}
-              style={{ color: color }}
-            />
-          </div>
-          <div className="rate-workout-btn">
-            <Button
-              disabled={btnDisabled}
-              onClick={handleRateClick}
-              className="rate-workout-antbtn"
+      {showTop && (
+        <div className="rate-workout-top" style={{ border: topBorder }}>
+          {workoutTitle && (
+            <div className="rate-workout-top-title">
+              <span>{workoutTitle}</span>
+            </div>
+          )}
+
+          <div className="rate-workout-top-btn-and-rate">
+            <div
+              className="rate-workout-rateantd-div"
+              style={{ cursor: cursor }}
             >
-              <img src={ratingIcon} alt="" />
-              <span>Rate</span>
-            </Button>
+              <Rate
+                disabled={disabled}
+                className="rate-workout-rateantd"
+                allowClear={true}
+                defaultValue={1}
+                // onChange={handleChange}
+                // value={value}
+                style={{ color: color }}
+              />
+            </div>
+            <div className="rate-workout-btn">
+              <Button
+                disabled={btnDisabled}
+                onClick={handleRateClick}
+                className="rate-workout-antbtn"
+              >
+                {!btnDisabled ? (
+                  <img src={ratingIcon} alt="" />
+                ) : (
+                  <img src={checkMark} alt="" />
+                )}
+                {!btnDisabled ? <span>Rate</span> : <span>Rated</span>}
+              </Button>
+            </div>
           </div>
+
+          {rated && (
+            <div className="rate-workout-top-close">
+              <img onClick={() => setShowTop(false)} src={closeIcon} alt="" />
+            </div>
+          )}
         </div>
-      </div>
+      )}
+
       {rated && (
         <div className="rate-workout-bottom">
           <span>
             {`You have successfully rated this chest workout. Check out the other workouts !`}
           </span>
+          {!showTop && (
+            <div className="rate-workout-bottom-btn">
+              <Button
+                onClick={() => {
+                  setOpenInfosDrawer(false);
+                  setSectionBorder("1.5px solid #1aac83");
+                  setbg("white");
+                }}
+                className="rate-workout-bottom-antbtn"
+              >
+                <span>Close</span>
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </div>

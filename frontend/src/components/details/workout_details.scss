@@ -1,17 +1,16 @@
+@import "@fontsource/inconsolata";
+@import "@fontsource/mulish";
+
 .site-drawer-render-in-current-wrapper {
   position: relative;
   overflow: hidden;
   text-align: center;
-  // border: 1px solid #ebedf0;
   border-radius: 2px;
 }
 
 .workout-details-container {
   background-color: white;
-  // background-color: #fdfdfb50;
   margin-bottom: 20px;
-  border: 1px solid lightgray;
-  // box-shadow: 0 0 0 0.1rem rgba(26, 172, 131, 0.25);
 
   &.border-selected {
     border: 3px solid rgb(230, 161, 161);
@@ -55,6 +54,97 @@
         width: 24px;
         height: 24px;
         color: gray;
+      }
+    }
+  }
+
+  &.workout-details-container-as-grid {
+    &:hover {
+    }
+    .workout-details {
+      min-height: 264px;
+      justify-content: center;
+      align-items: center;
+
+      .work-details-left-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .work-details-left-content-inner {
+          margin: 0;
+          padding: 0;
+          .work-details-left-inner-iconbtn {
+            display: none;
+          }
+
+          h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+            color: #00b4d8;
+            font-weight: bolder;
+          }
+          .work-details-left-inner-load {
+            .work-details-left-inner-load-span1 {
+              margin-right: 5px;
+              span.span1-kg {
+                font-style: italic;
+                font-family: "Inconsolata";
+              }
+            }
+            .work-details-left-inner-load-span2 {
+              font-size: 2em;
+              color: #555;
+            }
+          }
+          .work-details-left-inner-reps {
+            .work-details-left-inner-reps-span1 {
+              margin-right: 5px;
+              span.span1-kg {
+                font-style: italic;
+              }
+            }
+            .work-details-left-inner-reps-span2 {
+              font-size: 2em;
+              color: rgba(85, 85, 85, 0.8);
+            }
+          }
+          .work-details-left-inner-date {
+            // border: 1px solid red;
+            margin: 0 auto;
+            span {
+              font-family: "Inconsolata";
+              font-size: 1.5em;
+            }
+          }
+        }
+      }
+      .work-details-right-content {
+        height: fit-content;
+        margin-top: 0px;
+        margin-right: 12px;
+        border-bottom: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .work-details-right-inner {
+          &.control-btns {
+            display: flex;
+            flex-direction: column;
+            margin-left: 20px;
+          }
+        }
+        .work-details-right-inner-iconbtn {
+          // border: 1px solid red;
+        }
+        .icon-btn-edit {
+          .edit-img {
+            width: 24px;
+            height: 24px;
+            color: gray;
+          }
+        }
       }
     }
   }
@@ -133,7 +223,7 @@
 }
 
 .changeBGColor {
-  background-color: rgba(168, 228, 250, 0.1);
+  background-color: rgba(168, 228, 250, 0.18);
 }
 
 .workout-infos-drawer {

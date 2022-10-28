@@ -16,23 +16,23 @@ import { SocialIcons } from "../drawer_content/SocialIcons";
 import { Stepper } from "../steppers/Stepper";
 import "./workout_details.scss";
 
-export const WorkoutDetails = ({ workout, index }) => {
-  // console.log(workout);
+export const WorkoutDetails = ({
+  workout,
+  index,
+  setSectionBorder,
+  setbg,
+  sectionBorder,
+  displayContainer,
+  listClicked,
+  cardClicked,
+}) => {
   const { dispatch } = useWorkoutsContext();
 
   const [className, setClassName] = React.useState(`workout-details`);
   const [containerBoxShadow, setcontainerBoxShadow] = React.useState(
     `0 0 0 0.1rem rgba(26, 172, 131, 0.1)`
   );
-
-  React.useEffect(() => {
-    if (workout) {
-      setTimeout(() => setClassName("changeBGColor workout-details"), 2000); //to delete later
-    }
-  }, []);
-  // box-shadow: 0 0 0 0.1rem rgba(26, 172, 131, 0.25)
   const [showCollapse, setshowCollapse] = React.useState(true);
-
   const handleCollapseclick = () => {
     if (showCollapse === true) {
       setshowCollapse(false);
@@ -55,11 +55,10 @@ export const WorkoutDetails = ({ workout, index }) => {
   };
 
   //Concerning the Popconfirm antd
+  const [openBackdrop, setOpenBackdrop] = React.useState(false);
   const [openPopconfirm, setOpenPopconfirm] = useState(false);
   const [showBorder, setshowBorder] = useState(false);
-  const [showBlackBorder, setshowBlackBorder] = useState(false);
-
-  const [openBackdrop, setOpenBackdrop] = React.useState(false);
+  const [border, setborder] = useState("1px solid lightgray");
 
   const confirm = () => {
     handleDelete();
@@ -77,27 +76,71 @@ export const WorkoutDetails = ({ workout, index }) => {
     setOpenBackdrop(!openBackdrop);
     setshowBorder(!showBorder);
     setcontainerBoxShadow(`none`);
+    setSectionBorder("");
   };
   //Concerning the Drawer of antd
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openInfosDrawer, setOpenInfosDrawer] = useState(false);
 
   const handleShare = () => {
-    setshowBlackBorder(true);
     setOpenDrawer(true);
+    setSectionBorder("");
   };
   const handleInfos = () => {
-    setshowBlackBorder(true);
     setOpenInfosDrawer(true);
+    setSectionBorder("");
   };
   const handleEdit = () => {
-    setshowBlackBorder(true);
+    setborder("1px solid black");
+    setSectionBorder("");
   };
 
   const onClose = () => {
     setOpenDrawer(false);
   };
+  React.useEffect(() => {
+    if (workout) {
+      setTimeout(() => setClassName("changeBGColor workout-details"), 2000); //to delete later
+    }
+    if (openDrawer === true || openInfosDrawer) {
+      setborder("1px solid black");
+    } else if (openDrawer === false || !openInfosDrawer) {
+      setborder("");
+    }
+    console.log(displayContainer);
+    if (listClicked === true) {
+      setclassNameA("workout-details-container");
+      setSectionBorder("");
+    }
+    if (cardClicked === true) {
+      setclassNameA("workout-details-container-as-grid");
+      setSectionBorder("1.5px solid #1aac83");
+    }
+  }, [openDrawer, openInfosDrawer, listClicked]);
 
+  const handleContainerHover = () => {
+    if (sectionBorder === `1.5px solid #1aac83`) {
+      setcontainerBoxShadow(
+        "rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px"
+      );
+    }
+  };
+  const handleContainerLeave = () => {
+    if (sectionBorder === `1.5px solid #1aac83`) {
+      setcontainerBoxShadow(!containerBoxShadow);
+    }
+  };
+  // let displayContainer =
+  //   sectionBorder === `1.5px solid #1aac83` ? "card" : "onePerRow";
+  function VarTestFunct(Vartest) {
+    if (sectionBorder === `1.5px solid #1aac83` && listClicked === true) {
+      Vartest = true;
+    } else {
+      Vartest = false;
+    }
+    return Vartest;
+  }
+  const [classNameA, setclassNameA] = useState("hahaha");
   return (
     <>
       <div
@@ -106,45 +149,80 @@ export const WorkoutDetails = ({ workout, index }) => {
          workout-details-container
          workout-details-container${index}
          ${showBorder === true ? `border-selected` : ``} 
-         ${showBlackBorder === true ? `black-border-selected` : ``} 
-                 `}
-        style={{ boxShadow: containerBoxShadow }}
+         ${
+           sectionBorder === `1.5px solid #1aac83`
+             ? `workout-details-container-as-grid`
+             : ""
+         } 
+         ${classNameA}
+         `}
+        style={{
+          boxShadow: containerBoxShadow,
+          border: border,
+        }}
+        onMouseOver={handleContainerHover}
+        onMouseLeave={handleContainerLeave}
       >
-        <div className="">
-          <Collapse in={showCollapse} collapsedSize="90px">
-            <Stack direction="row" className={className}>
+        <Collapse in={showCollapse} collapsedSize="90px">
+          <Stack
+            className={className}
+            direction="row"
+            justifyContent={
+              sectionBorder === `1.5px solid #1aac83` ? "center" : ""
+            }
+            alignItems={sectionBorder === `1.5px solid #1aac83` ? "center" : ""}
+          >
+            <div
+              className="work-details-left-content"
+              style={{
+                width: "80%",
+              }}
+            >
               <div
+                className="work-details-left-content-inner"
                 style={{
-                  width: "80%",
+                  display: "flex",
+                  flexDirection: `column`,
+                  justifyContent:
+                    sectionBorder !== `1.5px solid #1aac83` ? "flex-start" : "",
+                  alignItems:
+                    sectionBorder !== `1.5px solid #1aac83` ? "flex-start" : "",
                 }}
-                className="work-details-left-content"
               >
-                <div
-                  className="work-details-left-content-inner"
+                <IconButton
+                  className="work-details-left-inner-iconbtn"
                   style={{
-                    display: "flex",
-                    flexDirection: `column`,
-                    justifyContent: "flex-start",
-                    alignItems: "flex-start",
+                    alignSelf:
+                      sectionBorder !== `1.5px solid #1aac83`
+                        ? "flex-start"
+                        : "",
                   }}
+                  onClick={handleCollapseclick}
                 >
-                  <IconButton
-                    style={{
-                      alignSelf: "flex-start",
-                    }}
-                    onClick={handleCollapseclick}
-                  >
-                    {showCollapse ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                  </IconButton>
-                  <h4>{workout.title}</h4>
-                  <span>
-                    <strong>Load (kg) : </strong>
+                  {showCollapse ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                </IconButton>
+                <h4>{workout.title}</h4>
+                <div className="work-details-left-inner-load">
+                  <span className="work-details-left-inner-load-span1">
+                    <strong>
+                      Load (<span className="span1-kg">kg</span> ) :
+                    </strong>
+                  </span>
+                  <span className="work-details-left-inner-load-span2">
                     {workout.load}
                   </span>
-                  <span>
+                </div>
+
+                <div className="work-details-left-inner-reps">
+                  <span className="work-details-left-inner-reps-span1">
                     <strong>Number of reps : </strong>
+                  </span>
+                  <span className="work-details-left-inner-reps-span2">
                     {workout.reps}
                   </span>
+                </div>
+
+                <div className="work-details-left-inner-date">
                   <span>
                     {formatDistanceToNow(new Date(workout.createdAt), {
                       addSuffix: true,
@@ -152,12 +230,13 @@ export const WorkoutDetails = ({ workout, index }) => {
                   </span>
                 </div>
               </div>
+            </div>
 
-              <div
-                style={{ width: "20%" }}
-                className="work-details-right-content"
-              >
-                {/* add a modal to do a prompt check before deleting an item */}
+            <div
+              className="work-details-right-content"
+              style={{ width: "20%" }}
+            >
+              <div className="work-details-right-inner control-btns">
                 <Popconfirm
                   title="Are you sure to delete this task?"
                   onConfirm={confirm}
@@ -167,6 +246,7 @@ export const WorkoutDetails = ({ workout, index }) => {
                   open={openPopconfirm}
                 >
                   <IconButton
+                    className="work-details-right-inner-iconbtn"
                     //differnce  between setOpenBackdrop(false) and setOpenBackdrop(cur=>!cur) or setOpenBackdrop(!openBackdrop) is that the 2 last statement will create a toggle logic hence a infinite loop onclick on esc , whereas the 1st one will trigger only once
                     onKeyDown={() => {
                       setOpenPopconfirm(false);
@@ -181,32 +261,34 @@ export const WorkoutDetails = ({ workout, index }) => {
                 </Popconfirm>
 
                 <IconButton
-                  onBlur={() => setshowBlackBorder(false)}
+                  className="work-details-right-inner-iconbtn"
                   onClick={handleShare}
                 >
                   <ShareIcon></ShareIcon>
                 </IconButton>
 
                 <IconButton
+                  className="work-details-right-inner-iconbtn"
                   onClick={handleInfos}
-                  onBlur={() => setshowBlackBorder(false)}
                 >
                   <InfoIcon />
                 </IconButton>
 
                 <IconButton
-                  onBlur={() => setshowBlackBorder(false)}
-                  className="icon-btn-edit"
+                  className="icon-btn-edit work-details-right-inner-iconbtn"
+                  onBlur={() => setborder("")}
+                  onKeyDown={() => setborder("")}
                   onClick={handleEdit}
                 >
                   <img className="edit-img" src={editIcon} alt="" />
                 </IconButton>
               </div>
-            </Stack>
-          </Collapse>
-        </div>
+            </div>
+          </Stack>
+        </Collapse>
       </div>
       <Backdrop
+        className="workout-details-backdrop"
         // onKeyDown={() => setOpenBackdrop(!openBackdrop)}
         sx={{ bgcolor: "rgba(0, 0, 0, 0.2)", zIndex: 1 }}
         open={openBackdrop}
@@ -260,7 +342,10 @@ export const WorkoutDetails = ({ workout, index }) => {
           }
         >
           <div className="workout-infos-wrapper">
-            <Stepper workoutTitle={workout.title} />
+            <Stepper
+              {...{ setSectionBorder, setOpenInfosDrawer, setbg }}
+              workoutTitle={workout.title}
+            />
           </div>
         </Drawer>
       </div>

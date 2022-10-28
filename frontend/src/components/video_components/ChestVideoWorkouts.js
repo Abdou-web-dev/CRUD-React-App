@@ -41,3 +41,15 @@ export const ChestVideoWorkouts = ({ videoUrl }) => {
     </div>
   );
 };
+// Are you trying to play a Youtube video in the the <video> tag?
+// That won't work because a Youtube link gives a web page (eg: .html text) but for playback in a video tag you need a video file (eg: .mp4).
+//You must ensure the URL contains embed rather watch as the /embed endpoint allows outside requests, whereas the /watch endpoint does not.
+//<div>
+// <iframe
+//   style={{ border: "1px solid red" }}
+//   src={videoUrl}
+//   width={`100%`} height={`100%`}
+//   frameborder="0"
+//   allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen
+// ></iframe>
+// </div>
