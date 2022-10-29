@@ -19,12 +19,10 @@ import "./workout_details.scss";
 export const WorkoutDetails = ({
   workout,
   index,
-  setSectionBorder,
   setbg,
-  sectionBorder,
-  displayContainer,
-  listClicked,
-  cardClicked,
+  detailsContClass,
+  setdetailsContClass,
+  setcontainerClass,
 }) => {
   const { dispatch } = useWorkoutsContext();
 
@@ -76,7 +74,6 @@ export const WorkoutDetails = ({
     setOpenBackdrop(!openBackdrop);
     setshowBorder(!showBorder);
     setcontainerBoxShadow(`none`);
-    setSectionBorder("");
   };
   //Concerning the Drawer of antd
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -84,15 +81,12 @@ export const WorkoutDetails = ({
 
   const handleShare = () => {
     setOpenDrawer(true);
-    setSectionBorder("");
   };
   const handleInfos = () => {
     setOpenInfosDrawer(true);
-    setSectionBorder("");
   };
   const handleEdit = () => {
     setborder("1px solid black");
-    setSectionBorder("");
   };
 
   const onClose = () => {
@@ -100,61 +94,35 @@ export const WorkoutDetails = ({
   };
   React.useEffect(() => {
     if (workout) {
-      setTimeout(() => setClassName("changeBGColor workout-details"), 2000); //to delete later
+      setTimeout(() => setClassName("changeBGColor workout-details"), 1000); //to delete later
     }
     if (openDrawer === true || openInfosDrawer) {
       setborder("1px solid black");
     } else if (openDrawer === false || !openInfosDrawer) {
       setborder("");
     }
-    console.log(displayContainer);
-    if (listClicked === true) {
-      setclassNameA("workout-details-container");
-      setSectionBorder("");
-    }
-    if (cardClicked === true) {
-      setclassNameA("workout-details-container-as-grid");
-      setSectionBorder("1.5px solid #1aac83");
-    }
-  }, [openDrawer, openInfosDrawer, listClicked]);
+  }, [openDrawer, openInfosDrawer]);
 
   const handleContainerHover = () => {
-    if (sectionBorder === `1.5px solid #1aac83`) {
+    if (detailsContClass === "workout-details-container-as-grid") {
       setcontainerBoxShadow(
         "rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px"
       );
     }
   };
   const handleContainerLeave = () => {
-    if (sectionBorder === `1.5px solid #1aac83`) {
+    if (detailsContClass === "workout-details-container-as-grid") {
       setcontainerBoxShadow(!containerBoxShadow);
     }
   };
-  // let displayContainer =
-  //   sectionBorder === `1.5px solid #1aac83` ? "card" : "onePerRow";
-  function VarTestFunct(Vartest) {
-    if (sectionBorder === `1.5px solid #1aac83` && listClicked === true) {
-      Vartest = true;
-    } else {
-      Vartest = false;
-    }
-    return Vartest;
-  }
-  const [classNameA, setclassNameA] = useState("hahaha");
+
   return (
     <>
       <div
         className={`
          site-drawer-render-in-current-wrapper
-         workout-details-container
          workout-details-container${index}
-         ${showBorder === true ? `border-selected` : ``} 
-         ${
-           sectionBorder === `1.5px solid #1aac83`
-             ? `workout-details-container-as-grid`
-             : ""
-         } 
-         ${classNameA}
+         ${detailsContClass} ${showBorder === true ? `border-selected` : ``} 
          `}
         style={{
           boxShadow: containerBoxShadow,
@@ -164,39 +132,17 @@ export const WorkoutDetails = ({
         onMouseLeave={handleContainerLeave}
       >
         <Collapse in={showCollapse} collapsedSize="90px">
-          <Stack
-            className={className}
-            direction="row"
-            justifyContent={
-              sectionBorder === `1.5px solid #1aac83` ? "center" : ""
-            }
-            alignItems={sectionBorder === `1.5px solid #1aac83` ? "center" : ""}
-          >
+          <Stack className={className} direction="row">
+            <span>{index} </span>
             <div
               className="work-details-left-content"
               style={{
                 width: "80%",
               }}
             >
-              <div
-                className="work-details-left-content-inner"
-                style={{
-                  display: "flex",
-                  flexDirection: `column`,
-                  justifyContent:
-                    sectionBorder !== `1.5px solid #1aac83` ? "flex-start" : "",
-                  alignItems:
-                    sectionBorder !== `1.5px solid #1aac83` ? "flex-start" : "",
-                }}
-              >
+              <div className="work-details-left-content-inner">
                 <IconButton
                   className="work-details-left-inner-iconbtn"
-                  style={{
-                    alignSelf:
-                      sectionBorder !== `1.5px solid #1aac83`
-                        ? "flex-start"
-                        : "",
-                  }}
                   onClick={handleCollapseclick}
                 >
                   {showCollapse ? <ExpandLessIcon /> : <ExpandMoreIcon />}
@@ -343,7 +289,12 @@ export const WorkoutDetails = ({
         >
           <div className="workout-infos-wrapper">
             <Stepper
-              {...{ setSectionBorder, setOpenInfosDrawer, setbg }}
+              {...{
+                setOpenInfosDrawer,
+                setbg,
+                setdetailsContClass,
+                setcontainerClass,
+              }}
               workoutTitle={workout.title}
             />
           </div>
@@ -352,3 +303,8 @@ export const WorkoutDetails = ({
     </>
   );
 };
+// ${
+//   sectionBorder === `1.5px solid #1aac83`
+//     ? `workout-details-container-as-grid`
+//     : ""
+// }

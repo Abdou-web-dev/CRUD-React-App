@@ -10,8 +10,9 @@ const { Step } = Steps;
 export const Stepper = ({
   workoutTitle,
   setOpenInfosDrawer,
-  setSectionBorder,
   setbg,
+  setdetailsContClass,
+  setcontainerClass,
 }) => {
   function videoUrl() {
     let videoUrl =
@@ -61,7 +62,13 @@ export const Stepper = ({
       title: "",
       content: (
         <RateWorkout
-          {...{ setOpenInfosDrawer, workoutTitle, setSectionBorder, setbg }}
+          {...{
+            setOpenInfosDrawer,
+            workoutTitle,
+            setbg,
+            setdetailsContClass,
+            setcontainerClass,
+          }}
         />
       ),
     },

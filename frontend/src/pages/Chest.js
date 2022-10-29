@@ -12,6 +12,7 @@ import { AntdSkeleton } from "../components/skeletons/AntdSkeleton";
 
 const Chest = ({}) => {
   const { workouts, dispatch } = useWorkoutsContext();
+  // console.log(workouts.length);
 
   useEffect(() => {
     const fetchWorkouts = async () => {

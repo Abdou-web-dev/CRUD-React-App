@@ -9,8 +9,9 @@ import "./rate_styles.scss";
 export const RateWorkout = ({
   workoutTitle,
   setOpenInfosDrawer,
-  setSectionBorder,
   setbg,
+  setdetailsContClass,
+  setcontainerClass,
 }) => {
   const [value, setvalue] = useState(1);
   const [showTop, setShowTop] = useState(true);
@@ -98,7 +99,9 @@ export const RateWorkout = ({
               <Button
                 onClick={() => {
                   setOpenInfosDrawer(false);
-                  setSectionBorder("1.5px solid #1aac83");
+                  // setSectionBorder("1.5px solid #1aac83");
+                  setdetailsContClass(`workout-details-container-as-grid`);
+                  setcontainerClass("chest-page-workouts showItemsAsGrid");
                   setbg("white");
                 }}
                 className="rate-workout-bottom-antbtn"
