@@ -4,14 +4,23 @@ import shareIcon from "../../assets/img/shareIcon.svg";
 import success from "../../assets/img/success.svg";
 import "./social_links.scss";
 
-export function SocialModalContent({ workoutTitle, imagePath, setopenSocial }) {
+export function SocialModalContent({
+  workoutTitle,
+  imagePath,
+  setopenSocial,
+  layoutGrid,
+}) {
   const [showSharedModal, setShowSharedModal] = useState();
   const handleShare = () => {
     setShowSharedModal(true);
     setopenSocial(false);
   };
   return (
-    <div className="social-mod-cont">
+    <div
+      className={
+        layoutGrid ? "social-mod-cont-grid social-mod-cont" : "social-mod-cont"
+      }
+    >
       <div className="social-mod-cont-left">
         <p>
           {`Hey ! I want you to come take a look at this chest workout ! Thanks !`}
@@ -26,7 +35,11 @@ export function SocialModalContent({ workoutTitle, imagePath, setopenSocial }) {
           <span>Share</span>
         </Button>
         <div className="social-mod-cont-right-img-wrapper">
-          <Image loading={"lazy"} width={500} src={imagePath} />
+          <Image
+            loading={"lazy"}
+            width={layoutGrid ? 350 : 500}
+            src={imagePath}
+          />
         </div>
       </div>
 

@@ -59,8 +59,6 @@
 }
 
 .workout-details-container-as-grid {
-  &:hover {
-  }
   .workout-details {
     min-height: 264px;
     justify-content: center;
@@ -144,6 +142,12 @@
       }
     }
   }
+
+  &.filtered-workouts {
+    border: 1px solid #00b4d8;
+    background: rgba(225, 214, 214, 0.5);
+    padding: 5px;
+  }
 }
 
 .border-selected {
@@ -172,6 +176,15 @@
             img {
               width: 64px;
               height: 64px;
+              &:hover {
+                transform: scale(1.2);
+              }
+            }
+          }
+          .workout-details-imgs-grid {
+            img {
+              width: 34px;
+              height: 34px;
               &:hover {
                 transform: scale(1.2);
               }

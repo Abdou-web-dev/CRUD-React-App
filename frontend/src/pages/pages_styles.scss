@@ -1,3 +1,5 @@
+@import "@fontsource/inconsolata";
+
 .chest-page-container {
   width: 100%;
   max-width: 1400px;
@@ -27,6 +29,51 @@
   gap: 10px;
   margin: 100px 0px;
   margin-top: 70px;
+
+  .ant-pagination-prev {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .ant-pagination-next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.pagination-content-loaded-grid {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 215px;
+  gap: 10px;
+  .ant-pagination-prev {
+    img {
+      width: 30px;
+      height: 30px;
+    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ant-pagination-item {
+    font-family: "Inconsolata";
+    &.ant-pagination-item-active {
+      font-size: 30px;
+      padding: 5px;
+      height: fit-content;
+    }
+  }
+  .ant-pagination-next {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
 }
 
 .skeleton-content-not-loaded {

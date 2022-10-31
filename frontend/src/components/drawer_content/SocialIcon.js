@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SocialModalContent } from "./SocialModalContent";
 import "./social_links.scss";
 
-export function SocialIcon({ social, icon, workoutTitle }) {
+export function SocialIcon({ social, icon, workoutTitle, layoutGrid }) {
   // console.log(workoutTitle, "here");
   const [openSocial, setopenSocial] = useState(false);
   const socialText = (text) => {
@@ -89,7 +89,13 @@ export function SocialIcon({ social, icon, workoutTitle }) {
   }
 
   return (
-    <div className="social-icon-modal-container">
+    <div
+      className={
+        layoutGrid
+          ? "social-icon-modal-container-grid"
+          : "social-icon-modal-container"
+      }
+    >
       <div className="social-icon-btn">
         {icon && (
           <IconButton onClick={() => setopenSocial(true)}>
@@ -98,7 +104,11 @@ export function SocialIcon({ social, icon, workoutTitle }) {
         )}
       </div>
       <Modal
-        className={setModalClassName() + ` social-icon-ant-modal`}
+        className={
+          setModalClassName() + layoutGrid
+            ? ` social-icon-ant-modal ant-modal-grid`
+            : ` social-icon-ant-modal`
+        }
         open={openSocial}
         maskClosable={true}
         closable={true}
@@ -106,7 +116,7 @@ export function SocialIcon({ social, icon, workoutTitle }) {
         mask={true}
         onOk={() => setopenSocial(false)}
         onCancel={() => setopenSocial(false)}
-        width={"60%"}
+        width={layoutGrid ? "50%" : "60%"}
         footer={null}
         title={
           <div className="social-modal-title">
@@ -121,35 +131,35 @@ export function SocialIcon({ social, icon, workoutTitle }) {
             <div className="modal-content-fb">
               <SocialModalContent
                 imagePath={imagePath()}
-                {...{ setopenSocial, workoutTitle }}
+                {...{ setopenSocial, workoutTitle, layoutGrid }}
               ></SocialModalContent>
             </div>
           ) : social === "insta" ? (
             <div className="modal-content-ins">
               <SocialModalContent
                 imagePath={imagePath()}
-                {...{ workoutTitle, setopenSocial }}
+                {...{ workoutTitle, setopenSocial, layoutGrid }}
               ></SocialModalContent>
             </div>
           ) : social === "pin" ? (
             <div className="modal-content-pin">
               <SocialModalContent
                 imagePath={imagePath()}
-                {...{ setopenSocial, workoutTitle }}
+                {...{ setopenSocial, workoutTitle, layoutGrid }}
               ></SocialModalContent>
             </div>
           ) : social === "twitter" ? (
             <div className="modal-content-twitter">
               <SocialModalContent
                 imagePath={imagePath()}
-                {...{ setopenSocial, workoutTitle }}
+                {...{ setopenSocial, workoutTitle, layoutGrid }}
               ></SocialModalContent>
             </div>
           ) : social === "yt" ? (
             <div className="modal-content-yt">
               <SocialModalContent
                 imagePath={imagePath()}
-                {...{ setopenSocial, workoutTitle }}
+                {...{ setopenSocial, workoutTitle, layoutGrid }}
               ></SocialModalContent>
             </div>
           ) : null}

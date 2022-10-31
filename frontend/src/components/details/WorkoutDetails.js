@@ -23,6 +23,7 @@ export const WorkoutDetails = ({
   detailsContClass,
   setdetailsContClass,
   setcontainerClass,
+  searchInput,
 }) => {
   const { dispatch } = useWorkoutsContext();
 
@@ -115,14 +116,19 @@ export const WorkoutDetails = ({
       setcontainerBoxShadow(!containerBoxShadow);
     }
   };
-
+  let layoutGrid = detailsContClass === "workout-details-container-as-grid";
+  // let layoutList = detailsContClass === "workout-details-container-as-list";
+  let createdAt = workout?.createdAt;
   return (
     <>
       <div
-        className={`
+        className={`${detailsContClass}
          site-drawer-render-in-current-wrapper
          workout-details-container${index}
-         ${detailsContClass} ${showBorder === true ? `border-selected` : ``} 
+          ${showBorder === true ? `border-selected` : ``} 
+          ${searchInput?.length !== 0 ? `filtered-workouts` : ``} 
+
+          
          `}
         style={{
           boxShadow: containerBoxShadow,
@@ -147,7 +153,7 @@ export const WorkoutDetails = ({
                 >
                   {showCollapse ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </IconButton>
-                <h4>{workout.title}</h4>
+                <h4>{workout?.title}</h4>
                 <div className="work-details-left-inner-load">
                   <span className="work-details-left-inner-load-span1">
                     <strong>
@@ -155,7 +161,7 @@ export const WorkoutDetails = ({
                     </strong>
                   </span>
                   <span className="work-details-left-inner-load-span2">
-                    {workout.load}
+                    {workout?.load}
                   </span>
                 </div>
 
@@ -164,13 +170,13 @@ export const WorkoutDetails = ({
                     <strong>Number of reps : </strong>
                   </span>
                   <span className="work-details-left-inner-reps-span2">
-                    {workout.reps}
+                    {workout?.reps}
                   </span>
                 </div>
 
                 <div className="work-details-left-inner-date">
                   <span>
-                    {formatDistanceToNow(new Date(workout.createdAt), {
+                    {formatDistanceToNow(new Date(createdAt), {
                       addSuffix: true,
                     })}
                   </span>
@@ -256,8 +262,15 @@ export const WorkoutDetails = ({
             position: "absolute",
           }}
         >
-          <div className="workout-details-imgs">
-            <SocialIcons workoutTitle={workout.title}></SocialIcons>
+          <div
+            className={
+              layoutGrid ? "workout-details-imgs-grid" : "workout-details-imgs"
+            }
+          >
+            <SocialIcons
+              {...{ layoutGrid }}
+              workoutTitle={workout.title}
+            ></SocialIcons>
           </div>
         </Drawer>
       </div>
@@ -303,8 +316,3 @@ export const WorkoutDetails = ({
     </>
   );
 };
-// ${
-//   sectionBorder === `1.5px solid #1aac83`
-//     ? `workout-details-container-as-grid`
-//     : ""
-// }

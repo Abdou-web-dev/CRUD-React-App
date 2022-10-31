@@ -1,5 +1,8 @@
 import React from "react";
 import infoPNG from "../../assets/img/infoPNG.png";
+import leftArrowIcon from "../../assets/img/left-arrow.png";
+import clearIcon from "../../assets/img/remove.png";
+import rightArrowIcon from "../../assets/img/right-arrow.png";
 import rate from "../../assets/img/star.png";
 
 export const VideoPlayer = () => {
@@ -27,7 +30,6 @@ export const InfosvgIcon = () => {
 export const RateIcon = () => {
   return <img width={45} height={45} src={rate} alt="" />;
 };
-
 export const PlayIcon = () => {
   return (
     <svg
@@ -62,5 +64,16 @@ export const PlayIcon = () => {
       <g></g>
       <g></g>
     </svg>
+  );
+};
+export const RightArrow = () => {
+  return <img src={rightArrowIcon} alt="" />;
+};
+export const LeftArrow = () => {
+  return <img src={leftArrowIcon} alt="" />;
+};
+export const ClearIcon = () => {
+  return (
+    <img style={{ width: "35px", height: "35px" }} src={clearIcon} alt="" />
   );
 };

@@ -6,8 +6,19 @@
   display: flex;
   justify-content: center;
 }
+.social-icons-container-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  & > *:nth-child(4),
+  & > *:nth-child(5) {
+    // margin-left: 60px;
+    position: relative;
+    left: 40px;
+  }
+}
 
-.social-icon-modal-container {
+.social-icon-modal-container-grid {
+  // border: 1px solid red;
   .social-icon-btn {
   }
 }
@@ -32,8 +43,6 @@
     }
   }
   .ant-modal-body {
-    background: pink;
-
     .modal-content {
       margin-bottom: 20px;
 
@@ -59,12 +68,66 @@
       }
     }
   }
-
   .ant-modal-close {
     .ant-modal-close-x {
       position: relative;
       bottom: 30px;
       left: 30px;
+    }
+  }
+  &.ant-modal-grid {
+    .ant-modal-header {
+      .ant-modal-title {
+        .social-modal-title {
+          margin-top: 10px;
+
+          .social-modal-title-span1 {
+            font-family: "Open Sans";
+            font-size: 30px;
+          }
+          .social-modal-title-span2 {
+            font-family: "Inconsolata";
+            font-size: 34px;
+            letter-spacing: 4px;
+            margin-left: 10px;
+            color: #585e66;
+          }
+        }
+      }
+    }
+    .ant-modal-body {
+      .modal-content {
+        margin-bottom: 20px;
+
+        .modal-content-fb {
+          border-radius: 0;
+          border: 0;
+        }
+        .modal-content-ins {
+          border-radius: 0;
+          border: 0;
+        }
+        .modal-content-pin {
+          border-radius: 0;
+          border: 0;
+        }
+        .modal-content-twitter {
+          border-radius: 0;
+          border: 0;
+        }
+        .modal-content-yt {
+          border-radius: 0;
+          border: 0;
+        }
+      }
+    }
+    .ant-modal-close {
+      .ant-modal-close-x {
+        position: relative;
+        bottom: 30px;
+        left: 30px;
+        color: black;
+      }
     }
   }
 }
@@ -187,5 +250,36 @@
         height: 200px;
       }
     }
+  }
+}
+
+.social-mod-cont-grid {
+  .social-mod-cont-left {
+    padding: 20px;
+
+    p {
+      font-family: "Mulish";
+      padding: 0px;
+      font-weight: normal;
+      font-size: 20px;
+    }
+    .social-mod-cont-left-span1 {
+      font-family: "Mulish";
+      padding: 20px;
+      font-weight: 500;
+      font-size: 22px;
+    }
+    .social-mod-cont-left-span2 {
+      font-family: "Mulish";
+      padding: 20px;
+      font-weight: 900;
+      font-size: 26px;
+      font-style: italic;
+    }
+  }
+
+  .social-mod-cont-right {
+    margin: 20px 0;
+    gap: 50px;
   }
 }
