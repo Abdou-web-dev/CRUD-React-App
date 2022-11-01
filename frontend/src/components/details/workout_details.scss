@@ -11,6 +11,7 @@
 .workout-details-container-as-list {
   background-color: white;
   margin-bottom: 20px;
+  background-color: rgba(168, 200, 180, 0.16);
 
   &.black-border-selected {
     border: 1.5px solid black;
@@ -59,6 +60,8 @@
 }
 
 .workout-details-container-as-grid {
+  background-color: rgba(0, 180, 216, 0.075);
+
   .workout-details {
     min-height: 264px;
     justify-content: center;
@@ -144,9 +147,12 @@
   }
 
   &.filtered-workouts {
-    border: 1px solid #00b4d8;
-    background: rgba(225, 214, 214, 0.5);
+    border: 1px solid #727e8043;
+    background: rgba(225, 214, 214, 0.15);
     padding: 5px;
+    .work-details-right-inner-iconbtn {
+      align-self: center;
+    }
   }
 }
 
@@ -235,10 +241,6 @@
 .stop-scrolling {
   height: 100%;
   overflow: hidden;
-}
-
-.changeBGColor {
-  background-color: rgba(168, 228, 250, 0.18);
 }
 
 .workout-infos-drawer {

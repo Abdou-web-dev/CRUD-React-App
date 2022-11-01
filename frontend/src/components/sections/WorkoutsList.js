@@ -18,7 +18,7 @@ export function WorkoutsList({
   setshowfilteredResults,
   showfilteredResults,
 }) {
-  const [sectionBorder, setSectionBorder] = useState("");
+  const [boxShadow, setBoxShadow] = useState("");
   const [bg, setbg] = useState("");
   const [containerClass, setcontainerClass] = useState("chest-page-workouts");
   const [src, setsrc] = useState(listIcon);
@@ -84,16 +84,17 @@ export function WorkoutsList({
   }
 
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
-
   useEffect(() => {
     if (searchInput?.length !== 0) {
-      setSectionBorder("1px solid #1aac83");
+      setBoxShadow(
+        "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+      );
     } else {
-      setSectionBorder("");
+      setBoxShadow("");
     }
   }, [searchInput]);
-  // console.log(filteredResults?.length);
   let result = filteredResults?.length === 1 ? `result` : `results`;
+
   return (
     <div className="workouts-section-container">
       <div className="workouts-section-toggle-btn-container">
@@ -108,10 +109,18 @@ export function WorkoutsList({
 
       {searchInput?.length !== 0 &&
         detailsContClass === `workout-details-container-as-grid` && (
-          <div>
-            <span>
-              You have got {filteredResults?.length} {result} !
-            </span>
+          <div className="workouts-section-results">
+            {filteredResults?.length !== 0 ? (
+              <span>
+                You have got {filteredResults?.length} {result} !
+              </span>
+            ) : filteredResults?.length === 0 ? (
+              <div>
+                <span>
+                  {`Sorry , there is no item with the searched criteria !`}{" "}
+                </span>
+              </div>
+            ) : null}
           </div>
         )}
 
@@ -119,7 +128,7 @@ export function WorkoutsList({
         className="workouts-section-container-items-and-closebtn"
         style={{
           background: bg,
-          border: sectionBorder,
+          boxShadow: boxShadow,
         }}
       >
         <div

@@ -7,7 +7,7 @@
   --error: #e7195a;
 }
 body {
-  background: rgba(167, 224, 191, 0.05);
+  background: white;
   margin: 0;
   font-family: "Poppins";
   overflow-x: hidden;

@@ -14,6 +14,7 @@ import "./exos_lists.scss";
 export function ChestExosBtnsList({
   chestExos,
   suggestiveListBorder,
+  paginationClassName,
   setTitle,
 }) {
   const chestValues = Object.values(chestExos);
@@ -180,7 +181,15 @@ export function ChestExosBtnsList({
       {/* Ellipsis icon , dot dot dot */}
 
       <div className="ellipsis-wrapper">
-        <IconButton onClick={handleDotsIconClick}>
+        <IconButton
+          onClick={handleDotsIconClick}
+          style={{
+            zIndex:
+              paginationClassName === "pagination-content-loaded-grid"
+                ? 999
+                : "",
+          }}
+        >
           <Tooltip placement="top" title={titleLabel} arrowPointAtCenter>
             <MoreHorizIcon />
           </Tooltip>

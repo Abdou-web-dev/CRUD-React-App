@@ -1,14 +1,21 @@
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
-import { Button } from "@mui/material";
-import { Input, Modal, Tooltip } from "antd";
+import { Button, IconButton } from "@mui/material";
+import { Alert, Input, Modal, Tooltip } from "antd";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import exercisesData from "../../assets/staticData/chestExercises.json";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
+import { ClearIcon } from "../icons/Icons";
 import { ChestExosBtnsList as ChestExosList } from "../lists/exosLists/ChestExosBtnsList";
 import "./form_styles.scss";
 
-const WorkoutForm = ({ setCurrentPage }) => {
+const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
+  const [showNotification, setShowNotification] = useState(false);
+  const workoutsTitlesArray = [
+    ...new Set(workouts?.map((workout) => workout.title)),
+  ];
+  // console.log(workoutsTitlesArray.includes('a'));
+
   const currentLocation = useLocation();
   let currentLocat = currentLocation.pathname;
   const chestExos = exercisesData.exercises.chest_Exercises;
@@ -21,14 +28,15 @@ const WorkoutForm = ({ setCurrentPage }) => {
   const [emptyFields, setEmptyFields] = useState([]);
   const [suggestiveListBorder, setSuggestiveListBorder] = useState("");
   const [showFormNewWindow, setShowFormNewWindow] = useState(false);
-
+  // const pureString = str.replace(/(?:\r\n|\r|\n)/g, '');
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const pureString = str.replace(/(?:\r\n|\r|\n)/g, '');
     const workout = { title, load, reps };
     const response = await fetch("/api/workouts", {
       method: "POST",
-      body: JSON.stringify(workout),
+      body: JSON.stringify(
+        !workoutsTitlesArray.includes(workout.title) ? workout : handleError()
+      ),
       headers: {
         "Content-Type": "application/json",
       },
@@ -38,6 +46,7 @@ const WorkoutForm = ({ setCurrentPage }) => {
     if (!response.ok) {
       setError(json.error);
       setEmptyFields(json.emptyFields);
+      console.log("errooor");
     }
     if (response.ok) {
       setEmptyFields([]);
@@ -47,13 +56,27 @@ const WorkoutForm = ({ setCurrentPage }) => {
       setReps("");
       dispatch({ type: "CREATE_WORKOUT", payload: json });
       if (showFormNewWindow === true) {
-        //close the form modal when user types all required info for a workout
+        //close the form modal when user types all required info for a workout and clicks on submit
         setShowFormNewWindow(false);
       }
       //on submit, redirect the user to the 1st page
       setCurrentPage(1);
+      //
+      if (showNotification === true) {
+        setShowNotification(false);
+      }
     }
   };
+
+  function handleError() {
+    setShowNotification(!showNotification);
+    setEmptyFields([]);
+    setTitle(null);
+    setLoad(null);
+    setReps(null);
+    setError(null);
+    console.log("already exists");
+  }
 
   //3 JSX blocs
   const ButtonToggleModalDom = (
@@ -124,18 +147,18 @@ const WorkoutForm = ({ setCurrentPage }) => {
               type="text"
               onChange={(e) => setTitle(e.target.value)}
               status={
-                emptyFields.includes("title") && title.length === 0
+                emptyFields.includes("title") && title?.length === 0
                   ? "error"
                   : ""
               }
               // title.length === 0 means that nothing is being typed by the user
               placeholder={
-                emptyFields.includes("title") && title.length === 0
+                emptyFields.includes("title") && title?.length === 0
                   ? `You have forgotten to type a title`
                   : "Type a title"
               }
               prefix={
-                emptyFields.includes("title") && title.length === 0 ? (
+                emptyFields.includes("title") && title?.length === 0 ? (
                   <PriorityHighIcon />
                 ) : null
               }
@@ -149,15 +172,15 @@ const WorkoutForm = ({ setCurrentPage }) => {
             onChange={(e) => setLoad(e.target.value)}
             value={load}
             status={
-              emptyFields.includes("load") && load.length === 0 ? "error" : ""
+              emptyFields.includes("load") && load?.length === 0 ? "error" : ""
             }
             placeholder={
-              emptyFields.includes("load") && load.length === 0
+              emptyFields.includes("load") && load?.length === 0
                 ? `You have forgotten to type a load`
                 : "Type a load"
             }
             prefix={
-              emptyFields.includes("load") && load.length === 0 ? (
+              emptyFields.includes("load") && load?.length === 0 ? (
                 <PriorityHighIcon />
               ) : null
             }
@@ -170,16 +193,16 @@ const WorkoutForm = ({ setCurrentPage }) => {
             onChange={(e) => setReps(e.target.value)}
             value={reps}
             status={
-              emptyFields.includes("reps") && reps.length === 0 ? "error" : ""
+              emptyFields.includes("reps") && reps?.length === 0 ? "error" : ""
             }
             // reps.length === 0 means that nothing is being typed by the user
             placeholder={
-              emptyFields.includes("reps") && reps.length === 0
+              emptyFields.includes("reps") && reps?.length === 0
                 ? `You have forgotten to type reps`
                 : "Type reps"
             }
             prefix={
-              emptyFields.includes("reps") && reps.length === 0 ? (
+              emptyFields.includes("reps") && reps?.length === 0 ? (
                 <PriorityHighIcon />
               ) : null
             }
@@ -208,6 +231,7 @@ const WorkoutForm = ({ setCurrentPage }) => {
     <div className="chest-suggest-btns">
       {currentLocat === "/chest" && (
         <ChestExosList
+          paginationClassName={paginationClassName}
           setTitle={setTitle}
           chestExos={chestExos}
           suggestiveListBorder={suggestiveListBorder}
@@ -218,6 +242,23 @@ const WorkoutForm = ({ setCurrentPage }) => {
 
   return (
     <>
+      {showNotification && (
+        <div className="notification">
+          <Alert
+            className="ant-alert"
+            closeIcon={
+              <IconButton onClick={() => setShowNotification(false)}>
+                <ClearIcon />
+              </IconButton>
+            }
+            message={
+              <span className="noti-text">This workout already exists !</span>
+            }
+            banner
+            closable
+          />
+        </div>
+      )}
       {showFormNewWindow === false && (
         <>
           <div className="chest-workout-form-container">
@@ -254,17 +295,3 @@ const WorkoutForm = ({ setCurrentPage }) => {
 };
 
 export default WorkoutForm;
-
-{
-  /* <svg
-          className="up-svg-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          viewBox="0 0 14 14"
-          role="img"
-          width={`34px`}
-          height={`34px`}
-        >
-          <path d="M12 7.252h2V14H0V0h6.602v2.014H2v9.971h10V7.252zM8.602 0v2.014h2.088L6.795 5.935l1.414 1.424L12 3.54v1.898h2V0H8.602z"></path>
-        </svg> */
-}

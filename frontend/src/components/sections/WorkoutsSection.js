@@ -1,9 +1,13 @@
 import { IconButton } from "@mui/material";
 import { Input } from "antd";
+import { formatDistanceToNow } from "date-fns";
 import React, { useState } from "react";
 import { ClearIcon } from "../icons/Icons";
 import "./sections_styles.scss";
-import { WorkoutsList } from "./WorkoutsList";
+import {
+  WorkoutsList,
+  WorkoutsList as WorkoutsListFiltered,
+} from "./WorkoutsList";
 
 export const WorkoutsSection = ({
   workouts,
@@ -21,12 +25,18 @@ export const WorkoutsSection = ({
     setSearchInput(searchValue);
     if (searchInput !== "") {
       const filteredData = workouts.filter((workout) => {
+        const createdAtFormatted = formatDistanceToNow(
+          new Date(workout.createdAt),
+          {
+            addSuffix: true,
+          }
+        );
         return (
-          Object.values(workout.title)
+          Object.values(createdAtFormatted)
             .join("")
             .toLowerCase()
             .includes(searchInput.toString().toLowerCase()) ||
-          Object.values(workout.createdAt)
+          Object.values(workout.title)
             .join("")
             .toLowerCase()
             .includes(searchInput.toString().toLowerCase())
@@ -59,14 +69,14 @@ export const WorkoutsSection = ({
           onChange={handleChange}
           className="workouts-search-ant-input"
           style={{ width: "800px" }}
-          placeholder=" &nbsp;Search by keyword"
+          placeholder=" &nbsp;Search a workout"
           // allowClear
         ></Input>
       </div>
 
       {searchInput?.length >= 1 ? ( //if something is being typed in the search input field
         showfilteredResults === true && (
-          <WorkoutsList
+          <WorkoutsListFiltered
             {...{
               currentPage,
               setCurrentPage,

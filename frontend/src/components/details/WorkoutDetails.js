@@ -63,6 +63,7 @@ export const WorkoutDetails = ({
     handleDelete();
     setOpenBackdrop(!openBackdrop);
     message.success("Deleted !", 0.6); //This is a prompt message for success, and it will disappear in 0.6 seconds
+    setOpenPopconfirm(false);
   };
   const cancel = () => {
     setOpenPopconfirm(false);
@@ -86,17 +87,55 @@ export const WorkoutDetails = ({
   const handleInfos = () => {
     setOpenInfosDrawer(true);
   };
-  const handleEdit = () => {
+  const [showRepsInput, setshowRepsInput] = useState(false);
+  const [updatedReps, setupdatedReps] = useState(false);
+
+  //
+  const [reps, setReps] = useState(workout?.reps);
+  const [title, setTitle] = useState(workout?.title);
+  const [load, setLoad] = useState(workout?.load);
+  //
+  const [updName, setupdName] = useState("");
+  const [updLoad, setupdLoad] = useState("");
+  const [updReps, setupdReps] = useState("");
+  //
+  const [repsValue, setRepsValue] = useState("");
+
+  const handleEdit = async () => {
+    setshowRepsInput(true);
     setborder("1px solid black");
+    // const workout = { title, load, reps };
+    var updatedWorkout = {
+      updName,
+      updLoad,
+      updReps,
+    };
+    const response = await fetch("/api/workouts/" + workout._id, {
+      method: "PATCH", //if it does not work , use "PUT"
+      body: JSON.stringify(updatedWorkout),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
+
+    if (!response.ok) {
+      console.log("error occured during updating");
+    }
+    if (response.ok) {
+      // setEmptyFields([]);
+      setTitle(updName);
+      setReps(updReps);
+      setLoad(updLoad);
+      dispatch({ type: "UPDATE_WORKOUT", payload: json });
+      console.log("success");
+    }
   };
 
   const onClose = () => {
     setOpenDrawer(false);
   };
   React.useEffect(() => {
-    if (workout) {
-      setTimeout(() => setClassName("changeBGColor workout-details"), 1000); //to delete later
-    }
     if (openDrawer === true || openInfosDrawer) {
       setborder("1px solid black");
     } else if (openDrawer === false || !openInfosDrawer) {
@@ -139,7 +178,7 @@ export const WorkoutDetails = ({
       >
         <Collapse in={showCollapse} collapsedSize="90px">
           <Stack className={className} direction="row">
-            <span>{index} </span>
+            {/* <span>{index} </span> */}
             <div
               className="work-details-left-content"
               style={{
@@ -153,7 +192,7 @@ export const WorkoutDetails = ({
                 >
                   {showCollapse ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </IconButton>
-                <h4>{workout?.title}</h4>
+                <h4>{title}</h4>
                 <div className="work-details-left-inner-load">
                   <span className="work-details-left-inner-load-span1">
                     <strong>
@@ -161,7 +200,7 @@ export const WorkoutDetails = ({
                     </strong>
                   </span>
                   <span className="work-details-left-inner-load-span2">
-                    {workout?.load}
+                    {load}
                   </span>
                 </div>
 
@@ -169,9 +208,37 @@ export const WorkoutDetails = ({
                   <span className="work-details-left-inner-reps-span1">
                     <strong>Number of reps : </strong>
                   </span>
-                  <span className="work-details-left-inner-reps-span2">
-                    {workout?.reps}
-                  </span>
+                  {reps !== updReps && (
+                    <span className="work-details-left-inner-reps-span2">
+                      {reps}
+                    </span>
+                  )}
+                  {updatedReps && (
+                    <span className="work-details-left-inner-reps-span2">
+                      {repsValue}
+                    </span>
+                  )}
+                  {reps === updReps && showRepsInput && (
+                    <input
+                      value={repsValue}
+                      onChange={(e) => {
+                        setRepsValue(e.target.value);
+                      }}
+                      type="number"
+                    />
+                  )}
+                  {reps === updReps && (
+                    <Button
+                      onClick={() => {
+                        setReps(updReps);
+                        setshowRepsInput(false);
+                        setupdatedReps(true);
+                        console.log(repsValue);
+                      }}
+                    >
+                      edit
+                    </Button>
+                  )}
                 </div>
 
                 <div className="work-details-left-inner-date">
@@ -316,3 +383,11 @@ export const WorkoutDetails = ({
     </>
   );
 };
+
+// const response = await fetch("/api/workouts", {
+//   method: "PATCH",
+//   body: JSON.stringify(workout),
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// });

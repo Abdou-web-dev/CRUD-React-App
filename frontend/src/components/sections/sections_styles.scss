@@ -1,3 +1,6 @@
+@import "@fontsource/inconsolata";
+@import "@fontsource/mulish";
+
 .workouts-section-container {
   .workouts-section-toggle-btn-container {
     margin: 25px 0px;
@@ -29,6 +32,15 @@
       }
     }
   }
+  .workouts-section-results {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    span {
+      font-size: 25px;
+      font-family: "Mulish";
+    }
+  }
 }
 .workouts-close-three-andmore {
   position: relative;
@@ -41,6 +53,10 @@
   .workouts-section-input {
     .workouts-search-ant-input {
       height: 70px;
+      & > * {
+        font-size: 25px;
+        font-family: "Inconsolata";
+      }
     }
   }
 }

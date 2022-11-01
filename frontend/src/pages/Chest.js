@@ -15,6 +15,7 @@ import { WorkoutsSection } from "../components/sections/WorkoutsSection";
 import { AntdSkeleton } from "../components/skeletons/AntdSkeleton";
 
 const Chest = ({}) => {
+  //instead of âdding contexts object down to child components as props, I can use this hook in each component that needs workouts
   const { workouts, dispatch } = useWorkoutsContext();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
@@ -108,7 +109,9 @@ const Chest = ({}) => {
             ></WorkoutsSection>
           </div>
           <div className="chest-form">
-            <WorkoutForm {...{ setCurrentPage }} />
+            <WorkoutForm
+              {...{ setCurrentPage, workouts, paginationClassName }}
+            />
           </div>
           <BackTop />
         </div>
