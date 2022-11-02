@@ -2,12 +2,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShareIcon from "@mui/icons-material/Share";
-import editIcon from "../../assets/img/editer.png";
-
 import { Backdrop, Collapse, Stack } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import { Button, Drawer, message, Popconfirm, Space } from "antd";
+import { Button, Drawer, Input, message, Popconfirm, Space } from "antd";
 import React, { useState } from "react";
+import checkmarkIcon from "../../assets/img/checked.svg";
+import editIconPen from "../../assets/img/editer.png";
+import editImg from "../../assets/img/editIcon.svg";
+import closeIcone from "../../assets/img/smallCloseicon.svg";
+
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 // date fns package
 import InfoIcon from "@mui/icons-material/Info";
@@ -52,6 +55,7 @@ export const WorkoutDetails = ({
       dispatch({ type: "DELETE_WORKOUT", payload: json });
     }
   };
+  const [closeIcon, setcloseIcon] = useState(closeIcone);
 
   //Concerning the Popconfirm antd
   const [openBackdrop, setOpenBackdrop] = React.useState(false);
@@ -64,6 +68,7 @@ export const WorkoutDetails = ({
     setOpenBackdrop(!openBackdrop);
     message.success("Deleted !", 0.6); //This is a prompt message for success, and it will disappear in 0.6 seconds
     setOpenPopconfirm(false);
+    setshowBorder(!showBorder);
   };
   const cancel = () => {
     setOpenPopconfirm(false);
@@ -80,16 +85,23 @@ export const WorkoutDetails = ({
   //Concerning the Drawer of antd
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openInfosDrawer, setOpenInfosDrawer] = useState(false);
-
+  //
+  const [disableDeleteBtn, setDisableDeleteBtn] = useState(false);
+  const [disableEditBtn, setDisableEditBtn] = useState(false);
+  const [disableInfosBtn, setDisableInfosBtn] = useState(false);
+  const [disableShareBtn, setDisableShareBtn] = useState(false);
+  const [editIcon, setEditIcon] = useState(editIconPen);
   const handleShare = () => {
     setOpenDrawer(true);
   };
   const handleInfos = () => {
     setOpenInfosDrawer(true);
   };
+  const [showEditBtn, setshowEditBtn] = useState(false);
   const [showRepsInput, setshowRepsInput] = useState(false);
-  const [updatedReps, setupdatedReps] = useState(false);
-
+  const [showupdatedReps, setShowupdatedReps] = useState(false);
+  //
+  const [hideOKBtn, setHideOKBtn] = useState(false);
   //
   const [reps, setReps] = useState(workout?.reps);
   const [title, setTitle] = useState(workout?.title);
@@ -100,9 +112,34 @@ export const WorkoutDetails = ({
   const [updReps, setupdReps] = useState("");
   //
   const [repsValue, setRepsValue] = useState("");
+  const [repsUpdated, setRepsUpdated] = useState("");
 
   const handleEdit = async () => {
-    setshowRepsInput(true);
+    if (editIcon === editIconPen) {
+      setshowEditBtn(true);
+      // console.log(showEditBtn, +"input", showRepsInput);
+
+      setDisableDeleteBtn(true);
+      setDisableInfosBtn(true);
+      setDisableShareBtn(true);
+      setTimeout(() => {
+        setEditIcon(checkmarkIcon);
+      }, 200);
+      // setshowRepsInput(true);
+    }
+    if (editIcon === checkmarkIcon) {
+      console.log(showRepsInput, hideOKBtn, "hide");
+      setshowRepsInput(!showRepsInput);
+      setHideOKBtn(!hideOKBtn);
+      setDisableDeleteBtn(false);
+      setDisableInfosBtn(false);
+      setDisableShareBtn(false);
+      setEditIcon(editIconPen);
+      setshowRepsInput(false);
+      setshowEditBtn(!showEditBtn);
+      setHideOKBtn(false);
+    }
+
     setborder("1px solid black");
     // const workout = { title, load, reps };
     var updatedWorkout = {
@@ -120,15 +157,15 @@ export const WorkoutDetails = ({
     const json = await response.json();
 
     if (!response.ok) {
-      console.log("error occured during updating");
+      // console.log("error occured during updating");
     }
     if (response.ok) {
       // setEmptyFields([]);
       setTitle(updName);
-      setReps(updReps);
+      setupdReps(updReps);
       setLoad(updLoad);
       dispatch({ type: "UPDATE_WORKOUT", payload: json });
-      console.log("success");
+      // console.log("success");
     }
   };
 
@@ -158,6 +195,16 @@ export const WorkoutDetails = ({
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   // let layoutList = detailsContClass === "workout-details-container-as-list";
   let createdAt = workout?.createdAt;
+  //to keep the state when we refresh the page
+  // useEffect(() => {
+  //   const data = window.localStorage.getItem("updReps_STATE");
+  //   if (data !== null) setReps(JSON.parse(data));
+  // }, []);
+
+  // useEffect(() => {
+  //   window.localStorage.setItem("updReps_STATE", JSON.stringify(updReps));
+  // }, [updReps]);
+
   return (
     <>
       <div
@@ -192,7 +239,7 @@ export const WorkoutDetails = ({
                 >
                   {showCollapse ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </IconButton>
-                <h4>{title}</h4>
+                <h4>{workout.title}</h4>
                 <div className="work-details-left-inner-load">
                   <span className="work-details-left-inner-load-span1">
                     <strong>
@@ -200,44 +247,104 @@ export const WorkoutDetails = ({
                     </strong>
                   </span>
                   <span className="work-details-left-inner-load-span2">
-                    {load}
+                    {workout.load}
                   </span>
                 </div>
 
-                <div className="work-details-left-inner-reps">
+                <div
+                  className={
+                    editIcon === checkmarkIcon
+                      ? "work-details-left-inner-reps-checkmark"
+                      : "work-details-left-inner-reps"
+                  }
+                >
                   <span className="work-details-left-inner-reps-span1">
                     <strong>Number of reps : </strong>
                   </span>
                   {reps !== updReps && (
                     <span className="work-details-left-inner-reps-span2">
-                      {reps}
+                      {workout.reps}
                     </span>
                   )}
-                  {updatedReps && (
+                  {showupdatedReps && (
                     <span className="work-details-left-inner-reps-span2">
-                      {repsValue}
+                      {repsUpdated}
                     </span>
                   )}
-                  {reps === updReps && showRepsInput && (
-                    <input
-                      value={repsValue}
-                      onChange={(e) => {
-                        setRepsValue(e.target.value);
-                      }}
-                      type="number"
-                    />
-                  )}
-                  {reps === updReps && (
-                    <Button
-                      onClick={() => {
-                        setReps(updReps);
-                        setshowRepsInput(false);
-                        setupdatedReps(true);
-                        console.log(repsValue);
-                      }}
-                    >
-                      edit
-                    </Button>
+                  {editIcon === checkmarkIcon && (
+                    <>
+                      {showRepsInput && hideOKBtn === false && (
+                        <Input
+                          value={repsValue}
+                          onChange={(e) => {
+                            setRepsValue(e.target.value);
+                          }}
+                          type="number"
+                          className="reps-input-edit"
+                        />
+                      )}
+                      {showRepsInput === false && showEditBtn === true && (
+                        <Button
+                          onClick={() => {
+                            setReps(updReps);
+                            setshowRepsInput(true);
+                            setShowupdatedReps(true);
+                            console.log(hideOKBtn);
+                          }}
+                          className="work-details-left-inner-reps-editbtn"
+                          style={{
+                            padding:
+                              repsValue && closeIcon === closeIcone
+                                ? "2px 0px 2px 4px"
+                                : "4px",
+                          }}
+                        >
+                          <img
+                            className={
+                              repsValue && showRepsInput === false
+                                ? "edit-icon-again"
+                                : "edit-icon"
+                            }
+                            src={editImg}
+                            alt=""
+                          />
+                          <span
+                            className={
+                              repsValue && showRepsInput === false
+                                ? "again-span"
+                                : "edit-text"
+                            }
+                          >
+                            {repsValue && showRepsInput === false
+                              ? "Edit again"
+                              : "Edit"}
+                          </span>
+                          {repsValue && showRepsInput === false && (
+                            <img
+                              onClick={() => {
+                                setHideOKBtn(true);
+                              }}
+                              className="work-details-left-inner-reps-close-edit"
+                              src={closeIcon}
+                              alt=""
+                            />
+                          )}
+                        </Button>
+                      )}
+                      {hideOKBtn === false &&
+                        showRepsInput === true &&
+                        repsValue?.length !== 0 && (
+                          <Button
+                            onClick={() => {
+                              setRepsUpdated(repsValue);
+                              setshowRepsInput(!showRepsInput);
+                            }}
+                            className="work-details-left-inner-reps-edit-okbtn"
+                          >
+                            <span> OK</span>
+                          </Button>
+                        )}
+                    </>
                   )}
                 </div>
 
@@ -265,6 +372,7 @@ export const WorkoutDetails = ({
                   open={openPopconfirm}
                 >
                   <IconButton
+                    disabled={disableDeleteBtn}
                     className="work-details-right-inner-iconbtn"
                     //differnce  between setOpenBackdrop(false) and setOpenBackdrop(cur=>!cur) or setOpenBackdrop(!openBackdrop) is that the 2 last statement will create a toggle logic hence a infinite loop onclick on esc , whereas the 1st one will trigger only once
                     onKeyDown={() => {
@@ -280,6 +388,7 @@ export const WorkoutDetails = ({
                 </Popconfirm>
 
                 <IconButton
+                  disabled={disableShareBtn}
                   className="work-details-right-inner-iconbtn"
                   onClick={handleShare}
                 >
@@ -287,6 +396,7 @@ export const WorkoutDetails = ({
                 </IconButton>
 
                 <IconButton
+                  disabled={disableInfosBtn}
                   className="work-details-right-inner-iconbtn"
                   onClick={handleInfos}
                 >
@@ -294,12 +404,19 @@ export const WorkoutDetails = ({
                 </IconButton>
 
                 <IconButton
+                  disabled={disableEditBtn}
                   className="icon-btn-edit work-details-right-inner-iconbtn"
                   onBlur={() => setborder("")}
                   onKeyDown={() => setborder("")}
                   onClick={handleEdit}
                 >
-                  <img className="edit-img" src={editIcon} alt="" />
+                  <img
+                    className={
+                      editIcon === checkmarkIcon ? "checkmarkIcon" : "edit-img"
+                    }
+                    src={editIcon}
+                    alt=""
+                  />
                 </IconButton>
               </div>
             </div>

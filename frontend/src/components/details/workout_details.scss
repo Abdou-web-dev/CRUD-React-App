@@ -1,5 +1,6 @@
 @import "@fontsource/inconsolata";
 @import "@fontsource/mulish";
+@import "@fontsource/open-sans";
 
 .site-drawer-render-in-current-wrapper {
   position: relative;
@@ -27,6 +28,78 @@
       justify-content: flex-start;
       align-items: flex-start;
 
+      .work-details-left-inner-reps-checkmark {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        .work-details-left-inner-reps-editbtn {
+          width: fit-content;
+          height: fit-content;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          // padding: 5px 0px 5px 5px;
+
+          .again-span {
+            font-family: "Open Sans";
+            font-size: 12px;
+          }
+          .edit-text {
+            font-family: "Open Sans";
+            font-size: 14px;
+          }
+          img.edit-icon-again {
+            width: 12px;
+            height: 12px;
+          }
+          img.edit-icon {
+            width: 15px;
+            height: 15px;
+          }
+          img.work-details-left-inner-reps-close-edit {
+            width: 30px;
+            height: 30px;
+            position: relative;
+            right: 5px;
+            align-self: flex-start;
+            &:hover {
+              transform: scale(1.7);
+            }
+          }
+        }
+        .reps-input-edit {
+          border: 1px solid lightgray;
+          background: white;
+          & > * {
+            font-family: "Mulish";
+            color: #5899f9;
+          }
+          &:focus {
+            height: 35px;
+          }
+          &:hover {
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          }
+        }
+        //
+        .work-details-left-inner-reps-edit-okbtn {
+          background: #5899f9;
+          border-radius: 5px;
+          span {
+            font-family: "Roboto";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #ffffff;
+          }
+        }
+      }
+
       h4 {
         margin: 0 0 10px 0;
         font-size: 1.6em;
@@ -38,6 +111,7 @@
         margin: 0;
         font-size: 1.15em;
         color: #555;
+        white-space: nowrap;
       }
     }
   }
@@ -54,6 +128,14 @@
         width: 24px;
         height: 24px;
         color: gray;
+      }
+      .checkmarkIcon {
+        width: 34px;
+        height: 34px;
+        // opacity: 0.82;
+        &:hover {
+          transform: scale(1.2);
+        }
       }
     }
   }
@@ -110,6 +192,7 @@
             color: rgba(85, 85, 85, 0.8);
           }
         }
+
         .work-details-left-inner-date {
           // border: 1px solid red;
           margin: 0 auto;
@@ -264,6 +347,16 @@
             background: rgba(23, 22, 22, 0.44);
           }
         }
+      }
+    }
+  }
+}
+
+.MuiInputBase-root {
+  &.MuiInput-root {
+    &.MuiInput-underline {
+      &.Mui-focused {
+        // padding: 1.5px 0;
       }
     }
   }

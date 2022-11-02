@@ -106,7 +106,6 @@ module.exports = {
 };
 
 // UPDATE/PATCH: // update a workout
-
 // res.status(200).json(workout)
 //  const workout = await workout.findOneAndUpdate({ _id: id }, {...req.body}, {new: true})
 // json = await response.json()
