@@ -64,8 +64,6 @@ const Chest = ({}) => {
     "pagination-content-loaded"
   );
 
-  // console.log(workouts?.length);
-
   if (!workouts) {
     return (
       <div className="skeleton-content-not-loaded">
@@ -113,6 +111,7 @@ const Chest = ({}) => {
               {...{ setCurrentPage, workouts, paginationClassName }}
             />
           </div>
+
           <BackTop />
         </div>
 

@@ -1,0 +1,110 @@
+@import "@fontsource/poppins";
+
+.reps-update-controller {
+  .reps-update-controller-input-and-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 8px;
+
+    .reps-input-edit {
+      border: 1px solid lightgray;
+      background: white;
+      & > * {
+        font-family: "Mulish";
+      }
+      &:focus {
+        height: 35px;
+      }
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      }
+      .anticon-close-circle {
+        font-size: 0.6em;
+        position: relative;
+        right: 30px;
+        bottom: 2.5px;
+      }
+      &.ant-input-affix-wrapper {
+        padding: 0;
+      }
+    }
+    .work-details-left-inner-reps-editbtns-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // gap: 5px;
+      padding: 0;
+      border: 1px solid #5898f9b5;
+      .again-span {
+        font-family: "Open Sans";
+        font-size: 12px;
+      }
+      .edit-text {
+        font-family: "Open Sans";
+        font-size: 14px;
+      }
+      .reps-upd-divider {
+        width: 2%;
+        border: 0.5px solid lightgray;
+        height: 20px;
+      }
+      .work-details-left-inner-reps-editbtn-editpen {
+        border: none;
+
+        &:hover {
+          background: lightgray;
+        }
+        img.reps-update-edit-icon {
+          width: 12px;
+          height: 12px;
+        }
+      }
+      .work-details-left-inner-reps-editbtn-closeicon {
+        border: none;
+        &:hover {
+          background: lightgray;
+        }
+
+        .reps-update-close-icon {
+          width: 12px;
+          height: 12px;
+        }
+      }
+    }
+
+    .work-details-left-inner-reps-edit-okbtn {
+      background: #5899f9;
+      border-radius: 5px;
+      width: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+        font-family: "Mulish";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14.5px !important;
+        line-height: 16px;
+        letter-spacing: 0.05em;
+        // text-transform: uppercase;
+        color: #ffffff !important;
+      }
+    }
+  }
+  .reps-update-controller-modify {
+    .reps-update-controller-modify-btn {
+      background: rgba(26, 172, 131, 0.4);
+      &:hover {
+        background: #1aac83;
+      }
+      span {
+        font-family: "Poppins";
+        color: white !important;
+        font-weight: bolder;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}

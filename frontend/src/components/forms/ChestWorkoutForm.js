@@ -23,7 +23,7 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
   const { dispatch } = useWorkoutsContext();
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
-  const [reps, setReps] = useState("");
+  const [reps, setReps] = useState(0);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
   const [suggestiveListBorder, setSuggestiveListBorder] = useState("");

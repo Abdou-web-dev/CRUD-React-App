@@ -96,3 +96,21 @@
 // The key here is to structure your components such that the drawer component is not nested within any of the routes, so it doesn't disappear when its parent component does. Perhaps you could place the drawer component outside <Routes /> like you've done with <Navbar /> (which is the reason why Navbar doesn't disappear on route changes).
 
 // You can place the drawer at the root of your component tree and manage its state by passing it down other routed components or perhaps through redux.
+const [value, setValue] = useState(50);
+const [inputValue, setinputValue] = useState(5000);
+
+useEffect(() => {
+  const data = localStorage.getItem("valueKey");
+  console.log(data);
+  if (data !== null) setValue(JSON.parse(data));
+}, []);
+useEffect(() => {
+  localStorage.setItem("valueKey", JSON.stringify(inputValue));
+}, [inputValue]);
+
+
+<div>
+<span>{value}</span>
+</div>
+<input value={inputValue} type="number" />
+<Button onClick={() => setinputValue(200)}>+</Button>

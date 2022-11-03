@@ -4,10 +4,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShareIcon from "@mui/icons-material/Share";
 import { Backdrop, Collapse, Stack } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import { Button, Drawer, message, Popconfirm, Space } from "antd";
+import { Button, Drawer, Input, message, Popconfirm, Space } from "antd";
 import React, { useState } from "react";
 import checkmarkIcon from "../../assets/img/checked.svg";
 import editIconPen from "../../assets/img/editer.png";
+import editImg from "../../assets/img/editIcon.svg";
 import closeIcone from "../../assets/img/smallCloseicon.svg";
 
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
@@ -16,7 +17,6 @@ import InfoIcon from "@mui/icons-material/Info";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { SocialIcons } from "../drawer_content/SocialIcons";
 import { Stepper } from "../steppers/Stepper";
-import { RepsUpdate as RepsUpdateController } from "../update/RepsUpdate";
 import "./workout_details.scss";
 
 export const WorkoutDetails = ({
@@ -97,6 +97,9 @@ export const WorkoutDetails = ({
   const handleInfos = () => {
     setOpenInfosDrawer(true);
   };
+  const [showEditBtn, setshowEditBtn] = useState(false);
+  const [showRepsInput, setshowRepsInput] = useState(false);
+  // const [showupdatedReps, setShowupdatedReps] = useState(false);
   //
   const [hideOKBtn, setHideOKBtn] = useState(false);
   //
@@ -104,23 +107,61 @@ export const WorkoutDetails = ({
   const [title, setTitle] = useState(workout?.title);
   const [load, setLoad] = useState(workout?.load);
   //
-  const [showModifyReps, setshowModifyReps] = useState(false);
+  const [updName, setupdName] = useState("");
+  const [updLoad, setupdLoad] = useState("");
+  const [updReps, setupdReps] = useState(0);
 
-  const handleEdit = () => {
-    setborder("1px solid black");
+  const [repsValue, setRepsValue] = useState("");
+  // const [repsUpdated, setRepsUpdated] = useState("");
+  const handleEdit = async () => {
     if (editIcon === editIconPen) {
+      setshowEditBtn(true);
+      // console.log(showEditBtn, +"input", showRepsInput);
       setDisableDeleteBtn(true);
       setDisableInfosBtn(true);
       setDisableShareBtn(true);
-      setEditIcon(checkmarkIcon);
-      setshowModifyReps(true);
+      setTimeout(() => {
+        setEditIcon(checkmarkIcon);
+      }, 200);
+      // setshowRepsInput(true);
     }
     if (editIcon === checkmarkIcon) {
+      // console.log(showRepsInput, hideOKBtn, "hide");
+      setshowRepsInput(!showRepsInput);
+      setHideOKBtn(!hideOKBtn);
       setDisableDeleteBtn(false);
       setDisableInfosBtn(false);
       setDisableShareBtn(false);
       setEditIcon(editIconPen);
-      setshowModifyReps(false);
+      setshowRepsInput(false);
+      setshowEditBtn(!showEditBtn);
+      setHideOKBtn(false);
+    }
+
+    setborder("1px solid black");
+    var updatedWorkout = {
+      updName,
+      updLoad,
+      updReps,
+    };
+    const response = await fetch("/api/workouts/" + workout._id, {
+      method: "PATCH", //if it does not work , use "PUT"
+      body: JSON.stringify(updatedWorkout),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const json = await response.json();
+
+    if (!response.ok) {
+      // console.log("error occured during updating");
+    }
+    if (response.ok) {
+      console.log(typeof updReps);
+      setTitle("haha");
+      setReps(updReps);
+      setLoad(updLoad);
+      dispatch({ type: "UPDATE_WORKOUT", payload: json });
     }
   };
 
@@ -169,11 +210,12 @@ export const WorkoutDetails = ({
          workout-details-container${index}
           ${showBorder === true ? `border-selected` : ``} 
           ${searchInput?.length !== 0 ? `filtered-workouts` : ``} 
+
+          
          `}
         style={{
           boxShadow: containerBoxShadow,
           border: border,
-          background: editIcon === checkmarkIcon && `rgba(168, 200, 180, 0.05)`,
         }}
         onMouseOver={handleContainerHover}
         onMouseLeave={handleContainerLeave}
@@ -213,24 +255,88 @@ export const WorkoutDetails = ({
                       : "work-details-left-inner-reps"
                   }
                 >
-                  <div className="work-details-left-inner-reps-span1span2">
-                    <span className="work-details-left-inner-reps-span1">
-                      <strong>Number of reps : </strong>
-                    </span>
-                    <span className="work-details-left-inner-reps-span2">
-                      {reps}
-                    </span>
-                  </div>
-
-                  <RepsUpdateController
-                    {...{
-                      setReps,
-                      workout,
-                      dispatch,
-                      showModifyReps,
-                      setshowModifyReps,
-                    }}
-                  ></RepsUpdateController>
+                  <span className="work-details-left-inner-reps-span1">
+                    <strong>Number of reps : </strong>
+                  </span>
+                  <span className="work-details-left-inner-reps-span2">
+                    {reps}
+                  </span>
+                  {editIcon === checkmarkIcon && (
+                    <>
+                      {showRepsInput && hideOKBtn === false && (
+                        <Input
+                          value={repsValue}
+                          onChange={(e) => {
+                            setRepsValue(e.target.value);
+                          }}
+                          type="number"
+                          className="reps-input-edit"
+                        />
+                      )}
+                      {showRepsInput === false && showEditBtn === true && (
+                        <Button
+                          onClick={() => {
+                            // console.log(reps, updReps);
+                            setshowRepsInput(true);
+                            // setShowupdatedReps(true);
+                          }}
+                          className="work-details-left-inner-reps-editbtn"
+                          style={{
+                            padding:
+                              repsValue && closeIcon === closeIcone
+                                ? "2px 0px 2px 4px"
+                                : "4px",
+                          }}
+                        >
+                          <img
+                            className={
+                              repsValue && showRepsInput === false
+                                ? "edit-icon-again"
+                                : "edit-icon"
+                            }
+                            src={editImg}
+                            alt=""
+                          />
+                          <span
+                            className={
+                              repsValue && showRepsInput === false
+                                ? "again-span"
+                                : "edit-text"
+                            }
+                          >
+                            {repsValue && showRepsInput === false
+                              ? "Edit again"
+                              : "Edit"}
+                          </span>
+                          {repsValue && showRepsInput === false && (
+                            <img
+                              onClick={() => {
+                                setHideOKBtn(true);
+                              }}
+                              className="work-details-left-inner-reps-close-edit"
+                              src={closeIcon}
+                              alt=""
+                            />
+                          )}
+                        </Button>
+                      )}
+                      {hideOKBtn === false &&
+                        showRepsInput === true &&
+                        repsValue?.length !== 0 && (
+                          <Button
+                            onClick={() => {
+                              setupdReps(repsValue);
+                              console.log(repsValue, updReps);
+                              setshowRepsInput(!showRepsInput);
+                            }}
+                            className="work-details-left-inner-reps-edit-okbtn"
+                          >
+                            <span> OK</span>
+                          </Button>
+                        )}
+                    </>
+                  )}
+                  <RepsUpdate></RepsUpdate>
                 </div>
 
                 <div className="work-details-left-inner-date">
