@@ -141,3 +141,94 @@ span.ant-modal-close-x {
     }
   }
 }
+
+.edit-modal {
+  .edit-modal-reps-load-wrapper {
+    display: flex;
+    gap: 15px;
+    .edit-modal-block1 {
+      flex: 50%;
+      // height: 150px;
+      padding: 50px 0;
+      border: 1px solid rgba(128, 0, 128, 0.501);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      &:hover {
+        background: rgba(211, 211, 211, 0.1);
+      }
+      .edit-modal-label1 {
+        color: rgb(52, 51, 51);
+        line-height: 200%;
+        font-family: "Nanum Gothic";
+        font-size: 22px;
+      }
+      .edit-modal-load-input {
+        height: 40px;
+        width: 50%;
+      }
+    }
+    .edit-modal-block2 {
+      &:hover {
+        background: rgba(211, 211, 211, 0.1);
+      }
+      flex: 50%;
+      padding: 50px 0;
+      border: 1px solid rgba(128, 0, 128, 0.501);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      .edit-modal-label2 {
+        color: rgb(52, 51, 51);
+        line-height: 200%;
+        font-family: "Nanum Gothic";
+        font-size: 22px;
+      }
+      .edit-modal-reps-input {
+        width: 50%;
+        height: 40px;
+      }
+    }
+  }
+  .edit-modal-title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    .edit-modal-title-input {
+      height: 40px;
+      width: 50%;
+      &:hover,
+      &:focus {
+        height: 60px;
+        width: 60%;
+      }
+    }
+  }
+  .edit-modal-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    .edit-modal-save-btn,
+    .edit-modal-cancel-btn {
+      margin-top: 20px;
+      background: #1aac83;
+      width: 120px;
+      height: 50px;
+      span {
+        color: white;
+        line-height: 200%;
+        font-family: "Nanum Gothic";
+        font-size: 22px;
+      }
+    }
+    .edit-modal-cancel-btn {
+      background: gray;
+    }
+  }
+}

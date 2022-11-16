@@ -16,7 +16,6 @@ export function WorkoutsList({
   searchInput,
   setCurrentPage,
   setshowfilteredResults,
-  showfilteredResults,
 }) {
   const [boxShadow, setBoxShadow] = useState("");
   const [bg, setbg] = useState("");
@@ -98,6 +97,10 @@ export function WorkoutsList({
   return (
     <div className="workouts-section-container">
       <div className="workouts-section-toggle-btn-container">
+        rather make 3 btns , one for grid layout , one for list layout the 2nd
+        {/* view of list layout will display the workouts' elements compacted with
+        a different bg color and with a scrollbar on the right , between the
+        workouts section and the form */}
         <Button
           className="workouts-section-toggle-btn"
           onClick={handleIconClick}

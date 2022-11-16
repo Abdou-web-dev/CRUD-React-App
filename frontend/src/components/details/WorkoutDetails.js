@@ -4,19 +4,18 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShareIcon from "@mui/icons-material/Share";
 import { Backdrop, Collapse, Stack } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import { Button, Drawer, message, Popconfirm, Space } from "antd";
+import { Button, Drawer, message, Modal, Popconfirm, Space } from "antd";
 import React, { useState } from "react";
 import checkmarkIcon from "../../assets/img/checked.svg";
 import editIconPen from "../../assets/img/editer.png";
-import closeIcone from "../../assets/img/smallCloseicon.svg";
 
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 // date fns package
 import InfoIcon from "@mui/icons-material/Info";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { SocialIcons } from "../drawer_content/SocialIcons";
+import { EditModal } from "../modals/EditModal";
 import { Stepper } from "../steppers/Stepper";
-import { RepsUpdate as RepsUpdateController } from "../update/RepsUpdate";
 import "./workout_details.scss";
 
 export const WorkoutDetails = ({
@@ -55,7 +54,6 @@ export const WorkoutDetails = ({
       dispatch({ type: "DELETE_WORKOUT", payload: json });
     }
   };
-  const [closeIcon, setcloseIcon] = useState(closeIcone);
 
   //Concerning the Popconfirm antd
   const [openBackdrop, setOpenBackdrop] = React.useState(false);
@@ -97,33 +95,25 @@ export const WorkoutDetails = ({
   const handleInfos = () => {
     setOpenInfosDrawer(true);
   };
-  //
-  const [hideOKBtn, setHideOKBtn] = useState(false);
-  //
-  const [reps, setReps] = useState(workout?.reps);
-  const [title, setTitle] = useState(workout?.title);
-  const [load, setLoad] = useState(workout?.load);
-  //
-  const [showModifyReps, setshowModifyReps] = useState(false);
+  const [updatedWorkout, setUpdatedWorkout] = useState({});
 
   const handleEdit = () => {
     setborder("1px solid black");
+    setopenEditModal(true);
+    setUpdatedWorkout(workout);
     if (editIcon === editIconPen) {
-      setDisableDeleteBtn(true);
-      setDisableInfosBtn(true);
-      setDisableShareBtn(true);
-      setEditIcon(checkmarkIcon);
-      setshowModifyReps(true);
+      // setDisableDeleteBtn(true);
+      // setDisableInfosBtn(true);
+      // setDisableShareBtn(true);
+      // setEditIcon(checkmarkIcon);
     }
     if (editIcon === checkmarkIcon) {
-      setDisableDeleteBtn(false);
-      setDisableInfosBtn(false);
-      setDisableShareBtn(false);
-      setEditIcon(editIconPen);
-      setshowModifyReps(false);
+      // setDisableDeleteBtn(false);
+      // setDisableInfosBtn(false);
+      // setDisableShareBtn(false);
+      // setEditIcon(editIconPen);
     }
   };
-
   const onClose = () => {
     setOpenDrawer(false);
   };
@@ -147,19 +137,10 @@ export const WorkoutDetails = ({
       setcontainerBoxShadow(!containerBoxShadow);
     }
   };
+  let createdAt = workout?.createdAt;
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   // let layoutList = detailsContClass === "workout-details-container-as-list";
-  let createdAt = workout?.createdAt;
-  //to keep the state when we refresh the page
-  // useEffect(() => {
-  //   const data = window.localStorage.getItem("updReps_STATE");
-  //   if (data !== null) setReps(JSON.parse(data));
-  // }, []);
-
-  // useEffect(() => {
-  //   window.localStorage.setItem("updReps_STATE", JSON.stringify(updReps));
-  // }, [updReps]);
-  //try to remove JSON.stringify
+  const [openEditModal, setopenEditModal] = useState(false);
 
   return (
     <>
@@ -218,19 +199,9 @@ export const WorkoutDetails = ({
                       <strong>Number of reps : </strong>
                     </span>
                     <span className="work-details-left-inner-reps-span2">
-                      {reps}
+                      {workout?.reps}
                     </span>
                   </div>
-
-                  <RepsUpdateController
-                    {...{
-                      setReps,
-                      workout,
-                      dispatch,
-                      showModifyReps,
-                      setshowModifyReps,
-                    }}
-                  ></RepsUpdateController>
                 </div>
 
                 <div className="work-details-left-inner-date">
@@ -382,6 +353,29 @@ export const WorkoutDetails = ({
           </div>
         </Drawer>
       </div>
+      <Modal
+        className=""
+        open={openEditModal}
+        maskClosable={true}
+        closable={true}
+        keyboard={true}
+        mask={true}
+        onOk={() => setopenEditModal(false)}
+        onCancel={() => setopenEditModal(false)}
+        width={layoutGrid ? "50%" : "60%"}
+        footer={null}
+        title={`Edit this workout`}
+      >
+        <EditModal
+          {...{
+            setopenEditModal,
+            workout,
+            dispatch,
+            setUpdatedWorkout,
+            updatedWorkout,
+          }}
+        ></EditModal>
+      </Modal>
     </>
   );
 };
@@ -393,3 +387,13 @@ export const WorkoutDetails = ({
 //     "Content-Type": "application/json",
 //   },
 // });
+
+//to keep the state when we refresh the page
+// useEffect(() => {
+//   const data = window.localStorage.getItem("updReps_STATE");
+//   if (data !== null) setReps(JSON.parse(data));
+// }, []);
+// useEffect(() => {
+//   window.localStorage.setItem("updReps_STATE", JSON.stringify(updReps));
+// }, [updReps]);
+//try to remove JSON.stringify
