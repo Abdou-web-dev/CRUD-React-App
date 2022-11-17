@@ -1,5 +1,5 @@
-import { WorkoutDetails } from "../../components/details/WorkoutDetails";
-export function WorkoutsDetailsList({
+import { WorkoutDetails } from "../details/WorkoutDetails";
+export function WorkoutDetailsItem({
   workout,
   filteredResult,
   index,

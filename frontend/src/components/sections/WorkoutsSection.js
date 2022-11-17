@@ -17,6 +17,7 @@ export const WorkoutsSection = ({
   setpaginationClassName,
   searchInput,
   setSearchInput,
+  setDisplayPagination,
 }) => {
   const [filteredResults, setFilteredResults] = React.useState([]);
   const [showfilteredResults, setshowfilteredResults] = useState(true);
@@ -40,6 +41,7 @@ export const WorkoutsSection = ({
             .join("")
             .toLowerCase()
             .includes(searchInput.toString().toLowerCase())
+          // Object.values(user.userName).join("").toLowerCase() === searchInput.toString().toLowerCase() for exact search matching
         );
       });
       setFilteredResults(filteredData);
@@ -78,28 +80,30 @@ export const WorkoutsSection = ({
         showfilteredResults === true && (
           <WorkoutsListFiltered
             {...{
+              filteredResults, //filtered workouts
               currentPage,
               setCurrentPage,
+              searchInput,
               setmovePaginationFromBottom,
               setpaginationClassName,
-              filteredResults,
-              searchInput,
-              setshowfilteredResults,
               showfilteredResults,
+              setshowfilteredResults,
             }}
           />
         )
       ) : (
         <WorkoutsList
           {...{
-            workouts,
+            workouts, //all workouts
+            currentPage,
             setCurrentPage,
             searchInput,
-            currentPage,
             setmovePaginationFromBottom,
             setpaginationClassName,
+            setDisplayPagination,
           }}
         />
+        // <ShowMore></ShowMore>
       )}
     </div>
   );

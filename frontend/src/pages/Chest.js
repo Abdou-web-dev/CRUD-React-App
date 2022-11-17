@@ -19,6 +19,7 @@ const Chest = ({}) => {
   const { workouts, dispatch } = useWorkoutsContext();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
+  const [displayPagination, setDisplayPagination] = useState("");
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -103,6 +104,7 @@ const Chest = ({}) => {
                 searchInput,
                 setSearchInput,
                 setCurrentPage,
+                setDisplayPagination,
               }}
             ></WorkoutsSection>
           </div>
@@ -142,6 +144,7 @@ const Chest = ({}) => {
                   : `50px 0`,
               position: "relative",
               bottom: movePaginationFromBottom,
+              display: displayPagination,
             }}
             className={paginationClassName}
             total={

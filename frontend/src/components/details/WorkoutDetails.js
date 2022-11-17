@@ -8,7 +8,6 @@ import { Button, Drawer, message, Modal, Popconfirm, Space } from "antd";
 import React, { useState } from "react";
 import checkmarkIcon from "../../assets/img/checked.svg";
 import editIconPen from "../../assets/img/editer.png";
-
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 // date fns package
 import InfoIcon from "@mui/icons-material/Info";
@@ -26,7 +25,9 @@ export const WorkoutDetails = ({
   setdetailsContClass,
   setcontainerClass,
   searchInput,
+  workoutIsCondensed,
 }) => {
+  // console.log(workoutIsCondensed);
   const { dispatch } = useWorkoutsContext();
 
   const [className, setClassName] = React.useState(`workout-details`);
@@ -150,6 +151,7 @@ export const WorkoutDetails = ({
          workout-details-container${index}
           ${showBorder === true ? `border-selected` : ``} 
           ${searchInput?.length !== 0 ? `filtered-workouts` : ``} 
+          ${workoutIsCondensed === true ? `condensed-workouts` : ``}           
          `}
         style={{
           boxShadow: containerBoxShadow,
