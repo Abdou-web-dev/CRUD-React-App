@@ -20,6 +20,11 @@ const Chest = ({}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [displayPagination, setDisplayPagination] = useState("");
+  const [detailsContClass, setdetailsContClass] = useState(
+    "workout-details-container-as-list"
+  ); //this className detailsContClass is being passed as props to children
+  let layoutGrid = detailsContClass === "workout-details-container-as-grid";
+  let layoutList = detailsContClass === "workout-details-container-as-list";
 
   useEffect(() => {
     const fetchWorkouts = async () => {
@@ -34,7 +39,12 @@ const Chest = ({}) => {
     if (searchInput?.length > 0) {
       setCurrentPage(1);
     }
-  }, [dispatch, searchInput]);
+    if (currentPage === 10 && layoutList) {
+      setmovePaginationFromBottom("0px");
+    } else if (currentPage !== 10 && layoutList) {
+      setmovePaginationFromBottom("150px");
+    }
+  }, [dispatch, searchInput, currentPage, layoutList]);
 
   const antIcon = (
     <LoadingOutlined
@@ -105,6 +115,8 @@ const Chest = ({}) => {
                 setSearchInput,
                 setCurrentPage,
                 setDisplayPagination,
+                detailsContClass,
+                setdetailsContClass,
               }}
             ></WorkoutsSection>
           </div>

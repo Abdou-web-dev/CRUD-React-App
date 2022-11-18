@@ -5,6 +5,7 @@
   .workouts-section-toggle-btn-container {
     margin: 25px 0px;
     .workouts-section-toggle-btn {
+      margin-right: 15px;
     }
   }
   .workouts-section-container-items-and-closebtn {
@@ -74,6 +75,7 @@
             background: none;
             width: fit-content;
             height: fit-content;
+
             img {
               &:hover {
                 transform: scale(1.08);

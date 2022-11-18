@@ -4,10 +4,7 @@ import redCloseIcon from "../../assets/img/redCloseIcon.svg";
 import { WorkoutDetails } from "../details/WorkoutDetails";
 import "./sections_styles.scss";
 
-export function WorkoutDetailsItemCondensed({
-  workoutCondensed,
-  hiddenWorkouts,
-}) {
+export function WorkoutDetailsItemCondensed({ workoutCondensed, counter }) {
   const [showWorkout, setshowWorkout] = useState(true);
   const [showClosebtn, setshowClosebtn] = useState(false);
   const [displayItem, setdisplayItem] = useState("");
@@ -27,7 +24,7 @@ export function WorkoutDetailsItemCondensed({
     >
       <div
         onMouseOver={() => {
-          if (hiddenWorkouts === false) {
+          if (counter === 2) {
             setshowWorkout(false);
             setshowClosebtn(true);
           }

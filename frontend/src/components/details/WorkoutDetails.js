@@ -85,10 +85,6 @@ export const WorkoutDetails = ({
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openInfosDrawer, setOpenInfosDrawer] = useState(false);
   //
-  const [disableDeleteBtn, setDisableDeleteBtn] = useState(false);
-  const [disableEditBtn, setDisableEditBtn] = useState(false);
-  const [disableInfosBtn, setDisableInfosBtn] = useState(false);
-  const [disableShareBtn, setDisableShareBtn] = useState(false);
   const [editIcon, setEditIcon] = useState(editIconPen);
   const handleShare = () => {
     setOpenDrawer(true);
@@ -230,7 +226,6 @@ export const WorkoutDetails = ({
                   open={openPopconfirm}
                 >
                   <IconButton
-                    disabled={disableDeleteBtn}
                     className="work-details-right-inner-iconbtn"
                     //differnce  between setOpenBackdrop(false) and setOpenBackdrop(cur=>!cur) or setOpenBackdrop(!openBackdrop) is that the 2 last statement will create a toggle logic hence a infinite loop onclick on esc , whereas the 1st one will trigger only once
                     onKeyDown={() => {
@@ -246,7 +241,6 @@ export const WorkoutDetails = ({
                 </Popconfirm>
 
                 <IconButton
-                  disabled={disableShareBtn}
                   className="work-details-right-inner-iconbtn"
                   onClick={handleShare}
                 >
@@ -254,7 +248,6 @@ export const WorkoutDetails = ({
                 </IconButton>
 
                 <IconButton
-                  disabled={disableInfosBtn}
                   className="work-details-right-inner-iconbtn"
                   onClick={handleInfos}
                 >
@@ -262,7 +255,6 @@ export const WorkoutDetails = ({
                 </IconButton>
 
                 <IconButton
-                  disabled={disableEditBtn}
                   className="icon-btn-edit work-details-right-inner-iconbtn"
                   onBlur={() => setborder("")}
                   onKeyDown={() => setborder("")}

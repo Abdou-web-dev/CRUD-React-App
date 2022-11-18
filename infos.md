@@ -52,3 +52,10 @@ D'après ma propre expérience, je n'ai jamais trouvé une seule bibliothèque/s
 
 Visuellement, Antd n'est peut-être pas la meilleure libraire UI, et il peut y avoir des problèmes d'implémentation/de modèle que certains développeurs n'aiment pas, mais la réalité est que moins vous avez à créer, plus vous pouvez livrer rapidement, et les utilisateurs
 finaux se soucieront plus de la fonctionnalité que de l'apparence de votre application. Les priorités que vous accordez à ces choses seront certainement différentes.
+
+How to compare arrays in JavaScript?
+let somewokrouts = workouts.slice(0, 6)
+let compareArrays =workouts.length === somewokrouts.length &&
+workouts.every((value, index) => value === somewokrouts[index]);
+console.log(compareArrays);
+this will return false

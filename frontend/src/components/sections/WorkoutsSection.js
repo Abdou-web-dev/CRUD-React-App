@@ -18,6 +18,8 @@ export const WorkoutsSection = ({
   searchInput,
   setSearchInput,
   setDisplayPagination,
+  detailsContClass,
+  setdetailsContClass,
 }) => {
   const [filteredResults, setFilteredResults] = React.useState([]);
   const [showfilteredResults, setshowfilteredResults] = useState(true);
@@ -88,6 +90,8 @@ export const WorkoutsSection = ({
               setpaginationClassName,
               showfilteredResults,
               setshowfilteredResults,
+              detailsContClass,
+              setdetailsContClass,
             }}
           />
         )
@@ -101,6 +105,8 @@ export const WorkoutsSection = ({
             setmovePaginationFromBottom,
             setpaginationClassName,
             setDisplayPagination,
+            detailsContClass,
+            setdetailsContClass,
           }}
         />
         // <ShowMore></ShowMore>

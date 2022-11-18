@@ -16,6 +16,10 @@ export function WorkoutDetailsItem({
   showItemsPage5,
   showItemsPage6,
   searchInput,
+  showItemsPage7,
+  showItemsPage8,
+  showItemsPage9,
+  showItemsPage10,
 }) {
   return (
     <div
@@ -32,6 +36,14 @@ export function WorkoutDetailsItem({
             ? "150px"
             : currentPage === 6 && layoutGrid
             ? "190px"
+            : currentPage === 7 && layoutGrid
+            ? "230px"
+            : currentPage === 8 && layoutGrid
+            ? "270px"
+            : currentPage === 9 && layoutGrid
+            ? "310px"
+            : currentPage === 10 && layoutGrid
+            ? "350px"
             : "",
       }}
     >
@@ -126,6 +138,78 @@ export function WorkoutDetailsItem({
           }
         />
       ) : showItemsPage6(index) && currentPage === 6 ? (
+        <WorkoutDetails
+          {...{
+            index,
+            setbg,
+            detailsContClass,
+            setdetailsContClass,
+            setcontainerClass,
+            searchInput,
+          }}
+          workout={
+            searchInput?.length === 0
+              ? workout
+              : searchInput?.length !== 0
+              ? filteredResult
+              : null
+          }
+        />
+      ) : showItemsPage7(index) && currentPage === 7 ? (
+        <WorkoutDetails
+          {...{
+            index,
+            setbg,
+            detailsContClass,
+            setdetailsContClass,
+            setcontainerClass,
+            searchInput,
+          }}
+          workout={
+            searchInput?.length === 0
+              ? workout
+              : searchInput?.length !== 0
+              ? filteredResult
+              : null
+          }
+        />
+      ) : showItemsPage8(index) && currentPage === 8 ? (
+        <WorkoutDetails
+          {...{
+            index,
+            setbg,
+            detailsContClass,
+            setdetailsContClass,
+            setcontainerClass,
+            searchInput,
+          }}
+          workout={
+            searchInput?.length === 0
+              ? workout
+              : searchInput?.length !== 0
+              ? filteredResult
+              : null
+          }
+        />
+      ) : showItemsPage9(index) && currentPage === 9 ? (
+        <WorkoutDetails
+          {...{
+            index,
+            setbg,
+            detailsContClass,
+            setdetailsContClass,
+            setcontainerClass,
+            searchInput,
+          }}
+          workout={
+            searchInput?.length === 0
+              ? workout
+              : searchInput?.length !== 0
+              ? filteredResult
+              : null
+          }
+        />
+      ) : showItemsPage10(index) && currentPage === 10 ? (
         <WorkoutDetails
           {...{
             index,
