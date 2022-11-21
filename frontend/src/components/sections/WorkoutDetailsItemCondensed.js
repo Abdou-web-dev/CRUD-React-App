@@ -17,7 +17,7 @@ export function WorkoutDetailsItemCondensed({ workoutCondensed, counter }) {
 
   return (
     <div
-      className={`${showClosebtn && "bg1"} ${showWorkout && "bg2"}
+      className={`${showClosebtn === true && "bg1"} ${showWorkout && "bg2"}
       workout-details-item-condensed
   `}
       style={{ display: displayItem }}

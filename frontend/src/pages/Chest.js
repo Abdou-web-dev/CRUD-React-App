@@ -1,7 +1,6 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { BackTop, Pagination, Spin } from "antd";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
-import "./pages_styles.scss";
 // components
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Skeleton } from "@mui/material";
@@ -9,20 +8,33 @@ import React, { useEffect, useState } from "react";
 import WorkoutForm from "../components/forms/ChestWorkoutForm";
 import {
   LeftArrow as PrevIcon,
+  NextArrow,
+  NextArrowList,
+  PrevArrow,
+  PrevArrowList,
   RightArrow as NextIcon,
 } from "../components/icons/Icons";
+
 import { WorkoutsSection } from "../components/sections/WorkoutsSection";
 import { AntdSkeleton } from "../components/skeletons/AntdSkeleton";
+import "./pages_styles.scss";
 
 const Chest = ({}) => {
-  //instead of âdding contexts object down to child components as props, I can use this hook in each component that needs workouts
+  //instead of adding workouts object down to child components as props, I can use this hook in each component that needs workouts
   const { workouts, dispatch } = useWorkoutsContext();
+  const [filteredResults, setFilteredResults] = React.useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [displayPagination, setDisplayPagination] = useState("");
   const [detailsContClass, setdetailsContClass] = useState(
     "workout-details-container-as-list"
   ); //this className detailsContClass is being passed as props to children
+  const [movePaginationFromBottom, setmovePaginationFromBottom] =
+    useState("220px");
+  const [paginationClassName, setpaginationClassName] = useState(
+    "pagination-content-loaded"
+  );
+
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let layoutList = detailsContClass === "workout-details-container-as-list";
 
@@ -35,24 +47,21 @@ const Chest = ({}) => {
       }
     };
     fetchWorkouts();
-    //this line of code redirects the results to page 1, without it and if the pagination is not displayed , results will not be displayed , because they are on 4th page for example but there is no pagination to go to page 4
-    if (searchInput?.length > 0) {
-      setCurrentPage(1);
-    }
+    //this line of code redirects the search results to page 1, without it and if the pagination is not displayed , results will not be displayed , because they are on 4th page for example but there is no pagination to go to page 4
+    // if (searchInput?.length > 0) {
+    //   setCurrentPage(1);
+    // }
     if (currentPage === 10 && layoutList) {
       setmovePaginationFromBottom("0px");
     } else if (currentPage !== 10 && layoutList) {
       setmovePaginationFromBottom("150px");
+    } else if (
+      (layoutList && searchInput?.length > 0) ||
+      (layoutGrid && searchInput?.length > 0)
+    ) {
+      setmovePaginationFromBottom("550px");
     }
-  }, [dispatch, searchInput, currentPage, layoutList]);
-
-  const antIcon = (
-    <LoadingOutlined
-      style={{
-        fontSize: 50,
-      }}
-    />
-  );
+  }, [dispatch, searchInput, currentPage, layoutList, layoutGrid]);
 
   const MuiSkeletonJSX = (
     <Skeleton
@@ -69,10 +78,12 @@ const Chest = ({}) => {
       <AntdSkeleton></AntdSkeleton>
     </Skeleton>
   );
-  const [movePaginationFromBottom, setmovePaginationFromBottom] =
-    useState("220px");
-  const [paginationClassName, setpaginationClassName] = useState(
-    "pagination-content-loaded"
+  const antIcon = (
+    <LoadingOutlined
+      style={{
+        fontSize: 50,
+      }}
+    />
   );
 
   if (!workouts) {
@@ -117,6 +128,8 @@ const Chest = ({}) => {
                 setDisplayPagination,
                 detailsContClass,
                 setdetailsContClass,
+                filteredResults,
+                setFilteredResults,
               }}
             ></WorkoutsSection>
           </div>
@@ -131,6 +144,7 @@ const Chest = ({}) => {
 
         {searchInput?.length === 0 && (
           <Pagination
+            className={paginationClassName}
             prevIcon={
               paginationClassName === "pagination-content-loaded-grid" ? (
                 <PrevIcon />
@@ -158,7 +172,6 @@ const Chest = ({}) => {
               bottom: movePaginationFromBottom,
               display: displayPagination,
             }}
-            className={paginationClassName}
             total={
               workouts.length > 0 && workouts.length <= 10
                 ? 30 //3 pages
@@ -181,6 +194,43 @@ const Chest = ({}) => {
             }}
             showSizeChanger={false}
             showQuickJumper
+          />
+        )}
+
+        {searchInput?.length > 0 && (
+          <Pagination
+            className={`
+            ${layoutGrid && "pagination-filtered-results-grid"}
+            ${layoutList && "pagination-filtered-results-list"}
+            ${
+              filteredResults?.length >= 1 &&
+              filteredResults?.length <= 3 &&
+              "pagination-filtered-results-less-than4"
+            }
+            ${
+              filteredResults?.length === 0 &&
+              "pagination-filtered-results-none"
+            }
+            pagination-filtered-results`}
+            prevIcon={
+              paginationClassName === "pagination-content-loaded-grid" ? (
+                <PrevArrow />
+              ) : (
+                <PrevArrowList />
+              )
+            }
+            nextIcon={
+              paginationClassName === "pagination-content-loaded-grid" ? (
+                <NextArrow />
+              ) : (
+                <NextArrowList />
+              )
+            }
+            current={currentPage}
+            onChange={(page, e) => {
+              setCurrentPage(page);
+            }}
+            total={50}
           />
         )}
       </>

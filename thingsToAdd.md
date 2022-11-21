@@ -6,3 +6,5 @@
 
 4)++add auth0 authentication 5) add a search input for fetching a specific workout in the list
 Note: files tracked before can be untracked by running git rm --cached filename
+
+5- authentication , maybe use Firebase or JWT ?? auth0 is not completely free and is changing rapidly

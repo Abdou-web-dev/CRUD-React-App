@@ -1,7 +1,12 @@
 import React from "react";
 import infoPNG from "../../assets/img/infoPNG.png";
+import left from "../../assets/img/left-arr.svg";
 import leftArrowIcon from "../../assets/img/left-arrow.png";
+import left_green from "../../assets/img/left_green.svg";
 import clearIcon from "../../assets/img/remove.png";
+import right from "../../assets/img/right-arr.svg";
+import right_green from "../../assets/img/right_green.svg";
+
 import rightArrowIcon from "../../assets/img/right-arrow.png";
 import rate from "../../assets/img/star.png";
 
@@ -75,5 +80,22 @@ export const LeftArrow = () => {
 export const ClearIcon = () => {
   return (
     <img style={{ width: "20px", height: "20px" }} src={clearIcon} alt="" />
+  );
+};
+export const NextArrow = () => {
+  return <img style={{ width: "70px", height: "70px" }} src={right} alt="" />;
+};
+export const PrevArrow = () => {
+  return <img style={{ width: "70px", height: "70px" }} src={left} alt="" />;
+};
+
+export const NextArrowList = () => {
+  return (
+    <img style={{ width: "50px", height: "50px" }} src={right_green} alt="" />
+  );
+};
+export const PrevArrowList = () => {
+  return (
+    <img style={{ width: "50px", height: "50px" }} src={left_green} alt="" />
   );
 };

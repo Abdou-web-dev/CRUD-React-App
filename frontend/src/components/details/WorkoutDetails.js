@@ -6,7 +6,6 @@ import { Backdrop, Collapse, Stack } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import { Button, Drawer, message, Modal, Popconfirm, Space } from "antd";
 import React, { useState } from "react";
-import checkmarkIcon from "../../assets/img/checked.svg";
 import editIconPen from "../../assets/img/editer.png";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 // date fns package
@@ -85,7 +84,6 @@ export const WorkoutDetails = ({
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openInfosDrawer, setOpenInfosDrawer] = useState(false);
   //
-  const [editIcon, setEditIcon] = useState(editIconPen);
   const handleShare = () => {
     setOpenDrawer(true);
   };
@@ -98,18 +96,6 @@ export const WorkoutDetails = ({
     setborder("1px solid black");
     setopenEditModal(true);
     setUpdatedWorkout(workout);
-    if (editIcon === editIconPen) {
-      // setDisableDeleteBtn(true);
-      // setDisableInfosBtn(true);
-      // setDisableShareBtn(true);
-      // setEditIcon(checkmarkIcon);
-    }
-    if (editIcon === checkmarkIcon) {
-      // setDisableDeleteBtn(false);
-      // setDisableInfosBtn(false);
-      // setDisableShareBtn(false);
-      // setEditIcon(editIconPen);
-    }
   };
   const onClose = () => {
     setOpenDrawer(false);
@@ -152,7 +138,6 @@ export const WorkoutDetails = ({
         style={{
           boxShadow: containerBoxShadow,
           border: border,
-          background: editIcon === checkmarkIcon && `rgba(168, 200, 180, 0.05)`,
         }}
         onMouseOver={handleContainerHover}
         onMouseLeave={handleContainerLeave}
@@ -185,13 +170,7 @@ export const WorkoutDetails = ({
                   </span>
                 </div>
 
-                <div
-                  className={
-                    editIcon === checkmarkIcon
-                      ? "work-details-left-inner-reps-checkmark"
-                      : "work-details-left-inner-reps"
-                  }
-                >
+                <div className={"work-details-left-inner-reps"}>
                   <div className="work-details-left-inner-reps-span1span2">
                     <span className="work-details-left-inner-reps-span1">
                       <strong>Number of reps : </strong>
@@ -260,13 +239,7 @@ export const WorkoutDetails = ({
                   onKeyDown={() => setborder("")}
                   onClick={handleEdit}
                 >
-                  <img
-                    className={
-                      editIcon === checkmarkIcon ? "checkmarkIcon" : "edit-img"
-                    }
-                    src={editIcon}
-                    alt=""
-                  />
+                  <img className={"edit-img"} src={editIconPen} alt="" />
                 </IconButton>
               </div>
             </div>

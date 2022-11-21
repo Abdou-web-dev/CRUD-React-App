@@ -14,7 +14,7 @@
   // flex-direction: row;
   gap: 30px;
   .chest-workouts {
-    // flex: 70%;
+    height: 100%;
   }
   .chest-form {
     // flex: 30%;
@@ -72,6 +72,59 @@
     img {
       width: 30px;
       height: 30px;
+    }
+  }
+}
+.pagination-filtered-results {
+  position: relative;
+  bottom: 500px;
+  .ant-pagination-item {
+    display: none;
+  }
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .ant-pagination-prev {
+    position: relative;
+    bottom: 400px;
+  }
+  .ant-pagination-next {
+    position: relative;
+    bottom: 400px;
+    margin-left: 800px;
+  }
+  &.pagination-filtered-results-list {
+    position: relative;
+    bottom: 870px;
+    .ant-pagination-prev {
+      position: relative;
+      bottom: 400px;
+      left: 200px;
+    }
+    .ant-pagination-next {
+      position: relative;
+      bottom: 400px;
+      margin-left: 600px;
+    }
+  }
+
+  &.pagination-filtered-results-less-than4 {
+    .ant-pagination-prev {
+      display: none;
+    }
+    .ant-pagination-next {
+      display: none;
+    }
+  }
+  &.pagination-filtered-results-none {
+    .ant-pagination-prev {
+      display: none;
+    }
+    .ant-pagination-next {
+      display: none;
     }
   }
 }

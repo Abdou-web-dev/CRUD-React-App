@@ -49,12 +49,14 @@ export function WorkoutsList({
       setFirsticon(cardIcon);
       setmovePaginationFromBottom("180px");
       setpaginationClassName("pagination-content-loaded");
+      setDisplayPagination("flex");
     } else if (firstIcon === cardIcon) {
       setdetailsContClass(`workout-details-container-as-grid`);
       setcontainerClass("chest-page-workouts showItemsAsGrid");
       setFirsticon(listIcon);
       setmovePaginationFromBottom("620px");
       setpaginationClassName("pagination-content-loaded-grid");
+      setDisplayPagination("flex");
     }
     if (showAllWorkoutsCondensed === false) {
       setshowAllWorkouts(true);
@@ -72,6 +74,17 @@ export function WorkoutsList({
       setshowAllWorkouts(false);
     }
   }
+  // searchInput?.length === 0
+  // ? workout
+  // : searchInput?.length !== 0
+  // ? filteredResult
+  // function filteredItems(index) {
+  //   let a1 = index >= 0 && index <= 3;
+  //   let b1 = index >= 0 && index <= 5;
+  //   if (detailsContClass === "workout-details-container-as-list") return a1;
+  //   else if (detailsContClass === "workout-details-container-as-grid")
+  //     return b1;
+  // }
   function showItemsPage1(index) {
     let a1 = index >= 0 && index <= 3;
     let b1 = index >= 0 && index <= 5;
@@ -145,7 +158,6 @@ export function WorkoutsList({
 
   const [showMoreIcon, setshowMoreIcon] = useState(moreIcon);
   const [counter, setcounter] = useState(0);
-
   //
   const [showFirstGrp, setshowFirstGrp] = useState(true);
   const firstGroup =
@@ -268,6 +280,7 @@ export function WorkoutsList({
       setBoxShadow(
         "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
       );
+      setsecondBtnDisabled(true);
     } else {
       setBoxShadow("");
     }

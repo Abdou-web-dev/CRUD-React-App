@@ -129,7 +129,6 @@ export const Stepper = ({
           title={steps[1].title}
         />
         <Step
-          // onClick={() => console.log("tttttt")}
           subTitle={rateStep === true ? `Rate it` : null}
           icon={RateIconWrapper}
           title={steps[2].title}
