@@ -111,7 +111,6 @@ export const WorkoutsSection = ({
             setdetailsContClass,
           }}
         />
-        // <ShowMore></ShowMore>
       )}
     </div>
   );

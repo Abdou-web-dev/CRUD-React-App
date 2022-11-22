@@ -8,3 +8,17 @@
 Note: files tracked before can be untracked by running git rm --cached filename
 
 5- authentication , maybe use Firebase or JWT ?? auth0 is not completely free and is changing rapidly
+
+6- in the frontend , create a page divided into 2 parts : left part allows users to signup to the website, the right part allows them to login into their account.
+if the visitor clicks on signup , the left part will then occup 85% of the full width of the screen, the rest 15% and some kind of greyish background will partially hide the content behind, vice versa for the right part...
+
+fullName: {
+// type: String,
+// required: true,
+// },
+in userModel.js
+
+if you want to use custom db from mongoDB db's , you need to type the name of the db after the ".net/" in this URI :
+MONGO_URI=mongodb+srv://avdelmounim:condemerde22@cluster0.iswlhxp.mongodb.net/dbAbdel?retryWrites=true&w=majority
+this db should already be present among your list of dbs , otherwise it wont work
+if we dont specify any name, a default db named 'test' is created
