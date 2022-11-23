@@ -17,11 +17,14 @@ import {
 
 import { WorkoutsSection } from "../components/sections/WorkoutsSection";
 import { AntdSkeleton } from "../components/skeletons/AntdSkeleton";
+import { useAuthContext } from "../hooks/useAuthContext";
 import "./pages_styles.scss";
 
 const Chest = ({}) => {
   //instead of adding workouts object down to child components as props, I can use this hook in each component that needs workouts
   const { workouts, dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext();
+
   const [filteredResults, setFilteredResults] = React.useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
@@ -40,17 +43,17 @@ const Chest = ({}) => {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch("/api/workouts");
+      const response = await fetch("/api/workouts", {
+        headers: { Authorization: `Bearer ${user?.token}` },
+      });
       const json = await response.json();
       if (response.ok) {
         dispatch({ type: "SET_WORKOUTS", payload: json });
       }
     };
-    fetchWorkouts();
-    //this line of code redirects the search results to page 1, without it and if the pagination is not displayed , results will not be displayed , because they are on 4th page for example but there is no pagination to go to page 4
-    // if (searchInput?.length > 0) {
-    //   setCurrentPage(1);
-    // }
+    if (user) {
+      fetchWorkouts();
+    }
     if (currentPage === 10 && layoutList) {
       setmovePaginationFromBottom("0px");
     } else if (currentPage !== 10 && layoutList) {
@@ -61,7 +64,8 @@ const Chest = ({}) => {
     ) {
       setmovePaginationFromBottom("550px");
     }
-  }, [dispatch, searchInput, currentPage, layoutList, layoutGrid]);
+    console.log(user);
+  }, [dispatch, searchInput, currentPage, layoutList, layoutGrid, user]);
 
   const MuiSkeletonJSX = (
     <Skeleton
@@ -111,7 +115,7 @@ const Chest = ({}) => {
         />
       </div>
     );
-  } else {
+  } else if (user) {
     return (
       <>
         <div className="chest-page-container">

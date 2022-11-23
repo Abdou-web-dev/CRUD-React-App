@@ -6,13 +6,10 @@
   height: 100%;
   //setting minheight to 1400px will prevent the page fro mscrolling to the top when navigating between chest sub pages
   min-height: 1400px;
-  // padding-bottom: 400px;
-  // border: 1px solid red;
   display: grid;
   grid-template-columns: 3fr 1fr;
-  // display: flex;
-  // flex-direction: row;
   gap: 30px;
+  margin-left: 50px;
   .chest-workouts {
     height: 100%;
   }

@@ -15,12 +15,13 @@ body {
 }
 
 .pages {
-  max-width: 1400px;
+  /* max-width: 1400px; */
   width: 100%;
   padding: 20px;
-  margin: 0 auto;
+  /* border: 1px solid red; */
+  /* margin: 0 auto; */
 }
-.changeBGColor {
-  /* background-color: rgba(168, 228, 250, 0.1); */
-  /* background-color: white; */
+.pages .pages-login {
+  display: flex;
+  justify-content: center;
 }

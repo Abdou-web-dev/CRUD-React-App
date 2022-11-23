@@ -1,0 +1,118 @@
+.login-form-container {
+  width: auto;
+  .login-form-inner {
+    .login-form {
+      padding: 5px 170px;
+      width: 100%;
+      min-height: 500px;
+      background: rgba(0, 180, 216, 0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      .login-form-email-item {
+        .ant-form-item-row {
+          .ant-form-item-label {
+            margin-top: 24px;
+            position: relative;
+            right: 15px;
+            font-family: "Mulish";
+          }
+        }
+        .login-form-email-item-input {
+          width: 100%;
+          height: 60px;
+        }
+        .login-form-email-item-label {
+          span {
+            font-size: 20px;
+          }
+        }
+      }
+      .login-form-full-name-item {
+        .ant-form-item-row {
+          .ant-form-item-label {
+            position: relative;
+            right: 35px;
+            margin-top: 24px;
+            font-family: "Mulish";
+          }
+          .ant-form-item-control {
+            position: relative;
+            left: 20px;
+          }
+        }
+        .login-form-full-name-item-input {
+          width: 100%;
+          height: 60px;
+        }
+        .login-form-full-name-item-label {
+          span {
+            font-size: 20px;
+          }
+        }
+      }
+      .login-form-password-item {
+        .ant-form-item-row {
+          .ant-form-item-label {
+            position: relative;
+            right: 35px;
+            margin-top: 24px;
+            font-family: "Mulish";
+          }
+          .ant-form-item-control {
+            position: relative;
+            left: 20px;
+          }
+        }
+        .login-form-password-item-input {
+          width: 100%;
+          height: 60px;
+        }
+        .login-form-password-item-label {
+          span {
+            font-size: 20px;
+          }
+        }
+      }
+      .login-form-btn-item {
+        margin-left: 4px;
+        width: 100%;
+
+        .login-form-btn-and-error {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          gap: 15px;
+          .login-form-btn-item-button {
+            width: 100px;
+            height: 45px;
+            margin-right: 150px;
+          }
+          .text-error {
+            position: relative;
+            right: 70px;
+
+            span {
+              font-family: "Poppins";
+              font-size: 16px;
+              color: rgb(206, 72, 72);
+              font-style: italic;
+              font-weight: 600;
+              letter-spacing: 2px;
+            }
+          }
+        }
+      }
+
+      .ant-form-item {
+        .ant-form-item-row {
+          .ant-form-item-control {
+            width: 328px;
+          }
+        }
+      }
+    }
+  }
+}

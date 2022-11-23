@@ -14,17 +14,26 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  // fullName: {
-  //   type: String,
-  //   required: true,
-  // },
+  fullName: {
+    type: String,
+    required: true,
+  },
 });
 
 // static signup method
-userSchema.statics.signup = async function (email, password) {
+userSchema.statics.signup = async function (email, password, fullName) {
   // validation
-  if (!email || !password) {
-    throw Error("All fields must be filled");
+  if (!email && !password && !fullName) {
+    throw Error("Please, fill in the fields before subscribing ");
+  }
+  if (!email) {
+    throw Error("Please, type your email address ");
+  }
+  if (!password) {
+    throw Error("Please, type your password ");
+  }
+  if (!fullName) {
+    throw Error("Please, type your full name ");
   }
   if (!validator.isEmail(email)) {
     throw Error("Email not valid");
@@ -42,14 +51,14 @@ userSchema.statics.signup = async function (email, password) {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ email, password: hash });
+  const user = await this.create({ email, fullName, password: hash });
 
   return user;
 };
 
 // static login method
-userSchema.statics.login = async function (email, password) {
-  if (!email || !password) {
+userSchema.statics.login = async function (email, password, fullName) {
+  if (!email || !password || !fullName) {
     throw Error("All fields must be filled");
   }
 

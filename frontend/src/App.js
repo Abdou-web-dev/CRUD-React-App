@@ -1,40 +1,46 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 // pages & components
-import { ListOfExercises } from "./components/lists/ListOfExercises";
 import Navbar from "./components/Navbar/Navbar";
-import AbsWorkouts from "./pages/Abs";
-import BackWorkouts from "./pages/Back";
-import BicepsWorkouts from "./pages/Biceps";
-import CalvesWorkouts from "./pages/Calves";
+import { useAuthContext } from "./hooks/useAuthContext";
 import ChestWorkouts from "./pages/Chest";
-// import ChestVideoWorkouts from "./pages/ChestVideoWorkouts";
-import ForearmsWorkouts from "./pages/Forearms";
-import HamstringsWorkouts from "./pages/Hamstrings";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import NoMatch from "./pages/NoMatch";
-import ShouldersWorkouts from "./pages/Shoulders";
-import TrapeziusWorkouts from "./pages/Trapezius";
-import TricepsWorkouts from "./pages/Triceps";
+import Signup from "./pages/Signup";
 
 function App() {
+  const { user } = useAuthContext();
+
   return (
     <div className="App">
       <Navbar />
-      <ListOfExercises></ListOfExercises>
 
       <div className="pages">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route index path="/chest" element={<ChestWorkouts />} />
-          <Route path="/hamstrings" element={<HamstringsWorkouts />} />
-          <Route path="/calves" element={<CalvesWorkouts />} />
-          <Route path="/back" element={<BackWorkouts />} />
-          <Route path="/shoulders" element={<ShouldersWorkouts />} />
-          <Route path="/triceps" element={<TricepsWorkouts />} />
-          <Route path="/biceps" element={<BicepsWorkouts />} />
-          <Route path="/forearms" element={<ForearmsWorkouts />} />
-          <Route path="/trapezius" element={<TrapeziusWorkouts />} />
-          <Route path="/abs" element={<AbsWorkouts />} />
+
+          <Route
+            index
+            path="/chest"
+            element={user ? <ChestWorkouts /> : <Navigate to="/login" />}
+          />
+
+          <Route
+            path="/login"
+            element={
+              !user ? (
+                <div className="pages-login">
+                  <Login />
+                </div>
+              ) : (
+                <Navigate to="/chest" />
+              )
+            }
+          />
+          <Route
+            path="/signup"
+            element={!user ? <Signup /> : <Navigate to="/chest" />}
+          />
           <Route path="/*" element={<NoMatch />} />
         </Routes>
       </div>

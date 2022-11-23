@@ -4,12 +4,16 @@ import { Alert, Input, Modal, Tooltip } from "antd";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import exercisesData from "../../assets/staticData/chestExercises.json";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 import { ClearIcon } from "../icons/Icons";
 import { ChestExosBtnsList as ChestExosList } from "../lists/exosLists/ChestExosBtnsList";
 import "./form_styles.scss";
 
 const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
+  const { user } = useAuthContext();
+  const { dispatch } = useWorkoutsContext();
+
   const [showNotification, setShowNotification] = useState(false);
   const workoutsTitlesArray = [
     ...new Set(workouts?.map((workout) => workout.title)),
@@ -20,7 +24,6 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
   let currentLocat = currentLocation.pathname;
   const chestExos = exercisesData.exercises.chest_Exercises;
 
-  const { dispatch } = useWorkoutsContext();
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState(``);
@@ -31,6 +34,11 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
   // const pureString = str.replace(/(?:\r\n|\r|\n)/g, '');
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user) {
+      setError("You must be logged in");
+      return;
+    }
+    //quit the function at this point, if no user is authenticated and logged in, because only logged in users can add workouts or delete them...
     const workout = { title, load, reps };
     const response = await fetch("/api/workouts", {
       method: "POST",
@@ -39,6 +47,7 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
       ),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
       },
     });
     const json = await response.json();
@@ -61,7 +70,6 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
       }
       //on submit, redirect the user to the 1st page
       setCurrentPage(1);
-      //
       if (showNotification === true) {
         setShowNotification(false);
       }
@@ -147,18 +155,18 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
               type="text"
               onChange={(e) => setTitle(e.target.value)}
               status={
-                emptyFields.includes("title") && title?.length === 0
+                emptyFields?.includes("title") && title?.length === 0
                   ? "error"
                   : ""
               }
               // title.length === 0 means that nothing is being typed by the user
               placeholder={
-                emptyFields.includes("title") && title?.length === 0
+                emptyFields?.includes("title") && title?.length === 0
                   ? `You have forgotten to type a title`
                   : "Type a title"
               }
               prefix={
-                emptyFields.includes("title") && title?.length === 0 ? (
+                emptyFields?.includes("title") && title?.length === 0 ? (
                   <PriorityHighIcon />
                 ) : null
               }
@@ -172,15 +180,15 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
             onChange={(e) => setLoad(e.target.value)}
             value={load}
             status={
-              emptyFields.includes("load") && load?.length === 0 ? "error" : ""
+              emptyFields?.includes("load") && load?.length === 0 ? "error" : ""
             }
             placeholder={
-              emptyFields.includes("load") && load?.length === 0
+              emptyFields?.includes("load") && load?.length === 0
                 ? `You have forgotten to type a load`
                 : "Type a load"
             }
             prefix={
-              emptyFields.includes("load") && load?.length === 0 ? (
+              emptyFields?.includes("load") && load?.length === 0 ? (
                 <PriorityHighIcon />
               ) : null
             }
@@ -193,16 +201,16 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
             onChange={(e) => setReps(e.target.value)}
             value={reps}
             status={
-              emptyFields.includes("reps") && reps?.length === 0 ? "error" : ""
+              emptyFields?.includes("reps") && reps?.length === 0 ? "error" : ""
             }
             // reps.length === 0 means that nothing is being typed by the user
             placeholder={
-              emptyFields.includes("reps") && reps?.length === 0
+              emptyFields?.includes("reps") && reps?.length === 0
                 ? `You have forgotten to type reps`
                 : "Type reps"
             }
             prefix={
-              emptyFields.includes("reps") && reps?.length === 0 ? (
+              emptyFields?.includes("reps") && reps?.length === 0 ? (
                 <PriorityHighIcon />
               ) : null
             }

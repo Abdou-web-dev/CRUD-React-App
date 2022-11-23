@@ -1,5 +1,6 @@
 import { Button, Input } from "antd";
 import { useState } from "react";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import "./modals_styles.scss";
 
 export function EditModal({
@@ -9,6 +10,8 @@ export function EditModal({
   setUpdatedWorkout,
   updatedWorkout,
 }) {
+  const { user } = useAuthContext();
+
   const [currentReps, setcurrentReps] = useState(updatedWorkout?.reps);
   const [currentLoad, setcurrentLoad] = useState(updatedWorkout?.load);
   const [currentTitle, setcurrentTitle] = useState(updatedWorkout?.title);
@@ -41,11 +44,15 @@ export function EditModal({
     });
   };
   const handleSaveEdit = async () => {
+    if (!user) {
+      return;
+    }
     const response = await fetch("/api/workouts/" + workout._id, {
       method: "PATCH", //PUt and PATCH are equivalent
       body: JSON.stringify(updatedWorkout),
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
       },
     });
     const json = await response.json();

@@ -7,7 +7,9 @@ import IconButton from "@mui/material/IconButton";
 import { Button, Drawer, message, Modal, Popconfirm, Space } from "antd";
 import React, { useState } from "react";
 import editIconPen from "../../assets/img/editer.png";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
+
 // date fns package
 import InfoIcon from "@mui/icons-material/Info";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
@@ -28,6 +30,7 @@ export const WorkoutDetails = ({
 }) => {
   // console.log(workoutIsCondensed);
   const { dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext();
 
   const [className, setClassName] = React.useState(`workout-details`);
   const [containerBoxShadow, setcontainerBoxShadow] = React.useState(
@@ -45,8 +48,16 @@ export const WorkoutDetails = ({
   };
 
   const handleDelete = async () => {
+    if (!user) {
+      return;
+    }
+    //if there is no user, do not bother and run the code below, so the handleClick is abandoned
+
     const response = await fetch("/api/workouts/" + workout._id, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
     });
     const json = await response.json();
 
