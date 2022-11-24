@@ -1,10 +1,11 @@
 .login-form-container {
   width: auto;
   .login-form-inner {
+    margin-bottom: 100px;
     .login-form {
       padding: 5px 170px;
       width: 100%;
-      min-height: 500px;
+      min-height: 650px;
       background: rgba(0, 180, 216, 0.15);
       display: flex;
       justify-content: center;
@@ -22,6 +23,17 @@
         .login-form-email-item-input {
           width: 100%;
           height: 60px;
+        }
+        .login-form-email-item-input-empty {
+          border-bottom: 1px solid red;
+          &::after {
+            display: flex;
+            align-items: center;
+            content: "!";
+            margin-left: 10px;
+            color: red;
+            font-weight: bold;
+          }
         }
         .login-form-email-item-label {
           span {
@@ -46,6 +58,18 @@
           width: 100%;
           height: 60px;
         }
+        .login-form-full-name-item-input-empty {
+          border-bottom: 1px solid red;
+          &::after {
+            display: flex;
+            align-items: center;
+            content: "!";
+            margin-left: 10px;
+            color: red;
+            font-weight: bold;
+            font-weight: bold;
+          }
+        }
         .login-form-full-name-item-label {
           span {
             font-size: 20px;
@@ -68,6 +92,17 @@
         .login-form-password-item-input {
           width: 100%;
           height: 60px;
+        }
+        .login-form-password-item-input-empty {
+          border-bottom: 1px solid red;
+          &::after {
+            display: flex;
+            align-items: center;
+            content: "!";
+            margin-left: 10px;
+            color: red;
+            font-weight: bold;
+          }
         }
         .login-form-password-item-label {
           span {
@@ -110,6 +145,228 @@
         .ant-form-item-row {
           .ant-form-item-control {
             width: 328px;
+          }
+        }
+      }
+      .login-form-not-a-member {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // border: 1px solid;
+        .login-form-text1 {
+          font-family: "inconsolata";
+          font-size: 20px;
+          margin-right: 20px;
+        }
+        .login-form-not-a-member-register-btn {
+          background: #188fffb9;
+          width: 90px;
+          height: 40px;
+          &:hover {
+            background: #1890ff;
+          }
+          .login-form-text2 {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.signup-form-container {
+  width: auto;
+  .signup-form-inner {
+    margin-bottom: 100px;
+    .signup-form {
+      padding: 5px 170px;
+      width: 822px;
+      min-height: 650px;
+      background: rgba(26, 172, 131, 0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 10px;
+
+      .signup-form-email-label {
+        font-family: "inconsolata";
+        font-size: 20px;
+        letter-spacing: 1.5px;
+      }
+
+      .signup-form-email-item-input {
+        width: 100%;
+        height: 60px;
+      }
+
+      .signup-form-email-item-input-empty {
+        border-bottom: 1px solid red;
+        &::after {
+          display: flex;
+          align-items: center;
+          content: "!";
+          margin-left: 10px;
+          color: red;
+          font-weight: bold;
+        }
+      }
+      .signup-form-fullName-label {
+        font-family: "inconsolata";
+        font-size: 20px;
+        letter-spacing: 1.5px;
+      }
+
+      .signup-form-full-name-item-input {
+        width: 100%;
+        height: 60px;
+      }
+      .signup-form-full-name-item-input-empty {
+        border-bottom: 1px solid red;
+        &::after {
+          display: flex;
+          align-items: center;
+          content: "!";
+          margin-left: 10px;
+          color: red;
+          font-weight: bold;
+          font-weight: bold;
+        }
+      }
+      .signup-form-password-label {
+        font-family: "inconsolata";
+        font-size: 20px;
+        letter-spacing: 1.5px;
+      }
+      .signup-form-password-item-input {
+        width: 100%;
+        height: 60px;
+      }
+      .signup-form-password-item-input-empty {
+        border-bottom: 1px solid red;
+        &::after {
+          display: flex;
+          align-items: center;
+          content: "!";
+          margin-left: 10px;
+          color: red;
+          font-weight: bold;
+        }
+      }
+
+      .signup-form-gender-label {
+        font-family: "inconsolata";
+        font-size: 20px;
+        letter-spacing: 1.5px;
+      }
+      .signup-form-gender-item-select {
+        .ant-select-selector {
+          width: 150px;
+          height: 50px;
+          .ant-select-selection-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
+      .signup-form-gender-item-select-empty {
+        border-bottom: 1px solid red;
+        &::after {
+          display: flex;
+          align-items: center;
+          content: "!";
+          margin-left: 10px;
+          color: red;
+          font-weight: bold;
+        }
+      }
+
+      .signup-form-avatar-label {
+        font-family: "inconsolata";
+        font-size: 20px;
+        letter-spacing: 1.5px;
+      }
+      .signup-form-avatar-select-icon {
+        width: 34px;
+        height: 34px;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+      .signup-form-country-label {
+        font-family: "inconsolata";
+        font-size: 20px;
+        letter-spacing: 1.5px;
+      }
+      .signup-form-country-item-select {
+        .ant-select-selector {
+          width: 150px;
+          height: 50px;
+          .ant-select-selection-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
+      .signup-form-country-item-select-empty {
+        border-bottom: 1px solid red;
+        &::after {
+          display: flex;
+          align-items: center;
+          content: "!";
+          margin-left: 10px;
+          color: red;
+          font-weight: bold;
+          font-weight: bold;
+        }
+      }
+
+      .signup-form-btn-and-error {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 15px;
+        .signup-form-btn-item-button {
+          width: 100px;
+          height: 45px;
+        }
+        .text-error {
+          span {
+            font-family: "Poppins";
+            font-size: 16px;
+            color: rgb(206, 72, 72);
+            font-style: italic;
+            font-weight: 600;
+            letter-spacing: 2px;
+          }
+        }
+      }
+
+      .signup-form-not-a-member {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // border: 1px solid;
+        .signup-form-text1 {
+          font-family: "inconsolata";
+          font-size: 20px;
+          margin-right: 20px;
+        }
+        .signup-form-not-a-member-register-btn {
+          background: #188fffb9;
+          width: 90px;
+          height: 40px;
+          &:hover {
+            background: #1890ff;
+          }
+          .signup-form-text2 {
+            color: white;
           }
         }
       }

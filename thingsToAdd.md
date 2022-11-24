@@ -12,11 +12,8 @@ Note: files tracked before can be untracked by running git rm --cached filename
 6- in the frontend , create a page divided into 2 parts : left part allows users to signup to the website, the right part allows them to login into their account.
 if the visitor clicks on signup , the left part will then occup 85% of the full width of the screen, the rest 15% and some kind of greyish background will partially hide the content behind, vice versa for the right part...
 
-fullName: {
-// type: String,
-// required: true,
-// },
-in userModel.js
+in the signup form , add an input for the gender and a btn for choosing an avatar icon from a list of avatars that are displayed in a modal, oncloick on this btn
+once the user is logged in , add a btn to view the user infos once the user hovers over a small icon for each info and make them modifiable
 
 if you want to use custom db from mongoDB db's , you need to type the name of the db after the ".net/" in this URI :
 MONGO_URI=mongodb+srv://avdelmounim:condemerde22@cluster0.iswlhxp.mongodb.net/dbAbdel?retryWrites=true&w=majority

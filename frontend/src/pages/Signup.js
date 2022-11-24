@@ -1,55 +1,267 @@
-import { Button, Input } from "antd";
+import { Button, Form, Input, Modal, Select } from "antd";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import select_icon from "../assets/img/selection.png";
+import { Avatars } from "../components/avatars/Avatars";
 import { useSignup } from "../hooks/useSignup";
+import "./login_signup_styles.scss";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [gender, setGender] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [country, setCountry] = useState("");
+  const [showAvatarModal, setshowAvatarModal] = useState(false);
+
+  const [emailClass, setemailClass] = useState("signup-form-email-item-input");
+  const [passwordClass, setPasswordClass] = useState(
+    "signup-form-password-item-input"
+  );
+  const [fullNameClass, setFullNameClass] = useState(
+    "signup-form-full-name-item-input"
+  );
+  const [genderClass, setgenderClass] = useState(
+    "signup-form-gender-item-select"
+  );
+  const [countryClass, setCountryClass] = useState(
+    "signup-form-country-item-select"
+  );
 
   const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    if (email.length === 0)
+      setemailClass(
+        "signup-form-email-item-input signup-form-email-item-input-empty"
+      );
+    if (!password.length)
+      setPasswordClass(
+        "signup-form-password-item-input signup-form-password-item-input-empty"
+      );
+    if (!fullName.length)
+      setFullNameClass(
+        "signup-form-full-name-item-input signup-form-full-name-item-input-empty"
+      );
+    if (gender.length === 0)
+      setgenderClass(
+        "signup-form-gender-item-select signup-form-gender-item-select-empty"
+      );
+    if (!country.length)
+      setCountryClass(
+        "signup-form-country-item-select signup-form-country-item-select-empty"
+      );
 
-    await signup(email, password, fullName);
+    await signup(email, password, fullName, gender, avatar, country);
   };
-
+  function handleSelectAvatar() {
+    setshowAvatarModal(true);
+  }
+  // useEffect(() => {
+  //   console.log(gender.length);
+  // }, []);
   return (
     <>
       <div className="signup-form-container">
         <div className="signup-form-inner">
-          <form className="signup-form" name="form" onSubmit={handleSubmit}>
-            <label htmlFor="">Email : </label>
+          <Form
+            className="signup-form"
+            name="form"
+            onFinish={handleSubmit}
+            initialValues={{
+              remember: true,
+            }}
+          >
+            <>
+              <label className="signup-form-email-label">Email :</label>
+              <Input
+                className={emailClass}
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder="Email"
+                allowClear
+              />
+            </>
+            <>
+              <label className="signup-form-fullName-label">Full Name : </label>
+              <Input
+                className={fullNameClass}
+                type="text"
+                onChange={(e) => setFullName(e.target.value)}
+                value={fullName}
+                placeholder="Full Name"
+                allowClear
+              />
+            </>
+            <>
+              <label className="signup-form-gender-label">Gender : </label>
+              <Select
+                className={genderClass}
+                value={gender}
+                //strangely , when using antd Select, the event will hold the value of the value keys nested in options prop
+                onChange={(value) => setGender(value)}
+                defaultValue=""
+                size={"large"}
+                options={[
+                  {
+                    value: "Male",
+                    label: "Male",
+                  },
+                  {
+                    value: "Female",
+                    label: "Female",
+                  },
+                ]}
+              />
+            </>
+            <>
+              <label className="signup-form-avatar-label">Avatar : </label>
+              <img
+                className="signup-form-avatar-select-icon"
+                onClick={handleSelectAvatar}
+                src={select_icon}
+                alt=""
+              />
+              {showAvatarModal && (
+                <div>
+                  <Modal
+                    className="avatar-modal"
+                    open={showAvatarModal}
+                    maskClosable={true}
+                    closable={true}
+                    keyboard={true}
+                    mask={true}
+                    onOk={() => setshowAvatarModal(false)}
+                    onCancel={() => setshowAvatarModal(false)}
+                    // width={layoutGrid ? "50%" : "60%"}
+                    footer={null}
+                    title={`Pick an avatar`}
+                  >
+                    <Avatars {...{ gender }} />
+                  </Modal>
+                </div>
+              )}
+            </>
+            <>
+              <label className="signup-form-country-label">Country : </label>
+              <Select
+                className={countryClass}
+                value={country}
+                onChange={(value) => setCountry(value)}
+                defaultValue="Morrco"
+                size={"large"}
+                filterOption={(input, option) =>
+                  (option?.value ?? "").includes(input)
+                }
+                filterSort={(optionA, optionB) =>
+                  //if optionA.value is null ou undefined then "" will be returned instead, and if it has a value , this value will be returned and used
+                  (optionA?.value ?? "")
+                    .toLowerCase()
+                    .localeCompare((optionB?.value ?? "").toLowerCase())
+                }
+                options={[
+                  { value: "Afghanistan" },
+                  { value: "Morocco" },
+                  { value: "United States" },
+                  { value: "Åland Islands" },
+                  { value: "Albania" },
+                  { value: "Algeria" },
+                  { value: "American Samoa" },
+                  { value: "Andorra" },
+                  { value: "Angola" },
+                  { value: "Anguilla" },
+                  { value: "Antarctica" },
+                  { value: "Antigua and Barbuda" },
+                  { value: "Argentina" },
+                  { value: "Armenia" },
+                  { value: "Aruba" },
+                  { value: "Australia" },
+                  { value: "Austria" },
+                  { value: "Azerbaijan" },
+                  { value: "Bahamas" },
+                  { value: "Bahrain" },
+                  { value: "Bangladesh" },
+                  { value: "Barbados" },
+                  { value: "Belarus" },
+                  { value: "Belgium" },
+                  { value: "Belize" },
+                  { value: "Benin" },
+                  { value: "Bermuda" },
+                  { value: "Bhutan" },
+                  { value: "Bolivia" },
+                  { value: "Bosnia and Herzegovina" },
 
-            <Input
-              className="signup-form-email-item-input"
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              placeholder="Email"
-              allowClear
-            />
+                  { value: "Botswana" },
+                  { value: "Bouvet Island" },
+                  { value: "Brazil" },
+                  { value: "British Indian Ocean Territory" },
 
-            <label htmlFor="">Full Name : </label>
-            <Input
-              className="signup-form-full-name-item-input"
-              type="text"
-              onChange={(e) => setFullName(e.target.value)}
-              value={fullName}
-              placeholder="Full Name"
-              allowClear
-            />
+                  { value: "Brunei Darussalam" },
+                  { value: "Bulgaria" },
+                  { value: "Burkina Faso" },
+                  { value: "Burundi" },
+                  { value: "Cambodia" },
+                  { value: "Cameroon" },
+                  { value: "Canada" },
+                  { value: "Cape Verde" },
+                  { value: "Cayman Islands" },
+                  { value: "Central African Republic" },
 
-            <label htmlFor="">Password : </label>
-            <Input.Password
-              className="signup-form-password-item-input"
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              placeholder="Password"
-              allowClear
-            />
+                  { value: "Chad" },
+                  { value: "Chile" },
+                  { value: "China" },
+                  { value: "Christmas Island" },
+                  { value: "Cocos (Keeling) Islands" },
+
+                  { value: "Colombia" },
+                  { value: "Comoros" },
+                  { value: "Congo" },
+                  { value: "Congo, The Democratic Republic of The" },
+
+                  { value: "Cook Islands" },
+                  { value: "Costa Rica" },
+                  { value: "Cote D'ivoire" },
+                  { value: "Croatia" },
+                  { value: "Cuba" },
+                  { value: "Cyprus" },
+                  { value: "Czech Republic" },
+                  { value: "Denmark" },
+                  { value: "Djibouti" },
+                  { value: "Dominica" },
+                  { value: "Dominican Republic" },
+                  { value: "Ecuador" },
+                  { value: "Egypt" },
+                  { value: "El Salvador" },
+                  { value: "Equatorial Guinea" },
+                  { value: "Eritrea" },
+                  { value: "Estonia" },
+                  { value: "Ethiopia" },
+                  { value: "Falkland Islands (Malvinas)" },
+
+                  { value: "Faroe Islands" },
+                  { value: "Fiji" },
+                  { value: "Finland" },
+                  { value: "France" },
+                  { value: "French Guiana" },
+                  { value: "French Polynesia" },
+                  { value: "French Southern Territories" },
+                ]}
+              />
+            </>
+            <>
+              <label className="signup-form-password-label">Password : </label>
+              <Input.Password
+                className={passwordClass}
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                placeholder="Password"
+                allowClear
+              />
+            </>
 
             <div className="signup-form-btn-and-error">
               <Button
@@ -66,7 +278,18 @@ const Signup = () => {
                 </div>
               )}
             </div>
-          </form>
+
+            <div className="signup-form-not-a-member">
+              <span className="signup-form-text1">
+                Have already an account ?
+              </span>
+              <Button className="signup-form-not-a-member-register-btn">
+                <Link to="/login">
+                  <span className="signup-form-text2"> Login</span>
+                </Link>
+              </Button>
+            </div>
+          </Form>
         </div>
       </div>
     </>
@@ -74,3 +297,5 @@ const Signup = () => {
 };
 
 export default Signup;
+
+// L' opérateur de coalescence nul ( ??) est un opérateur logique qui renvoie son opérande de droite lorsque son opérande de gauche est nullou undefined, et sinon renvoie son opérande de gauche.

@@ -18,12 +18,31 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  gender: {
+    type: String,
+    required: true,
+  },
+  avatar: {
+    type: Image,
+    required: true,
+  },
+  country: {
+    type: String,
+    required: true,
+  },
 });
 
 // static signup method
-userSchema.statics.signup = async function (email, password, fullName) {
+userSchema.statics.signup = async function (
+  email,
+  password,
+  fullName,
+  gender,
+  avatar,
+  country
+) {
   // validation
-  if (!email && !password && !fullName) {
+  if (!email && !password && !fullName && !gender && !avatar && !country) {
     throw Error("Please, fill in the fields before subscribing ");
   }
   if (!email) {
@@ -34,6 +53,15 @@ userSchema.statics.signup = async function (email, password, fullName) {
   }
   if (!fullName) {
     throw Error("Please, type your full name ");
+  }
+  if (!gender) {
+    throw Error("Please, select your gender ");
+  }
+  if (!avatar) {
+    throw Error("Please, select an avatar ");
+  }
+  if (!country) {
+    throw Error("Please, select a country ");
   }
   if (!validator.isEmail(email)) {
     throw Error("Email not valid");
@@ -51,7 +79,14 @@ userSchema.statics.signup = async function (email, password, fullName) {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create({ email, fullName, password: hash });
+  const user = await this.create({
+    email,
+    fullName,
+    gender,
+    avatar,
+    country,
+    password: hash,
+  });
 
   return user;
 };

@@ -10,7 +10,7 @@ import { useLogout } from "../../hooks/useLogout";
 
 import "./navbar.scss";
 
-const Navbar = () => {
+const Navbar = ({ fullName }) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
@@ -49,7 +49,8 @@ const Navbar = () => {
         <div className={"workout-app-navbar-login-logout-icons"}>
           {user && (
             <div className="workout-app-navbar-logout">
-              <span>{user.email}</span>
+              <span>{user.email}</span> <br />
+              <span className="aaa"> {fullName}</span>
               <Button
                 className="workout-app-navbar-logout-btn"
                 onClick={handleLogOutClick}

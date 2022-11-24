@@ -1,5 +1,6 @@
 import { Button, Form, Input } from "antd";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useLogin } from "../hooks/useLogin";
 import "./login_signup_styles.scss";
 
@@ -7,11 +8,30 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [emailClass, setemailClass] = useState("login-form-email-item-input");
+  const [passwordClass, setPasswordClass] = useState(
+    "login-form-password-item-input"
+  );
+  const [fullNameClass, setFullNameClass] = useState(
+    "login-form-full-name-item-input"
+  );
 
   const { login, error, isLoading } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (email === "")
+      setemailClass(
+        "login-form-email-item-input login-form-email-item-input-empty"
+      );
+    if (password === "")
+      setPasswordClass(
+        "login-form-password-item-input login-form-password-item-input-empty"
+      );
+    if (fullName === "")
+      setFullNameClass(
+        "login-form-full-name-item-input login-form-full-name-item-input-empty"
+      );
 
     await login(email, password, fullName);
   };
@@ -28,19 +48,14 @@ const Login = () => {
               </div>
             }
             name="Email address"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Email address!",
-              },
-            ]}
+            rules={[{ required: true }]}
             // wrapperCol={{
             //   offset: 8,
             //   span: 8,
             // }}
           >
             <Input
-              className="login-form-email-item-input"
+              className={emailClass}
               type="email"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -57,15 +72,10 @@ const Login = () => {
               </div>
             }
             name="Full name"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Full name!",
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <Input
-              className="login-form-full-name-item-input"
+              className={fullNameClass}
               type="text"
               onChange={(e) => setFullName(e.target.value)}
               value={fullName}
@@ -82,15 +92,10 @@ const Login = () => {
               </div>
             }
             name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your password!",
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <Input.Password
-              className="login-form-password-item-input"
+              className={passwordClass}
               type="password"
               onChange={(e) => setPassword(e.target.value)}
               value={password}
@@ -122,6 +127,14 @@ const Login = () => {
               )}
             </div>
           </Form.Item>
+          <div className="login-form-not-a-member">
+            <span className="login-form-text1"> not a member ?</span>
+            <Button className="login-form-not-a-member-register-btn">
+              <Link to="/signup">
+                <span className="login-form-text2"> Register</span>
+              </Link>
+            </Button>
+          </div>
         </form>
       </div>
     </div>

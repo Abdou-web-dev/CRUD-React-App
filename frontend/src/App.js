@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 // pages & components
 import Navbar from "./components/Navbar/Navbar";
@@ -10,10 +11,11 @@ import Signup from "./pages/Signup";
 
 function App() {
   const { user } = useAuthContext();
+  const [fullName, setFullName] = useState("");
 
   return (
     <div className="App">
-      <Navbar />
+      <Navbar {...{ fullName }} />
 
       <div className="pages">
         <Routes>
@@ -39,7 +41,15 @@ function App() {
           />
           <Route
             path="/signup"
-            element={!user ? <Signup /> : <Navigate to="/chest" />}
+            element={
+              !user ? (
+                <div className="pages-login">
+                  <Signup {...{ fullName, setFullName }} />
+                </div>
+              ) : (
+                <Navigate to="/chest" />
+              )
+            }
           />
           <Route path="/*" element={<NoMatch />} />
         </Routes>
