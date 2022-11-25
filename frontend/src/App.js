@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 // pages & components
 import Navbar from "./components/Navbar/Navbar";
@@ -11,11 +10,11 @@ import Signup from "./pages/Signup";
 
 function App() {
   const { user } = useAuthContext();
-  const [fullName, setFullName] = useState("");
-
   return (
     <div className="App">
-      <Navbar {...{ fullName }} />
+      <Navbar />
+      {/* a solution to the fullName prb would be to declare a state fullName variable both in logi nand signup pages
+      the fullName will be then taken from the login page */}
 
       <div className="pages">
         <Routes>
@@ -44,7 +43,7 @@ function App() {
             element={
               !user ? (
                 <div className="pages-login">
-                  <Signup {...{ fullName, setFullName }} />
+                  <Signup />
                 </div>
               ) : (
                 <Navigate to="/chest" />

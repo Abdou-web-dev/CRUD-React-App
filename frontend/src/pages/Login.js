@@ -1,13 +1,39 @@
-import { Button, Form, Input } from "antd";
-import { useState } from "react";
+import { IconButton } from "@mui/material";
+import { Alert, Button, Checkbox, Form, Input, Modal } from "antd";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import avatarfemale1 from "../assets/img/avatarfemale1.svg";
+import avatarfemale2 from "../assets/img/avatarfemale2.svg";
+import avatarfemale3 from "../assets/img/avatarfemale3.svg";
+import avatarfemale4 from "../assets/img/avatarfemale4.svg";
+import avatarfemale5 from "../assets/img/avatarfemale5.svg";
+import avatarfemale6 from "../assets/img/avatarfemale6.svg";
+
+import avatarmale1 from "../assets/img/avatarmale1.svg";
+import avatarmale2 from "../assets/img/avatarmale2.svg";
+import avatarmale3 from "../assets/img/avatarmale3.svg";
+import avatarmale4 from "../assets/img/avatarmale4.svg";
+import avatarmale5 from "../assets/img/avatarmale5.svg";
+import avatarmale6 from "../assets/img/avatarmale6.svg";
+import { ClearIcon } from "../components/icons/Icons";
+
 import { useLogin } from "../hooks/useLogin";
 import "./login_signup_styles.scss";
 
-const Login = () => {
+const Login = ({}) => {
+  const { login, error, isLoading } = useLogin();
+  const [showNotification, setShowNotification] = useState(false);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
+  const [avatar, setAvatar] = useState(null);
+  const [gender, setGender] = useState("");
+  const [password, setPassword] = useState("");
+  const [checkedMale, setCheckedMale] = useState(false);
+  const [checkedFemale, setCheckedFemale] = useState(false);
+
+  // save the avatar to local storage
+  localStorage.setItem("avatar", JSON.stringify(avatar));
+
   const [emailClass, setemailClass] = useState("login-form-email-item-input");
   const [passwordClass, setPasswordClass] = useState(
     "login-form-password-item-input"
@@ -15,11 +41,32 @@ const Login = () => {
   const [fullNameClass, setFullNameClass] = useState(
     "login-form-full-name-item-input"
   );
+  const [showAvatarModal, setshowAvatarModal] = useState(false);
+  //open a modal containing the avatars once the user checks his gender
+  // setshowAvatarModal(true);
 
-  const { login, error, isLoading } = useLogin();
+  const avatars =
+    gender === "Male"
+      ? [
+          avatarmale1,
+          avatarmale2,
+          avatarmale3,
+          avatarmale4,
+          avatarmale5,
+          avatarmale6,
+        ]
+      : [
+          avatarfemale1,
+          avatarfemale2,
+          avatarfemale3,
+          avatarfemale4,
+          avatarfemale5,
+          avatarfemale6,
+        ];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (email === "")
       setemailClass(
         "login-form-email-item-input login-form-email-item-input-empty"
@@ -28,13 +75,50 @@ const Login = () => {
       setPasswordClass(
         "login-form-password-item-input login-form-password-item-input-empty"
       );
-    if (fullName === "")
+    if (fullName === "") {
       setFullNameClass(
         "login-form-full-name-item-input login-form-full-name-item-input-empty"
       );
+    }
 
-    await login(email, password, fullName);
+    //do not log in the user until the avatar is picked
+    if (avatar) {
+      await login(email, password, fullName, gender);
+    }
+    if (!avatar) {
+      setShowNotification(true);
+    }
   };
+
+  const onChangeMale = (e) => {
+    setCheckedMale(e.target.checked);
+    if (checkedFemale === true) {
+      setCheckedFemale(false);
+    }
+  };
+  const onChangeFemale = (e) => {
+    setCheckedFemale(e.target.checked);
+    if (checkedMale === true) {
+      setCheckedMale(false);
+    }
+  };
+  const handleAvatarClick = (index) => {
+    const selectedItem = avatars[index];
+    setAvatar(selectedItem);
+    // console.log(selectedItem, avatar);
+  };
+
+  useEffect(() => {
+    if (checkedMale === true) {
+      setGender("Male");
+    }
+    if (checkedFemale === true) {
+      setGender("Female");
+    }
+    if (checkedMale || checkedFemale) {
+      setshowAvatarModal(true);
+    }
+  }, [checkedMale, checkedFemale]);
 
   return (
     <div className="login-form-container">
@@ -82,6 +166,32 @@ const Login = () => {
               placeholder="Full Name"
               allowClear
             />
+          </Form.Item>
+
+          <Form.Item
+            className="login-form-gender-item"
+            label={
+              <div className="login-form-gender-item-label">
+                <span>Gender</span>
+              </div>
+            }
+            name="Gender"
+            rules={[{ required: true }]}
+          >
+            <Checkbox
+              className={""}
+              checked={checkedMale}
+              onChange={onChangeMale}
+            >
+              <span>Male</span>
+            </Checkbox>
+            <Checkbox
+              className={""}
+              checked={checkedFemale}
+              onChange={onChangeFemale}
+            >
+              <span>Female</span>
+            </Checkbox>
           </Form.Item>
 
           <Form.Item
@@ -137,6 +247,73 @@ const Login = () => {
           </div>
         </form>
       </div>
+      <>
+        {showAvatarModal && (
+          <div>
+            <Modal
+              className="login-form-avatar-modal"
+              open={showAvatarModal}
+              maskClosable={true}
+              closable={true}
+              keyboard={true}
+              mask={true}
+              onOk={() => setshowAvatarModal(false)}
+              onCancel={() => setshowAvatarModal(false)}
+              footer={null}
+              title={`Pick an avatar`}
+              width="60%"
+            >
+              <div className="login-form-modal-content login-form-list-of-avatars">
+                {avatars &&
+                  avatars?.map((avatar, index) => (
+                    <div className="login-form-avatar-wrapper" key={index}>
+                      <Button
+                        onClick={() => handleAvatarClick(index)}
+                        className="login-form-avatar-btn"
+                      >
+                        <img
+                          className="login-form-avatar-icon"
+                          src={avatar}
+                          alt=""
+                        />
+                      </Button>
+                    </div>
+                  ))}
+              </div>
+              {avatar && (
+                <div className="login-form-choose-btn-wrapper">
+                  <Button
+                    onClick={() => setshowAvatarModal(false)}
+                    className="login-form-choose-btn"
+                  >
+                    <span>Choose</span>
+                  </Button>
+                </div>
+              )}
+            </Modal>
+          </div>
+        )}
+      </>
+      <>
+        {showNotification && (
+          <div className="notification">
+            <Alert
+              type="info"
+              className="ant-alert"
+              closeIcon={
+                <IconButton onClick={() => setShowNotification(false)}>
+                  <ClearIcon />
+                </IconButton>
+              }
+              message={
+                <span className="noti-text">Please, select an avatar !</span>
+              }
+              banner
+              closable
+            />
+          </div>
+        )}
+      </>
     </div>
   );
 };

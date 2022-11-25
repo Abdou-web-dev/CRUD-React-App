@@ -173,6 +173,88 @@
       }
     }
   }
+  .notification {
+    position: relative;
+    bottom: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .ant-alert {
+      width: 490px;
+      position: relative;
+      bottom: 40px;
+      padding: 15px 30px;
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+          rgba(0, 0, 0, 0.23) 0px 6px 6px;
+      }
+    }
+    span {
+      font-family: "Sofia Pro";
+      font-style: normal;
+      font-weight: 900;
+      font-size: 20px;
+      line-height: 0px;
+      letter-spacing: 1.5px;
+      color: black;
+      text-transform: initial;
+      &::first-letter {
+        text-transform: capitalize;
+      }
+    }
+    span.noti-text {
+      position: relative;
+      top: 2px;
+      margin-left: 5px;
+    }
+  }
+}
+.login-form-avatar-modal {
+  .login-form-modal-content {
+    &.login-form-list-of-avatars {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      .login-form-avatar-wrapper {
+        .login-form-avatar-btn {
+          height: fit-content;
+
+          .login-form-avatar-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+            cursor: pointer;
+            &:hover {
+              transform: scale(1.05);
+            }
+          }
+        }
+      }
+    }
+  }
+  .login-form-choose-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 30px;
+
+    .login-form-choose-btn {
+      height: fit-content;
+      background: #e39ff6;
+      border: none;
+      &:hover {
+        background: #a1045a;
+      }
+      span {
+        font-family: "inconsolata";
+        font-size: 20px;
+        letter-spacing: 1.5px;
+        color: white;
+      }
+    }
+  }
 }
 
 .signup-form-container {

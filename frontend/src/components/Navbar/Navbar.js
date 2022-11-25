@@ -7,16 +7,19 @@ import signUpIcon from "../../assets/img/add-user.png";
 import gym from "../../assets/img/gymBold.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogout } from "../../hooks/useLogout";
-
 import "./navbar.scss";
 
-const Navbar = ({ fullName }) => {
+const Navbar = ({}) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
   const handleLogOutClick = () => {
     logout();
   };
+
+  // get the avatar and the fullName of the user from the browser local storage
+  const userStored = JSON.parse(localStorage.getItem("user"));
+  const avatarStored = JSON.parse(localStorage.getItem("avatar"));
 
   return (
     <div className="workout-app-navbar-container">
@@ -49,8 +52,11 @@ const Navbar = ({ fullName }) => {
         <div className={"workout-app-navbar-login-logout-icons"}>
           {user && (
             <div className="workout-app-navbar-logout">
-              <span>{user.email}</span> <br />
-              <span className="aaa"> {fullName}</span>
+              {/* can use both {userStored?.fullName} or {user?.fullName} */}
+              {/* <span>{user.email}</span> <br /> */}
+              <span className="">Welcome</span>
+              <span className=""> {userStored?.fullName}</span>
+              <img className="" src={avatarStored} alt="" />
               <Button
                 className="workout-app-navbar-logout-btn"
                 onClick={handleLogOutClick}
@@ -106,3 +112,9 @@ export default Navbar;
 />; */
 
 /* <img src={logOutIcon} alt="" /> */
+//users login and pwd
+// hamada66@gmail.com
+// FF%T4L(#M@nARek)
+
+// hassna.chama@gmail.com
+// (GLUXJqeyE*7W6#5dd4d4dAA

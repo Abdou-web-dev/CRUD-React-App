@@ -1,19 +1,15 @@
-import { Button, Form, Input, Modal, Select } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import select_icon from "../assets/img/selection.png";
-import { Avatars } from "../components/avatars/Avatars";
 import { useSignup } from "../hooks/useSignup";
 import "./login_signup_styles.scss";
 
-const Signup = () => {
+const Signup = ({}) => {
+  const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [gender, setGender] = useState("");
-  const [avatar, setAvatar] = useState("");
   const [country, setCountry] = useState("");
-  const [showAvatarModal, setshowAvatarModal] = useState(false);
+  const [fullName, setFullName] = useState("");
 
   const [emailClass, setemailClass] = useState("signup-form-email-item-input");
   const [passwordClass, setPasswordClass] = useState(
@@ -54,14 +50,9 @@ const Signup = () => {
         "signup-form-country-item-select signup-form-country-item-select-empty"
       );
 
-    await signup(email, password, fullName, gender, avatar, country);
+    await signup(email, password, fullName, gender, country);
   };
-  function handleSelectAvatar() {
-    setshowAvatarModal(true);
-  }
-  // useEffect(() => {
-  //   console.log(gender.length);
-  // }, []);
+
   return (
     <>
       <div className="signup-form-container">
@@ -89,9 +80,9 @@ const Signup = () => {
               <label className="signup-form-fullName-label">Full Name : </label>
               <Input
                 className={fullNameClass}
-                type="text"
                 onChange={(e) => setFullName(e.target.value)}
                 value={fullName}
+                type="text"
                 placeholder="Full Name"
                 allowClear
               />
@@ -117,34 +108,7 @@ const Signup = () => {
                 ]}
               />
             </>
-            <>
-              <label className="signup-form-avatar-label">Avatar : </label>
-              <img
-                className="signup-form-avatar-select-icon"
-                onClick={handleSelectAvatar}
-                src={select_icon}
-                alt=""
-              />
-              {showAvatarModal && (
-                <div>
-                  <Modal
-                    className="avatar-modal"
-                    open={showAvatarModal}
-                    maskClosable={true}
-                    closable={true}
-                    keyboard={true}
-                    mask={true}
-                    onOk={() => setshowAvatarModal(false)}
-                    onCancel={() => setshowAvatarModal(false)}
-                    // width={layoutGrid ? "50%" : "60%"}
-                    footer={null}
-                    title={`Pick an avatar`}
-                  >
-                    <Avatars {...{ gender }} />
-                  </Modal>
-                </div>
-              )}
-            </>
+
             <>
               <label className="signup-form-country-label">Country : </label>
               <Select

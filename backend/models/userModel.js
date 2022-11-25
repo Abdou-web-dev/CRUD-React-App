@@ -22,10 +22,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  avatar: {
-    type: Image,
-    required: true,
-  },
+
   country: {
     type: String,
     required: true,
@@ -38,11 +35,10 @@ userSchema.statics.signup = async function (
   password,
   fullName,
   gender,
-  avatar,
   country
 ) {
   // validation
-  if (!email && !password && !fullName && !gender && !avatar && !country) {
+  if (!email && !password && !fullName && !gender && !country) {
     throw Error("Please, fill in the fields before subscribing ");
   }
   if (!email) {
@@ -56,9 +52,6 @@ userSchema.statics.signup = async function (
   }
   if (!gender) {
     throw Error("Please, select your gender ");
-  }
-  if (!avatar) {
-    throw Error("Please, select an avatar ");
   }
   if (!country) {
     throw Error("Please, select a country ");
@@ -83,7 +76,6 @@ userSchema.statics.signup = async function (
     email,
     fullName,
     gender,
-    avatar,
     country,
     password: hash,
   });
@@ -106,8 +98,28 @@ userSchema.statics.login = async function (email, password, fullName) {
   if (!match) {
     throw Error("Incorrect password");
   }
+  if (fullName !== user.fullName) {
+    throw Error(
+      "This is not the full name you enetered when you first registered"
+    );
+  }
+  if (fullName === user.fullName) {
+    return user;
+  }
+  //user.fullName is the fullName entered while the user logges in
+  //fullName is the fullName entered while the user signed up
 
-  return user;
+  // return user;
 };
 
 module.exports = mongoose.model("User", userSchema);
+
+// Data types allowed in schemas
+// String.
+// Number.
+// Date.
+// Boolean.
+// Buffer.
+// ObjectId.
+// Mixed.
+// Array.
