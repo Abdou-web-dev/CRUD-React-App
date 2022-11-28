@@ -1,4 +1,3 @@
-import { IconButton } from "@mui/material";
 import { Alert, Button, Checkbox, Form, Input, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -8,7 +7,6 @@ import avatarfemale3 from "../assets/img/avatarfemale3.svg";
 import avatarfemale4 from "../assets/img/avatarfemale4.svg";
 import avatarfemale5 from "../assets/img/avatarfemale5.svg";
 import avatarfemale6 from "../assets/img/avatarfemale6.svg";
-
 import avatarmale1 from "../assets/img/avatarmale1.svg";
 import avatarmale2 from "../assets/img/avatarmale2.svg";
 import avatarmale3 from "../assets/img/avatarmale3.svg";
@@ -16,7 +14,6 @@ import avatarmale4 from "../assets/img/avatarmale4.svg";
 import avatarmale5 from "../assets/img/avatarmale5.svg";
 import avatarmale6 from "../assets/img/avatarmale6.svg";
 import { ClearIcon } from "../components/icons/Icons";
-
 import { useLogin } from "../hooks/useLogin";
 import "./login_signup_styles.scss";
 
@@ -71,20 +68,23 @@ const Login = ({}) => {
       setemailClass(
         "login-form-email-item-input login-form-email-item-input-empty"
       );
+    else if (email !== "") setemailClass("login-form-email-item-input");
     if (password === "")
       setPasswordClass(
         "login-form-password-item-input login-form-password-item-input-empty"
       );
+    else if (password !== "")
+      setPasswordClass("login-form-password-item-input");
     if (fullName === "") {
       setFullNameClass(
         "login-form-full-name-item-input login-form-full-name-item-input-empty"
       );
+    } else if (fullName !== "") {
+      setFullNameClass("login-form-full-name-item-input");
     }
 
-    //do not log in the user until the avatar is picked
-    if (avatar) {
-      await login(email, password, fullName, gender);
-    }
+    await login(email, password, fullName, gender);
+
     if (!avatar) {
       setShowNotification(true);
     }
@@ -107,6 +107,8 @@ const Login = ({}) => {
     setAvatar(selectedItem);
     // console.log(selectedItem, avatar);
   };
+  //when the user closes the modal , show the selected avatar instead of the 2 checkboxes
+  //but still allow him to modify it
 
   useEffect(() => {
     if (checkedMale === true) {
@@ -133,10 +135,6 @@ const Login = ({}) => {
             }
             name="Email address"
             rules={[{ required: true }]}
-            // wrapperCol={{
-            //   offset: 8,
-            //   span: 8,
-            // }}
           >
             <Input
               className={emailClass}
@@ -161,10 +159,16 @@ const Login = ({}) => {
             <Input
               className={fullNameClass}
               type="text"
-              onChange={(e) => setFullName(e.target.value)}
+              onChange={(e) => setFullName(e.target.value.trim())}
               value={fullName}
               placeholder="Full Name"
               allowClear
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  setFullName(e.target.value.trim());
+                }
+              }}
+              /**trim js method Removes the leading and trailing white space and line terminator characters from a string. */
             />
           </Form.Item>
 
@@ -230,9 +234,28 @@ const Login = ({}) => {
               >
                 <span> Login</span>
               </Button>
+
               {error && (
                 <div className="text-error">
-                  <span>{error} !</span>
+                  {error ===
+                  "This is not the full name you entered when you first registered" ? (
+                    <div className="errorMsg-wrapper">
+                      <span className="errorMsg">{`This is not the full name you entered`}</span>
+                      <span className="errorMsg">
+                        {`when you first registered !`}
+                      </span>
+                    </div>
+                  ) : (
+                    <span
+                      className={
+                        error === "Please , type your email address"
+                          ? "error-msg-text small-font"
+                          : "error-msg-text"
+                      }
+                    >
+                      {error}!
+                    </span>
+                  )}
                 </div>
               )}
             </div>
@@ -300,11 +323,7 @@ const Login = ({}) => {
             <Alert
               type="info"
               className="ant-alert"
-              closeIcon={
-                <IconButton onClick={() => setShowNotification(false)}>
-                  <ClearIcon />
-                </IconButton>
-              }
+              closeIcon={<ClearIcon />}
               message={
                 <span className="noti-text">Please, select an avatar !</span>
               }
@@ -321,3 +340,8 @@ const Login = ({}) => {
 export default Login;
 
 // Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://docs.atlas.mongodb.com/security-whitelist/
+//const pureString = fullName.replace(/(?:\r\n|\r|\n)/g, '')
+//const pureString = str.replace(/(?:\r\n|\r|\n)/g, '')
+
+// mazih-sara@gmail.com
+// d1efde0+e0fe+fe+feAAAA

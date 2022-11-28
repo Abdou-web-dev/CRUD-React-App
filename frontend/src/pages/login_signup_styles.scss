@@ -76,6 +76,27 @@
           }
         }
       }
+      .login-form-gender-item {
+        .ant-form-item-row {
+          .ant-form-item-label {
+            position: relative;
+            right: 45px;
+            margin-top: 24px;
+            font-family: "Mulish";
+          }
+          .ant-form-item-control {
+            position: relative;
+            left: 30px;
+            top: 25px;
+          }
+        }
+
+        .login-form-gender-item-label {
+          span {
+            font-size: 20px;
+          }
+        }
+      }
       .login-form-password-item {
         .ant-form-item-row {
           .ant-form-item-label {
@@ -128,14 +149,33 @@
           .text-error {
             position: relative;
             right: 70px;
-
-            span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .errorMsg-wrapper {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              span.errorMsg {
+                font-family: "Poppins";
+                color: rgb(206, 72, 72);
+                font-style: italic;
+                font-weight: 600;
+                letter-spacing: 2px;
+                font-size: 12px;
+              }
+            }
+            span.error-msg-text {
               font-family: "Poppins";
               font-size: 16px;
               color: rgb(206, 72, 72);
               font-style: italic;
               font-weight: 600;
               letter-spacing: 2px;
+              &.small-font {
+                font-size: 12px;
+              }
             }
           }
         }
@@ -276,6 +316,7 @@
         font-family: "inconsolata";
         font-size: 20px;
         letter-spacing: 1.5px;
+        margin-top: 50px;
       }
 
       .signup-form-email-item-input {
@@ -354,30 +395,18 @@
         }
       }
       .signup-form-gender-item-select-empty {
-        border-bottom: 1px solid red;
-        &::after {
+        width: 150px;
+        height: 50px;
+        .ant-select-selector {
+          border-bottom: 1px solid red;
+        }
+        .ant-select-selection-item {
           display: flex;
+          justify-content: center;
           align-items: center;
-          content: "!";
-          margin-left: 10px;
-          color: red;
-          font-weight: bold;
         }
       }
 
-      .signup-form-avatar-label {
-        font-family: "inconsolata";
-        font-size: 20px;
-        letter-spacing: 1.5px;
-      }
-      .signup-form-avatar-select-icon {
-        width: 34px;
-        height: 34px;
-        cursor: pointer;
-        &:hover {
-          transform: scale(1.1);
-        }
-      }
       .signup-form-country-label {
         font-family: "inconsolata";
         font-size: 20px;
@@ -385,25 +414,25 @@
       }
       .signup-form-country-item-select {
         .ant-select-selector {
-          width: 150px;
+          // width: 150px;
           height: 50px;
-          .ant-select-selection-item {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
+        }
+        .ant-select-selection-item {
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
       }
       .signup-form-country-item-select-empty {
-        border-bottom: 1px solid red;
-        &::after {
+        width: 150px;
+        height: 50px;
+        .ant-select-selector {
+          border-bottom: 1px solid red;
+        }
+        .ant-select-selection-item {
           display: flex;
+          justify-content: center;
           align-items: center;
-          content: "!";
-          margin-left: 10px;
-          color: red;
-          font-weight: bold;
-          font-weight: bold;
         }
       }
 
@@ -418,7 +447,11 @@
           height: 45px;
         }
         .text-error {
-          span {
+          width: 500px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          span.error-msg-text {
             font-family: "Poppins";
             font-size: 16px;
             color: rgb(206, 72, 72);
@@ -426,11 +459,27 @@
             font-weight: 600;
             letter-spacing: 2px;
           }
+
+          .errorMsg-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            span.errorMsg {
+              font-family: "Poppins";
+              color: rgb(206, 72, 72);
+              font-style: italic;
+              font-weight: 600;
+              letter-spacing: 2px;
+              font-size: 12px;
+            }
+          }
         }
       }
 
       .signup-form-not-a-member {
         margin-top: 30px;
+        margin-bottom: 50px;
         display: flex;
         justify-content: center;
         align-items: center;

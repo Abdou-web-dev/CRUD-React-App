@@ -50,6 +50,13 @@ userSchema.statics.signup = async function (
   if (!fullName) {
     throw Error("Please, type your full name ");
   }
+  if (!validator.isAlpha(fullName)) {
+    throw Error("Invalid full name");
+  }
+  // if (!validator.minLength(fullName)) {
+  //   throw Error("Invalid full name");
+  // }
+
   if (!gender) {
     throw Error("Please, select your gender ");
   }
@@ -59,8 +66,17 @@ userSchema.statics.signup = async function (
   if (!validator.isEmail(email)) {
     throw Error("Email not valid");
   }
-  if (!validator.isStrongPassword(password)) {
-    throw Error("Password not strong enough");
+
+  if (
+    !validator.matches(
+      password,
+      // /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,30}$/
+    )
+  ) {
+    throw Error(
+      "Password must include one lowercase character, one uppercase character, a number, and a special character and have a minimum length of 8 characters"
+    );
   }
 
   const exists = await this.findOne({ email });
@@ -85,8 +101,14 @@ userSchema.statics.signup = async function (
 
 // static login method
 userSchema.statics.login = async function (email, password, fullName) {
-  if (!email || !password || !fullName) {
-    throw Error("All fields must be filled");
+  if (!email) {
+    throw Error("Please , type your email address");
+  }
+  if (!fullName) {
+    throw Error("Please , type your full name");
+  }
+  if (!password) {
+    throw Error("Please , type your password");
   }
 
   const user = await this.findOne({ email });
@@ -94,25 +116,29 @@ userSchema.statics.login = async function (email, password, fullName) {
     throw Error("Incorrect email");
   }
 
-  const match = await bcrypt.compare(password, user.password);
-  if (!match) {
+  let match = await bcrypt.compare(password, user.password); //a boolean variable
+  let correctPassword = match;
+  let correctFullName = fullName === user.fullName; //a boolean variable
+
+  if (!correctPassword) {
     throw Error("Incorrect password");
   }
-  if (fullName !== user.fullName) {
+  if (!correctFullName) {
     throw Error(
-      "This is not the full name you enetered when you first registered"
+      "This is not the full name you entered when you first registered"
     );
   }
-  if (fullName === user.fullName) {
+  if (user && correctPassword && correctFullName) {
     return user;
   }
-  //user.fullName is the fullName entered while the user logges in
-  //fullName is the fullName entered while the user signed up
 
   // return user;
 };
 
 module.exports = mongoose.model("User", userSchema);
+
+//user.fullName is the fullName entered while the user logges in
+//fullName is the fullName entered while the user signed up
 
 // Data types allowed in schemas
 // String.
