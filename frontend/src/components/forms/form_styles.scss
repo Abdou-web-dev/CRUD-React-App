@@ -41,6 +41,19 @@
         border-radius: 4px;
         cursor: pointer;
       }
+      .form-select-exo-categ-and-info-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .form-select-exo-categ {
+        }
+        .form-select-exo-categ-info-btn {
+          .form-select-exo-categ-info-btn-icon {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
     }
     div.error-msg-container {
       display: inline-block;

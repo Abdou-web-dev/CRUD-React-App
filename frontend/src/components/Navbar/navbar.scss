@@ -10,6 +10,8 @@
     .workout-navbar-icon-user-logged-in {
       display: flex;
       justify-content: center;
+      position: relative;
+      top: 40px;
       .navbar-ul {
         margin-bottom: 0px;
         padding-left: 0;
@@ -90,15 +92,79 @@
         }
       }
     }
-    .workout-app-navbar-login-logout-icons {
+    .workout-app-navbar-user-profile-wrapper {
       display: flex;
       justify-content: flex-end;
       align-items: flex-start;
       position: relative;
       bottom: 180px;
-      .workout-app-navbar-logout {
+      &.bg-gray {
+        background: gray;
+      }
+      .workout-app-navbar-user-profile {
+        // border: 1px solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+
+        .welcome-text {
+          font-family: "Poppins";
+          color: white;
+          font-weight: bold;
+          font-size: 18px;
+        }
+        .logged-user {
+          font-family: "Poppins";
+          color: white;
+          font-weight: bold;
+          font-size: 18px;
+        }
+        .logged-avatar-btn {
+          height: fit-content;
+          .logged-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+          }
+        }
+
         .workout-app-navbar-logout-btn {
+          margin-right: 5px;
           .LogoutOutlined-icon {
+          }
+        }
+      }
+      .workout-app-navbar-help-wrapper {
+        margin-right: 100px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        overflow: hidden;
+
+        .workout-app-navbar-help-btn {
+          background: none;
+          height: fit-content;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 10px;
+          .workout-app-navbar-help-text {
+            font-family: "Inconsolata";
+            color: white;
+            font-size: 16px;
+            /* animation properties */
+            -moz-transform: translateX(100%);
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+            -moz-animation: moveTextAnimation 5s linear infinite;
+            -webkit-animation: moveTextAnimation 5s linear infinite;
+            animation: moveTextAnimation 5s linear infinite;
+          }
+          .help-icon {
+            img {
+              width: 35px;
+              height: 35px;
+            }
           }
         }
       }
@@ -165,10 +231,46 @@
     }
   }
 }
+// do not nest this css rule inside the container
+.workout-app-navbar-avatar-menu {
+  .avatar-menu-item {
+    .avatar-menu-item-text {
+      font-family: "Inconsolata";
+      color: rgba(128, 128, 128, 1);
+      font-size: 16px;
+    }
+  }
+}
 
-// video#navbar-video {
-//   width: 100%;
-//   z-index: -1;
-//   position: fixed;
-//   opacity: 0.2;
-// }
+/* for Firefox */
+@-moz-keyframes moveTextAnimation {
+  from {
+    -moz-transform: translateX(100%);
+  }
+  to {
+    -moz-transform: translateX(-100%);
+  }
+}
+
+/* for Chrome */
+@-webkit-keyframes moveTextAnimation {
+  from {
+    -webkit-transform: translateX(100%);
+  }
+  to {
+    -webkit-transform: translateX(-100%);
+  }
+}
+
+@keyframes moveTextAnimation {
+  from {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  to {
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}

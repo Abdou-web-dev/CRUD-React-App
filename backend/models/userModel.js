@@ -70,7 +70,6 @@ userSchema.statics.signup = async function (
   if (
     !validator.matches(
       password,
-      // /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,30}$/
     )
   ) {

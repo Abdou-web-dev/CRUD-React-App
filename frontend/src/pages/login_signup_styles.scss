@@ -96,6 +96,31 @@
             font-size: 20px;
           }
         }
+        .login-form-checkboxes {
+        }
+        .login-form-selected-avatar {
+          padding: 5px;
+          display: flex;
+          position: relative;
+          bottom: 20px;
+          border: 1px solid lightgray;
+          width: 120px;
+          .login-form-selected-avatar-icon {
+            width: 80px;
+            height: 80px;
+          }
+          .login-form-selected-avatar-edit-icon-btn {
+            padding: 0;
+            height: fit-content;
+
+            background: none;
+            border: none;
+            .login-form-selected-avatar-edit-icon {
+              width: 30px;
+              height: 30px;
+            }
+          }
+        }
       }
       .login-form-password-item {
         .ant-form-item-row {

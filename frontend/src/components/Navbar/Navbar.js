@@ -1,10 +1,12 @@
 // import "@fontsource/open-sans";
 import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Stack } from "@mui/material";
-import { Button, Divider } from "antd";
+import { Menu, MenuItem, Stack } from "@mui/material";
+import { Button, Divider, Tooltip } from "antd";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import signUpIcon from "../../assets/img/add-user.png";
 import gym from "../../assets/img/gymBold.png";
+import helpIcon from "../../assets/img/helpIcon.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogout } from "../../hooks/useLogout";
 import "./navbar.scss";
@@ -20,6 +22,15 @@ const Navbar = ({}) => {
   // get the avatar and the fullName of the user from the browser local storage
   const userStored = JSON.parse(localStorage.getItem("user"));
   const avatarStored = JSON.parse(localStorage.getItem("avatar"));
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const openMenu = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div className="workout-app-navbar-container">
@@ -49,21 +60,70 @@ const Navbar = ({}) => {
           </ul>
         </div>
 
-        <div className={"workout-app-navbar-login-logout-icons"}>
+        <div
+          className={
+            user
+              ? "workout-app-navbar-user-profile-wrapper bg-gray"
+              : "workout-app-navbar-user-profile-wrapper"
+          }
+        >
           {user && (
-            <div className="workout-app-navbar-logout">
-              {/* can use both {userStored?.fullName} or {user?.fullName} */}
-              {/* <span>{user.email}</span> <br /> */}
-              <span className="">Welcome</span>
-              <span className=""> {userStored?.fullName}</span>
-              <img className="" src={avatarStored} alt="" />
-              <Button
-                className="workout-app-navbar-logout-btn"
-                onClick={handleLogOutClick}
+            <>
+              <div
+                className="workout-app-navbar-help-wrapper"
+                id="scroll-container"
               >
-                <LogoutOutlined className="LogoutOutlined-icon" />
-              </Button>
-            </div>
+                <Link to={`/help`}>
+                  <Button className="workout-app-navbar-help-btn">
+                    <span
+                      className="workout-app-navbar-help-text"
+                      id="scroll-text"
+                    >
+                      Need help
+                    </span>
+                    <div className="help-icon">
+                      <img src={helpIcon} alt="" />
+                    </div>
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="workout-app-navbar-user-profile">
+                <span className="welcome-text">Welcome ,</span>
+                <span className="logged-user">{userStored?.fullName}</span>
+                <Tooltip
+                  title={
+                    openMenu === true
+                      ? `Close profile menu`
+                      : `Open profile menu`
+                  }
+                  overlayInnerStyle={{
+                    fontSize: "10px",
+                  }}
+                >
+                  <Button className="logged-avatar-btn" onClick={handleClick}>
+                    <img className="logged-avatar" src={avatarStored} alt="" />
+                  </Button>
+                </Tooltip>
+
+                <Tooltip
+                  //Style of the tooltip inner content
+                  overlayInnerStyle={{
+                    fontSize: "10px",
+                  }}
+                  title="Log out"
+                  className=""
+                  // open
+                >
+                  <Button
+                    className="workout-app-navbar-logout-btn"
+                    onClick={handleLogOutClick}
+                  >
+                    <LogoutOutlined className="LogoutOutlined-icon" />
+                  </Button>
+                </Tooltip>
+              </div>
+            </>
           )}
           {!user && (
             <div className="workout-app-navbar-login-signup">
@@ -89,6 +149,33 @@ const Navbar = ({}) => {
           }}
         />
       </div>
+      <Menu
+        className="workout-app-navbar-avatar-menu"
+        open={openMenu}
+        id="basic-menu"
+        anchorEl={anchorEl}
+        onClose={handleCloseMenu}
+      >
+        <MenuItem className="avatar-menu-item" onClick={handleCloseMenu}>
+          <Link to={`profile`}>
+            <span className="avatar-menu-item-text">Profile</span>
+          </Link>
+        </MenuItem>
+        <MenuItem className="avatar-menu-item" onClick={handleCloseMenu}>
+          <Link to={`my-account`}>
+            <span className="avatar-menu-item-text">My account</span>{" "}
+          </Link>
+        </MenuItem>
+        <MenuItem
+          className="avatar-menu-item"
+          onClick={() => {
+            handleCloseMenu();
+            logout();
+          }}
+        >
+          <span className="avatar-menu-item-text">Logout</span>
+        </MenuItem>
+      </Menu>
     </div>
   );
 };
@@ -118,3 +205,8 @@ export default Navbar;
 
 // hassna.chama@gmail.com
 // (GLUXJqeyE*7W6#5dd4d4dAA
+
+{
+  /* can use both {userStored?.fullName} or {user?.fullName} 
+              <span>{user.email}</span> <br />  */
+}

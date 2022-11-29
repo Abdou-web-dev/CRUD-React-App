@@ -3,9 +3,12 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import { useAuthContext } from "./hooks/useAuthContext";
 import ChestWorkouts from "./pages/Chest";
+import Help from "./pages/Help";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import MyAccount from "./pages/MyAccount";
 import NoMatch from "./pages/NoMatch";
+import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 
 function App() {
@@ -44,6 +47,45 @@ function App() {
               !user ? (
                 <div className="pages-login">
                   <Signup />
+                </div>
+              ) : (
+                <Navigate to="/chest" />
+              )
+            }
+          />
+
+          <Route
+            path="/profile"
+            element={
+              user ? (
+                <div className="pages-login">
+                  <Profile />
+                </div>
+              ) : (
+                <Navigate to="/chest" />
+              )
+            }
+          />
+
+          <Route
+            path="/my-account"
+            element={
+              user ? (
+                <div className="pages-login">
+                  <MyAccount />
+                </div>
+              ) : (
+                <Navigate to="/chest" />
+              )
+            }
+          />
+
+          <Route
+            path="/help"
+            element={
+              user ? (
+                <div className="pages-login">
+                  <Help />
                 </div>
               ) : (
                 <Navigate to="/chest" />

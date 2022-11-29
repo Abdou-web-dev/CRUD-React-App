@@ -1,4 +1,4 @@
-import { Alert, Button, Checkbox, Form, Input, Modal } from "antd";
+import { Alert, Button, Checkbox, Form, Input, Modal, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import avatarfemale1 from "../assets/img/avatarfemale1.svg";
@@ -13,6 +13,8 @@ import avatarmale3 from "../assets/img/avatarmale3.svg";
 import avatarmale4 from "../assets/img/avatarmale4.svg";
 import avatarmale5 from "../assets/img/avatarmale5.svg";
 import avatarmale6 from "../assets/img/avatarmale6.svg";
+import edit from "../assets/img/edit.svg";
+
 import { ClearIcon } from "../components/icons/Icons";
 import { useLogin } from "../hooks/useLogin";
 import "./login_signup_styles.scss";
@@ -27,6 +29,8 @@ const Login = ({}) => {
   const [password, setPassword] = useState("");
   const [checkedMale, setCheckedMale] = useState(false);
   const [checkedFemale, setCheckedFemale] = useState(false);
+  const [showCheckboxes, setshowCheckboxes] = useState(true);
+  const [showSelectedAvatar, setShowSelectedAvatar] = useState(false);
 
   // save the avatar to local storage
   localStorage.setItem("avatar", JSON.stringify(avatar));
@@ -62,8 +66,6 @@ const Login = ({}) => {
         ];
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
     if (email === "")
       setemailClass(
         "login-form-email-item-input login-form-email-item-input-empty"
@@ -83,16 +85,18 @@ const Login = ({}) => {
       setFullNameClass("login-form-full-name-item-input");
     }
 
-    await login(email, password, fullName, gender);
-
+    if (avatar) {
+      await login(email, password, fullName, gender);
+    }
     if (!avatar) {
       setShowNotification(true);
     }
   };
 
-  const onChangeMale = (e) => {
+  const onChangeMale = (e, index) => {
     setCheckedMale(e.target.checked);
     if (checkedFemale === true) {
+      //meaning if this female checkbox is checked by the user
       setCheckedFemale(false);
     }
   };
@@ -105,8 +109,20 @@ const Login = ({}) => {
   const handleAvatarClick = (index) => {
     const selectedItem = avatars[index];
     setAvatar(selectedItem);
-    // console.log(selectedItem, avatar);
+    if (selectedItem) {
+      setshowCheckboxes(false);
+      setAvatar(selectedItem);
+      setShowSelectedAvatar(true);
+    }
   };
+
+  const handleEditAvatarClick = () => {
+    setshowCheckboxes(true);
+    setShowSelectedAvatar(false);
+    setCheckedMale(false);
+    setCheckedFemale(false);
+  };
+
   //when the user closes the modal , show the selected avatar instead of the 2 checkboxes
   //but still allow him to modify it
 
@@ -125,7 +141,7 @@ const Login = ({}) => {
   return (
     <div className="login-form-container">
       <div className="login-form-inner">
-        <form className="login-form" name="form" onSubmit={handleSubmit}>
+        <Form className="login-form" name="form" onFinish={handleSubmit}>
           <Form.Item
             className="login-form-email-item"
             label={
@@ -176,26 +192,53 @@ const Login = ({}) => {
             className="login-form-gender-item"
             label={
               <div className="login-form-gender-item-label">
-                <span>Gender</span>
+                <span>Avatar</span>
               </div>
             }
-            name="Gender"
-            rules={[{ required: true }]}
+            // required
+            // name="Gender"
+            // rules={[{ required: true }]}
+            //when we remove name property , the asterisk marking that field is mandatory is removed
           >
-            <Checkbox
-              className={""}
-              checked={checkedMale}
-              onChange={onChangeMale}
-            >
-              <span>Male</span>
-            </Checkbox>
-            <Checkbox
-              className={""}
-              checked={checkedFemale}
-              onChange={onChangeFemale}
-            >
-              <span>Female</span>
-            </Checkbox>
+            {showCheckboxes && (
+              <div className="login-form-checkboxes">
+                <Checkbox
+                  className={""}
+                  checked={checkedMale}
+                  onChange={onChangeMale}
+                >
+                  <span>Male</span>
+                </Checkbox>
+                <Checkbox
+                  className={""}
+                  checked={checkedFemale}
+                  onChange={onChangeFemale}
+                >
+                  <span>Female</span>
+                </Checkbox>
+              </div>
+            )}
+            {showSelectedAvatar && (
+              <div className="login-form-selected-avatar">
+                <img
+                  className="login-form-selected-avatar-icon"
+                  src={avatar}
+                  alt=""
+                />
+                <Tooltip title="Change this avatar">
+                  <Button
+                    onClick={handleEditAvatarClick}
+                    className="login-form-selected-avatar-edit-icon-btn"
+                  >
+                    <img
+                      className="login-form-selected-avatar-edit-icon"
+                      src={edit}
+                      alt=""
+                    />
+                  </Button>
+                </Tooltip>
+              </div>
+            )}
           </Form.Item>
 
           <Form.Item
@@ -268,7 +311,7 @@ const Login = ({}) => {
               </Link>
             </Button>
           </div>
-        </form>
+        </Form>
       </div>
       <>
         {showAvatarModal && (
@@ -306,7 +349,10 @@ const Login = ({}) => {
               {avatar && (
                 <div className="login-form-choose-btn-wrapper">
                   <Button
-                    onClick={() => setshowAvatarModal(false)}
+                    onClick={() => {
+                      setshowAvatarModal(false);
+                      setShowNotification(false);
+                    }}
                     className="login-form-choose-btn"
                   >
                     <span>Choose</span>

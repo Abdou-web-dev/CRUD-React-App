@@ -11,7 +11,7 @@ body {
   margin: 0;
   font-family: "Poppins";
   overflow-x: hidden;
-  padding-left: 20px;
+  /* padding-left: 20px; */
 }
 
 .pages {
