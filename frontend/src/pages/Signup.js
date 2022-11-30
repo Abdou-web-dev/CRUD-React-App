@@ -129,7 +129,10 @@ const Signup = ({}) => {
                 className={genderClass}
                 value={gender}
                 //strangely , when using antd Select, the event will hold the value of the value keys nested in options prop
-                onChange={(value) => setGender(value)}
+                onChange={(value) => {
+                  setGender(value);
+                  // console.log(value)
+                }}
                 defaultValue=""
                 size={"large"}
                 options={[

@@ -1,7 +1,7 @@
 // import "@fontsource/open-sans";
 import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Menu, MenuItem, Stack } from "@mui/material";
-import { Button, Divider, Tooltip } from "antd";
+import { Button, Divider, Modal, Tooltip } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import signUpIcon from "../../assets/img/add-user.png";
@@ -15,14 +15,10 @@ const Navbar = ({}) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
-  const handleLogOutClick = () => {
-    logout();
-  };
-
   // get the avatar and the fullName of the user from the browser local storage
   const userStored = JSON.parse(localStorage.getItem("user"));
   const avatarStored = JSON.parse(localStorage.getItem("avatar"));
-
+  const [showLogOutModal, setshowLogOutModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -30,6 +26,9 @@ const Navbar = ({}) => {
   };
   const handleCloseMenu = () => {
     setAnchorEl(null);
+  };
+  const handleLogOutClick = () => {
+    setshowLogOutModal(true);
   };
 
   return (
@@ -117,7 +116,7 @@ const Navbar = ({}) => {
                 >
                   <Button
                     className="workout-app-navbar-logout-btn"
-                    onClick={handleLogOutClick}
+                    onClick={() => logout()}
                   >
                     <LogoutOutlined className="LogoutOutlined-icon" />
                   </Button>
@@ -170,12 +169,46 @@ const Navbar = ({}) => {
           className="avatar-menu-item"
           onClick={() => {
             handleCloseMenu();
-            logout();
+            handleLogOutClick();
           }}
         >
           <span className="avatar-menu-item-text">Logout</span>
         </MenuItem>
       </Menu>
+      <>
+        <Modal
+          className="logout-modal"
+          open={showLogOutModal}
+          maskClosable={true}
+          closable={true}
+          keyboard={true}
+          mask={true}
+          onOk={() => setshowLogOutModal(false)}
+          onCancel={() => setshowLogOutModal(false)}
+          // width={layoutGrid ? "50%" : "60%"}
+          footer={null}
+        >
+          <div className="logout-modal-wrapper">
+            <div className="logout-modal-inner">
+              <Button
+                className="logout-modal-cancelbtn"
+                onClick={() => setshowLogOutModal(false)}
+              >
+                <span>Cancel</span>
+              </Button>
+              <Button
+                className="logout-modal-logoutbtn"
+                onClick={() => {
+                  logout();
+                  setshowLogOutModal(false);
+                }}
+              >
+                <span>Logout</span>
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      </>
     </div>
   );
 };

@@ -16,6 +16,10 @@ const workoutSchema = new Schema(
       type: Number,
       required: true,
     },
+    exoCategory: {
+      type: String,
+      required: true,
+    },
     user_id: {
       type: String,
       required: true,

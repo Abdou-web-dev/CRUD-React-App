@@ -1,0 +1,9 @@
+.workout-details-container-as-list:hover .exo-category-icon-wrapper {
+  display: block !important;
+}
+.workout-details-container-as-grid:hover .exo-category-icon-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px;
+}

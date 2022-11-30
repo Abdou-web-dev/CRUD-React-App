@@ -29,7 +29,7 @@ const getWorkout = async (req, res) => {
 
 // create a new workout
 const createWorkout = async (req, res) => {
-  const { title, load, reps } = req.body;
+  const { title, load, reps, exoCategory } = req.body;
 
   let emptyFields = [];
 
@@ -42,6 +42,10 @@ const createWorkout = async (req, res) => {
   if (!reps) {
     emptyFields.push("reps");
   }
+  if (!exoCategory) {
+    emptyFields.push("exoCategory");
+  }
+
   if (emptyFields.length > 0) {
     return res
       .status(400)
@@ -51,7 +55,13 @@ const createWorkout = async (req, res) => {
   // add to the database
   try {
     const user_id = req.user._id;
-    const workout = await Workout.create({ title, load, reps, user_id });
+    const workout = await Workout.create({
+      title,
+      load,
+      reps,
+      exoCategory,
+      user_id,
+    });
     res.status(200).json(workout);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -82,6 +92,7 @@ const updateWorkout = async (req, res) => {
     title: req.body.title,
     load: req.body.load,
     reps: req.body.reps,
+    exoCategory: req.body.exoCategory,
   };
 
   if (!mongoose.Types.ObjectId.isValid(id)) {

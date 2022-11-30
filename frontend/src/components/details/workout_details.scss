@@ -13,6 +13,8 @@
   background-color: white;
   margin-bottom: 20px;
   background-color: rgba(168, 200, 180, 0.16);
+  //pos relative in order to positio nthe exo icon on top in the middle on hover
+  position: relative;
 
   &.black-border-selected {
     border: 1.5px solid black;
@@ -79,10 +81,39 @@
       }
     }
   }
+  .exo-category-icon-wrapper {
+    padding-top: 7px;
+    padding-right: 7px;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    display: none;
+    border-top: 0.5px solid #1aac83;
+    padding: 5px 15px;
+    img.exo-category-icon {
+      width: 40px;
+      height: 40px;
+    }
+    h4.exo-category-workout-category {
+      color: gray;
+      font-style: italic;
+      font-family: "Inconsolata";
+      font-size: 18px;
+    }
+  }
+  &.filtered-workouts {
+    .work-details-right-inner-iconbtn {
+      align-self: center;
+    }
+    h4.work-details-left-content-inner-title {
+      background: rgba(255, 255, 0, 0.25);
+    }
+  }
 }
 
 .workout-details-container-as-grid {
   background-color: rgba(0, 180, 216, 0.075);
+  position: relative;
 
   .workout-details {
     min-height: 264px;
@@ -175,6 +206,26 @@
     padding: 5px;
     .work-details-right-inner-iconbtn {
       align-self: center;
+    }
+    h4.work-details-left-content-inner-title {
+      background: rgba(255, 255, 0, 0.25);
+    }
+  }
+  .exo-category-icon-wrapper {
+    padding-top: 7px;
+    padding-right: 7px;
+    position: absolute;
+    right: 30%;
+    top: 0;
+    display: none;
+    img.exo-category-icon {
+      width: 40px;
+      height: 40px;
+    }
+    h4.exo-category-workout-category {
+      color: gray;
+      font-style: italic;
+      font-family: "Inconsolata";
     }
   }
 }

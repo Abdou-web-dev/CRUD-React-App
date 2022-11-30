@@ -10,13 +10,24 @@ import editIconPen from "../../assets/img/editer.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 
-// date fns package
+// date fns package and icons
 import InfoIcon from "@mui/icons-material/Info";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import AbsIcon from "../../assets/img/AbsIcon.png";
+import BackIcon from "../../assets/img/backIcon.png";
+import BicepsIcon from "../../assets/img/bicepsIcon.png";
+import CalvesIcon from "../../assets/img/calvesIcon.png";
+import ChestIcon from "../../assets/img/ChestIcon.svg";
+import ForearmsIcon from "../../assets/img/forearmsIcon.png";
+import HamstringsIcon from "../../assets/img/HamstringsIcon.svg";
+import ShouldersIcon from "../../assets/img/shouldersIcon.png";
+import TrapeziusIcon from "../../assets/img/TrapeziusIcon.png";
+import TricepsIcon from "../../assets/img/TricepsIcon.png";
 import { SocialIcons } from "../drawer_content/SocialIcons";
 import { EditModal } from "../modals/EditModal";
 import { Stepper } from "../steppers/Stepper";
 import "./workout_details.scss";
+import "./workout_details_styles.css";
 
 export const WorkoutDetails = ({
   workout,
@@ -31,12 +42,16 @@ export const WorkoutDetails = ({
   // console.log(workoutIsCondensed);
   const { dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
-
+  let createdAt = workout?.createdAt;
+  let layoutGrid = detailsContClass === "workout-details-container-as-grid";
+  // let layoutList = detailsContClass === "workout-details-container-as-list";
+  const [openEditModal, setopenEditModal] = useState(false);
   const [className, setClassName] = React.useState(`workout-details`);
   const [containerBoxShadow, setcontainerBoxShadow] = React.useState(
     `0 0 0 0.1rem rgba(26, 172, 131, 0.1)`
   );
   const [showCollapse, setshowCollapse] = React.useState(true);
+
   const handleCollapseclick = () => {
     if (showCollapse === true) {
       setshowCollapse(false);
@@ -94,6 +109,8 @@ export const WorkoutDetails = ({
   //Concerning the Drawer of antd
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openInfosDrawer, setOpenInfosDrawer] = useState(false);
+  const [updatedWorkout, setUpdatedWorkout] = useState({});
+
   //
   const handleShare = () => {
     setOpenDrawer(true);
@@ -101,7 +118,6 @@ export const WorkoutDetails = ({
   const handleInfos = () => {
     setOpenInfosDrawer(true);
   };
-  const [updatedWorkout, setUpdatedWorkout] = useState({});
 
   const handleEdit = () => {
     setborder("1px solid black");
@@ -111,13 +127,6 @@ export const WorkoutDetails = ({
   const onClose = () => {
     setOpenDrawer(false);
   };
-  React.useEffect(() => {
-    if (openDrawer === true || openInfosDrawer) {
-      setborder("1px solid black");
-    } else if (openDrawer === false || !openInfosDrawer) {
-      setborder("");
-    }
-  }, [openDrawer, openInfosDrawer]);
 
   const handleContainerHover = () => {
     if (detailsContClass === "workout-details-container-as-grid") {
@@ -131,10 +140,14 @@ export const WorkoutDetails = ({
       setcontainerBoxShadow(!containerBoxShadow);
     }
   };
-  let createdAt = workout?.createdAt;
-  let layoutGrid = detailsContClass === "workout-details-container-as-grid";
-  // let layoutList = detailsContClass === "workout-details-container-as-list";
-  const [openEditModal, setopenEditModal] = useState(false);
+
+  React.useEffect(() => {
+    if (openDrawer === true || openInfosDrawer) {
+      setborder("1px solid black");
+    } else if (openDrawer === false || !openInfosDrawer) {
+      setborder("");
+    }
+  }, [openDrawer, openInfosDrawer]);
 
   return (
     <>
@@ -169,7 +182,10 @@ export const WorkoutDetails = ({
                 >
                   {showCollapse ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </IconButton>
-                <h4>{workout.title}</h4>
+                <h4 className="work-details-left-content-inner-title">
+                  {workout.title}
+                </h4>
+
                 <div className="work-details-left-inner-load">
                   <span className="work-details-left-inner-load-span1">
                     <strong>
@@ -256,104 +272,143 @@ export const WorkoutDetails = ({
             </div>
           </Stack>
         </Collapse>
+
+        {/* this is the exo icon and exo category that shows on hover */}
+        <div className="exo-category-icon-wrapper">
+          <img
+            className="exo-category-icon"
+            src={
+              workout.exoCategory === `Hamstrings`
+                ? HamstringsIcon
+                : workout.exoCategory === `Chest`
+                ? ChestIcon
+                : workout.exoCategory === `Trapezius`
+                ? TrapeziusIcon
+                : workout.exoCategory === `Shoulders`
+                ? ShouldersIcon
+                : workout.exoCategory === `Forearms`
+                ? ForearmsIcon
+                : workout.exoCategory === `Calves`
+                ? CalvesIcon
+                : workout.exoCategory === `Biceps`
+                ? BicepsIcon
+                : workout.exoCategory === `Abs`
+                ? AbsIcon
+                : workout.exoCategory === `Back`
+                ? BackIcon
+                : workout.exoCategory === `Triceps`
+                ? TricepsIcon
+                : null
+            }
+            alt=""
+          />
+          <h4 className="exo-category-workout-category">
+            {workout.exoCategory}
+          </h4>
+        </div>
       </div>
-      <Backdrop
-        className="workout-details-backdrop"
-        // onKeyDown={() => setOpenBackdrop(!openBackdrop)}
-        sx={{ bgcolor: "rgba(0, 0, 0, 0.2)", zIndex: 1 }}
-        open={openBackdrop}
-      >
-        {/* content */}
-      </Backdrop>
-      {/* Antd Drawer  */}
-      <div className="workout-details-drawer-container">
-        <Drawer
-          className="workout-details-drawer"
-          title="Share on..."
-          placement="top"
-          closable={true}
-          onClose={onClose}
-          open={openDrawer}
-          // closeIcon
-          getContainer={`.workout-details-container${index}`}
-          style={{
-            position: "absolute",
-          }}
+
+      <>
+        <Backdrop
+          className="workout-details-backdrop"
+          // onKeyDown={() => setOpenBackdrop(!openBackdrop)}
+          sx={{ bgcolor: "rgba(0, 0, 0, 0.2)", zIndex: 1 }}
+          open={openBackdrop}
         >
-          <div
-            className={
-              layoutGrid ? "workout-details-imgs-grid" : "workout-details-imgs"
+          {/* content */}
+        </Backdrop>
+        {/* Antd Drawer  */}
+        <div className="workout-details-drawer-container">
+          <Drawer
+            className="workout-details-drawer"
+            title="Share on..."
+            placement="top"
+            closable={true}
+            onClose={onClose}
+            open={openDrawer}
+            // closeIcon
+            getContainer={`.workout-details-container${index}`}
+            style={{
+              position: "absolute",
+            }}
+          >
+            <div
+              className={
+                layoutGrid
+                  ? "workout-details-imgs-grid"
+                  : "workout-details-imgs"
+              }
+            >
+              <SocialIcons
+                {...{ layoutGrid }}
+                workoutTitle={workout.title}
+              ></SocialIcons>
+            </div>
+          </Drawer>
+        </div>
+        <div className="workout-infos-drawer-container">
+          <Drawer
+            className="workout-infos-drawer"
+            placement="right"
+            closable={true}
+            onClose={() => {
+              setOpenInfosDrawer(false);
+            }}
+            open={openInfosDrawer}
+            size={"large"}
+            destroyOnClose
+            // destroyOnClose === Whether to unmount child components on closing drawer or not
+            extra={
+              <Space>
+                <Button
+                  type="dashed"
+                  size="large"
+                  onClick={() => {
+                    setOpenInfosDrawer(false);
+                  }}
+                >
+                  {`Hide`}
+                </Button>
+              </Space>
             }
           >
-            <SocialIcons
-              {...{ layoutGrid }}
-              workoutTitle={workout.title}
-            ></SocialIcons>
-          </div>
-        </Drawer>
-      </div>
-      <div className="workout-infos-drawer-container">
-        <Drawer
-          className="workout-infos-drawer"
-          placement="right"
-          closable={true}
-          onClose={() => {
-            setOpenInfosDrawer(false);
-          }}
-          open={openInfosDrawer}
-          size={"large"}
-          destroyOnClose
-          // destroyOnClose === Whether to unmount child components on closing drawer or not
-          extra={
-            <Space>
-              <Button
-                type="dashed"
-                size="large"
-                onClick={() => {
-                  setOpenInfosDrawer(false);
+            <div className="workout-infos-wrapper">
+              <Stepper
+                {...{
+                  setOpenInfosDrawer,
+                  setbg,
+                  setdetailsContClass,
+                  setcontainerClass,
                 }}
-              >
-                {`Hide`}
-              </Button>
-            </Space>
-          }
+                workoutTitle={workout.title}
+              />
+            </div>
+          </Drawer>
+        </div>
+        <Modal
+          className=""
+          open={openEditModal}
+          maskClosable={true}
+          closable={true}
+          keyboard={true}
+          mask={true}
+          onOk={() => setopenEditModal(false)}
+          onCancel={() => setopenEditModal(false)}
+          width={layoutGrid ? "50%" : "60%"}
+          footer={null}
+          title={`Edit this workout`}
         >
-          <div className="workout-infos-wrapper">
-            <Stepper
-              {...{
-                setOpenInfosDrawer,
-                setbg,
-                setdetailsContClass,
-                setcontainerClass,
-              }}
-              workoutTitle={workout.title}
-            />
-          </div>
-        </Drawer>
-      </div>
-      <Modal
-        className=""
-        open={openEditModal}
-        maskClosable={true}
-        closable={true}
-        keyboard={true}
-        mask={true}
-        onOk={() => setopenEditModal(false)}
-        onCancel={() => setopenEditModal(false)}
-        width={layoutGrid ? "50%" : "60%"}
-        footer={null}
-        title={`Edit this workout`}
-      >
-        <EditModal
-          {...{
-            setopenEditModal,
-            workout,
-            dispatch,
-            setUpdatedWorkout,
-            updatedWorkout,
-          }}
-        ></EditModal>
-      </Modal>
+          <EditModal
+            {...{
+              setopenEditModal,
+              workout,
+              dispatch,
+              setUpdatedWorkout,
+              updatedWorkout,
+            }}
+          ></EditModal>
+        </Modal>
+      </>
     </>
   );
 };

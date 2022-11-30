@@ -1,5 +1,5 @@
 import { CloseOutlined } from "@ant-design/icons";
-import { IconButton } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { Button, Spin } from "antd";
 import { useEffect, useState } from "react";
 import blocs from "../../assets/img/blocs.png";
@@ -24,9 +24,10 @@ export function WorkoutsList({
   setDisplayPagination,
   detailsContClass,
   setdetailsContClass,
+  setcontainerClass,
+  containerClass,
 }) {
   //always put state variables first , then regular variables, then useEffect statement and the other fncts
-  const [containerClass, setcontainerClass] = useState("chest-page-workouts");
 
   const [boxShadow, setBoxShadow] = useState("");
   const [bg, setbg] = useState("");
@@ -52,7 +53,7 @@ export function WorkoutsList({
       setDisplayPagination("flex");
     } else if (firstIcon === cardIcon) {
       setdetailsContClass(`workout-details-container-as-grid`);
-      setcontainerClass("chest-page-workouts showItemsAsGrid");
+      setcontainerClass("chest-page-workouts showItemsAsGrid"); //here
       setFirsticon(listIcon);
       setmovePaginationFromBottom("620px");
       setpaginationClassName("pagination-content-loaded-grid");
@@ -74,17 +75,7 @@ export function WorkoutsList({
       setshowAllWorkouts(false);
     }
   }
-  // searchInput?.length === 0
-  // ? workout
-  // : searchInput?.length !== 0
-  // ? filteredResult
-  // function filteredItems(index) {
-  //   let a1 = index >= 0 && index <= 3;
-  //   let b1 = index >= 0 && index <= 5;
-  //   if (detailsContClass === "workout-details-container-as-list") return a1;
-  //   else if (detailsContClass === "workout-details-container-as-grid")
-  //     return b1;
-  // }
+
   function showItemsPage1(index) {
     let a1 = index >= 0 && index <= 3;
     let b1 = index >= 0 && index <= 5;
@@ -292,26 +283,43 @@ export function WorkoutsList({
       setshowMoreIcon(moreIcon);
       setSpinning(false);
     }
-  }, [searchInput, showSecondGrp, showThirdGrp, showFifthGrp, showFourthGrp]);
+  }, [
+    searchInput,
+    showSecondGrp,
+    showThirdGrp,
+    showFifthGrp,
+    showFourthGrp,
+    containerClass,
+  ]);
 
   console.log(counter);
   return (
     <div className="workouts-section-container">
       <div className="workouts-section-toggle-btn-container">
-        <Button
-          className="workouts-section-toggle-btn"
-          onClick={handleIconClick}
-          style={{ height: "fit-content", width: "fit-content" }}
+        <Tooltip
+          title={
+            detailsContClass === `workout-details-container-as-grid`
+              ? `Display as list`
+              : `Display as grid`
+          }
         >
-          <img width={"30px"} height="30px" src={firstIcon} alt="" />
-        </Button>
-        <Button
-          disabled={secondBtnDisabled}
-          onClick={handleCondensedIconClick}
-          style={{ height: "fit-content", width: "fit-content" }}
-        >
-          <img width={"30px"} height="30px" src={secondIcon} alt="" />
-        </Button>
+          <Button
+            className="workouts-section-toggle-btn"
+            onClick={handleIconClick}
+            style={{ height: "fit-content", width: "fit-content" }}
+          >
+            <img width={"30px"} height="30px" src={firstIcon} alt="" />
+          </Button>
+        </Tooltip>
+        <Tooltip title="Display all items in one section">
+          <Button
+            disabled={secondBtnDisabled}
+            onClick={handleCondensedIconClick}
+            style={{ height: "fit-content", width: "fit-content" }}
+          >
+            <img width={"30px"} height="30px" src={secondIcon} alt="" />
+          </Button>
+        </Tooltip>
       </div>
 
       <>

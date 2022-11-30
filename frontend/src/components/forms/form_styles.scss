@@ -41,17 +41,82 @@
         border-radius: 4px;
         cursor: pointer;
       }
-      .form-select-exo-categ-and-info-icon {
+      .form-select-exo-title-and-info-icon {
+        margin-top: 15px;
+        margin-bottom: 10px;
         display: flex;
         justify-content: center;
         align-items: center;
-        .form-select-exo-categ {
+        // border: 1px solid;
+        .form-select-label-and-select-component {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          .form-select-exo-title-label {
+            font-family: "Inconsolata";
+            font-size: 18px;
+          }
+          .form-select-exo-title {
+          }
+          &.move-from-right {
+            margin-right: 20px;
+          }
         }
-        .form-select-exo-categ-info-btn {
-          .form-select-exo-categ-info-btn-icon {
+
+        .form-select-exo-title-info-btn {
+          .form-select-exo-title-info-btn-icon {
             width: 20px;
             height: 20px;
           }
+        }
+      }
+      .form-select-exo-categ-label-and-select-component {
+        .form-select-exo-categ-label {
+          font-family: "Inconsolata";
+          font-size: 18px;
+          margin: 15px 0;
+        }
+        .form-select-exo-categ {
+        }
+      }
+      .form-title-label-and-input-component {
+        display: flex;
+        align-items: center;
+        .form-input-title-and-label-wrapper {
+          .form-input-title-component {
+            width: 242px;
+          }
+          .form-title-label {
+            font-family: "Inconsolata";
+            font-size: 18px;
+          }
+        }
+        .form-input-title-icon-btn-wrapper {
+          .form-input-title-icon-btn {
+            .form-input-title-list-icon {
+              width: 25px;
+              height: 25px;
+            }
+          }
+        }
+      }
+      .form-load-label-and-load-input-component {
+        .form-input-load-component {
+          width: 242px;
+        }
+        .form-load-label {
+          font-family: "Inconsolata";
+          font-size: 18px;
+          margin-top: 10px;
+        }
+      }
+      .form-reps-label-and-reps-input-component {
+        .form-input-reps-component {
+          width: 242px;
+        }
+        .form-reps-label {
+          font-family: "Inconsolata";
+          font-size: 18px;
         }
       }
     }

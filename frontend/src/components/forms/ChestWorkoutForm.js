@@ -1,9 +1,11 @@
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import { Button, IconButton } from "@mui/material";
-import { Alert, Input, Modal, Select, Tooltip } from "antd";
+import { Alert, Divider, Input, Modal, Select, Tooltip } from "antd";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import infoIcon from "../../assets/img/infoPNG.png";
+import list from "../../assets/img/list.svg";
+
 import exercisesData from "../../assets/staticData/chestExercises.json";
 import {
   AbsExos,
@@ -32,7 +34,6 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
   const workoutsTitlesArray = [
     ...new Set(workouts?.map((workout) => workout.title)),
   ];
-  // console.log(workoutsTitlesArray.includes('a'));
 
   const currentLocation = useLocation();
   let currentLocat = currentLocation.pathname;
@@ -42,14 +43,13 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
   const [load, setLoad] = useState("");
   const [reps, setReps] = useState(``);
   const [exoCategory, setExoCategory] = useState(``);
-  const [exosList, setExosList] = useState(``);
   const [error, setError] = useState(null);
   const [emptyFields, setEmptyFields] = useState([]);
   const [showSuggExoTitle, setshowSuggExoTitle] = useState(true);
   const [showInputTitle, setshowInputTitle] = useState(false);
   const [suggestiveListBorder, setSuggestiveListBorder] = useState("");
   const [showFormNewWindow, setShowFormNewWindow] = useState(false);
-  // const pureString = str.replace(/(?:\r\n|\r|\n)/g, '');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!user) {
@@ -57,7 +57,9 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
       return;
     }
     //quit the function at this point, if no user is authenticated and logged in, because only logged in users can add workouts or delete them...
-    const workout = { title, load, reps };
+
+    console.log(title, "here");
+    const workout = { title, load, reps, exoCategory };
     const response = await fetch("/api/workouts", {
       method: "POST",
       body: JSON.stringify(
@@ -73,10 +75,11 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
     if (!response.ok) {
       setError(json.error);
       setEmptyFields(json.emptyFields);
-      console.log("errooor");
+      console.log("error occured");
     }
     if (response.ok) {
       setEmptyFields([]);
+      setExoCategory(``);
       setError(null);
       setTitle("");
       setLoad("");
@@ -105,12 +108,12 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
   }
 
   function handleCustomExo() {
-    if (showInputTitle === true) {
-      setshowSuggExoTitle(false);
-    }
-    if (showSuggExoTitle === true) {
-      setshowInputTitle(false);
-    }
+    setshowInputTitle(true);
+    setshowSuggExoTitle(false);
+  }
+  function handleListIconClick() {
+    setshowInputTitle(false);
+    setshowSuggExoTitle(true);
   }
 
   //3 JSX blocs
@@ -160,13 +163,18 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
       <form className="chest-workouts-form" onSubmit={handleSubmit}>
         <div className="chest-workouts-form-inner">
           {showFormNewWindow === false && <h3>Add a New Workout</h3>}
-          <>
-            <label>Exercice category:</label>
+          {showFormNewWindow === false && (
+            <Divider style={{ background: "gray" }}></Divider>
+          )}
+          <div className="form-select-exo-categ-label-and-select-component">
+            <label className={"form-select-exo-categ-label"}>
+              Exercise category :
+            </label>
             <Select
-              className={""}
+              className={"form-select-exo-categ"}
               value={exoCategory}
               onChange={(value) => setExoCategory(value)}
-              onClick={null}
+              // onClick={null}
               style={{ width: "200px" }}
               size={"large"}
               filterOption={(input, option) =>
@@ -190,123 +198,184 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
                 { value: "Back" },
                 { value: "Abs" },
               ]}
+              status={
+                emptyFields?.includes("exoCategory") &&
+                exoCategory?.length === 0
+                  ? "error"
+                  : ""
+              }
+              suffixIcon={
+                emptyFields?.includes("exoCategory") &&
+                exoCategory?.length === 0 ? (
+                  <PriorityHighIcon />
+                ) : null
+              }
             />
-          </>
-
-          <div className={"form-select-exo-categ-and-info-icon"}>
-            {showSuggExoTitle && (
-              <>
-                <label className={"form-select-exo-categ-label"}>
-                  Excercise Title :
-                </label>
-                <Select
-                  className={"form-select-exo-categ"}
-                  disabled={!exoCategory ? true : false}
-                  value={exosList}
-                  onChange={(value) => setExosList(value)}
-                  onClick={null}
-                  style={{ width: "200px" }}
-                  size={"large"}
-                  filterOption={(input, option) =>
-                    (option?.value ?? "").includes(input)
-                  }
-                  filterSort={(optionA, optionB) =>
-                    //if optionA.value is null ou undefined then "" will be returned instead, and if it has a value , this value will be returned and used
-                    (optionA?.value ?? "")
-                      .toLowerCase()
-                      .localeCompare((optionB?.value ?? "").toLowerCase())
-                  }
-                  options={
-                    exoCategory === `Hamstrings`
-                      ? HamstringsExos
-                      : exoCategory === `Hamstrings`
-                      ? ChestExos
-                      : exoCategory === `Trapezius`
-                      ? TrapeziusExos
-                      : exoCategory === `Shoulders`
-                      ? ShouldersExos
-                      : exoCategory === `Forearms`
-                      ? ForearmsExos
-                      : exoCategory === `Calves`
-                      ? CalvesExos
-                      : exoCategory === `Biceps`
-                      ? BicepsExos
-                      : exoCategory === `Hamstrings`
-                      ? AbsExos
-                      : exoCategory === `Abs`
-                      ? BackExos
-                      : exoCategory === `Triceps`
-                      ? TricepsExos
-                      : null
-                  }
-                />
-              </>
-            )}
-            <>
-              <Tooltip title="Type a custom exercise">
-                <Button
-                  className={"form-select-exo-categ-info-btn"}
-                  onClick={handleCustomExo}
-                >
-                  <img
-                    className={"form-select-exo-categ-info-btn-icon"}
-                    src={infoIcon}
-                    alt=""
-                  />
-                </Button>
-              </Tooltip>
-            </>
           </div>
 
-          <>
-            <label>Excercise Title : </label>
-            <Tooltip
-              zIndex={`999`}
-              title={
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <span style={{ fontSize: "12px" }}>
-                    You can always pick the exercise you want from the list
-                    below !
-                  </span>
+          <div
+            style={{
+              justifyContent:
+                showFormNewWindow === true ? `flex-start` : "flex-start",
+            }}
+            className={"form-select-exo-title-and-info-icon"}
+          >
+            {showSuggExoTitle && (
+              <>
+                <div
+                  className={
+                    exoCategory === `Chest`
+                      ? `form-select-label-and-select-component move-from-right`
+                      : "form-select-label-and-select-component"
+                  }
+                >
+                  <label className={"form-select-exo-title-label"}>
+                    Excercise Title :
+                  </label>
+                  <Select
+                    className={"form-select-exo-title"}
+                    disabled={!exoCategory ? true : false}
+                    value={title}
+                    onChange={(value) => {
+                      setTitle(value);
+                      console.log(value);
+                    }}
+                    onClick={null}
+                    style={{ width: "200px" }}
+                    size={"large"}
+                    filterOption={(input, option) =>
+                      (option?.value ?? "").includes(input)
+                    }
+                    filterSort={(optionA, optionB) =>
+                      //if optionA.value is null ou undefined then "" will be returned instead, and if it has a value , this value will be returned and used
+                      (optionA?.value ?? "")
+                        .toLowerCase()
+                        .localeCompare((optionB?.value ?? "").toLowerCase())
+                    }
+                    options={
+                      exoCategory === `Hamstrings`
+                        ? HamstringsExos
+                        : exoCategory === `Chest`
+                        ? ChestExos
+                        : exoCategory === `Trapezius`
+                        ? TrapeziusExos
+                        : exoCategory === `Shoulders`
+                        ? ShouldersExos
+                        : exoCategory === `Forearms`
+                        ? ForearmsExos
+                        : exoCategory === `Calves`
+                        ? CalvesExos
+                        : exoCategory === `Biceps`
+                        ? BicepsExos
+                        : exoCategory === `Abs`
+                        ? AbsExos
+                        : exoCategory === `Back`
+                        ? BackExos
+                        : exoCategory === `Triceps`
+                        ? TricepsExos
+                        : null
+                    }
+                    status={
+                      emptyFields?.includes("title") && title?.length === 0
+                        ? "error"
+                        : ""
+                    }
+                    suffixIcon={
+                      emptyFields?.includes("title") && title?.length === 0 ? (
+                        <PriorityHighIcon />
+                      ) : null
+                    }
+                  />
                 </div>
-              }
-              color="rgba(74, 72, 73,0.75)"
-            >
-              {showInputTitle && (
-                <Input
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
-                  onMouseOver={() => {
-                    setSuggestiveListBorder(
-                      "0.5px solid rgba(26, 172, 131,0.25)"
-                    );
-                  }}
-                  type="text"
-                  status={
-                    emptyFields?.includes("title") && title?.length === 0
-                      ? "error"
-                      : ""
-                  }
-                  // title.length === 0 means that nothing is being typed by the user
-                  placeholder={
-                    emptyFields?.includes("title") && title?.length === 0
-                      ? `You have forgotten to type a title`
-                      : "Type a title"
-                  }
-                  prefix={
-                    emptyFields?.includes("title") && title?.length === 0 ? (
-                      <PriorityHighIcon />
-                    ) : null
-                  }
-                  allowClear
-                />
-              )}
-            </Tooltip>
-          </>
+                <>
+                  <Tooltip title="Type a custom exercise">
+                    <Button
+                      disabled={!exoCategory ? true : false}
+                      className={"form-select-exo-title-info-btn"}
+                      onClick={handleCustomExo}
+                    >
+                      <img
+                        className={"form-select-exo-title-info-btn-icon"}
+                        src={infoIcon}
+                        alt=""
+                      />
+                    </Button>
+                  </Tooltip>
+                </>
+              </>
+            )}
+          </div>
 
-          <>
-            <label>Load (in kg) :</label>
+          {showInputTitle && (
+            <div className={"form-title-label-and-input-component"}>
+              <div className={"form-input-title-and-label-wrapper"}>
+                <label className="form-title-label">Excercise Title : </label>
+                <Tooltip
+                  zIndex={`999`}
+                  title={
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                      <span style={{ fontSize: "12px" }}>
+                        You can always pick the exercise you want from the list
+                        below !
+                      </span>
+                    </div>
+                  }
+                  color="rgba(74, 72, 73,0.75)"
+                >
+                  <Input
+                    className={"form-input-title-component"}
+                    value={title}
+                    onChange={(e) => {
+                      setTitle(e.target.value);
+                      console.log(e.target.value);
+                    }}
+                    onMouseOver={() => {
+                      setSuggestiveListBorder(
+                        "0.5px solid rgba(26, 172, 131,0.25)"
+                      );
+                    }}
+                    type="text"
+                    status={
+                      emptyFields?.includes("title") && title?.length === 0
+                        ? "error"
+                        : ""
+                    }
+                    // title.length === 0 means that nothing is being typed by the user
+                    placeholder={
+                      emptyFields?.includes("title") && title?.length === 0
+                        ? `You have forgotten to type a title`
+                        : "Type a title"
+                    }
+                    prefix={
+                      emptyFields?.includes("title") && title?.length === 0 ? (
+                        <PriorityHighIcon />
+                      ) : null
+                    }
+                    allowClear
+                  />
+                </Tooltip>
+              </div>
+              <div className={"form-input-title-icon-btn-wrapper"}>
+                <Tooltip title="Choose from a list of workouts">
+                  <Button
+                    className={"form-input-title-icon-btn"}
+                    onClick={handleListIconClick}
+                  >
+                    <img
+                      className={"form-input-title-list-icon"}
+                      src={list}
+                      alt=""
+                    />
+                  </Button>
+                </Tooltip>
+              </div>
+            </div>
+          )}
+
+          <div className="form-load-label-and-load-input-component">
+            <label className="form-load-label">Load (in kg) :</label>
             <Input
+              className="form-input-load-component"
               type="number"
               onChange={(e) => setLoad(e.target.value)}
               value={load}
@@ -327,11 +396,12 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
               }
               allowClear
             />
-          </>
+          </div>
 
-          <>
-            <label>Number of Reps :</label>
+          <div className="form-reps-label-and-reps-input-component">
+            <label className="form-reps-label">Number of Reps :</label>
             <Input
+              className="form-input-reps-component"
               type="number"
               onChange={(e) => setReps(e.target.value)}
               value={reps}
@@ -353,7 +423,7 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
               }
               allowClear
             />
-          </>
+          </div>
 
           <div className={showFormNewWindow === true ? "d_flex" : ""}>
             <button className="chest-form-btn">Add Workout</button>
@@ -409,7 +479,7 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
         <>
           <div className="chest-workout-form-container">
             <>{!showFormNewWindow && formDOM}</>
-            <>{exoCategory === `Chest` && chestExosList}</>
+            <>{exoCategory === `Chest` && showInputTitle && chestExosList}</>
           </div>
         </>
       )}
@@ -431,7 +501,7 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
           >
             <div className="chest-workout-form-container">
               <>{showFormNewWindow === true && formDOM}</>
-              <>{chestExosList}</>
+              <>{exoCategory === `Chest` && showInputTitle && chestExosList}</>
             </div>
           </Modal>
         </>
@@ -441,3 +511,4 @@ const WorkoutForm = ({ setCurrentPage, workouts, paginationClassName }) => {
 };
 
 export default WorkoutForm;
+// const pureString = str.replace(/(?:\r\n|\r|\n)/g, '');
