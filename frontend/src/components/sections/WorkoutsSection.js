@@ -25,6 +25,8 @@ export const WorkoutsSection = ({
 }) => {
   const [showfilteredResults, setshowfilteredResults] = useState(true);
   const [containerClass, setcontainerClass] = useState("chest-page-workouts");
+  let layoutGrid = detailsContClass === "workout-details-container-as-grid"; //returns a boolean value
+  let layoutList = detailsContClass === "workout-details-container-as-list";
 
   const searchItems = (searchValue) => {
     setSearchInput(searchValue);
@@ -56,10 +58,16 @@ export const WorkoutsSection = ({
   const handleChange = (e) => {
     searchItems(e.target.value);
   };
-  const handleClearClick = (e) => {
+
+  const handleClearClick = () => {
     setSearchInput("");
     setshowfilteredResults(true);
-    setcontainerClass("chest-page-workouts showItemsAsGrid");
+    if (layoutGrid) {
+      setcontainerClass("chest-page-workouts showItemsAsGrid");
+    }
+    if (layoutList) {
+      setcontainerClass("chest-page-workouts");
+    }
   };
 
   const clearIconJSX = (

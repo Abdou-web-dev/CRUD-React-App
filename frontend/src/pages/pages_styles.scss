@@ -99,12 +99,24 @@
     .ant-pagination-prev {
       position: relative;
       bottom: 400px;
-      left: 200px;
+      left: 290px;
     }
     .ant-pagination-next {
       position: relative;
       bottom: 400px;
-      margin-left: 600px;
+      margin-left: 700px;
+    }
+  }
+  &.pagination-filtered-results-grid {
+    .ant-pagination-prev {
+      position: relative;
+      bottom: 400px;
+      left: 70px;
+    }
+    .ant-pagination-next {
+      position: relative;
+      bottom: 400px;
+      margin-left: 900px;
     }
   }
 

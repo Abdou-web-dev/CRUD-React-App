@@ -3,7 +3,7 @@ import { BackTop, Pagination, Spin } from "antd";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 // components
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { Skeleton } from "@mui/material";
+import { Skeleton, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import WorkoutForm from "../components/forms/ChestWorkoutForm";
 import {
@@ -218,23 +218,39 @@ const Chest = ({}) => {
             pagination-filtered-results`}
             prevIcon={
               paginationClassName === "pagination-content-loaded-grid" ? (
-                <PrevArrow />
+                <Tooltip title="Previous page">
+                  <div>
+                    <PrevArrow />
+                  </div>
+                </Tooltip>
               ) : (
-                <PrevArrowList />
+                <Tooltip title="Previous page">
+                  <div>
+                    <PrevArrowList />
+                  </div>
+                </Tooltip>
               )
             }
             nextIcon={
               paginationClassName === "pagination-content-loaded-grid" ? (
-                <NextArrow />
+                <Tooltip title="Next page">
+                  <div>
+                    <NextArrow />
+                  </div>
+                </Tooltip>
               ) : (
-                <NextArrowList />
+                <Tooltip title="Next page">
+                  <div>
+                    <NextArrowList />
+                  </div>
+                </Tooltip>
               )
             }
             current={currentPage}
             onChange={(page, e) => {
               setCurrentPage(page);
             }}
-            total={50}
+            total={`30`}
           />
         )}
       </>

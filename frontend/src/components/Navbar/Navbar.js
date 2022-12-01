@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import signUpIcon from "../../assets/img/add-user.png";
 import gym from "../../assets/img/gymBold.png";
 import helpIcon from "../../assets/img/helpIcon.png";
+import profil from "../../assets/img/profil.png";
+import starred from "../../assets/img/starred.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogout } from "../../hooks/useLogout";
 import "./navbar.scss";
@@ -157,12 +159,16 @@ const Navbar = ({}) => {
       >
         <MenuItem className="avatar-menu-item" onClick={handleCloseMenu}>
           <Link to={`profile`}>
+            <img src={profil} alt="" />
             <span className="avatar-menu-item-text">Profile</span>
           </Link>
         </MenuItem>
         <MenuItem className="avatar-menu-item" onClick={handleCloseMenu}>
           <Link to={`my-account`}>
-            <span className="avatar-menu-item-text">My account</span>{" "}
+            <img src={starred} alt="" />
+            <span className="avatar-menu-item-text">
+              Favorite Workouts
+            </span>{" "}
           </Link>
         </MenuItem>
         <MenuItem

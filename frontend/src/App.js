@@ -6,10 +6,10 @@ import ChestWorkouts from "./pages/Chest";
 import Help from "./pages/Help";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import MyAccount from "./pages/MyAccount";
 import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
+import StarredItems from "./pages/StarredItems";
 
 function App() {
   const { user } = useAuthContext();
@@ -72,7 +72,7 @@ function App() {
             element={
               user ? (
                 <div className="pages-login">
-                  <MyAccount />
+                  <StarredItems />
                 </div>
               ) : (
                 <Navigate to="/chest" />

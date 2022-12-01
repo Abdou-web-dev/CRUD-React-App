@@ -1,5 +1,5 @@
 import { CloseOutlined } from "@ant-design/icons";
-import { IconButton, Tooltip } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { Button, Spin } from "antd";
 import { useEffect, useState } from "react";
 import blocs from "../../assets/img/blocs.png";
@@ -8,6 +8,7 @@ import lessIcon from "../../assets/img/lessIcon.svg";
 import listIcon from "../../assets/img/listIcon.png";
 import moreIcon from "../../assets/img/plusIcon.svg";
 import redCloseIcon from "../../assets/img/redCloseIcon.svg";
+import { WorkoutsListBtns } from "../buttons/WorkoutsListBtns";
 import "./sections_styles.scss";
 import { WorkoutDetailsItem } from "./WorkoutDetailsItem";
 import { WorkoutDetailsItemCondensed } from "./WorkoutDetailsItemCondensed";
@@ -38,12 +39,20 @@ export function WorkoutsList({
   const [showAllWorkouts, setshowAllWorkouts] = useState(true);
   const [spinning, setSpinning] = useState(false);
   const [showMoreBtn, setshowMoreBtn] = useState(true);
+  const [showMoreIcon, setshowMoreIcon] = useState(moreIcon);
+  const [counter, setcounter] = useState(0);
+  const [secondBtnDisabled, setsecondBtnDisabled] = useState(false);
+  const [showFilterButton, setshowFilterButton] = useState(false); //passed as prop
+  const [showAllExistentWorkouts, setshowAllExistentWorkouts] = useState(false);
 
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
+  let layoutList = detailsContClass === "workout-details-container-as-list";
+
   let result = filteredResults?.length === 1 ? `result` : `results`;
 
   function handleIconClick() {
     setshowAllWorkoutsCondensed(false);
+    setshowAllExistentWorkouts(false);
     if (firstIcon === listIcon) {
       setdetailsContClass("workout-details-container-as-list"); //the container of every workout
       setcontainerClass("chest-page-workouts"); //the container of the whole section containing the workouts
@@ -63,8 +72,13 @@ export function WorkoutsList({
       setshowAllWorkouts(true);
     }
     setsecondBtnDisabled(false);
+    if ((filteredResults && layoutGrid) || (filteredResults && layoutList)) {
+      setsecondBtnDisabled(true);
+    }
   }
+
   function handleCondensedIconClick() {
+    setshowAllWorkoutsCondensed(false);
     setshowAllWorkoutsCondensed(true);
     setDisplayPagination("none");
     if (secondIcon === blocs) {
@@ -74,6 +88,7 @@ export function WorkoutsList({
       setshowAllWorkoutsCondensed(false);
       setshowAllWorkouts(false);
     }
+    setshowFilterButton(true);
   }
 
   function showItemsPage1(index) {
@@ -147,8 +162,6 @@ export function WorkoutsList({
       return b2;
   }
 
-  const [showMoreIcon, setshowMoreIcon] = useState(moreIcon);
-  const [counter, setcounter] = useState(0);
   //
   const [showFirstGrp, setshowFirstGrp] = useState(true);
   const firstGroup =
@@ -233,7 +246,6 @@ export function WorkoutsList({
           />
         )
     );
-  const [secondBtnDisabled, setsecondBtnDisabled] = useState(false);
 
   function handleClick() {
     setshowSecondGrp(true);
@@ -268,10 +280,10 @@ export function WorkoutsList({
 
   useEffect(() => {
     if (searchInput?.length !== 0) {
+      setsecondBtnDisabled(true);
       setBoxShadow(
         "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
       );
-      setsecondBtnDisabled(true);
     } else {
       setBoxShadow("");
     }
@@ -283,43 +295,29 @@ export function WorkoutsList({
       setshowMoreIcon(moreIcon);
       setSpinning(false);
     }
-  }, [
-    searchInput,
-    showSecondGrp,
-    showThirdGrp,
-    showFifthGrp,
-    showFourthGrp,
-    containerClass,
-  ]);
+  }, [searchInput, showSecondGrp, showThirdGrp, showFifthGrp, showFourthGrp]);
 
-  console.log(counter);
   return (
     <div className="workouts-section-container">
       <div className="workouts-section-toggle-btn-container">
-        <Tooltip
-          title={
-            detailsContClass === `workout-details-container-as-grid`
-              ? `Display as list`
-              : `Display as grid`
-          }
-        >
-          <Button
-            className="workouts-section-toggle-btn"
-            onClick={handleIconClick}
-            style={{ height: "fit-content", width: "fit-content" }}
-          >
-            <img width={"30px"} height="30px" src={firstIcon} alt="" />
-          </Button>
-        </Tooltip>
-        <Tooltip title="Display all items in one section">
-          <Button
-            disabled={secondBtnDisabled}
-            onClick={handleCondensedIconClick}
-            style={{ height: "fit-content", width: "fit-content" }}
-          >
-            <img width={"30px"} height="30px" src={secondIcon} alt="" />
-          </Button>
-        </Tooltip>
+        <WorkoutsListBtns
+          {...{
+            firstIcon,
+            secondIcon,
+            detailsContClass,
+            secondBtnDisabled,
+            handleCondensedIconClick,
+            handleIconClick,
+            showAllWorkoutsCondensed,
+            setshowAllWorkoutsCondensed,
+            showFilterButton,
+            showAllWorkouts,
+            setshowAllWorkouts,
+            workouts,
+            showAllExistentWorkouts,
+            setshowAllExistentWorkouts,
+          }}
+        />
       </div>
 
       <>
@@ -341,105 +339,108 @@ export function WorkoutsList({
             </div>
           )}
       </>
-
-      {/* workouts filtered or not and closeBtn */}
-      {showAllWorkouts === true && (
-        <div
-          className="workouts-section-container-items-and-closebtn"
-          style={{
-            background: bg,
-            boxShadow: boxShadow,
-          }}
-        >
+      <>
+        {/* workouts filtered or not and closeBtn */}
+        {showAllWorkouts === true && (
           <div
-            className={`${
-              filteredResults?.length === 1 &&
-              detailsContClass === "workout-details-container-as-grid" &&
-              "grid-one-item"
-            }
-        ${containerClass}`}
+            className="workouts-section-container-items-and-closebtn"
+            style={{
+              background: bg,
+              boxShadow: boxShadow,
+            }}
           >
-            {!showAllWorkoutsCondensed && (
-              <>
-                {workouts &&
-                  workouts?.map((workout, index) => (
-                    <WorkoutDetailsItem
-                      {...{
-                        workout,
-                        index,
-                        setbg,
-                        detailsContClass,
-                        setdetailsContClass,
-                        setcontainerClass,
-                        currentPage,
-                        layoutGrid,
-                        showItemsPage1,
-                        showItemsPage2,
-                        showItemsPage3,
-                        showItemsPage4,
-                        showItemsPage5,
-                        showItemsPage6,
-                        showItemsPage7,
-                        showItemsPage8,
-                        showItemsPage9,
-                        showItemsPage10,
-                        searchInput,
-                        setCurrentPage,
-                      }}
-                      key={index}
-                    ></WorkoutDetailsItem>
-                  ))}
-                {filteredResults &&
-                  filteredResults?.map((filteredResult, index) => (
-                    <WorkoutDetailsItem
-                      {...{
-                        filteredResult,
-                        index,
-                        setbg,
-                        detailsContClass,
-                        setdetailsContClass,
-                        setcontainerClass,
-                        currentPage,
-                        layoutGrid,
-                        searchInput,
-                        showItemsPage1,
-                        showItemsPage2,
-                        showItemsPage3,
-                        showItemsPage4,
-                        showItemsPage5,
-                        showItemsPage6,
-                        setCurrentPage,
-                        showItemsPage7,
-                        showItemsPage8,
-                        showItemsPage9,
-                        showItemsPage10,
-                      }}
-                      key={index}
-                    ></WorkoutDetailsItem>
-                  ))}
-              </>
-            )}
-          </div>
+            <div
+              className={`${
+                filteredResults?.length === 1 &&
+                detailsContClass === "workout-details-container-as-grid" &&
+                "grid-one-item"
+              }
+        ${containerClass}`}
+            >
+              {!showAllWorkoutsCondensed && (
+                <>
+                  {workouts &&
+                    workouts?.map((workout, index) => (
+                      <WorkoutDetailsItem
+                        {...{
+                          workout,
+                          index,
+                          setbg,
+                          detailsContClass,
+                          setdetailsContClass,
+                          setcontainerClass,
+                          currentPage,
+                          layoutGrid,
+                          showItemsPage1,
+                          showItemsPage2,
+                          showItemsPage3,
+                          showItemsPage4,
+                          showItemsPage5,
+                          showItemsPage6,
+                          showItemsPage7,
+                          showItemsPage8,
+                          showItemsPage9,
+                          showItemsPage10,
+                          searchInput,
+                          setCurrentPage,
+                        }}
+                        key={index}
+                      ></WorkoutDetailsItem>
+                    ))}
+                  {filteredResults &&
+                    filteredResults?.map((filteredResult, index) => (
+                      <WorkoutDetailsItem
+                        {...{
+                          filteredResult,
+                          index,
+                          setbg,
+                          detailsContClass,
+                          setdetailsContClass,
+                          setcontainerClass,
+                          currentPage,
+                          layoutGrid,
+                          searchInput,
+                          showItemsPage1,
+                          showItemsPage2,
+                          showItemsPage3,
+                          showItemsPage4,
+                          showItemsPage5,
+                          showItemsPage6,
+                          setCurrentPage,
+                          showItemsPage7,
+                          showItemsPage8,
+                          showItemsPage9,
+                          showItemsPage10,
+                        }}
+                        key={index}
+                      ></WorkoutDetailsItem>
+                    ))}
+                </>
+              )}
+            </div>
 
-          {searchInput?.length !== 0 &&
-            detailsContClass === `workout-details-container-as-grid` && (
-              <div className={"workouts-list-close-icon-div"}>
-                <IconButton
-                  onClick={() => {
-                    setshowfilteredResults(false);
-                    setmovePaginationFromBottom("180px");
-                  }}
-                  className="workouts-list-close-icon-btn"
-                >
-                  <CloseOutlined
-                    className="workouts-list-close-icon"
-                    style={{ color: "red" }}
-                  ></CloseOutlined>
-                </IconButton>
-              </div>
-            )}
-        </div>
-      )}
+            <>
+              {searchInput?.length !== 0 &&
+                detailsContClass === `workout-details-container-as-grid` && (
+                  <div className={"workouts-list-close-icon-div"}>
+                    <IconButton
+                      onClick={() => {
+                        setshowfilteredResults(false);
+                        setmovePaginationFromBottom("180px");
+                      }}
+                      className="workouts-list-close-icon-btn"
+                    >
+                      <CloseOutlined
+                        className="workouts-list-close-icon"
+                        style={{ color: "red" }}
+                      ></CloseOutlined>
+                    </IconButton>
+                  </div>
+                )}
+            </>
+          </div>
+        )}
+      </>
 
       {showAllWorkoutsCondensed === true && ( //always put state variables (that control display of children inside them) above the div tags
         <div className="chest-page-workouts-condensed-container">
@@ -474,16 +475,3 @@ export function WorkoutsList({
     </div>
   );
 }
-
-// rather make 3 btns , one for grid layout , one for list layout the 2nd
-// view of list layout will display the workouts' elements compacted with
-//a different bg color and with a scrollbar on the right , between the workouts section and the form
-// const slicedArray1 = workouts.slice(0, 10);
-// const slicedArray2 = workouts.slice(10, 20);
-// const slicedArray3 = workouts.slice(20, 30);
-// console.log(slicedArray3);
-// let wokroutspg2 = workouts.slice(6, 12);
-// let wokroutspg3 = workouts.slice(12, 18);
-// let wokroutspg4 = workouts.slice(18, 24);
-// let wokroutspg5 = workouts.slice(24, 30);
-// let wokroutspg6 = workouts.slice(36, 42);

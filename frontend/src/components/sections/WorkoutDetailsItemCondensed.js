@@ -4,17 +4,40 @@ import redCloseIcon from "../../assets/img/redCloseIcon.svg";
 import { WorkoutDetails } from "../details/WorkoutDetails";
 import "./sections_styles.scss";
 
-export function WorkoutDetailsItemCondensed({ workoutCondensed, counter }) {
+export function WorkoutDetailsItemCondensed({
+  workoutCondensed,
+  workoutFiltered,
+  counter,
+  showAllExistentWorkouts,
+  chowResults,
+}) {
   const [showWorkout, setshowWorkout] = useState(true);
   const [showClosebtn, setshowClosebtn] = useState(false);
   const [displayItem, setdisplayItem] = useState("");
-
   let workoutIsCondensed = true; //a boolean variable to be passed as prop to the child comp in order to apply a diff className on the container
 
   function handleCloseClick() {
     setdisplayItem("none");
   }
-
+  if (showAllExistentWorkouts || chowResults) {
+    return (
+      <div>
+        <WorkoutDetails
+          {...{
+            workoutCondensed, //this prop prevents the exo icons from displaying on this component
+          }}
+          workout={
+            workoutFiltered
+              ? workoutFiltered
+              : workoutCondensed
+              ? workoutCondensed
+              : null
+          }
+        />
+      </div>
+    );
+  }
+  //else
   return (
     <div
       className={`${showClosebtn === true && "bg1"} ${showWorkout && "bg2"}
@@ -35,6 +58,7 @@ export function WorkoutDetailsItemCondensed({ workoutCondensed, counter }) {
           <WorkoutDetails
             {...{
               workoutIsCondensed,
+              workoutCondensed,
             }}
             workout={workoutCondensed}
           />

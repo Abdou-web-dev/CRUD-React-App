@@ -113,3 +113,15 @@
 // </div>
 // <input value={inputValue} type="number" />
 // <Button onClick={() => setinputValue(200)}>+</Button>
+// rather make 3 btns , one for grid layout , one for list layout the 2nd
+// view of list layout will display the workouts' elements compacted with
+//a different bg color and with a scrollbar on the right , between the workouts section and the form
+// const slicedArray1 = workouts.slice(0, 10);
+// const slicedArray2 = workouts.slice(10, 20);
+// const slicedArray3 = workouts.slice(20, 30);
+// console.log(slicedArray3);
+// let wokroutspg2 = workouts.slice(6, 12);
+// let wokroutspg3 = workouts.slice(12, 18);
+// let wokroutspg4 = workouts.slice(18, 24);
+// let wokroutspg5 = workouts.slice(24, 30);
+// let wokroutspg6 = workouts.slice(36, 42);

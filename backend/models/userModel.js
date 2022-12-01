@@ -51,11 +51,8 @@ userSchema.statics.signup = async function (
     throw Error("Please, type your full name ");
   }
   if (!validator.isAlpha(fullName)) {
-    throw Error("Invalid full name");
+    throw Error("Invalid full name"); //resolve space problem
   }
-  // if (!validator.minLength(fullName)) {
-  //   throw Error("Invalid full name");
-  // }
 
   if (!gender) {
     throw Error("Please, select your gender ");

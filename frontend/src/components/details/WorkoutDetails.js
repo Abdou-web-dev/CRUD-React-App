@@ -12,7 +12,7 @@ import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 
 // date fns package and icons
 import InfoIcon from "@mui/icons-material/Info";
-import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { formatDistanceToNow } from "date-fns";
 import AbsIcon from "../../assets/img/AbsIcon.png";
 import BackIcon from "../../assets/img/backIcon.png";
 import BicepsIcon from "../../assets/img/bicepsIcon.png";
@@ -38,13 +38,17 @@ export const WorkoutDetails = ({
   setcontainerClass,
   searchInput,
   workoutIsCondensed,
+  workoutCondensed,
+  workoutFiltered,
 }) => {
-  // console.log(workoutIsCondensed);
+  // let layoutList = detailsContClass === "workout-details-container-as-list";
+  // console.log(createdAt?.split());
   const { dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
   let createdAt = workout?.createdAt;
+  let workoutCateg = workout?.exoCategory;
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
-  // let layoutList = detailsContClass === "workout-details-container-as-list";
+
   const [openEditModal, setopenEditModal] = useState(false);
   const [className, setClassName] = React.useState(`workout-details`);
   const [containerBoxShadow, setcontainerBoxShadow] = React.useState(
@@ -60,6 +64,7 @@ export const WorkoutDetails = ({
       setshowCollapse(true);
       setcontainerBoxShadow(`0 0 0 0.1rem rgba(26, 172, 131, 0.1`);
     }
+    console.log(showCollapse);
   };
 
   const handleDelete = async () => {
@@ -147,7 +152,11 @@ export const WorkoutDetails = ({
     } else if (openDrawer === false || !openInfosDrawer) {
       setborder("");
     }
-  }, [openDrawer, openInfosDrawer]);
+    if (layoutGrid) {
+      //if the wotkout is collapsed (minimized), then maximize it when the display is changed to grid
+      setshowCollapse(true);
+    }
+  }, [openDrawer, openInfosDrawer, layoutGrid]);
 
   return (
     <>
@@ -183,7 +192,7 @@ export const WorkoutDetails = ({
                   {showCollapse ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </IconButton>
                 <h4 className="work-details-left-content-inner-title">
-                  {workout.title}
+                  {workout?.title}
                 </h4>
 
                 <div className="work-details-left-inner-load">
@@ -193,7 +202,7 @@ export const WorkoutDetails = ({
                     </strong>
                   </span>
                   <span className="work-details-left-inner-load-span2">
-                    {workout.load}
+                    {workout?.load}
                   </span>
                 </div>
 
@@ -274,38 +283,40 @@ export const WorkoutDetails = ({
         </Collapse>
 
         {/* this is the exo icon and exo category that shows on hover */}
-        <div className="exo-category-icon-wrapper">
-          <img
-            className="exo-category-icon"
-            src={
-              workout.exoCategory === `Hamstrings`
-                ? HamstringsIcon
-                : workout.exoCategory === `Chest`
-                ? ChestIcon
-                : workout.exoCategory === `Trapezius`
-                ? TrapeziusIcon
-                : workout.exoCategory === `Shoulders`
-                ? ShouldersIcon
-                : workout.exoCategory === `Forearms`
-                ? ForearmsIcon
-                : workout.exoCategory === `Calves`
-                ? CalvesIcon
-                : workout.exoCategory === `Biceps`
-                ? BicepsIcon
-                : workout.exoCategory === `Abs`
-                ? AbsIcon
-                : workout.exoCategory === `Back`
-                ? BackIcon
-                : workout.exoCategory === `Triceps`
-                ? TricepsIcon
-                : null
-            }
-            alt=""
-          />
-          <h4 className="exo-category-workout-category">
-            {workout.exoCategory}
-          </h4>
-        </div>
+        {!workoutCondensed && (
+          <div className="exo-category-icon-wrapper">
+            <img
+              className="exo-category-icon"
+              src={
+                workoutCateg === `Hamstrings`
+                  ? HamstringsIcon
+                  : workoutCateg === `Chest`
+                  ? ChestIcon
+                  : workoutCateg === `Trapezius`
+                  ? TrapeziusIcon
+                  : workoutCateg === `Shoulders`
+                  ? ShouldersIcon
+                  : workoutCateg === `Forearms`
+                  ? ForearmsIcon
+                  : workoutCateg === `Calves`
+                  ? CalvesIcon
+                  : workoutCateg === `Biceps`
+                  ? BicepsIcon
+                  : workoutCateg === `Abs`
+                  ? AbsIcon
+                  : workoutCateg === `Back`
+                  ? BackIcon
+                  : workoutCateg === `Triceps`
+                  ? TricepsIcon
+                  : null
+              }
+              alt=""
+            />
+            <h4 className="exo-category-workout-category">
+              {workout?.exoCategory}
+            </h4>
+          </div>
+        )}
       </div>
 
       <>
@@ -341,7 +352,7 @@ export const WorkoutDetails = ({
             >
               <SocialIcons
                 {...{ layoutGrid }}
-                workoutTitle={workout.title}
+                workoutTitle={workout?.title}
               ></SocialIcons>
             </div>
           </Drawer>
@@ -380,7 +391,7 @@ export const WorkoutDetails = ({
                   setdetailsContClass,
                   setcontainerClass,
                 }}
-                workoutTitle={workout.title}
+                workoutTitle={workout?.title}
               />
             </div>
           </Drawer>

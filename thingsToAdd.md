@@ -19,3 +19,7 @@ if you want to use custom db from mongoDB db's , you need to type the name of th
 MONGO_URI=mongodb+srv://avdelmounim:condemerde22@cluster0.iswlhxp.mongodb.net/dbAbdel?retryWrites=true&w=majority
 this db should already be present among your list of dbs , otherwise it wont work
 if we dont specify any name, a default db named 'test' is created
+
+if (!validator.isAlpha(fullName)) {
+throw Error("Invalid full name"); //resolve space problem
+}
