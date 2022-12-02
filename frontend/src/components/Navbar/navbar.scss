@@ -122,6 +122,7 @@
         }
         .logged-avatar-btn {
           height: fit-content;
+          margin-top: 1px;
           .logged-avatar {
             width: 35px;
             height: 35px;
@@ -132,6 +133,10 @@
         .workout-app-navbar-logout-btn {
           margin-right: 5px;
           .LogoutOutlined-icon {
+          }
+          &.adjust-btn {
+            // margin-top: 10px;
+            margin-right: 20px;
           }
         }
       }
@@ -234,10 +239,21 @@
 // do not nest this css rule inside the container
 .workout-app-navbar-avatar-menu {
   .avatar-menu-item {
-    .avatar-menu-item-text {
-      font-family: "Inconsolata";
-      color: rgba(128, 128, 128, 1);
-      font-size: 16px;
+    .avatar-menu-item-anchor {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      span.avatar-menu-item-text {
+        font-family: "Inconsolata";
+        color: rgba(128, 128, 128, 1);
+        font-size: 16px;
+      }
+      img.avatar-menu-starred-icon,
+      img.avatar-menu-profile-icon {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }

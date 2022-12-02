@@ -42,6 +42,7 @@ export function WorkoutsListBtns({
   showAllExistentWorkouts,
   setshowAllExistentWorkouts,
 }) {
+  let hideOtherWorkouts = !showAllWorkoutsCondensed && !showAllWorkouts;
   const [showChestResults, setShowChestResults] = useState(false);
   const [showHamstringsResults, setShowHamstringsResults] = useState(false);
   const [showAbsResults, setShowAbsResults] = useState(false);
@@ -81,7 +82,6 @@ export function WorkoutsListBtns({
     setShowChestResults(false);
     setShowHamstringsResults(false);
     setShowCalvesResults(false);
-
     setshowAllExistentWorkouts(false);
   }
   function handleFilterWorkouts(exo) {
@@ -102,6 +102,8 @@ export function WorkoutsListBtns({
         hideAllWorkouts();
         setShowCalvesResults(true);
         break;
+      //when the user clicks on filter btn, decrease the size of the form and of all inputs and select
+      //components inside...
       case `Abs`:
         hideAllWorkouts();
         setShowAbsResults(true);
@@ -195,6 +197,7 @@ export function WorkoutsListBtns({
           </div>
         )}
       </>
+
       <>
         {showAllExistentWorkouts &&
           workouts &&
@@ -210,8 +213,10 @@ export function WorkoutsListBtns({
             </div>
           ))}
       </>
+
       <>
-        {showChestResults &&
+        {hideOtherWorkouts &&
+          showChestResults &&
           chestWorkouts &&
           chestWorkouts?.map((workoutFiltered) => (
             <div>
@@ -228,7 +233,8 @@ export function WorkoutsListBtns({
       </>
 
       <>
-        {showHamstringsResults &&
+        {hideOtherWorkouts &&
+          showHamstringsResults &&
           hamstringsWorkouts &&
           hamstringsWorkouts?.map((workoutFiltered) => (
             <div>
@@ -245,7 +251,8 @@ export function WorkoutsListBtns({
       </>
 
       <>
-        {showAbsResults &&
+        {hideOtherWorkouts &&
+          showAbsResults &&
           AbsWorkouts &&
           AbsWorkouts?.map((workoutFiltered) => (
             <div>
@@ -262,7 +269,8 @@ export function WorkoutsListBtns({
       </>
 
       <>
-        {showCalvesResults &&
+        {hideOtherWorkouts &&
+          showCalvesResults &&
           calvesWorkouts &&
           calvesWorkouts?.map((workoutFiltered) => (
             <div>
@@ -280,8 +288,3 @@ export function WorkoutsListBtns({
     </>
   );
 }
-
-// onClick={(category) => {
-//   handleFilterWorkouts(category.exoTitle);
-// }}
-// wont trigger the click , because of the category argument pased to the function, it must recieve no arg

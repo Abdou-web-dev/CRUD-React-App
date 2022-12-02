@@ -5,6 +5,10 @@ import { Button, Divider, Modal, Tooltip } from "antd";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import signUpIcon from "../../assets/img/add-user.png";
+import fallbackAvatar from "../../assets/img/fallbackAvatar.svg";
+import femaleIcon from "../../assets/img/femaleIcon.svg";
+import maleIcon from "../../assets/img/maleIcon.svg";
+
 import gym from "../../assets/img/gymBold.png";
 import helpIcon from "../../assets/img/helpIcon.png";
 import profil from "../../assets/img/profil.png";
@@ -17,9 +21,25 @@ const Navbar = ({}) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
-  // get the avatar and the fullName of the user from the browser local storage
-  const userStored = JSON.parse(localStorage.getItem("user"));
-  const avatarStored = JSON.parse(localStorage.getItem("avatar"));
+  // get the avatar and the fullName of the user from the browser local storage when the user tries to log in
+  // from Login Page
+  const loggedUser = JSON.parse(localStorage.getItem("user")); //we can acces email and fullName
+  const loggedAvatar = JSON.parse(localStorage.getItem("avatar")); //an icon
+  let loggedFName = loggedUser?.fullName;
+
+  // get the gender and fullName from Signup Page to local storage
+  const registeredFullName = JSON.parse(
+    localStorage.getItem("registeredFullName")
+  ); //a string
+  const registeredGender = JSON.parse(localStorage.getItem("registeredGender")); //a string
+
+  let fallbackAvatarIcon =
+    registeredGender === `Male`
+      ? maleIcon
+      : registeredGender === `Female`
+      ? femaleIcon
+      : fallbackAvatar;
+
   const [showLogOutModal, setshowLogOutModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openMenu = Boolean(anchorEl);
@@ -90,8 +110,17 @@ const Navbar = ({}) => {
               </div>
 
               <div className="workout-app-navbar-user-profile">
-                <span className="welcome-text">Welcome ,</span>
-                <span className="logged-user">{userStored?.fullName}</span>
+                <>
+                  <span className="welcome-text">Welcome ,</span>
+                  <span className="logged-user">
+                    {loggedFName
+                      ? loggedFName
+                      : registeredFullName
+                      ? registeredFullName
+                      : ""}
+                  </span>
+                </>
+
                 <Tooltip
                   title={
                     openMenu === true
@@ -103,7 +132,11 @@ const Navbar = ({}) => {
                   }}
                 >
                   <Button className="logged-avatar-btn" onClick={handleClick}>
-                    <img className="logged-avatar" src={avatarStored} alt="" />
+                    <img
+                      className="logged-avatar"
+                      src={loggedAvatar ? loggedAvatar : fallbackAvatarIcon}
+                      alt=""
+                    />
                   </Button>
                 </Tooltip>
 
@@ -117,7 +150,11 @@ const Navbar = ({}) => {
                   // open
                 >
                   <Button
-                    className="workout-app-navbar-logout-btn"
+                    className={
+                      !loggedFName
+                        ? "workout-app-navbar-logout-btn adjust-btn"
+                        : "workout-app-navbar-logout-btn"
+                    }
                     onClick={() => logout()}
                   >
                     <LogoutOutlined className="LogoutOutlined-icon" />
@@ -158,17 +195,15 @@ const Navbar = ({}) => {
         onClose={handleCloseMenu}
       >
         <MenuItem className="avatar-menu-item" onClick={handleCloseMenu}>
-          <Link to={`profile`}>
-            <img src={profil} alt="" />
+          <Link className="avatar-menu-item-anchor" to={`profile`}>
+            <img className="avatar-menu-profile-icon" src={profil} alt="" />
             <span className="avatar-menu-item-text">Profile</span>
           </Link>
         </MenuItem>
         <MenuItem className="avatar-menu-item" onClick={handleCloseMenu}>
-          <Link to={`my-account`}>
-            <img src={starred} alt="" />
-            <span className="avatar-menu-item-text">
-              Favorite Workouts
-            </span>{" "}
+          <Link className="avatar-menu-item-anchor" to={`my-account`}>
+            <img className="avatar-menu-starred-icon" src={starred} alt="" />
+            <span className="avatar-menu-item-text">Favorite Workouts</span>
           </Link>
         </MenuItem>
         <MenuItem
@@ -220,32 +255,3 @@ const Navbar = ({}) => {
 };
 
 export default Navbar;
-
-/* <div>
-        <video width="30%" height="20%" autoPlay muted loop id="navbar-video">
-          <source src={workoutVideo} type="video/mp4" />
-          Your browser does not support HTML5 video.
-        </video>
-      </div> */
-
-/* <VideoPlayer
-  className="video-test"
-  src={
-    "https://player.vimeo.com/external/435674703.sd.mp4?s=01ad1ba21dc72c1d34728e1b77983805b34daad7&profile_id=165&oauth2_token_id=57447761"
-  }
-  autoPlay={true}
-  muted={true}
-/>; */
-
-/* <img src={logOutIcon} alt="" /> */
-//users login and pwd
-// hamada66@gmail.com
-// FF%T4L(#M@nARek)
-
-// hassna.chama@gmail.com
-// (GLUXJqeyE*7W6#5dd4d4dAA
-
-{
-  /* can use both {userStored?.fullName} or {user?.fullName} 
-              <span>{user.email}</span> <br />  */
-}

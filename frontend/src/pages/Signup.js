@@ -11,6 +11,10 @@ const Signup = ({}) => {
   const [country, setCountry] = useState("");
   const [fullName, setFullName] = useState("");
 
+  // save the gender and fullName from Signup Page to local storage
+  localStorage.setItem("registeredFullName", JSON.stringify(fullName));
+  localStorage.setItem("registeredGender", JSON.stringify(gender));
+
   const [emailClass, setemailClass] = useState("signup-form-email-item-input");
   const [passwordClass, setPasswordClass] = useState(
     "signup-form-password-item-input"

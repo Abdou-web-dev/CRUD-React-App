@@ -50,10 +50,11 @@ userSchema.statics.signup = async function (
   if (!fullName) {
     throw Error("Please, type your full name ");
   }
-  if (!validator.isAlpha(fullName)) {
+  // this regEx method str.replace(/\s*/g,"") allows to ignore whitespaces on strings
+  //because isAlpha validator method does not allow white spaces in strings
+  if (!validator.isAlpha(fullName.replace(/\s*/g, ""))) {
     throw Error("Invalid full name"); //resolve space problem
   }
-
   if (!gender) {
     throw Error("Please, select your gender ");
   }
@@ -121,7 +122,7 @@ userSchema.statics.login = async function (email, password, fullName) {
   }
   if (!correctFullName) {
     throw Error(
-      "This is not the full name you entered when you first registered"
+      "This is not the full name you entered when you first registered, check if you typed an extra white space"
     );
   }
   if (user && correctPassword && correctFullName) {

@@ -125,3 +125,40 @@
 // let wokroutspg4 = workouts.slice(18, 24);
 // let wokroutspg5 = workouts.slice(24, 30);
 // let wokroutspg6 = workouts.slice(36, 42);
+/* <div>
+        <video width="30%" height="20%" autoPlay muted loop id="navbar-video">
+          <source src={workoutVideo} type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
+      </div> */
+
+/* <VideoPlayer
+  className="video-test"
+  src={
+    "https://player.vimeo.com/external/435674703.sd.mp4?s=01ad1ba21dc72c1d34728e1b77983805b34daad7&profile_id=165&oauth2_token_id=57447761"
+  }
+  autoPlay={true}
+  muted={true}
+/>; */
+
+/* <img src={logOutIcon} alt="" /> */
+//users login and pwd
+// hamada66@gmail.com
+// FF%T4L(#M@nARek)
+
+// hassna.chama@gmail.com
+// (GLUXJqeyE*7W6#5dd4d4dAA
+
+// Kamal.saif@gmail.com
+// Kamal Saif
+// Kamalkamal2020++**-
+
+/* can use both {userStored?.fullName} or {user?.fullName} 
+              <span>{user.email}</span> <br />  */
+
+// console.log(nameAndGender, nameAndGender2, "here");
+
+// onClick={(category) => {
+//   handleFilterWorkouts(category.exoTitle);
+// }}
+// wont trigger the click , because of the category argument pased to the function, it must recieve no arg
