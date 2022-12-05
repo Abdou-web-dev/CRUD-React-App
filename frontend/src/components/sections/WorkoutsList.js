@@ -27,6 +27,9 @@ export function WorkoutsList({
   setdetailsContClass,
   setcontainerClass,
   containerClass,
+  border,
+  setshowAllExistentWorkouts,
+  showAllExistentWorkouts,
 }) {
   //always put state variables first , then regular variables, then useEffect statement and the other fncts
 
@@ -43,7 +46,7 @@ export function WorkoutsList({
   const [counter, setcounter] = useState(0);
   const [secondBtnDisabled, setsecondBtnDisabled] = useState(false);
   const [showFilterButton, setshowFilterButton] = useState(false); //passed as prop
-  const [showAllExistentWorkouts, setshowAllExistentWorkouts] = useState(false);
+  const [showFilterBtns, setshowFilterBtns] = useState(false);
 
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let layoutList = detailsContClass === "workout-details-container-as-list";
@@ -53,6 +56,7 @@ export function WorkoutsList({
   function handleIconClick() {
     setshowAllWorkoutsCondensed(false);
     setshowAllExistentWorkouts(false);
+    setshowFilterBtns(false);
     if (firstIcon === listIcon) {
       setdetailsContClass("workout-details-container-as-list"); //the container of every workout
       setcontainerClass("chest-page-workouts"); //the container of the whole section containing the workouts
@@ -75,11 +79,13 @@ export function WorkoutsList({
     if ((filteredResults && layoutGrid) || (filteredResults && layoutList)) {
       setsecondBtnDisabled(true);
     }
+    setshowAllWorkouts(true);
   }
 
   function handleCondensedIconClick() {
     setshowAllWorkoutsCondensed(false);
     setshowAllWorkoutsCondensed(true);
+    setshowAllExistentWorkouts(false);
     setDisplayPagination("none");
     if (secondIcon === blocs) {
       setsecondBtnDisabled(true);
@@ -316,6 +322,9 @@ export function WorkoutsList({
             workouts,
             showAllExistentWorkouts,
             setshowAllExistentWorkouts,
+            border,
+            showFilterBtns,
+            setshowFilterBtns,
           }}
         />
       </div>

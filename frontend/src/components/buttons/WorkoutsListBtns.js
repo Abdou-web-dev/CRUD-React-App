@@ -41,23 +41,33 @@ export function WorkoutsListBtns({
   workouts,
   showAllExistentWorkouts,
   setshowAllExistentWorkouts,
+  border,
+  showFilterBtns,
+  setshowFilterBtns,
 }) {
   let hideOtherWorkouts = !showAllWorkoutsCondensed && !showAllWorkouts;
   const [showChestResults, setShowChestResults] = useState(false);
   const [showHamstringsResults, setShowHamstringsResults] = useState(false);
   const [showAbsResults, setShowAbsResults] = useState(false);
   const [showCalvesResults, setShowCalvesResults] = useState(false);
-  // const [showHamstringsResults, setShowHamstringsResults] = useState(false);
-  // const [showHamstringsResults, setShowHamstringsResults] = useState(false);
-  // const [showHamstringsResults, setShowHamstringsResults] = useState(false);
-
-  const [showFilterBtns, setshowFilterBtns] = useState(false);
+  const [showTricepsResults, setShowTricepsResults] = useState(false);
+  const [showTrapeziusResults, setShowTrapeziusResults] = useState(false);
+  const [showForearmsResults, setShowForearmsResults] = useState(false);
+  const [showShouldersResults, setShowShouldersResults] = useState(false);
+  const [showBicepsResults, setShowBicepsResults] = useState(false);
+  const [showBackResults, setShowBackResults] = useState(false);
 
   const chowResults =
     showChestResults ||
     showHamstringsResults ||
     showAbsResults ||
-    showCalvesResults;
+    showCalvesResults ||
+    showTricepsResults ||
+    showTrapeziusResults ||
+    showForearmsResults ||
+    showShouldersResults ||
+    showBicepsResults ||
+    showBackResults;
   const chestWorkouts = [
     ...new Set(workouts?.filter((workout) => workout?.exoCategory === `Chest`)),
   ];
@@ -69,19 +79,51 @@ export function WorkoutsListBtns({
   const AbsWorkouts = [
     ...new Set(workouts?.filter((workout) => workout?.exoCategory === `Abs`)),
   ];
-  const backWorkouts = [
-    ...new Set(workouts?.filter((workout) => workout?.exoCategory === `Back`)),
-  ];
   const calvesWorkouts = [
     ...new Set(
       workouts?.filter((workout) => workout?.exoCategory === `Calves`)
     ),
   ];
+  const TricepsWorkouts = [
+    ...new Set(
+      workouts?.filter((workout) => workout?.exoCategory === `Triceps`)
+    ),
+  ];
+  const TrapeziusWorkouts = [
+    ...new Set(
+      workouts?.filter((workout) => workout?.exoCategory === `Trapezius`)
+    ),
+  ];
+  const ForearmsWorkouts = [
+    ...new Set(
+      workouts?.filter((workout) => workout?.exoCategory === `Forearms`)
+    ),
+  ];
+  const ShouldersWorkouts = [
+    ...new Set(
+      workouts?.filter((workout) => workout?.exoCategory === `Shoulders`)
+    ),
+  ];
+  const BicepsWorkouts = [
+    ...new Set(
+      workouts?.filter((workout) => workout?.exoCategory === `Biceps`)
+    ),
+  ];
+  const BackWorkouts = [
+    ...new Set(workouts?.filter((workout) => workout?.exoCategory === `Back`)),
+  ];
+
   function hideAllWorkouts() {
     setShowAbsResults(false);
     setShowChestResults(false);
     setShowHamstringsResults(false);
     setShowCalvesResults(false);
+    setShowTricepsResults(false);
+    setShowTrapeziusResults(false);
+    setShowForearmsResults(false);
+    setShowShouldersResults(false);
+    setShowBicepsResults(false);
+    setShowBackResults(false);
     setshowAllExistentWorkouts(false);
   }
   function handleFilterWorkouts(exo) {
@@ -102,25 +144,30 @@ export function WorkoutsListBtns({
         hideAllWorkouts();
         setShowCalvesResults(true);
         break;
-      //when the user clicks on filter btn, decrease the size of the form and of all inputs and select
-      //components inside...
-      case `Abs`:
+      case `Triceps`:
         hideAllWorkouts();
-        setShowAbsResults(true);
+        setShowTricepsResults(true);
         break;
-      case `Abs`:
+      case `Trapezius`:
         hideAllWorkouts();
-        setShowAbsResults(true);
+        setShowTrapeziusResults(true);
         break;
-      case `Abs`:
+      case `Shoulders`:
         hideAllWorkouts();
-        setShowAbsResults(true);
+        setShowShouldersResults(true);
         break;
-      case `Abs`:
+      case `Forearms`:
         hideAllWorkouts();
-        setShowAbsResults(true);
+        setShowForearmsResults(true);
         break;
-
+      case `Biceps`:
+        hideAllWorkouts();
+        setShowBicepsResults(true);
+        break;
+      case `Back`:
+        hideAllWorkouts();
+        setShowBackResults(true);
+        break;
       default:
         break;
     }
@@ -145,7 +192,11 @@ export function WorkoutsListBtns({
         <Button
           className="workouts-section-toggle-btn"
           onClick={handleIconClick}
-          style={{ height: "fit-content", width: "fit-content" }}
+          style={{
+            height: "fit-content",
+            width: "fit-content",
+            border: showAllExistentWorkouts ? border : ``,
+          }}
         >
           <img width={"30px"} height="30px" src={firstIcon} alt="" />
         </Button>
@@ -178,18 +229,18 @@ export function WorkoutsListBtns({
               categories?.map((category, index) => (
                 <Button
                   key={index}
-                  className={`workouts-section-${category.exoTitle}-filter-btn`}
+                  className={`workouts-section-${category?.exoTitle}-filter-btn`}
                   onClick={() => {
-                    handleFilterWorkouts(category.exoTitle);
+                    handleFilterWorkouts(category?.exoTitle);
                   }}
                   style={{ height: "fit-content", width: "fit-content" }}
                   // disabled={secondBtnDisabled}
                 >
-                  <span>{category.exoTitle}</span>
+                  <span>{category?.exoTitle}</span>
                   <img
                     width={"30px"}
                     height="30px"
-                    src={category.icon}
+                    src={category?.icon}
                     alt=""
                   />
                 </Button>
@@ -285,6 +336,116 @@ export function WorkoutsListBtns({
             </div>
           ))}
       </>
+
+      <>
+        {hideOtherWorkouts &&
+          showTricepsResults &&
+          TricepsWorkouts &&
+          TricepsWorkouts?.map((workoutFiltered) => (
+            <div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  chowResults,
+                }}
+                key={workoutFiltered?._id}
+              />
+            </div>
+          ))}
+      </>
+
+      <>
+        {hideOtherWorkouts &&
+          showTrapeziusResults &&
+          TrapeziusWorkouts &&
+          TrapeziusWorkouts?.map((workoutFiltered) => (
+            <div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  chowResults,
+                }}
+                key={workoutFiltered?._id}
+              />
+            </div>
+          ))}
+      </>
+
+      <>
+        {hideOtherWorkouts &&
+          showForearmsResults &&
+          ForearmsWorkouts &&
+          ForearmsWorkouts?.map((workoutFiltered) => (
+            <div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  chowResults,
+                }}
+                key={workoutFiltered?._id}
+              />
+            </div>
+          ))}
+      </>
+
+      <>
+        {hideOtherWorkouts &&
+          showShouldersResults &&
+          ShouldersWorkouts &&
+          ShouldersWorkouts?.map((workoutFiltered) => (
+            <div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  chowResults,
+                }}
+                key={workoutFiltered?._id}
+              />
+            </div>
+          ))}
+      </>
+
+      <>
+        {hideOtherWorkouts &&
+          showBicepsResults &&
+          BicepsWorkouts &&
+          BicepsWorkouts?.map((workoutFiltered) => (
+            <div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  chowResults,
+                }}
+                key={workoutFiltered?._id}
+              />
+            </div>
+          ))}
+      </>
+
+      <>
+        {hideOtherWorkouts &&
+          showBackResults &&
+          BackWorkouts &&
+          BackWorkouts?.map((workoutFiltered) => (
+            <div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  chowResults,
+                }}
+                key={workoutFiltered?._id}
+              />
+            </div>
+          ))}
+      </>
     </>
   );
 }
+//when the user clicks on filter btn, decrease the size of the form and of all inputs and select
+//components inside...

@@ -20,7 +20,7 @@ import { AntdSkeleton } from "../components/skeletons/AntdSkeleton";
 import { useAuthContext } from "../hooks/useAuthContext";
 import "./pages_styles.scss";
 
-const Chest = ({}) => {
+const Workouts = ({}) => {
   //instead of adding workouts object down to child components as props, I can use this hook in each component that needs workouts
   const { workouts, dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
@@ -258,4 +258,4 @@ const Chest = ({}) => {
   }
 };
 
-export default Chest;
+export default Workouts;

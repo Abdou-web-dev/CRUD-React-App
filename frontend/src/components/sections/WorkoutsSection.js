@@ -25,9 +25,12 @@ export const WorkoutsSection = ({
 }) => {
   const [showfilteredResults, setshowfilteredResults] = useState(true);
   const [containerClass, setcontainerClass] = useState("chest-page-workouts");
+  const [showAllExistentWorkouts, setshowAllExistentWorkouts] = useState(false);
+  const [border, setBorder] = useState(``);
+  const [showMsg, setshowMsg] = useState(false);
   let layoutGrid = detailsContClass === "workout-details-container-as-grid"; //returns a boolean value
   let layoutList = detailsContClass === "workout-details-container-as-list";
-
+  let msg = `To search for an item, you need to click on the 1st button below !`;
   const searchItems = (searchValue) => {
     setSearchInput(searchValue);
     if (searchInput !== "") {
@@ -69,12 +72,19 @@ export const WorkoutsSection = ({
       setcontainerClass("chest-page-workouts");
     }
   };
+  function handleInputHover() {
+    if (showAllExistentWorkouts) {
+      setBorder(`1px solid red`);
+      setshowMsg(true);
+    }
+  }
 
   const clearIconJSX = (
     <IconButton onClick={handleClearClick}>
       <ClearIcon />
     </IconButton>
   );
+
   return (
     <div className="workouts-section">
       <div className="workouts-section-input">
@@ -85,8 +95,14 @@ export const WorkoutsSection = ({
           className="workouts-search-ant-input"
           style={{ width: "800px" }}
           placeholder=" &nbsp;Search a workout"
-          // allowClear
+          onMouseOver={handleInputHover}
+          disabled={showAllExistentWorkouts ? true : false}
         ></Input>
+        {showMsg && showAllExistentWorkouts && (
+          <div className="workouts-search-ant-input-msg">
+            <span>{msg}</span>
+          </div>
+        )}
       </div>
 
       {searchInput?.length >= 1 ? ( //if something is being typed in the search input field
@@ -123,6 +139,9 @@ export const WorkoutsSection = ({
             setdetailsContClass,
             setcontainerClass,
             containerClass,
+            border,
+            setshowAllExistentWorkouts,
+            showAllExistentWorkouts,
           }}
         />
       )}

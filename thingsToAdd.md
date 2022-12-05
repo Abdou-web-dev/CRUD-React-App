@@ -23,3 +23,19 @@ if we dont specify any name, a default db named 'test' is created
 if (!validator.isAlpha(fullName)) {
 throw Error("Invalid full name"); //resolve space problem
 }
+
+      //when the user clicks on filter btn, decrease the size of the form and of all inputs and select
+      //components inside...
+
+
+
+      ****************************************************
+
+usecallback hook is used when you have a component in which a child is rendering repeatedly without the need for it.
+
+Which cases should you use the useRef?
+A very common use case for using useRef is for when, suppose you click on a button, and then on its click you want an input to come into focus. To do this, we would need to access the DOM element of input and then call its function focus() to focus the input.
+
+The useRef Hook allows you to persist values between renders. It can be used to store a mutable value that does not cause a re-render when updated. It can be used to access a DOM element directly.
+
+The most important thing to remember here is that both useMemo and useCallback are useful only during the re-renders phase. During the initial render, they are not only useless but even harmful: they make React do some additional work. This means that your app will become slightly slower during the initial render.13 jui. 2022

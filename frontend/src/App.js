@@ -2,7 +2,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 // pages & components
 import Navbar from "./components/Navbar/Navbar";
 import { useAuthContext } from "./hooks/useAuthContext";
-import ChestWorkouts from "./pages/Chest";
 import Help from "./pages/Help";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -10,6 +9,7 @@ import NoMatch from "./pages/NoMatch";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import StarredItems from "./pages/StarredItems";
+import Workouts from "./pages/Workouts";
 
 function App() {
   const { user } = useAuthContext();
@@ -26,7 +26,7 @@ function App() {
           <Route
             index
             path="/chest"
-            element={user ? <ChestWorkouts /> : <Navigate to="/login" />}
+            element={user ? <Workouts /> : <Navigate to="/login" />}
           />
 
           <Route
@@ -68,7 +68,7 @@ function App() {
           />
 
           <Route
-            path="/my-account"
+            path="/starred-items"
             element={
               user ? (
                 <div className="pages-login">
