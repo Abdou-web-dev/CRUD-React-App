@@ -30,6 +30,8 @@ export function WorkoutsList({
   border,
   setshowAllExistentWorkouts,
   showAllExistentWorkouts,
+  showAllWorkoutsCondensed,
+  setshowAllWorkoutsCondensed,
 }) {
   //always put state variables first , then regular variables, then useEffect statement and the other fncts
 
@@ -37,8 +39,7 @@ export function WorkoutsList({
   const [bg, setbg] = useState("");
   const [firstIcon, setFirsticon] = useState(listIcon);
   const [secondIcon, setSecondIcon] = useState(blocs);
-  const [showAllWorkoutsCondensed, setshowAllWorkoutsCondensed] =
-    useState(false);
+
   const [showAllWorkouts, setshowAllWorkouts] = useState(true);
   const [spinning, setSpinning] = useState(false);
   const [showMoreBtn, setshowMoreBtn] = useState(true);
@@ -324,6 +325,8 @@ export function WorkoutsList({
             setshowAllExistentWorkouts,
             border,
             showFilterBtns,
+            filteredResults,
+            searchInput,
             setshowFilterBtns,
           }}
         />

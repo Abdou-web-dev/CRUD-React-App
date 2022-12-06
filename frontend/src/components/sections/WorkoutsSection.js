@@ -22,10 +22,13 @@ export const WorkoutsSection = ({
   setdetailsContClass,
   filteredResults,
   setFilteredResults,
+  showAllExistentWorkouts,
+  setshowAllExistentWorkouts,
 }) => {
   const [showfilteredResults, setshowfilteredResults] = useState(true);
   const [containerClass, setcontainerClass] = useState("chest-page-workouts");
-  const [showAllExistentWorkouts, setshowAllExistentWorkouts] = useState(false);
+  const [showAllWorkoutsCondensed, setshowAllWorkoutsCondensed] =
+    useState(false);
   const [border, setBorder] = useState(``);
   const [showMsg, setshowMsg] = useState(false);
   let layoutGrid = detailsContClass === "workout-details-container-as-grid"; //returns a boolean value
@@ -96,7 +99,9 @@ export const WorkoutsSection = ({
           style={{ width: "800px" }}
           placeholder=" &nbsp;Search a workout"
           onMouseOver={handleInputHover}
-          disabled={showAllExistentWorkouts ? true : false}
+          disabled={
+            showAllExistentWorkouts || showAllWorkoutsCondensed ? true : false
+          }
         ></Input>
         {showMsg && showAllExistentWorkouts && (
           <div className="workouts-search-ant-input-msg">
@@ -142,6 +147,8 @@ export const WorkoutsSection = ({
             border,
             setshowAllExistentWorkouts,
             showAllExistentWorkouts,
+            showAllWorkoutsCondensed,
+            setshowAllWorkoutsCondensed,
           }}
         />
       )}

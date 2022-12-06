@@ -5,7 +5,7 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Skeleton, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import WorkoutForm from "../components/forms/ChestWorkoutForm";
+import WorkoutForm from "../components/forms/WorkoutForm";
 import {
   LeftArrow as PrevIcon,
   NextArrow,
@@ -26,6 +26,7 @@ const Workouts = ({}) => {
   const { user } = useAuthContext();
 
   const [filteredResults, setFilteredResults] = React.useState([]);
+  const [showAllExistentWorkouts, setshowAllExistentWorkouts] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [displayPagination, setDisplayPagination] = useState("");
@@ -134,12 +135,19 @@ const Workouts = ({}) => {
                 setdetailsContClass,
                 filteredResults,
                 setFilteredResults,
+                showAllExistentWorkouts,
+                setshowAllExistentWorkouts,
               }}
             ></WorkoutsSection>
           </div>
           <div className="chest-form">
             <WorkoutForm
-              {...{ setCurrentPage, workouts, paginationClassName }}
+              {...{
+                setCurrentPage,
+                workouts,
+                paginationClassName,
+                showAllExistentWorkouts,
+              }}
             />
           </div>
 

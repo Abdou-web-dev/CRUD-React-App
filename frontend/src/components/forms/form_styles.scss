@@ -143,6 +143,28 @@
       }
     }
   }
+
+  .workouts-form-allExistentWorkouts {
+    // border: 1px solid red;
+
+    .chest-workouts-form-inner {
+      .form-filter-btn-plus-btn {
+        padding: 10px;
+        background: rgba(211, 211, 211, 0.3);
+        &:hover {
+          background: rgba(211, 211, 211, 0.5);
+        }
+        img {
+          width: 25px;
+          height: 25px;
+          margin-right: 15px;
+        }
+      }
+      .form-filter-h3 {
+      }
+    }
+  }
+
   .toggle-form-btn {
     float: right;
     position: relative;

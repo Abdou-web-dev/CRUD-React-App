@@ -44,6 +44,8 @@ export function WorkoutsListBtns({
   border,
   showFilterBtns,
   setshowFilterBtns,
+  filteredResults,
+  searchInput,
 }) {
   let hideOtherWorkouts = !showAllWorkoutsCondensed && !showAllWorkouts;
   const [showChestResults, setShowChestResults] = useState(false);
@@ -201,6 +203,7 @@ export function WorkoutsListBtns({
           <img width={"30px"} height="30px" src={firstIcon} alt="" />
         </Button>
       </Tooltip>
+
       <Tooltip title="Display all items in one section">
         <Button
           disabled={secondBtnDisabled}
@@ -210,18 +213,22 @@ export function WorkoutsListBtns({
           <img width={"30px"} height="30px" src={secondIcon} alt="" />
         </Button>
       </Tooltip>
-      {showFilterButton && (
-        <Tooltip title="Filter these workouts">
-          <Button
-            className="workouts-section-filter-btn"
-            // disabled={secondBtnDisabled}
-            onClick={handleShowFilterBtns}
-            style={{ height: "fit-content", width: "fit-content" }}
-          >
-            <img width={"30px"} height="30px" src={filterIcon} alt="" />
-          </Button>
-        </Tooltip>
-      )}
+
+      <>
+        {showFilterButton && (
+          <Tooltip title="Filter these workouts">
+            <Button
+              className="workouts-section-filter-btn"
+              disabled={searchInput?.length !== 0 ? true : false}
+              onClick={handleShowFilterBtns}
+              style={{ height: "fit-content", width: "fit-content" }}
+            >
+              <img width={"30px"} height="30px" src={filterIcon} alt="" />
+            </Button>
+          </Tooltip>
+        )}
+      </>
+
       <>
         {showFilterBtns && !showAllWorkouts && !showAllWorkoutsCondensed && (
           <div>
