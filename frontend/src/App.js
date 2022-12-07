@@ -25,7 +25,7 @@ function App() {
 
           <Route
             index
-            path="/chest"
+            path="/workouts"
             element={user ? <Workouts /> : <Navigate to="/login" />}
           />
 
@@ -37,7 +37,7 @@ function App() {
                   <Login />
                 </div>
               ) : (
-                <Navigate to="/chest" />
+                <Navigate to="/workouts" />
               )
             }
           />
@@ -49,7 +49,7 @@ function App() {
                   <Signup />
                 </div>
               ) : (
-                <Navigate to="/chest" />
+                <Navigate to="/workouts" />
               )
             }
           />
@@ -62,7 +62,7 @@ function App() {
                   <Profile />
                 </div>
               ) : (
-                <Navigate to="/chest" />
+                <Navigate to="/workouts" />
               )
             }
           />
@@ -75,7 +75,7 @@ function App() {
                   <StarredItems />
                 </div>
               ) : (
-                <Navigate to="/chest" />
+                <Navigate to="/workouts" />
               )
             }
           />
@@ -88,7 +88,7 @@ function App() {
                   <Help />
                 </div>
               ) : (
-                <Navigate to="/chest" />
+                <Navigate to="/workouts" />
               )
             }
           />

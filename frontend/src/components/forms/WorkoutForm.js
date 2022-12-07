@@ -123,7 +123,7 @@ const WorkoutForm = ({
   }
 
   //3 JSX blocs
-  const ButtonToggleModalDom = (
+  const ButtonToggleModalJSX = (
     <Button
       disableRipple
       onClick={() => setShowFormNewWindow(!showFormNewWindow)}
@@ -167,7 +167,7 @@ const WorkoutForm = ({
         `}
       >
         {!showAllExistentWorkouts || showFormNewWindow
-          ? ButtonToggleModalDom
+          ? ButtonToggleModalJSX
           : null}
       </div>
       <form
@@ -504,7 +504,7 @@ const WorkoutForm = ({
   );
   const chestExosList = (
     <div className="chest-suggest-btns">
-      {currentLocat === "/chest" && (
+      {currentLocat === "/workouts" && (
         <ChestExosList
           paginationClassName={paginationClassName}
           setTitle={setTitle}

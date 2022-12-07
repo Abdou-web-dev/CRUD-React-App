@@ -194,13 +194,15 @@ export function WorkoutsList({
       (workoutCondensed, index) =>
         index < 16 &&
         index >= 8 && (
-          <WorkoutDetailsItemCondensed
-            {...{
-              workoutCondensed,
-              counter,
-            }}
-            key={workoutCondensed._id}
-          />
+          <div>
+            <WorkoutDetailsItemCondensed
+              {...{
+                workoutCondensed,
+                counter,
+              }}
+              key={workoutCondensed._id}
+            />
+          </div>
         )
     );
   //
@@ -302,7 +304,15 @@ export function WorkoutsList({
       setshowMoreIcon(moreIcon);
       setSpinning(false);
     }
-  }, [searchInput, showSecondGrp, showThirdGrp, showFifthGrp, showFourthGrp]);
+    if (secondGroup) console.log("second grp");
+  }, [
+    searchInput,
+    showSecondGrp,
+    showThirdGrp,
+    showFifthGrp,
+    showFourthGrp,
+    secondGroup,
+  ]);
 
   return (
     <div className="workouts-section-container">
@@ -469,6 +479,7 @@ export function WorkoutsList({
                   <Button
                     onClick={handleClick}
                     className="chest-page-workouts-condensed-inner-more-icon-btn"
+                    disabled={false}
                   >
                     <img
                       width={`54px`}
@@ -478,6 +489,20 @@ export function WorkoutsList({
                     />
                   </Button>
                 )}
+                {/* initially show this btn with a state of disabled, then when there is a second grp,
+                make it disappear and show the other */}
+                <Button
+                  onClick={handleClick}
+                  disabled={true}
+                  className="chest-page-workouts-condensed-inner-more-icon-btn"
+                >
+                  <img
+                    width={`44px`}
+                    height={`44px`}
+                    src={showMoreIcon}
+                    alt=""
+                  />
+                </Button>
                 <Spin spinning={spinning} size="large" />
               </div>
             </div>

@@ -281,11 +281,14 @@ const Login = ({}) => {
               {error && (
                 <div className="text-error">
                   {error ===
-                  "This is not the full name you entered when you first registered" ? (
+                  "This is not the full name you entered when you first registered, check if you typed an extra white space" ? (
                     <div className="errorMsg-wrapper">
                       <span className="errorMsg">{`This is not the full name you entered`}</span>
                       <span className="errorMsg">
-                        {`when you first registered !`}
+                        {`when you first registered,  !`}
+                      </span>
+                      <span className="errorMsg">
+                        {`check if you typed an extra white space`}
                       </span>
                     </div>
                   ) : (

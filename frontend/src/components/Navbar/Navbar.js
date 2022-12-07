@@ -70,7 +70,7 @@ const Navbar = ({}) => {
           }
         >
           <ul className="navbar-ul">
-            <Link className="nav-router-link" to="/chest">
+            <Link className="nav-router-link" to="/workouts">
               <Stack className="app-nav-stack" direction={"row"} spacing={5}>
                 <li className="navbar-ul-li icon-and-word">
                   <img className="gym-img" src={gym} alt="" />
