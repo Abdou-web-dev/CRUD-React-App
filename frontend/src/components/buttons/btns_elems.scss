@@ -1,0 +1,34 @@
+.workouts-btns-and-elements {
+  //   border: 1px solid;
+  .workouts-btns-and-elements-three-btns {
+    margin: 25px;
+    .btn1,
+    .btn2,
+    .workouts-section-filter-btn {
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      }
+    }
+  }
+  .workouts-btns-and-elements-categ-btns-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    // border: 1px solid;
+    // padding-left: 45px;
+    &.grp1 {
+      margin: 25px;
+    }
+    &.grp2 {
+      margin-bottom: 70px;
+    }
+    .workouts-btns-and-elements-categ-btn-elem {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 25px;
+    }
+  }
+}

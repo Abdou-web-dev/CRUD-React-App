@@ -489,20 +489,7 @@ export function WorkoutsList({
                     />
                   </Button>
                 )}
-                {/* initially show this btn with a state of disabled, then when there is a second grp,
-                make it disappear and show the other */}
-                <Button
-                  onClick={handleClick}
-                  disabled={true}
-                  className="chest-page-workouts-condensed-inner-more-icon-btn"
-                >
-                  <img
-                    width={`44px`}
-                    height={`44px`}
-                    src={showMoreIcon}
-                    alt=""
-                  />
-                </Button>
+
                 <Spin spinning={spinning} size="large" />
               </div>
             </div>

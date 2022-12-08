@@ -9,7 +9,7 @@ export function WorkoutDetailsItemCondensed({
   workoutFiltered,
   counter,
   showAllExistentWorkouts,
-  chowResults,
+  showResults,
 }) {
   const [showWorkout, setshowWorkout] = useState(true);
   const [showClosebtn, setshowClosebtn] = useState(false);
@@ -19,7 +19,7 @@ export function WorkoutDetailsItemCondensed({
   function handleCloseClick() {
     setdisplayItem("none");
   }
-  if (showAllExistentWorkouts || chowResults) {
+  if (showAllExistentWorkouts || showResults) {
     return (
       <div>
         <WorkoutDetails
