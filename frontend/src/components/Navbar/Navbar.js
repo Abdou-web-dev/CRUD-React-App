@@ -201,7 +201,7 @@ const Navbar = ({}) => {
           </Link>
         </MenuItem>
         <MenuItem className="avatar-menu-item" onClick={handleCloseMenu}>
-          <Link className="avatar-menu-item-anchor" to={`my-account`}>
+          <Link className="avatar-menu-item-anchor" to={`/starred-items`}>
             <img className="avatar-menu-starred-icon" src={starred} alt="" />
             <span className="avatar-menu-item-text">Favorite Workouts</span>
           </Link>

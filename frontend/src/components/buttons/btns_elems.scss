@@ -10,6 +10,13 @@
       }
     }
   }
+  .workouts-btns-and-elements-msg {
+    span {
+      font-size: 12px;
+      font-family: "Mulish";
+      color: rgba(255, 0, 0, 0.66);
+    }
+  }
   .workouts-btns-and-elements-categ-btns-wrapper {
     display: flex;
     justify-content: center;
@@ -30,5 +37,11 @@
       gap: 8px;
       padding: 5px 25px;
     }
+  }
+  .showItemsAsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin: 30px 20px;
   }
 }

@@ -230,6 +230,98 @@
   }
 }
 
+.condensed-workouts-all-workouts {
+  background-color: rgba(36, 40, 41, 0.48);
+  position: relative;
+  margin-bottom: 25px;
+  padding: 70px 10px;
+  &:hover {
+    background-color: rgba(36, 40, 41, 0.55);
+  }
+  .work-details-content-filters-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .work-details-content-filters-btns-title {
+      font-size: 1.2em;
+      color: white;
+      font-weight: bolder;
+      font-family: "Inconsolata";
+      letter-spacing: 1.5px;
+    }
+    .work-details-content-filters-btns-infos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 25px;
+
+      .work-details-content-filters-btns-load {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-right: 10px;
+        .work-details-load-img {
+          width: 50px;
+          height: 50px;
+        }
+        .load-span1 {
+          font-family: "Mulish";
+
+          .span1-kg {
+            font-style: italic;
+            font-family: "Inconsolata";
+          }
+        }
+        .load-span2 {
+          font-family: "Open Sans";
+        }
+      }
+      .work-details-content-filters-btns-reps {
+        margin-left: 5px;
+        .reps-inner {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          .reps-img {
+            width: 50px;
+            height: 50px;
+          }
+          .reps-span1 {
+            font-family: "Mulish";
+            .span1-kg {
+              font-style: italic;
+              font-family: "Inconsolata";
+            }
+          }
+          .reps-span2 {
+            font-family: "Open Sans";
+          }
+        }
+      }
+      .work-details-content-filters-btns-date {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        max-width: 90px;
+        margin-left: 10px;
+        .date-img {
+          width: 50px;
+          height: 50px;
+        }
+        .date-text {
+          font-style: italic;
+          font-family: "Inconsolata";
+        }
+      }
+    }
+  }
+}
+
 .border-selected {
   border: 3px solid rgb(230, 161, 161);
   border-radius: 5px;

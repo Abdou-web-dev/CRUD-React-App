@@ -10,6 +10,7 @@ export function WorkoutDetailsItemCondensed({
   counter,
   showAllExistentWorkouts,
   showResults,
+  filteredWorkout,
 }) {
   const [showWorkout, setshowWorkout] = useState(true);
   const [showClosebtn, setshowClosebtn] = useState(false);
@@ -21,20 +22,21 @@ export function WorkoutDetailsItemCondensed({
   }
   if (showAllExistentWorkouts || showResults) {
     return (
-      <div>
-        <WorkoutDetails
-          {...{
-            workoutCondensed, //this prop prevents the exo icons from displaying on this component
-          }}
-          workout={
-            workoutFiltered
-              ? workoutFiltered
-              : workoutCondensed
-              ? workoutCondensed
-              : null
-          }
-        />
-      </div>
+      <WorkoutDetails
+        {...{
+          workoutCondensed,
+          filteredWorkout,
+          showAllExistentWorkouts,
+          //this prop prevents the exo icons from displaying on this component
+        }}
+        workout={
+          workoutFiltered
+            ? workoutFiltered
+            : workoutCondensed
+            ? workoutCondensed
+            : null
+        }
+      />
     );
   }
   //else

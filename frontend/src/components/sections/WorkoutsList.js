@@ -338,6 +338,7 @@ export function WorkoutsList({
             filteredResults,
             searchInput,
             setshowFilterBtns,
+            searchInput,
           }}
         />
       </div>
@@ -466,7 +467,10 @@ export function WorkoutsList({
 
       {showAllWorkoutsCondensed === true && ( //always put state variables (that control display of children inside them) above the div tags
         <div className="chest-page-workouts-condensed-container">
-          <div className="chest-page-workouts-condensed-inner">
+          <div
+            className="chest-page-workouts-condensed-inner"
+            style={{ overflowY: showThirdGrp && thirdGroup ? `scroll` : `` }}
+          >
             <div className="chest-page-workouts-condensed-inner-workouts">
               <>{showFirstGrp && firstGroup}</>
               <>{showSecondGrp && secondGroup}</>

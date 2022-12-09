@@ -44,7 +44,6 @@ export function WorkoutsListBtns({
   border,
   showFilterBtns,
   setshowFilterBtns,
-  filteredResults,
   searchInput,
 }) {
   let hideOtherWorkouts = !showAllWorkoutsCondensed && !showAllWorkouts;
@@ -58,6 +57,7 @@ export function WorkoutsListBtns({
   const [showShouldersResults, setShowShouldersResults] = useState(false);
   const [showBicepsResults, setShowBicepsResults] = useState(false);
   const [showBackResults, setShowBackResults] = useState(false);
+  const [filteredWorkout, setFilteredWorkout] = useState(false); //in order to apply styles in child component to work detailer wrapper when clicking on filter btns
 
   const showResults =
     showChestResults ||
@@ -173,6 +173,7 @@ export function WorkoutsListBtns({
       default:
         break;
     }
+    setFilteredWorkout(true);
   }
   function handleShowFilterBtns() {
     //toggle logic, so that when the user clicks on the filter btn, the filter list of btns is displayed, and when he clicks again, this list is hidden
@@ -185,6 +186,16 @@ export function WorkoutsListBtns({
   return (
     <>
       <div className="workouts-btns-and-elements">
+        <>
+          {searchInput?.length !== 0 && (
+            <div className="workouts-btns-and-elements-msg">
+              <span>
+                To search for an item, clear this field and click on the 1st
+                button below !
+              </span>
+            </div>
+          )}
+        </>
         <div className="workouts-btns-and-elements-three-btns">
           <Tooltip
             title={
@@ -252,7 +263,6 @@ export function WorkoutsListBtns({
                             height: "fit-content",
                             width: "fit-content",
                           }}
-                          // disabled={secondBtnDisabled}
                         >
                           <span>{category?.exoTitle}</span>
                           <img
@@ -299,37 +309,35 @@ export function WorkoutsListBtns({
           )}
         </>
 
-        <>
+        <div className="chest-page-workouts showItemsAsGrid">
           {showAllExistentWorkouts &&
             workouts &&
             workouts?.map((workoutCondensed) => (
-              <div>
-                <WorkoutDetailsItemCondensed //all items condensed
-                  {...{
-                    workoutCondensed,
-                    showAllExistentWorkouts,
-                  }}
-                  key={workoutCondensed?._id}
-                />
-              </div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutCondensed,
+                  showAllExistentWorkouts,
+                  filteredWorkout,
+                }}
+                key={workoutCondensed?._id}
+              />
             ))}
-        </>
+        </div>
 
         <>
           {hideOtherWorkouts &&
             showChestResults &&
             chestWorkouts &&
             chestWorkouts?.map((workoutFiltered) => (
-              <div>
-                <WorkoutDetailsItemCondensed //all items condensed
-                  {...{
-                    workoutFiltered,
-                    showAllExistentWorkouts,
-                    showResults,
-                  }}
-                  key={workoutFiltered?._id}
-                />
-              </div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  showResults,
+                  filteredWorkout,
+                }}
+                key={workoutFiltered?._id}
+              />
             ))}
         </>
 
@@ -338,16 +346,15 @@ export function WorkoutsListBtns({
             showHamstringsResults &&
             hamstringsWorkouts &&
             hamstringsWorkouts?.map((workoutFiltered) => (
-              <div>
-                <WorkoutDetailsItemCondensed //all items condensed
-                  {...{
-                    workoutFiltered,
-                    showAllExistentWorkouts,
-                    showResults,
-                  }}
-                  key={workoutFiltered?._id}
-                />
-              </div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  showResults,
+                  filteredWorkout,
+                }}
+                key={workoutFiltered?._id}
+              />
             ))}
         </>
 
@@ -356,16 +363,15 @@ export function WorkoutsListBtns({
             showAbsResults &&
             AbsWorkouts &&
             AbsWorkouts?.map((workoutFiltered) => (
-              <div>
-                <WorkoutDetailsItemCondensed //all items condensed
-                  {...{
-                    workoutFiltered,
-                    showAllExistentWorkouts,
-                    showResults,
-                  }}
-                  key={workoutFiltered?._id}
-                />
-              </div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  showResults,
+                  filteredWorkout,
+                }}
+                key={workoutFiltered?._id}
+              />
             ))}
         </>
 
@@ -374,16 +380,15 @@ export function WorkoutsListBtns({
             showCalvesResults &&
             calvesWorkouts &&
             calvesWorkouts?.map((workoutFiltered) => (
-              <div>
-                <WorkoutDetailsItemCondensed //all items condensed
-                  {...{
-                    workoutFiltered,
-                    showAllExistentWorkouts,
-                    showResults,
-                  }}
-                  key={workoutFiltered?._id}
-                />
-              </div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  showResults,
+                  filteredWorkout,
+                }}
+                key={workoutFiltered?._id}
+              />
             ))}
         </>
 
@@ -392,16 +397,14 @@ export function WorkoutsListBtns({
             showTricepsResults &&
             TricepsWorkouts &&
             TricepsWorkouts?.map((workoutFiltered) => (
-              <div>
-                <WorkoutDetailsItemCondensed //all items condensed
-                  {...{
-                    workoutFiltered,
-                    showAllExistentWorkouts,
-                    showResults,
-                  }}
-                  key={workoutFiltered?._id}
-                />
-              </div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  showResults,
+                }}
+                key={workoutFiltered?._id}
+              />
             ))}
         </>
 
@@ -410,16 +413,15 @@ export function WorkoutsListBtns({
             showTrapeziusResults &&
             TrapeziusWorkouts &&
             TrapeziusWorkouts?.map((workoutFiltered) => (
-              <div>
-                <WorkoutDetailsItemCondensed //all items condensed
-                  {...{
-                    workoutFiltered,
-                    showAllExistentWorkouts,
-                    showResults,
-                  }}
-                  key={workoutFiltered?._id}
-                />
-              </div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  showResults,
+                  filteredWorkout,
+                }}
+                key={workoutFiltered?._id}
+              />
             ))}
         </>
 
@@ -428,16 +430,15 @@ export function WorkoutsListBtns({
             showForearmsResults &&
             ForearmsWorkouts &&
             ForearmsWorkouts?.map((workoutFiltered) => (
-              <div>
-                <WorkoutDetailsItemCondensed //all items condensed
-                  {...{
-                    workoutFiltered,
-                    showAllExistentWorkouts,
-                    showResults,
-                  }}
-                  key={workoutFiltered?._id}
-                />
-              </div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  showResults,
+                  filteredWorkout,
+                }}
+                key={workoutFiltered?._id}
+              />
             ))}
         </>
 
@@ -446,16 +447,15 @@ export function WorkoutsListBtns({
             showShouldersResults &&
             ShouldersWorkouts &&
             ShouldersWorkouts?.map((workoutFiltered) => (
-              <div>
-                <WorkoutDetailsItemCondensed //all items condensed
-                  {...{
-                    workoutFiltered,
-                    showAllExistentWorkouts,
-                    showResults,
-                  }}
-                  key={workoutFiltered?._id}
-                />
-              </div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  showResults,
+                  filteredWorkout,
+                }}
+                key={workoutFiltered?._id}
+              />
             ))}
         </>
 
@@ -464,16 +464,15 @@ export function WorkoutsListBtns({
             showBicepsResults &&
             BicepsWorkouts &&
             BicepsWorkouts?.map((workoutFiltered) => (
-              <div>
-                <WorkoutDetailsItemCondensed //all items condensed
-                  {...{
-                    workoutFiltered,
-                    showAllExistentWorkouts,
-                    showResults,
-                  }}
-                  key={workoutFiltered?._id}
-                />
-              </div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  showResults,
+                  filteredWorkout,
+                }}
+                key={workoutFiltered?._id}
+              />
             ))}
         </>
 
@@ -482,16 +481,15 @@ export function WorkoutsListBtns({
             showBackResults &&
             BackWorkouts &&
             BackWorkouts?.map((workoutFiltered) => (
-              <div>
-                <WorkoutDetailsItemCondensed //all items condensed
-                  {...{
-                    workoutFiltered,
-                    showAllExistentWorkouts,
-                    showResults,
-                  }}
-                  key={workoutFiltered?._id}
-                />
-              </div>
+              <WorkoutDetailsItemCondensed //all items condensed
+                {...{
+                  workoutFiltered,
+                  showAllExistentWorkouts,
+                  showResults,
+                  filteredWorkout,
+                }}
+                key={workoutFiltered?._id}
+              />
             ))}
         </>
       </div>

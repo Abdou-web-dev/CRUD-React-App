@@ -15,11 +15,14 @@ import InfoIcon from "@mui/icons-material/Info";
 import { formatDistanceToNow } from "date-fns";
 import AbsIcon from "../../assets/img/AbsIcon.png";
 import BackIcon from "../../assets/img/backIcon.png";
+import balance from "../../assets/img/balance.png";
 import BicepsIcon from "../../assets/img/bicepsIcon.png";
 import CalvesIcon from "../../assets/img/calvesIcon.png";
 import ChestIcon from "../../assets/img/ChestIcon.svg";
+import clock from "../../assets/img/clock.png";
 import ForearmsIcon from "../../assets/img/forearmsIcon.png";
 import HamstringsIcon from "../../assets/img/HamstringsIcon.svg";
+import repetition from "../../assets/img/repetition.png";
 import ShouldersIcon from "../../assets/img/shouldersIcon.png";
 import TrapeziusIcon from "../../assets/img/TrapeziusIcon.png";
 import TricepsIcon from "../../assets/img/TricepsIcon.png";
@@ -39,7 +42,8 @@ export const WorkoutDetails = ({
   searchInput,
   workoutIsCondensed,
   workoutCondensed,
-  workoutFiltered,
+  filteredWorkout,
+  showAllExistentWorkouts,
 }) => {
   // let layoutList = detailsContClass === "workout-details-container-as-list";
   // console.log(createdAt?.split());
@@ -48,6 +52,7 @@ export const WorkoutDetails = ({
   let createdAt = workout?.createdAt;
   let workoutCateg = workout?.exoCategory;
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
+  let notShowOnFilter = !showAllExistentWorkouts || filteredWorkout;
 
   const [openEditModal, setopenEditModal] = useState(false);
   const [className, setClassName] = React.useState(`workout-details`);
@@ -165,8 +170,26 @@ export const WorkoutDetails = ({
          site-drawer-render-in-current-wrapper
          workout-details-container${index}
           ${showBorder === true ? `border-selected` : ``} 
-          ${searchInput?.length !== 0 ? `filtered-workouts` : ``} 
-          ${workoutIsCondensed === true ? `condensed-workouts` : ``}           
+          ${
+            searchInput?.length !== 0 &&
+            !showAllExistentWorkouts &&
+            !filteredWorkout
+              ? `filtered-workouts`
+              : ``
+          } 
+          ${
+            workoutIsCondensed === true ? `condensed-workouts` : `` //2nd btn styles
+          }  
+          ${
+            workoutCondensed && showAllExistentWorkouts
+              ? `condensed-workouts-all-workouts`
+              : `` //3rd btn styles
+          }         
+          ${
+            filteredWorkout ? `condensed-workouts-filter-results` : `` //3rd btn styles afetr clicking filter btn
+          }           
+
+          
          `}
         style={{
           boxShadow: containerBoxShadow,
@@ -175,146 +198,195 @@ export const WorkoutDetails = ({
         onMouseOver={handleContainerHover}
         onMouseLeave={handleContainerLeave}
       >
-        <Collapse in={showCollapse} collapsedSize="90px">
-          <Stack className={className} direction="row">
-            {/* <span>{index} </span> */}
-            <div
-              className="work-details-left-content"
-              style={{
-                width: "80%",
-              }}
+        {notShowOnFilter ? (
+          <>
+            <Collapse
+              in={showCollapse}
+              collapsedSize="90px"
+              style={{ width: !notShowOnFilter ? `100%` : `` }}
+              className="aaaaaerfrfrfr5aa"
             >
-              <div className="work-details-left-content-inner">
-                <IconButton
-                  className="work-details-left-inner-iconbtn"
-                  onClick={handleCollapseclick}
+              <Stack className={className} direction="row">
+                {/* <span>{index} </span> */}
+                <div
+                  className="work-details-left-content"
+                  style={{
+                    width: "80%",
+                  }}
                 >
-                  {showCollapse ? <ExpandLessIcon /> : <ExpandMoreIcon />}
-                </IconButton>
-                <h4 className="work-details-left-content-inner-title">
-                  {workout?.title}
-                </h4>
+                  <div className="work-details-left-content-inner">
+                    <IconButton
+                      className="work-details-left-inner-iconbtn"
+                      onClick={handleCollapseclick}
+                    >
+                      {showCollapse ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                    </IconButton>
+                    <h4 className="work-details-left-content-inner-title">
+                      {workout?.title}
+                    </h4>
 
-                <div className="work-details-left-inner-load">
-                  <span className="work-details-left-inner-load-span1">
-                    <strong>
-                      Load (<span className="span1-kg">kg</span> ) :
-                    </strong>
-                  </span>
-                  <span className="work-details-left-inner-load-span2">
-                    {workout?.load}
-                  </span>
-                </div>
+                    <div className="work-details-left-inner-load">
+                      <span className="work-details-left-inner-load-span1">
+                        <strong>
+                          Load (<span className="span1-kg">kg</span> ) :
+                        </strong>
+                      </span>
+                      <span className="work-details-left-inner-load-span2">
+                        {workout?.load}
+                      </span>
+                    </div>
 
-                <div className={"work-details-left-inner-reps"}>
-                  <div className="work-details-left-inner-reps-span1span2">
-                    <span className="work-details-left-inner-reps-span1">
-                      <strong>Number of reps : </strong>
-                    </span>
-                    <span className="work-details-left-inner-reps-span2">
-                      {workout?.reps}
-                    </span>
+                    <div className={"work-details-left-inner-reps"}>
+                      <div className="work-details-left-inner-reps-span1span2">
+                        <span className="work-details-left-inner-reps-span1">
+                          <strong>Number of reps : </strong>
+                        </span>
+                        <span className="work-details-left-inner-reps-span2">
+                          {workout?.reps}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="work-details-left-inner-date">
+                      <span>
+                        {formatDistanceToNow(new Date(createdAt), {
+                          addSuffix: true,
+                        })}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="work-details-left-inner-date">
-                  <span>
-                    {formatDistanceToNow(new Date(createdAt), {
-                      addSuffix: true,
-                    })}
+                <div
+                  className="work-details-right-content"
+                  style={{ width: "20%" }}
+                >
+                  {notShowOnFilter && (
+                    <div className="work-details-right-inner control-btns">
+                      <Popconfirm
+                        title="Are you sure to delete this task?"
+                        onConfirm={confirm}
+                        onCancel={cancel}
+                        okText="Yes"
+                        cancelText="No"
+                        open={openPopconfirm}
+                      >
+                        <IconButton
+                          className="work-details-right-inner-iconbtn"
+                          //differnce  between setOpenBackdrop(false) and setOpenBackdrop(cur=>!cur) or setOpenBackdrop(!openBackdrop) is that the 2 last statement will create a toggle logic hence a infinite loop onclick on esc , whereas the 1st one will trigger only once
+                          onKeyDown={() => {
+                            setOpenPopconfirm(false);
+                            setshowBorder(false);
+                            setOpenBackdrop(false);
+                          }} //onClick on Esc key
+                          // never use onBlur method here because it prevents the items from being deleted
+                          onClick={handleDeleteWorkout}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Popconfirm>
+
+                      <IconButton
+                        className="work-details-right-inner-iconbtn"
+                        onClick={handleShare}
+                      >
+                        <ShareIcon></ShareIcon>
+                      </IconButton>
+
+                      <IconButton
+                        className="work-details-right-inner-iconbtn"
+                        onClick={handleInfos}
+                      >
+                        <InfoIcon />
+                      </IconButton>
+
+                      <IconButton
+                        className="icon-btn-edit work-details-right-inner-iconbtn"
+                        onBlur={() => setborder("")}
+                        onKeyDown={() => setborder("")}
+                        onClick={handleEdit}
+                      >
+                        <img className={"edit-img"} src={editIconPen} alt="" />
+                      </IconButton>
+                    </div>
+                  )}
+                </div>
+              </Stack>
+            </Collapse>
+
+            {/* this is the exo icon and exo category that shows on hover */}
+
+            {!workoutIsCondensed && (
+              <div className="exo-category-icon-wrapper">
+                <img
+                  className="exo-category-icon"
+                  src={
+                    workoutCateg === `Hamstrings`
+                      ? HamstringsIcon
+                      : workoutCateg === `Chest`
+                      ? ChestIcon
+                      : workoutCateg === `Trapezius`
+                      ? TrapeziusIcon
+                      : workoutCateg === `Shoulders`
+                      ? ShouldersIcon
+                      : workoutCateg === `Forearms`
+                      ? ForearmsIcon
+                      : workoutCateg === `Calves`
+                      ? CalvesIcon
+                      : workoutCateg === `Biceps`
+                      ? BicepsIcon
+                      : workoutCateg === `Abs`
+                      ? AbsIcon
+                      : workoutCateg === `Back`
+                      ? BackIcon
+                      : workoutCateg === `Triceps`
+                      ? TricepsIcon
+                      : null
+                  }
+                  alt=""
+                />
+                <h4 className="exo-category-workout-category">
+                  {workout?.exoCategory}
+                </h4>
+              </div>
+            )}
+          </>
+        ) : (
+          //all this content is shown when the user clicks on the 3rd (filter) btn
+          <div className="work-details-content-filters-btns">
+            <h4 className="work-details-content-filters-btns-title">
+              {workout?.title}
+            </h4>
+            <div className="work-details-content-filters-btns-infos">
+              <div className="work-details-content-filters-btns-load">
+                <img className="work-details-load-img" src={balance} alt="" />
+                <span className="load-span1">
+                  <strong>
+                    Load (<span className="span1-kg">kg</span> )
+                  </strong>
+                </span>
+                <span className="load-span2"> : {workout?.load}</span>
+              </div>
+
+              <div className={"work-details-content-filters-btns-reps"}>
+                <div className="reps-inner">
+                  <img className="reps-img" src={repetition} alt="" />
+                  <span className="reps-span1">
+                    <strong>Number of reps </strong>
                   </span>
+                  <span className="reps-span2">: {workout?.reps}</span>
                 </div>
               </div>
-            </div>
 
-            <div
-              className="work-details-right-content"
-              style={{ width: "20%" }}
-            >
-              <div className="work-details-right-inner control-btns">
-                <Popconfirm
-                  title="Are you sure to delete this task?"
-                  onConfirm={confirm}
-                  onCancel={cancel}
-                  okText="Yes"
-                  cancelText="No"
-                  open={openPopconfirm}
-                >
-                  <IconButton
-                    className="work-details-right-inner-iconbtn"
-                    //differnce  between setOpenBackdrop(false) and setOpenBackdrop(cur=>!cur) or setOpenBackdrop(!openBackdrop) is that the 2 last statement will create a toggle logic hence a infinite loop onclick on esc , whereas the 1st one will trigger only once
-                    onKeyDown={() => {
-                      setOpenPopconfirm(false);
-                      setshowBorder(false);
-                      setOpenBackdrop(false);
-                    }} //onClick on Esc key
-                    // never use onBlur method here because it prevents the items from being deleted
-                    onClick={handleDeleteWorkout}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Popconfirm>
-
-                <IconButton
-                  className="work-details-right-inner-iconbtn"
-                  onClick={handleShare}
-                >
-                  <ShareIcon></ShareIcon>
-                </IconButton>
-
-                <IconButton
-                  className="work-details-right-inner-iconbtn"
-                  onClick={handleInfos}
-                >
-                  <InfoIcon />
-                </IconButton>
-
-                <IconButton
-                  className="icon-btn-edit work-details-right-inner-iconbtn"
-                  onBlur={() => setborder("")}
-                  onKeyDown={() => setborder("")}
-                  onClick={handleEdit}
-                >
-                  <img className={"edit-img"} src={editIconPen} alt="" />
-                </IconButton>
+              <div className="work-details-content-filters-btns-date">
+                <img className="date-img" src={clock} alt="" />
+                <span className="date-text">
+                  {formatDistanceToNow(new Date(createdAt), {
+                    addSuffix: true,
+                  })}
+                </span>
               </div>
             </div>
-          </Stack>
-        </Collapse>
-
-        {/* this is the exo icon and exo category that shows on hover */}
-        {!workoutCondensed && (
-          <div className="exo-category-icon-wrapper">
-            <img
-              className="exo-category-icon"
-              src={
-                workoutCateg === `Hamstrings`
-                  ? HamstringsIcon
-                  : workoutCateg === `Chest`
-                  ? ChestIcon
-                  : workoutCateg === `Trapezius`
-                  ? TrapeziusIcon
-                  : workoutCateg === `Shoulders`
-                  ? ShouldersIcon
-                  : workoutCateg === `Forearms`
-                  ? ForearmsIcon
-                  : workoutCateg === `Calves`
-                  ? CalvesIcon
-                  : workoutCateg === `Biceps`
-                  ? BicepsIcon
-                  : workoutCateg === `Abs`
-                  ? AbsIcon
-                  : workoutCateg === `Back`
-                  ? BackIcon
-                  : workoutCateg === `Triceps`
-                  ? TricepsIcon
-                  : null
-              }
-              alt=""
-            />
-            <h4 className="exo-category-workout-category">
-              {workout?.exoCategory}
-            </h4>
           </div>
         )}
       </div>
@@ -329,73 +401,77 @@ export const WorkoutDetails = ({
           {/* content */}
         </Backdrop>
         {/* Antd Drawer  */}
-        <div className="workout-details-drawer-container">
-          <Drawer
-            className="workout-details-drawer"
-            title="Share on..."
-            placement="top"
-            closable={true}
-            onClose={onClose}
-            open={openDrawer}
-            // closeIcon
-            getContainer={`.workout-details-container${index}`}
-            style={{
-              position: "absolute",
-            }}
-          >
-            <div
-              className={
-                layoutGrid
-                  ? "workout-details-imgs-grid"
-                  : "workout-details-imgs"
-              }
-            >
-              <SocialIcons
-                {...{ layoutGrid }}
-                workoutTitle={workout?.title}
-              ></SocialIcons>
-            </div>
-          </Drawer>
-        </div>
-        <div className="workout-infos-drawer-container">
-          <Drawer
-            className="workout-infos-drawer"
-            placement="right"
-            closable={true}
-            onClose={() => {
-              setOpenInfosDrawer(false);
-            }}
-            open={openInfosDrawer}
-            size={"large"}
-            destroyOnClose
-            // destroyOnClose === Whether to unmount child components on closing drawer or not
-            extra={
-              <Space>
-                <Button
-                  type="dashed"
-                  size="large"
-                  onClick={() => {
-                    setOpenInfosDrawer(false);
-                  }}
-                >
-                  {`Hide`}
-                </Button>
-              </Space>
-            }
-          >
-            <div className="workout-infos-wrapper">
-              <Stepper
-                {...{
-                  setOpenInfosDrawer,
-                  setbg,
-                  setdetailsContClass,
-                  setcontainerClass,
+        {!showAllExistentWorkouts && (
+          <>
+            <div className="workout-details-drawer-container">
+              <Drawer
+                className="workout-details-drawer"
+                title="Share on..."
+                placement="top"
+                closable={true}
+                onClose={onClose}
+                open={openDrawer}
+                // closeIcon
+                getContainer={`.workout-details-container${index}`}
+                style={{
+                  position: "absolute",
                 }}
-                workoutTitle={workout?.title}
-              />
+              >
+                <div
+                  className={
+                    layoutGrid
+                      ? "workout-details-imgs-grid"
+                      : "workout-details-imgs"
+                  }
+                >
+                  <SocialIcons
+                    {...{ layoutGrid }}
+                    workoutTitle={workout?.title}
+                  ></SocialIcons>
+                </div>
+              </Drawer>
             </div>
-          </Drawer>
-        </div>
+            <div className="workout-infos-drawer-container">
+              <Drawer
+                className="workout-infos-drawer"
+                placement="right"
+                closable={true}
+                onClose={() => {
+                  setOpenInfosDrawer(false);
+                }}
+                open={openInfosDrawer}
+                size={"large"}
+                destroyOnClose
+                // destroyOnClose === Whether to unmount child components on closing drawer or not
+                extra={
+                  <Space>
+                    <Button
+                      type="dashed"
+                      size="large"
+                      onClick={() => {
+                        setOpenInfosDrawer(false);
+                      }}
+                    >
+                      {`Hide`}
+                    </Button>
+                  </Space>
+                }
+              >
+                <div className="workout-infos-wrapper">
+                  <Stepper
+                    {...{
+                      setOpenInfosDrawer,
+                      setbg,
+                      setdetailsContClass,
+                      setcontainerClass,
+                    }}
+                    workoutTitle={workout?.title}
+                  />
+                </div>
+              </Drawer>
+            </div>
+          </>
+        )}
         <Modal
           className=""
           open={openEditModal}
@@ -423,21 +499,3 @@ export const WorkoutDetails = ({
     </>
   );
 };
-
-// const response = await fetch("/api/workouts", {
-//   method: "PATCH",
-//   body: JSON.stringify(workout),
-//   headers: {
-//     "Content-Type": "application/json",
-//   },
-// });
-
-//to keep the state when we refresh the page
-// useEffect(() => {
-//   const data = window.localStorage.getItem("updReps_STATE");
-//   if (data !== null) setReps(JSON.parse(data));
-// }, []);
-// useEffect(() => {
-//   window.localStorage.setItem("updReps_STATE", JSON.stringify(updReps));
-// }, [updReps]);
-//try to remove JSON.stringify
