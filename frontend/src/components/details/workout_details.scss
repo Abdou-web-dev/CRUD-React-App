@@ -8,6 +8,18 @@
   text-align: center;
   border-radius: 2px;
 }
+// in order to center the index , regarding the container when the user filters the items
+.workout-details-top-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  .index-text-wrapper {
+    span {
+      font-family: "Inconsolata";
+      font-size: 4em;
+    }
+  }
+}
 
 .workout-details-container-as-list {
   background-color: white;
@@ -230,6 +242,7 @@
   }
 }
 
+//initial list of workouts, 3rd btn
 .condensed-workouts-all-workouts {
   background-color: rgba(36, 40, 41, 0.48);
   position: relative;
@@ -255,6 +268,107 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 25px;
+
+      .work-details-content-filters-btns-load {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-right: 10px;
+        .work-details-load-img {
+          width: 50px;
+          height: 50px;
+        }
+        .load-span1 {
+          font-family: "Mulish";
+
+          .span1-kg {
+            font-style: italic;
+            font-family: "Inconsolata";
+          }
+        }
+        .load-span2 {
+          font-family: "Open Sans";
+        }
+      }
+      .work-details-content-filters-btns-reps {
+        margin-left: 5px;
+        .reps-inner {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          .reps-img {
+            width: 50px;
+            height: 50px;
+          }
+          .reps-span1 {
+            font-family: "Mulish";
+            .span1-kg {
+              font-style: italic;
+              font-family: "Inconsolata";
+            }
+          }
+          .reps-span2 {
+            font-family: "Open Sans";
+          }
+        }
+      }
+      .work-details-content-filters-btns-date {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        max-width: 90px;
+        margin-left: 10px;
+        .date-img {
+          width: 50px;
+          height: 50px;
+        }
+        .date-text {
+          font-style: italic;
+          font-family: "Inconsolata";
+        }
+      }
+    }
+  }
+}
+.work-details-content-filters-btns-collapse-icon {
+  position: relative;
+  bottom: 20px;
+  // border: 1px solid red;
+}
+
+//list of relevant workouts either to Chest,....
+.condensed-workouts-filter-results {
+  background-color: rgba(36, 40, 41, 0.25);
+  position: relative;
+  margin-bottom: 25px;
+  padding: 30px 10px;
+  padding-top: 0;
+  width: 800px;
+  &:hover {
+    background-color: rgba(36, 40, 41, 0.35);
+  }
+  .work-details-content-filters-btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .work-details-content-filters-btns-title {
+      font-size: 1.2em;
+      color: white;
+      font-weight: bolder;
+      font-family: "Inconsolata";
+      letter-spacing: 1.5px;
+    }
+    .work-details-content-filters-btns-infos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
       margin-top: 25px;
 
       .work-details-content-filters-btns-load {

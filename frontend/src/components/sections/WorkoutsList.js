@@ -46,7 +46,7 @@ export function WorkoutsList({
   const [showMoreIcon, setshowMoreIcon] = useState(moreIcon);
   const [counter, setcounter] = useState(0);
   const [secondBtnDisabled, setsecondBtnDisabled] = useState(false);
-  const [showFilterButton, setshowFilterButton] = useState(false); //passed as prop
+  const [filterBtnDisabled, setFilterBtnDisabled] = useState(true); //passed as prop
   const [showFilterBtns, setshowFilterBtns] = useState(false);
 
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
@@ -95,7 +95,7 @@ export function WorkoutsList({
       setshowAllWorkoutsCondensed(false);
       setshowAllWorkouts(false);
     }
-    setshowFilterButton(true);
+    setFilterBtnDisabled(false);
   }
 
   function showItemsPage1(index) {
@@ -290,11 +290,13 @@ export function WorkoutsList({
   useEffect(() => {
     if (searchInput?.length !== 0) {
       setsecondBtnDisabled(true);
+      setFilterBtnDisabled(true);
       setBoxShadow(
         "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
       );
     } else {
       setBoxShadow("");
+      setFilterBtnDisabled(false);
     }
     if (showSecondGrp && showThirdGrp && showFifthGrp && showFourthGrp) {
       setshowMoreIcon(lessIcon);
@@ -304,7 +306,6 @@ export function WorkoutsList({
       setshowMoreIcon(moreIcon);
       setSpinning(false);
     }
-    if (secondGroup) console.log("second grp");
   }, [
     searchInput,
     showSecondGrp,
@@ -327,7 +328,7 @@ export function WorkoutsList({
             handleIconClick,
             showAllWorkoutsCondensed,
             setshowAllWorkoutsCondensed,
-            showFilterButton,
+            filterBtnDisabled,
             showAllWorkouts,
             setshowAllWorkouts,
             workouts,
@@ -339,6 +340,7 @@ export function WorkoutsList({
             searchInput,
             setshowFilterBtns,
             searchInput,
+            setDisplayPagination,
           }}
         />
       </div>

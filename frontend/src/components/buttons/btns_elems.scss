@@ -45,3 +45,24 @@
     margin: 30px 20px;
   }
 }
+.filtered-results-notification {
+  //  position: relative;
+  margin-left: 400px;
+  .ant-alert-filtered {
+    padding: 25px 10px;
+    position: relative;
+    bottom: 0px;
+    .noti-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 30px;
+
+      .noti-text {
+        font-family: "Poppins";
+        font-weight: 600;
+      }
+    }
+  }
+}

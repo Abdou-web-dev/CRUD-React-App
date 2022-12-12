@@ -44,6 +44,9 @@ export const WorkoutDetails = ({
   workoutCondensed,
   filteredWorkout,
   showAllExistentWorkouts,
+  indexx,
+  showResults,
+  showNotification,
 }) => {
   // let layoutList = detailsContClass === "workout-details-container-as-list";
   // console.log(createdAt?.split());
@@ -52,7 +55,8 @@ export const WorkoutDetails = ({
   let createdAt = workout?.createdAt;
   let workoutCateg = workout?.exoCategory;
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
-  let notShowOnFilter = !showAllExistentWorkouts || filteredWorkout;
+  let notShowOnFilter = !showAllExistentWorkouts && !filteredWorkout; //this means show the 4 control icon btns
+  //for deleting an item, sharing ... on the 2 first sections , but not on the 3rd section
 
   const [openEditModal, setopenEditModal] = useState(false);
   const [className, setClassName] = React.useState(`workout-details`);
@@ -60,6 +64,7 @@ export const WorkoutDetails = ({
     `0 0 0 0.1rem rgba(26, 172, 131, 0.1)`
   );
   const [showCollapse, setshowCollapse] = React.useState(true);
+  const [showCollapseFilter, setshowCollapseFilter] = React.useState(true);
 
   const handleCollapseclick = () => {
     if (showCollapse === true) {
@@ -69,8 +74,17 @@ export const WorkoutDetails = ({
       setshowCollapse(true);
       setcontainerBoxShadow(`0 0 0 0.1rem rgba(26, 172, 131, 0.1`);
     }
-    console.log(showCollapse);
+    // console.log(showCollapse);
   };
+  function handleCollapseClickFilter() {
+    if (showCollapseFilter === true) {
+      setshowCollapseFilter(false);
+      setcontainerBoxShadow(``);
+    } else {
+      setshowCollapseFilter(true);
+      setcontainerBoxShadow(``);
+    }
+  }
 
   const handleDelete = async () => {
     if (!user) {
@@ -120,6 +134,7 @@ export const WorkoutDetails = ({
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openInfosDrawer, setOpenInfosDrawer] = useState(false);
   const [updatedWorkout, setUpdatedWorkout] = useState({});
+  //
 
   //
   const handleShare = () => {
@@ -163,12 +178,73 @@ export const WorkoutDetails = ({
     }
   }, [openDrawer, openInfosDrawer, layoutGrid]);
 
+  let CollapseContent = (
+    <div className="work-details-content-filters-btns">
+      {showResults && (
+        <div className="work-details-content-filters-btns-collapse-icon">
+          <IconButton
+            className="work-details-left-inner-iconbtn"
+            onClick={handleCollapseClickFilter}
+          >
+            {showCollapseFilter ? (
+              <ExpandLessIcon
+                style={{ color: "white", width: "64px", height: `64px` }}
+              />
+            ) : (
+              <ExpandMoreIcon
+                style={{ color: "white", width: "64px", height: `64px` }}
+              />
+            )}
+          </IconButton>
+        </div>
+      )}
+      <h4 className="work-details-content-filters-btns-title">
+        {workout?.title}
+      </h4>
+      <div className="work-details-content-filters-btns-infos">
+        <div className="work-details-content-filters-btns-load">
+          <img className="work-details-load-img" src={balance} alt="" />
+          <span className="load-span1">
+            <strong>
+              Load (<span className="span1-kg">kg</span> )
+            </strong>
+          </span>
+          <span className="load-span2"> : {workout?.load}</span>
+        </div>
+
+        <div className={"work-details-content-filters-btns-reps"}>
+          <div className="reps-inner">
+            <img className="reps-img" src={repetition} alt="" />
+            <span className="reps-span1">
+              <strong>Number of reps </strong>
+            </span>
+            <span className="reps-span2">: {workout?.reps}</span>
+          </div>
+        </div>
+
+        <div className="work-details-content-filters-btns-date">
+          <img className="date-img" src={clock} alt="" />
+          <span className="date-text">
+            {formatDistanceToNow(new Date(createdAt), {
+              addSuffix: true,
+            })}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <>
+    <div className={showResults ? "workout-details-top-container" : ""}>
+      {showResults && (
+        <div className="index-text-wrapper">
+          <span className="index-text">{indexx + 1}</span>
+        </div>
+      )}
       <div
         className={`${detailsContClass}
          site-drawer-render-in-current-wrapper
-         workout-details-container${index}
+         workout-details-container
           ${showBorder === true ? `border-selected` : ``} 
           ${
             searchInput?.length !== 0 &&
@@ -186,7 +262,9 @@ export const WorkoutDetails = ({
               : `` //3rd btn styles
           }         
           ${
-            filteredWorkout ? `condensed-workouts-filter-results` : `` //3rd btn styles afetr clicking filter btn
+            filteredWorkout && !showAllExistentWorkouts
+              ? `condensed-workouts-filter-results`
+              : `` //3rd btn styles when clicking filter btn
           }           
 
           
@@ -204,7 +282,6 @@ export const WorkoutDetails = ({
               in={showCollapse}
               collapsedSize="90px"
               style={{ width: !notShowOnFilter ? `100%` : `` }}
-              className="aaaaaerfrfrfr5aa"
             >
               <Stack className={className} direction="row">
                 {/* <span>{index} </span> */}
@@ -353,41 +430,21 @@ export const WorkoutDetails = ({
           </>
         ) : (
           //all this content is shown when the user clicks on the 3rd (filter) btn
-          <div className="work-details-content-filters-btns">
-            <h4 className="work-details-content-filters-btns-title">
-              {workout?.title}
-            </h4>
-            <div className="work-details-content-filters-btns-infos">
-              <div className="work-details-content-filters-btns-load">
-                <img className="work-details-load-img" src={balance} alt="" />
-                <span className="load-span1">
-                  <strong>
-                    Load (<span className="span1-kg">kg</span> )
-                  </strong>
-                </span>
-                <span className="load-span2"> : {workout?.load}</span>
-              </div>
-
-              <div className={"work-details-content-filters-btns-reps"}>
-                <div className="reps-inner">
-                  <img className="reps-img" src={repetition} alt="" />
-                  <span className="reps-span1">
-                    <strong>Number of reps </strong>
-                  </span>
-                  <span className="reps-span2">: {workout?.reps}</span>
-                </div>
-              </div>
-
-              <div className="work-details-content-filters-btns-date">
-                <img className="date-img" src={clock} alt="" />
-                <span className="date-text">
-                  {formatDistanceToNow(new Date(createdAt), {
-                    addSuffix: true,
-                  })}
-                </span>
-              </div>
-            </div>
-          </div>
+          <>
+            {/* so that the collapse icon and the collapse functionality is applied only to the filtered results of workouts */}
+            {showResults ? (
+              <Collapse
+                in={showCollapseFilter}
+                collapsedSize="30px"
+                style={{ width: !notShowOnFilter ? `100%` : `` }}
+                className=""
+              >
+                {CollapseContent}
+              </Collapse>
+            ) : (
+              <>{CollapseContent}</>
+            )}
+          </>
         )}
       </div>
 
@@ -496,6 +553,7 @@ export const WorkoutDetails = ({
           ></EditModal>
         </Modal>
       </>
-    </>
+    </div>
   );
 };
+//  workout-details-container${index}

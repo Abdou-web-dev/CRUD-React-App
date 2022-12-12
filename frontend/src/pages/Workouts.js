@@ -154,7 +154,7 @@ const Workouts = ({}) => {
           <BackTop />
         </div>
 
-        {searchInput?.length === 0 && (
+        {searchInput?.length === 0 && !showAllExistentWorkouts && (
           <Pagination
             className={paginationClassName}
             prevIcon={
