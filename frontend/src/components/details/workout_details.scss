@@ -92,6 +92,19 @@
         }
       }
     }
+
+    .work-details-right-inner {
+      &.control-btns {
+        // border: 1px solid red;
+        .work-details-right-inner-iconbtn {
+          &.star-icon {
+            // border: 1px solid red;
+            width: 40px;
+            height: 40px;
+          }
+        }
+      }
+    }
   }
   .exo-category-icon-wrapper {
     padding-top: 7px;

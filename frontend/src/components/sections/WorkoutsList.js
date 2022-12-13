@@ -98,6 +98,26 @@ export function WorkoutsList({
     setFilterBtnDisabled(false);
   }
 
+  let workoutsIds = workouts?.map((workout) => workout._id);
+  const [selectedWorkouts, setSelectedWorkouts] = useState(workoutsIds);
+
+  const addOrRemoveWorkout = (workoutId, isChecked) => {
+    let newSelectedWorkouts = [...selectedWorkouts];
+    // Case 1 : The user checks the box
+    if (isChecked) {
+      newSelectedWorkouts.push(workoutId); // === newSelectedWorkouts = [...selectedWorkouts, workoutId];
+    }
+    // Case 2 : The user unchecks the box
+    else {
+      newSelectedWorkouts.splice(newSelectedWorkouts.indexOf(workoutId), 1);
+    }
+    setSelectedWorkouts(newSelectedWorkouts);
+    console.log(selectedWorkouts);
+  };
+
+  // save the avatar to local storage
+  localStorage.setItem("selectedWorkouts", JSON.stringify(selectedWorkouts));
+
   function showItemsPage1(index) {
     let a1 = index >= 0 && index <= 3;
     let b1 = index >= 0 && index <= 5;
@@ -408,6 +428,8 @@ export function WorkoutsList({
                           showItemsPage10,
                           searchInput,
                           setCurrentPage,
+                          addOrRemoveWorkout,
+                          selectedWorkouts,
                         }}
                         key={index}
                       ></WorkoutDetailsItem>
@@ -436,6 +458,7 @@ export function WorkoutsList({
                           showItemsPage8,
                           showItemsPage9,
                           showItemsPage10,
+                          //maybe add this prop  (addOrRemoveWorkout) here later ?
                         }}
                         key={index}
                       ></WorkoutDetailsItem>

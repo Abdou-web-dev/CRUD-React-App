@@ -20,6 +20,8 @@ export function WorkoutDetailsItem({
   showItemsPage8,
   showItemsPage9,
   showItemsPage10,
+  addOrRemoveWorkout,
+  selectedWorkouts,
 }) {
   return (
     <div
@@ -56,6 +58,8 @@ export function WorkoutDetailsItem({
             setdetailsContClass,
             setcontainerClass,
             searchInput,
+            addOrRemoveWorkout,
+            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -74,6 +78,8 @@ export function WorkoutDetailsItem({
             setdetailsContClass,
             setcontainerClass,
             searchInput,
+            addOrRemoveWorkout,
+            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -92,6 +98,8 @@ export function WorkoutDetailsItem({
             setdetailsContClass,
             setcontainerClass,
             searchInput,
+            addOrRemoveWorkout,
+            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -110,6 +118,8 @@ export function WorkoutDetailsItem({
             setdetailsContClass,
             setcontainerClass,
             searchInput,
+            addOrRemoveWorkout,
+            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -128,6 +138,8 @@ export function WorkoutDetailsItem({
             setdetailsContClass,
             setcontainerClass,
             searchInput,
+            addOrRemoveWorkout,
+            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -146,6 +158,8 @@ export function WorkoutDetailsItem({
             setdetailsContClass,
             setcontainerClass,
             searchInput,
+            addOrRemoveWorkout,
+            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -164,6 +178,8 @@ export function WorkoutDetailsItem({
             setdetailsContClass,
             setcontainerClass,
             searchInput,
+            addOrRemoveWorkout,
+            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -182,6 +198,8 @@ export function WorkoutDetailsItem({
             setdetailsContClass,
             setcontainerClass,
             searchInput,
+            addOrRemoveWorkout,
+            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -200,6 +218,8 @@ export function WorkoutDetailsItem({
             setdetailsContClass,
             setcontainerClass,
             searchInput,
+            addOrRemoveWorkout,
+            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -218,6 +238,8 @@ export function WorkoutDetailsItem({
             setdetailsContClass,
             setcontainerClass,
             searchInput,
+            addOrRemoveWorkout,
+            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0

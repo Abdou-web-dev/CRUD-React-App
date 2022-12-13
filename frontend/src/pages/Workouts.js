@@ -25,6 +25,8 @@ const Workouts = ({}) => {
   const { workouts, dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
 
+  // let workoutsList = workouts?.map((workout) => workout._id);
+  // console.log(workoutsList, "workoutsList");
   const [filteredResults, setFilteredResults] = React.useState([]);
   const [showAllExistentWorkouts, setshowAllExistentWorkouts] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);

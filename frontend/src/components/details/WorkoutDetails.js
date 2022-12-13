@@ -9,7 +9,8 @@ import React, { useState } from "react";
 import editIconPen from "../../assets/img/editer.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
-
+import { CustomizedCheckbox } from "../checkboxes/CustomCheckBox";
+// starIconYellow starIconGray
 // date fns package and icons
 import InfoIcon from "@mui/icons-material/Info";
 import { formatDistanceToNow } from "date-fns";
@@ -46,7 +47,7 @@ export const WorkoutDetails = ({
   showAllExistentWorkouts,
   indexx,
   showResults,
-  showNotification,
+  addOrRemoveWorkout,
 }) => {
   // let layoutList = detailsContClass === "workout-details-container-as-list";
   // console.log(createdAt?.split());
@@ -134,9 +135,7 @@ export const WorkoutDetails = ({
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openInfosDrawer, setOpenInfosDrawer] = useState(false);
   const [updatedWorkout, setUpdatedWorkout] = useState({});
-  //
 
-  //
   const handleShare = () => {
     setOpenDrawer(true);
   };
@@ -233,6 +232,12 @@ export const WorkoutDetails = ({
       </div>
     </div>
   );
+  const [checked, setChecked] = useState(false);
+
+  const onCheckBoxChange = (e) => {
+    setChecked(e.target.checked);
+    addOrRemoveWorkout(workout._id, e.target.checked);
+  };
 
   return (
     <div className={showResults ? "workout-details-top-container" : ""}>
@@ -245,6 +250,11 @@ export const WorkoutDetails = ({
         className={`${detailsContClass}
          site-drawer-render-in-current-wrapper
          workout-details-container
+         workout-details-container${
+           index
+           // this className rule must not be deleted because the drawer uses it as a container to render the content in the current container
+         }
+        
           ${showBorder === true ? `border-selected` : ``} 
           ${
             searchInput?.length !== 0 &&
@@ -340,6 +350,11 @@ export const WorkoutDetails = ({
                 >
                   {notShowOnFilter && (
                     <div className="work-details-right-inner control-btns">
+                      {/* <StarredWorkout {...{ workout }} /> */}
+                      <CustomizedCheckbox
+                        onChange={onCheckBoxChange}
+                        checked={checked}
+                      />
                       <Popconfirm
                         title="Are you sure to delete this task?"
                         onConfirm={confirm}
@@ -470,6 +485,7 @@ export const WorkoutDetails = ({
                 open={openDrawer}
                 // closeIcon
                 getContainer={`.workout-details-container${index}`}
+                // getContainer={false}
                 style={{
                   position: "absolute",
                 }}
