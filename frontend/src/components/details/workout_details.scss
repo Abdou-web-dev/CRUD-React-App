@@ -95,7 +95,6 @@
 
     .work-details-right-inner {
       &.control-btns {
-        // border: 1px solid red;
         .work-details-right-inner-iconbtn {
           &.star-icon {
             // border: 1px solid red;
@@ -210,6 +209,10 @@
           display: flex;
           flex-direction: column;
           margin-left: 20px;
+          .control-btns-checkbox {
+            position: relative;
+            right: 2px;
+          }
         }
       }
       .work-details-right-inner-iconbtn {
@@ -261,6 +264,10 @@
   position: relative;
   margin-bottom: 25px;
   padding: 70px 10px;
+
+  &.condensed-workouts-all-workouts-CollapseContent {
+    padding-top: 0px;
+  }
   &:hover {
     background-color: rgba(36, 40, 41, 0.55);
   }

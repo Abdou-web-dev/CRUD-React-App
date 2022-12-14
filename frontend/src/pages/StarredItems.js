@@ -1,16 +1,28 @@
+import { useEffect, useState } from "react";
+
 function StarredItems() {
-  // const favoriteWorkouts = JSON.parse(localStorage.getItem("favoriteWorkouts")); //we can acces email and fullName
+  const [favoriteWorkoutsData, setfavoriteWorkoutsData] = useState();
 
-  const selectedWorkoutss = JSON.parse(
-    localStorage.getItem("selectedWorkouts")
-  );
+  useEffect(() => {
+    const data = localStorage.getItem("selectedWorkoutsState");
+    console.log(data);
+    if (data !== null) setfavoriteWorkoutsData(JSON.parse(data));
+  }, []);
 
-  console.log(selectedWorkoutss);
+  // const favoriteWorkouts = JSON.parse(
+  //   localStorage.getItem("selectedWorkoutsState")
+  // );
+
   return (
     <div>
-      {selectedWorkoutss &&
-        selectedWorkoutss?.map((selectedWorkout, index) => (
-          <li key={index}>{selectedWorkout._id}</li>
+      {favoriteWorkoutsData &&
+        favoriteWorkoutsData?.map((favoriteWorkout, index) => (
+          <div key={index}>
+            <div>{favoriteWorkout?.title}</div>
+            <div>{favoriteWorkout?.reps}</div>
+            <div>{favoriteWorkout?.load}</div>
+            <div>{favoriteWorkout?.createdAt}</div>
+          </div>
         ))}
     </div>
   );

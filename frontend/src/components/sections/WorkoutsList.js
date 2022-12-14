@@ -39,7 +39,6 @@ export function WorkoutsList({
   const [bg, setbg] = useState("");
   const [firstIcon, setFirsticon] = useState(listIcon);
   const [secondIcon, setSecondIcon] = useState(blocs);
-
   const [showAllWorkouts, setshowAllWorkouts] = useState(true);
   const [spinning, setSpinning] = useState(false);
   const [showMoreBtn, setshowMoreBtn] = useState(true);
@@ -48,12 +47,98 @@ export function WorkoutsList({
   const [secondBtnDisabled, setsecondBtnDisabled] = useState(false);
   const [filterBtnDisabled, setFilterBtnDisabled] = useState(true); //passed as prop
   const [showFilterBtns, setshowFilterBtns] = useState(false);
+  const [selectedWorkouts, setSelectedWorkouts] = useState([]);
 
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let layoutList = detailsContClass === "workout-details-container-as-list";
-
   let result = filteredResults?.length === 1 ? `result` : `results`;
 
+  //JSX Fragments
+
+  const [showFirstGrp, setshowFirstGrp] = useState(true);
+  const firstGroup =
+    workouts &&
+    workouts?.map(
+      (workoutCondensed, index) =>
+        index < 8 &&
+        index >= 0 && (
+          <WorkoutDetailsItemCondensed //this is the initial first group
+            {...{
+              workoutCondensed,
+              counter,
+            }}
+            key={workoutCondensed._id}
+          />
+        )
+    );
+
+  const [showSecondGrp, setshowSecondGrp] = useState(false);
+  const secondGroup =
+    workouts &&
+    workouts?.map(
+      (workoutCondensed, index) =>
+        index < 16 &&
+        index >= 8 && (
+          <div>
+            <WorkoutDetailsItemCondensed
+              {...{
+                workoutCondensed,
+                counter,
+              }}
+              key={workoutCondensed._id}
+            />
+          </div>
+        )
+    );
+  //
+  const [showThirdGrp, setshowThirdGrp] = useState(false);
+  const thirdGroup =
+    workouts &&
+    workouts?.map(
+      (workoutCondensed, index) =>
+        index < 24 &&
+        index >= 16 && (
+          <WorkoutDetailsItemCondensed
+            {...{
+              workoutCondensed,
+              counter,
+            }}
+            key={workoutCondensed._id}
+          />
+        )
+    );
+  const [showFourthGrp, setshowFourthGrp] = useState(false);
+  const fourthGroup =
+    workouts &&
+    workouts?.map(
+      (workoutCondensed, index) =>
+        index < 32 &&
+        index >= 24 && (
+          <WorkoutDetailsItemCondensed
+            {...{
+              workoutCondensed,
+              counter,
+            }}
+            key={workoutCondensed._id}
+          />
+        )
+    );
+  const [showFifthGrp, setshowFifthGrp] = useState(false);
+  const fifthGroup =
+    workouts &&
+    workouts?.map(
+      (workoutCondensed, index) =>
+        index >= 32 && (
+          <WorkoutDetailsItemCondensed
+            {...{
+              workoutCondensed,
+              counter,
+            }}
+            key={workoutCondensed._id}
+          />
+        )
+    );
+  //functions
   function handleIconClick() {
     setshowAllWorkoutsCondensed(false);
     setshowAllExistentWorkouts(false);
@@ -98,25 +183,20 @@ export function WorkoutsList({
     setFilterBtnDisabled(false);
   }
 
-  let workoutsIds = workouts?.map((workout) => workout._id);
-  const [selectedWorkouts, setSelectedWorkouts] = useState(workoutsIds);
-
-  const addOrRemoveWorkout = (workoutId, isChecked) => {
-    let newSelectedWorkouts = [...selectedWorkouts];
+  // let workoutsIds = workouts?.map((workout) => workout._id);
+  //this function should be written in this component, as this commponent is the parent of WorkoutDetailsItem
+  const addOrRemoveWorkout = (workoutObject, isChecked) => {
+    let newSelectedWorkouts = [...selectedWorkouts]; //must declare an empty array here
     // Case 1 : The user checks the box
     if (isChecked) {
-      newSelectedWorkouts.push(workoutId); // === newSelectedWorkouts = [...selectedWorkouts, workoutId];
+      newSelectedWorkouts.push(workoutObject); // === newSelectedWorkouts = [...selectedWorkouts, workoutId];
     }
     // Case 2 : The user unchecks the box
     else {
-      newSelectedWorkouts.splice(newSelectedWorkouts.indexOf(workoutId), 1);
+      newSelectedWorkouts.splice(newSelectedWorkouts.indexOf(workoutObject), 1);
     }
     setSelectedWorkouts(newSelectedWorkouts);
-    console.log(selectedWorkouts);
   };
-
-  // save the avatar to local storage
-  localStorage.setItem("selectedWorkouts", JSON.stringify(selectedWorkouts));
 
   function showItemsPage1(index) {
     let a1 = index >= 0 && index <= 3;
@@ -189,93 +269,6 @@ export function WorkoutsList({
       return b2;
   }
 
-  //
-  const [showFirstGrp, setshowFirstGrp] = useState(true);
-  const firstGroup =
-    workouts &&
-    workouts?.map(
-      (workoutCondensed, index) =>
-        index < 8 &&
-        index >= 0 && (
-          <WorkoutDetailsItemCondensed //this is the initial first group
-            {...{
-              workoutCondensed,
-              counter,
-            }}
-            key={workoutCondensed._id}
-          />
-        )
-    );
-
-  const [showSecondGrp, setshowSecondGrp] = useState(false);
-  const secondGroup =
-    workouts &&
-    workouts?.map(
-      (workoutCondensed, index) =>
-        index < 16 &&
-        index >= 8 && (
-          <div>
-            <WorkoutDetailsItemCondensed
-              {...{
-                workoutCondensed,
-                counter,
-              }}
-              key={workoutCondensed._id}
-            />
-          </div>
-        )
-    );
-  //
-  const [showThirdGrp, setshowThirdGrp] = useState(false);
-  const thirdGroup =
-    workouts &&
-    workouts?.map(
-      (workoutCondensed, index) =>
-        index < 24 &&
-        index >= 16 && (
-          <WorkoutDetailsItemCondensed
-            {...{
-              workoutCondensed,
-              counter,
-            }}
-            key={workoutCondensed._id}
-          />
-        )
-    );
-  //
-  const [showFourthGrp, setshowFourthGrp] = useState(false);
-  const fourthGroup =
-    workouts &&
-    workouts?.map(
-      (workoutCondensed, index) =>
-        index < 32 &&
-        index >= 24 && (
-          <WorkoutDetailsItemCondensed
-            {...{
-              workoutCondensed,
-              counter,
-            }}
-            key={workoutCondensed._id}
-          />
-        )
-    );
-  //
-  const [showFifthGrp, setshowFifthGrp] = useState(false);
-  const fifthGroup =
-    workouts &&
-    workouts?.map(
-      (workoutCondensed, index) =>
-        index >= 32 && (
-          <WorkoutDetailsItemCondensed
-            {...{
-              workoutCondensed,
-              counter,
-            }}
-            key={workoutCondensed._id}
-          />
-        )
-    );
-
   function handleClick() {
     setshowSecondGrp(true);
     setSecondIcon(redCloseIcon);
@@ -326,6 +319,7 @@ export function WorkoutsList({
       setshowMoreIcon(moreIcon);
       setSpinning(false);
     }
+    console.log(selectedWorkouts);
   }, [
     searchInput,
     showSecondGrp,
@@ -333,7 +327,16 @@ export function WorkoutsList({
     showFifthGrp,
     showFourthGrp,
     secondGroup,
+    selectedWorkouts,
   ]);
+
+  //save selectedWorkouts to the brower's local storage
+  useEffect(() => {
+    localStorage.setItem(
+      "selectedWorkoutsState",
+      JSON.stringify(selectedWorkouts)
+    );
+  }, [selectedWorkouts]);
 
   return (
     <div className="workouts-section-container">
@@ -429,7 +432,9 @@ export function WorkoutsList({
                           searchInput,
                           setCurrentPage,
                           addOrRemoveWorkout,
-                          selectedWorkouts,
+                          // icon,
+                          // title,
+                          // HandleFavorite,
                         }}
                         key={index}
                       ></WorkoutDetailsItem>

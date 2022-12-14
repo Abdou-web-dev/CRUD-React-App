@@ -1,5 +1,8 @@
 import React from "react";
+import favorite from "../../assets/img/favorite.png";
+import favoriteGray from "../../assets/img/favoriteGray.png";
 import infoPNG from "../../assets/img/infoPNG.png";
+
 import left from "../../assets/img/left-arr.svg";
 import leftArrowIcon from "../../assets/img/left-arrow.png";
 import left_green from "../../assets/img/left_green.svg";
@@ -97,5 +100,16 @@ export const NextArrowList = () => {
 export const PrevArrowList = () => {
   return (
     <img style={{ width: "50px", height: "50px" }} src={left_green} alt="" />
+  );
+};
+export const HeartIcon = () => {
+  return (
+    <img style={{ width: "30px", height: "30px" }} src={favorite} alt="" />
+  );
+};
+
+export const HeartIconGray = () => {
+  return (
+    <img style={{ width: "30px", height: "30px" }} src={favoriteGray} alt="" />
   );
 };

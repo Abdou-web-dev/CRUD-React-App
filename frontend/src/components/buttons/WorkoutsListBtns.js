@@ -1,5 +1,5 @@
 import { Alert, Button, Tooltip } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AbsIcon from "../../assets/img/AbsIcon.png";
 import BackIcon from "../../assets/img/backIcon.png";
 import BicepsIcon from "../../assets/img/bicepsIcon.png";
@@ -61,6 +61,7 @@ export function WorkoutsListBtns({
   const [filteredWorkout, setFilteredWorkout] = useState(false); //in order to apply styles in child component to work detailer wrapper when clicking on filter btns
   const [showNotification, setshowNotification] = useState(false);
   const [workoutCateg, setworkoutCateg] = useState(``);
+  const [selectedWorkouts, setSelectedWorkouts] = useState([]);
 
   const showResults =
     showChestResults ||
@@ -227,6 +228,27 @@ export function WorkoutsListBtns({
     setshowNotification(false);
   }
 
+  const addOrRemoveWorkout = (workoutObject, isChecked) => {
+    let newSelectedWorkouts = [...selectedWorkouts]; //must declare an empty array here
+    // Case 1 : The user checks the box
+    if (isChecked) {
+      newSelectedWorkouts.push(workoutObject); // === newSelectedWorkouts = [...selectedWorkouts, workoutId];
+    }
+    // Case 2 : The user unchecks the box
+    else {
+      newSelectedWorkouts.splice(newSelectedWorkouts.indexOf(workoutObject), 1);
+    }
+    setSelectedWorkouts(newSelectedWorkouts);
+  };
+
+  //save selectedWorkouts to the brower's local storage
+  useEffect(() => {
+    localStorage.setItem(
+      "selectedWorkoutsState",
+      JSON.stringify(selectedWorkouts)
+    );
+  }, [selectedWorkouts]);
+
   return (
     <>
       {/* notification */}
@@ -387,6 +409,7 @@ export function WorkoutsListBtns({
                   workoutCondensed,
                   showAllExistentWorkouts,
                   filteredWorkout,
+                  addOrRemoveWorkout,
                 }}
                 key={workoutCondensed?._id}
               />

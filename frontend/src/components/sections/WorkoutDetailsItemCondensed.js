@@ -13,6 +13,7 @@ export function WorkoutDetailsItemCondensed({
   filteredWorkout,
   indexx,
   showNotification,
+  addOrRemoveWorkout,
 }) {
   const [showWorkout, setshowWorkout] = useState(true);
   const [showClosebtn, setshowClosebtn] = useState(false);
@@ -33,6 +34,7 @@ export function WorkoutDetailsItemCondensed({
           showResults,
           indexx,
           showNotification,
+          addOrRemoveWorkout,
           //this prop prevents the exo icons from displaying on this component
         }}
         workout={

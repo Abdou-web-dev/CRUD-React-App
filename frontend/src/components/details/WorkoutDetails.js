@@ -9,7 +9,6 @@ import React, { useState } from "react";
 import editIconPen from "../../assets/img/editer.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
-import { CustomizedCheckbox } from "../checkboxes/CustomCheckBox";
 // starIconYellow starIconGray
 // date fns package and icons
 import InfoIcon from "@mui/icons-material/Info";
@@ -27,7 +26,9 @@ import repetition from "../../assets/img/repetition.png";
 import ShouldersIcon from "../../assets/img/shouldersIcon.png";
 import TrapeziusIcon from "../../assets/img/TrapeziusIcon.png";
 import TricepsIcon from "../../assets/img/TricepsIcon.png";
+import { CustomizedCheckbox } from "../checkboxes/CustomCheckBox";
 import { SocialIcons } from "../drawer_content/SocialIcons";
+
 import { EditModal } from "../modals/EditModal";
 import { Stepper } from "../steppers/Stepper";
 import "./workout_details.scss";
@@ -48,6 +49,9 @@ export const WorkoutDetails = ({
   indexx,
   showResults,
   addOrRemoveWorkout,
+  // icon,
+  // HandleFavorite,
+  // selectedWorkouts,
 }) => {
   // let layoutList = detailsContClass === "workout-details-container-as-list";
   // console.log(createdAt?.split());
@@ -58,7 +62,6 @@ export const WorkoutDetails = ({
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let notShowOnFilter = !showAllExistentWorkouts && !filteredWorkout; //this means show the 4 control icon btns
   //for deleting an item, sharing ... on the 2 first sections , but not on the 3rd section
-
   const [openEditModal, setopenEditModal] = useState(false);
   const [className, setClassName] = React.useState(`workout-details`);
   const [containerBoxShadow, setcontainerBoxShadow] = React.useState(
@@ -66,7 +69,19 @@ export const WorkoutDetails = ({
   );
   const [showCollapse, setshowCollapse] = React.useState(true);
   const [showCollapseFilter, setshowCollapseFilter] = React.useState(true);
+  const [checked, setChecked] = useState(false);
+  const [title, setTitle] = useState("Save this workout as favorite.");
+  //Concerning the Popconfirm antd
+  const [openBackdrop, setOpenBackdrop] = React.useState(false);
+  const [openPopconfirm, setOpenPopconfirm] = useState(false);
+  const [showBorder, setshowBorder] = useState(false);
+  const [border, setborder] = useState("1px solid lightgray");
+  //Concerning the Drawer of antd
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [openInfosDrawer, setOpenInfosDrawer] = useState(false);
+  const [updatedWorkout, setUpdatedWorkout] = useState({});
 
+  //functions
   const handleCollapseclick = () => {
     if (showCollapse === true) {
       setshowCollapse(false);
@@ -86,7 +101,6 @@ export const WorkoutDetails = ({
       setcontainerBoxShadow(``);
     }
   }
-
   const handleDelete = async () => {
     if (!user) {
       return;
@@ -105,13 +119,6 @@ export const WorkoutDetails = ({
       dispatch({ type: "DELETE_WORKOUT", payload: json });
     }
   };
-
-  //Concerning the Popconfirm antd
-  const [openBackdrop, setOpenBackdrop] = React.useState(false);
-  const [openPopconfirm, setOpenPopconfirm] = useState(false);
-  const [showBorder, setshowBorder] = useState(false);
-  const [border, setborder] = useState("1px solid lightgray");
-
   const confirm = () => {
     handleDelete();
     setOpenBackdrop(!openBackdrop);
@@ -131,18 +138,12 @@ export const WorkoutDetails = ({
     setshowBorder(!showBorder);
     setcontainerBoxShadow(`none`);
   };
-  //Concerning the Drawer of antd
-  const [openDrawer, setOpenDrawer] = useState(false);
-  const [openInfosDrawer, setOpenInfosDrawer] = useState(false);
-  const [updatedWorkout, setUpdatedWorkout] = useState({});
-
   const handleShare = () => {
     setOpenDrawer(true);
   };
   const handleInfos = () => {
     setOpenInfosDrawer(true);
   };
-
   const handleEdit = () => {
     setborder("1px solid black");
     setopenEditModal(true);
@@ -151,7 +152,6 @@ export const WorkoutDetails = ({
   const onClose = () => {
     setOpenDrawer(false);
   };
-
   const handleContainerHover = () => {
     if (detailsContClass === "workout-details-container-as-grid") {
       setcontainerBoxShadow(
@@ -164,6 +164,21 @@ export const WorkoutDetails = ({
       setcontainerBoxShadow(!containerBoxShadow);
     }
   };
+  const onCheckBoxChange = (e) => {
+    setChecked(e.target.checked);
+    addOrRemoveWorkout(workout, e.target.checked);
+    //this if statement check should be placed in this function , in this component, not in addOrRemoveWorkout function , inside WorkoutsList.js
+    if (e.target.checked) {
+      setTitle(`Saved as favorite !`);
+    } else {
+      setTitle(`No longer favorite !`);
+    }
+  };
+  //this function works as a charm
+  function countWords(str) {
+    const arr = str.split(" ");
+    return arr.filter((word) => word !== "").length;
+  }
 
   React.useEffect(() => {
     if (openDrawer === true || openInfosDrawer) {
@@ -176,10 +191,11 @@ export const WorkoutDetails = ({
       setshowCollapse(true);
     }
   }, [openDrawer, openInfosDrawer, layoutGrid]);
-
+  //JSX fragment
   let CollapseContent = (
     <div className="work-details-content-filters-btns">
       {showResults && (
+        //the collapse Icon
         <div className="work-details-content-filters-btns-collapse-icon">
           <IconButton
             className="work-details-left-inner-iconbtn"
@@ -196,6 +212,13 @@ export const WorkoutDetails = ({
             )}
           </IconButton>
         </div>
+      )}
+      {showAllExistentWorkouts && (
+        <CustomizedCheckbox
+          onCheckBoxChange={onCheckBoxChange}
+          checked={checked}
+          title={title}
+        />
       )}
       <h4 className="work-details-content-filters-btns-title">
         {workout?.title}
@@ -232,12 +255,6 @@ export const WorkoutDetails = ({
       </div>
     </div>
   );
-  const [checked, setChecked] = useState(false);
-
-  const onCheckBoxChange = (e) => {
-    setChecked(e.target.checked);
-    addOrRemoveWorkout(workout._id, e.target.checked);
-  };
 
   return (
     <div className={showResults ? "workout-details-top-container" : ""}>
@@ -254,7 +271,6 @@ export const WorkoutDetails = ({
            index
            // this className rule must not be deleted because the drawer uses it as a container to render the content in the current container
          }
-        
           ${showBorder === true ? `border-selected` : ``} 
           ${
             searchInput?.length !== 0 &&
@@ -270,18 +286,30 @@ export const WorkoutDetails = ({
             workoutCondensed && showAllExistentWorkouts
               ? `condensed-workouts-all-workouts`
               : `` //3rd btn styles
+          }
+          ${
+            workoutCondensed && showAllExistentWorkouts && CollapseContent
+              ? `condensed-workouts-all-workouts-CollapseContent`
+              : `` //3rd btn styles
           }         
           ${
             filteredWorkout && !showAllExistentWorkouts
               ? `condensed-workouts-filter-results`
               : `` //3rd btn styles when clicking filter btn
-          }           
-
-          
+          }
          `}
         style={{
           boxShadow: containerBoxShadow,
           border: border,
+          height:
+            showAllExistentWorkouts && countWords(workout?.title) >= 4
+              ? `295px`
+              : workoutIsCondensed
+              ? `220px`
+              : showAllExistentWorkouts
+              ? `295px`
+              : ``, //this works as a charm
+          //Stability Bent Over Dumbbell Rear Delt Raise , this long title caused the element to have a height more than 295px
         }}
         onMouseOver={handleContainerHover}
         onMouseLeave={handleContainerLeave}
@@ -341,20 +369,43 @@ export const WorkoutDetails = ({
                         })}
                       </span>
                     </div>
+                    {/* <div>{workout?._id}</div> */}
                   </div>
                 </div>
 
                 <div
                   className="work-details-right-content"
-                  style={{ width: "20%" }}
+                  style={{ width: layoutGrid ? "20%" : `25%` }}
                 >
                   {notShowOnFilter && (
                     <div className="work-details-right-inner control-btns">
-                      {/* <StarredWorkout {...{ workout }} /> */}
-                      <CustomizedCheckbox
-                        onChange={onCheckBoxChange}
-                        checked={checked}
-                      />
+                      {/* <HeartIcon
+                        {...{
+                          icon,
+                          title,
+                          HandleFavorite,
+                          workout,
+                          selectedWorkouts,
+                        }}
+                      /> */}
+                      {layoutGrid ? (
+                        <div
+                          className={layoutGrid ? "control-btns-checkbox" : ``}
+                        >
+                          <CustomizedCheckbox
+                            onCheckBoxChange={onCheckBoxChange}
+                            checked={checked}
+                            title={title}
+                          />
+                        </div>
+                      ) : (
+                        //layoutList , the div wrapper caused a problem , hence this :
+                        <CustomizedCheckbox
+                          onCheckBoxChange={onCheckBoxChange}
+                          checked={checked}
+                          title={title}
+                        />
+                      )}
                       <Popconfirm
                         title="Are you sure to delete this task?"
                         onConfirm={confirm}
@@ -377,21 +428,18 @@ export const WorkoutDetails = ({
                           <DeleteIcon />
                         </IconButton>
                       </Popconfirm>
-
                       <IconButton
                         className="work-details-right-inner-iconbtn"
                         onClick={handleShare}
                       >
                         <ShareIcon></ShareIcon>
                       </IconButton>
-
                       <IconButton
                         className="work-details-right-inner-iconbtn"
                         onClick={handleInfos}
                       >
                         <InfoIcon />
                       </IconButton>
-
                       <IconButton
                         className="icon-btn-edit work-details-right-inner-iconbtn"
                         onBlur={() => setborder("")}

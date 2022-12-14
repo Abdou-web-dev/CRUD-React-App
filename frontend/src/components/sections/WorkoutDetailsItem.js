@@ -1,3 +1,5 @@
+// import starIconGray from "../../assets/img/starIconGray.svg";
+// import starIconYellow from "../../assets/img/starIconYellow.svg";
 import { WorkoutDetails } from "../details/WorkoutDetails";
 export function WorkoutDetailsItem({
   workout,
@@ -21,8 +23,29 @@ export function WorkoutDetailsItem({
   showItemsPage9,
   showItemsPage10,
   addOrRemoveWorkout,
-  selectedWorkouts,
 }) {
+  // const [icon, seticon] = useState(starIconGray);
+  // const [ setTitle] = useState("Save this workout as favorite.");
+  // const [selectedWorkouts, setSelectedWorkouts] = useState([]);
+
+  // const HandleFavorite = (workoutID) => {
+  //   let newSelectedWorkouts = [...selectedWorkouts]; //must declare an empty array here
+  //   //when click on the star, change its color to yellow and add the workout as favorite
+  //   if (icon === starIconGray) {
+  //     seticon(starIconYellow);
+  //     setTitle(`Saved as favorite !`);
+  //     newSelectedWorkouts.push(workoutID);
+  //   } else {
+  //     seticon(starIconGray);
+  //     setTitle(`No longer favorite !`);
+  //     newSelectedWorkouts.splice(newSelectedWorkouts.indexOf(workoutID), 1);
+  //   }
+  //   setSelectedWorkouts(newSelectedWorkouts);
+  // };
+  // useEffect(() => {
+  //   console.log(selectedWorkouts);
+  // }, [selectedWorkouts]);
+
   return (
     <div
       style={{
@@ -59,7 +82,6 @@ export function WorkoutDetailsItem({
             setcontainerClass,
             searchInput,
             addOrRemoveWorkout,
-            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -79,7 +101,6 @@ export function WorkoutDetailsItem({
             setcontainerClass,
             searchInput,
             addOrRemoveWorkout,
-            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -99,7 +120,6 @@ export function WorkoutDetailsItem({
             setcontainerClass,
             searchInput,
             addOrRemoveWorkout,
-            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -119,7 +139,6 @@ export function WorkoutDetailsItem({
             setcontainerClass,
             searchInput,
             addOrRemoveWorkout,
-            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -139,7 +158,6 @@ export function WorkoutDetailsItem({
             setcontainerClass,
             searchInput,
             addOrRemoveWorkout,
-            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -159,7 +177,6 @@ export function WorkoutDetailsItem({
             setcontainerClass,
             searchInput,
             addOrRemoveWorkout,
-            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -179,7 +196,6 @@ export function WorkoutDetailsItem({
             setcontainerClass,
             searchInput,
             addOrRemoveWorkout,
-            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -199,7 +215,6 @@ export function WorkoutDetailsItem({
             setcontainerClass,
             searchInput,
             addOrRemoveWorkout,
-            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -219,7 +234,6 @@ export function WorkoutDetailsItem({
             setcontainerClass,
             searchInput,
             addOrRemoveWorkout,
-            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
@@ -239,7 +253,6 @@ export function WorkoutDetailsItem({
             setcontainerClass,
             searchInput,
             addOrRemoveWorkout,
-            selectedWorkouts,
           }}
           workout={
             searchInput?.length === 0
