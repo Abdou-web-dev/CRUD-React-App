@@ -4,8 +4,7 @@ import * as React from "react";
 import { HeartIcon, HeartIconGray } from "../icons/Icons";
 import "./checkbox_styles.scss";
 
-export function CustomizedCheckbox({ title, onCheckBoxChange, checked }) {
-  function handleClick() {}
+export function CustomizedCheckbox({ title, onCheckBoxChange }) {
   return (
     <div className="custom-check-box">
       {/* in order for Mui tooltip to work properly , its content should be wrapper inside a div */}
@@ -13,7 +12,6 @@ export function CustomizedCheckbox({ title, onCheckBoxChange, checked }) {
         <div className="custom-check-box-wrapper">
           <Checkbox
             className="custom-check-box-checkbox"
-            onClick={handleClick}
             // checked={checked}
             onChange={onCheckBoxChange}
             sx={{

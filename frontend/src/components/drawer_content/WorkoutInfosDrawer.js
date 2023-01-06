@@ -3,6 +3,7 @@ import { WorkoutInfos } from "./WorkoutInfos";
 
 export function WorkoutInfosDrawer({ workoutTitle }) {
   function infos() {
+    //only for Chest category
     let infos =
       workoutTitle === "Barbell Flat Bench Press"
         ? {

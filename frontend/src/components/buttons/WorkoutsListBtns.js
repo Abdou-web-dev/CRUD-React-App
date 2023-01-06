@@ -46,6 +46,8 @@ export function WorkoutsListBtns({
   setshowFilterBtns,
   searchInput,
   setDisplayPagination,
+  addOrRemoveWorkout,
+  filteredResults,
 }) {
   let hideOtherWorkouts = !showAllWorkoutsCondensed && !showAllWorkouts;
   const [showChestResults, setShowChestResults] = useState(false);
@@ -227,19 +229,6 @@ export function WorkoutsListBtns({
     setDisplayPagination("none");
     setshowNotification(false);
   }
-
-  const addOrRemoveWorkout = (workoutObject, isChecked) => {
-    let newSelectedWorkouts = [...selectedWorkouts]; //must declare an empty array here
-    // Case 1 : The user checks the box
-    if (isChecked) {
-      newSelectedWorkouts.push(workoutObject); // === newSelectedWorkouts = [...selectedWorkouts, workoutId];
-    }
-    // Case 2 : The user unchecks the box
-    else {
-      newSelectedWorkouts.splice(newSelectedWorkouts.indexOf(workoutObject), 1);
-    }
-    setSelectedWorkouts(newSelectedWorkouts);
-  };
 
   //save selectedWorkouts to the brower's local storage
   useEffect(() => {

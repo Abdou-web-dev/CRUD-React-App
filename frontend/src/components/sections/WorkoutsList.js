@@ -364,6 +364,7 @@ export function WorkoutsList({
             setshowFilterBtns,
             searchInput,
             setDisplayPagination,
+            addOrRemoveWorkout,
           }}
         />
       </div>
@@ -403,10 +404,11 @@ export function WorkoutsList({
                 detailsContClass === "workout-details-container-as-grid" &&
                 "grid-one-item"
               }
-        ${containerClass}`}
+              ${containerClass}`}
             >
               {!showAllWorkoutsCondensed && (
                 <>
+                  {/* list of All workouts */}
                   {workouts &&
                     workouts?.map((workout, index) => (
                       <WorkoutDetailsItem
@@ -432,13 +434,12 @@ export function WorkoutsList({
                           searchInput,
                           setCurrentPage,
                           addOrRemoveWorkout,
-                          // icon,
-                          // title,
-                          // HandleFavorite,
                         }}
                         key={index}
                       ></WorkoutDetailsItem>
                     ))}
+
+                  {/* list of workouts after the search */}
                   {filteredResults &&
                     filteredResults?.map((filteredResult, index) => (
                       <WorkoutDetailsItem
@@ -463,7 +464,6 @@ export function WorkoutsList({
                           showItemsPage8,
                           showItemsPage9,
                           showItemsPage10,
-                          //maybe add this prop  (addOrRemoveWorkout) here later ?
                         }}
                         key={index}
                       ></WorkoutDetailsItem>

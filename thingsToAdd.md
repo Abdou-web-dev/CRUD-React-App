@@ -39,3 +39,10 @@ A very common use case for using useRef is for when, suppose you click on a butt
 The useRef Hook allows you to persist values between renders. It can be used to store a mutable value that does not cause a re-render when updated. It can be used to access a DOM element directly.
 
 The most important thing to remember here is that both useMemo and useCallback are useful only during the re-renders phase. During the initial render, they are not only useless but even harmful: they make React do some additional work. This means that your app will become slightly slower during the initial render.13 jui. 2022
+
+JS vs TS :::::::::::
+I wrote an app in JavaScript, released it, then for the second release ported it to TypeScript. My experience was that I preferred TypeScript. The better intelli-sense made coding faster when using objects and it definitely prevented mistakes. One simple mistake anybody who has written JavaScript has made is an accidental casing typo. For example, if an object variable name is mySharona, and you accidentally typed mySHarona. JavaScript allows this and treats the two as separate variables on the object since it is case-sensitive. This leads to defects as most places expect the correct spelling except for the place you made the mistake. This kind of stuff is even hard to catch in code-reviews.
+
+For this reason alone, TypeScript is superior. It catches stupid mistakes.
+
+This was glossed over in the video as the error category of static type checking.

@@ -66,6 +66,17 @@
             font-size: 18px;
           }
         }
+        .workout-google-btn1 {
+          // border: 1px solid red;
+          margin-top: 10px;
+          padding: 10px 20px !important;
+          height: fit-content;
+          span {
+            font-family: "Open Sans";
+            font-weight: normal;
+            font-size: 20px;
+          }
+        }
       }
 
       .workout-infos-howto-do {
@@ -80,14 +91,15 @@
           color: gray;
         }
       }
-      .workout-infos-sign {
+      .workout-plus-sign-and-how-to-do-text {
+        // border: 1px solid red;
         margin-top: 20px;
-        span.workout-infos-sign-span {
+        span.workout-plus-sign-span {
           display: block;
           font-family: "Inconsolata";
           font-size: 18px;
         }
-        .workout-infos-sign-btn {
+        .workout-plus-sign-btn {
           height: fit-content;
           border: none;
           background: none;
@@ -95,6 +107,14 @@
             display: block;
             width: 30px;
             height: 30px;
+          }
+        }
+        .workout-google-btn2-wrapper {
+          .workout-google-btn2 {
+            height: fit-content;
+            padding: 10px 15px !important;
+            img {
+            }
           }
         }
       }

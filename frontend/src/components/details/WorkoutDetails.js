@@ -28,7 +28,6 @@ import TrapeziusIcon from "../../assets/img/TrapeziusIcon.png";
 import TricepsIcon from "../../assets/img/TricepsIcon.png";
 import { CustomizedCheckbox } from "../checkboxes/CustomCheckBox";
 import { SocialIcons } from "../drawer_content/SocialIcons";
-
 import { EditModal } from "../modals/EditModal";
 import { Stepper } from "../steppers/Stepper";
 import "./workout_details.scss";
@@ -49,11 +48,8 @@ export const WorkoutDetails = ({
   indexx,
   showResults,
   addOrRemoveWorkout,
-  // icon,
-  // HandleFavorite,
-  // selectedWorkouts,
 }) => {
-  // let layoutList = detailsContClass === "workout-details-container-as-list";
+  let layoutList = detailsContClass === "workout-details-container-as-list";
   // console.log(createdAt?.split());
   const { dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
@@ -191,9 +187,10 @@ export const WorkoutDetails = ({
       setshowCollapse(true);
     }
   }, [openDrawer, openInfosDrawer, layoutGrid]);
+
   //JSX fragment
   let CollapseContent = (
-    <div className="work-details-content-filters-btns">
+    <div className="work-details-single-workout">
       {showResults && (
         //the collapse Icon
         <div className="work-details-content-filters-btns-collapse-icon">
@@ -375,7 +372,16 @@ export const WorkoutDetails = ({
 
                 <div
                   className="work-details-right-content"
-                  style={{ width: layoutGrid ? "20%" : `25%` }}
+                  style={{
+                    width:
+                      layoutList && searchInput?.length
+                        ? "20%"
+                        : layoutList
+                        ? `25%`
+                        : layoutGrid
+                        ? `20%`
+                        : "",
+                  }}
                 >
                   {notShowOnFilter && (
                     <div className="work-details-right-inner control-btns">
@@ -388,7 +394,7 @@ export const WorkoutDetails = ({
                           selectedWorkouts,
                         }}
                       /> */}
-                      {layoutGrid ? (
+                      {layoutGrid && !searchInput?.length ? ( //!searchInput?.length  means when the search input is no empty
                         <div
                           className={layoutGrid ? "control-btns-checkbox" : ``}
                         >
@@ -398,14 +404,14 @@ export const WorkoutDetails = ({
                             title={title}
                           />
                         </div>
-                      ) : (
+                      ) : layoutList && !searchInput?.length ? (
                         //layoutList , the div wrapper caused a problem , hence this :
                         <CustomizedCheckbox
                           onCheckBoxChange={onCheckBoxChange}
                           checked={checked}
                           title={title}
                         />
-                      )}
+                      ) : null}
                       <Popconfirm
                         title="Are you sure to delete this task?"
                         onConfirm={confirm}
