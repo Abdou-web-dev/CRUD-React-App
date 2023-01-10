@@ -394,7 +394,7 @@ export const WorkoutDetails = ({
                           selectedWorkouts,
                         }}
                       /> */}
-                      {layoutGrid && !searchInput?.length ? ( //!searchInput?.length  means when the search input is no empty
+                      {layoutGrid && !searchInput?.length ? ( //!searchInput?.length  means when the search input is empty
                         <div
                           className={layoutGrid ? "control-btns-checkbox" : ``}
                         >

@@ -10,42 +10,83 @@
     .workout-navbar-icon-user-logged-in {
       display: flex;
       justify-content: center;
-      position: relative;
-      top: 40px;
-      .navbar-ul {
-        margin-bottom: 0px;
-        padding-left: 0;
-        .app-nav-stack {
-          .icon-and-word {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 180px;
-            cursor: pointer;
-            img.gym-img {
-              width: 150px;
-              height: 150px;
+      align-items: center;
+      .nav-logo-and-lover-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        top: 40px;
+        width: 300px;
+        // border: 1px solid;
+
+        &:hover {
+          img.lover-logo {
+            transform: scale(1.1);
+          }
+        }
+        .navbar-ul {
+          margin-bottom: 0px;
+          padding-left: 0;
+          // border: 1px solid red;
+          .app-nav-stack {
+            .icon-and-word {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              height: 180px;
+              cursor: pointer;
+              img.gym-img {
+                width: 150px;
+                height: 150px;
+              }
+              .gym-word {
+                font-family: "Poppins";
+                color: gray;
+                font-size: 30px;
+                text-decoration: none;
+                position: relative;
+                bottom: 25px;
+              }
             }
-            .gym-word {
-              font-family: "Poppins";
-              color: gray;
-              font-size: 30px;
+          }
+          .navbar-ul-li {
+            list-style: none;
+            .nav-router-link {
               text-decoration: none;
-              position: relative;
-              bottom: 25px;
+
+              span {
+                font-family: "Open Sans";
+                color: black;
+              }
             }
           }
         }
-        .navbar-ul-li {
-          list-style: none;
+        .navabar-logo {
+          margin-right: 20px;
           .nav-router-link {
-            text-decoration: none;
-
-            span {
-              font-family: "Open Sans";
-              color: black;
+            .app-nav-stack {
+              .navbar-ul-li {
+                .gym-img {
+                  width: 80px;
+                  height: 80px;
+                  margin-bottom: 10px;
+                }
+                .gym-word {
+                  font-family: "Poppins";
+                  color: gray;
+                  font-size: 15px;
+                  text-decoration: none;
+                }
+              }
             }
+          }
+        }
+        .nav-logo-lover-icon {
+          img {
+            width: 80px;
+            height: 80px;
           }
         }
       }

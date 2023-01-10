@@ -140,6 +140,7 @@ export function WorkoutsList({
     );
   //functions
   function handleIconClick() {
+    setshowAllWorkouts(true);
     setshowAllWorkoutsCondensed(false);
     setshowAllExistentWorkouts(false);
     setshowFilterBtns(false);
@@ -154,7 +155,7 @@ export function WorkoutsList({
       setdetailsContClass(`workout-details-container-as-grid`);
       setcontainerClass("chest-page-workouts showItemsAsGrid"); //here
       setFirsticon(listIcon);
-      setmovePaginationFromBottom("620px");
+      setmovePaginationFromBottom("590px");
       setpaginationClassName("pagination-content-loaded-grid");
       setDisplayPagination("flex");
     }
@@ -165,7 +166,6 @@ export function WorkoutsList({
     if ((filteredResults && layoutGrid) || (filteredResults && layoutList)) {
       setsecondBtnDisabled(true);
     }
-    setshowAllWorkouts(true);
   }
 
   function handleCondensedIconClick() {
@@ -381,7 +381,7 @@ export function WorkoutsList({
               ) : filteredResults?.length === 0 ? (
                 <div>
                   <span>
-                    {`Sorry , there is no item with the searched criteria !`}{" "}
+                    {`Sorry, there is no item with the search criteria!`}
                   </span>
                 </div>
               ) : null}

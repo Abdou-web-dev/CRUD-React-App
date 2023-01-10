@@ -1,0 +1,87 @@
+.fav-work-container {
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+  width: 288px;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 20px 0px;
+  }
+  .fav-work-trash-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .fav-work-trash-icon-btn {
+      border: 1px solid lightgray !important;
+
+      &:hover {
+        border: none;
+      }
+      img {
+      }
+    }
+  }
+  .fav-work-title {
+    span {
+      font-family: "Inconsolata";
+      font-size: 18px;
+    }
+  }
+  .fav-work-reps {
+    span {
+      font-family: "Open Sans";
+      font-size: 20px;
+    }
+  }
+  .fav-work-load {
+    span {
+      font-family: "Mulish";
+      font-size: 22px;
+    }
+  }
+  .fav-work-date {
+    span {
+      font-family: "Roboto";
+      font-size: 24px;
+    }
+  }
+}
+
+.fav-work-restore-btn {
+  // position: relative;
+  // bottom: 150px;
+  height: fit-content;
+  min-height: 35px;
+  background: rgba(211, 211, 211, 0.437) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  // position: absolute;
+
+  // &.fav-work-restore-btn-ind0 {
+  //   position: relative;
+  //   left: 650px;
+  // }
+  // &.fav-work-restore-btn-ind1 {
+  //   position: relative;
+  //   left: 352px;
+  // }
+  // &.fav-work-restore-btn-ind2 {
+  //   position: relative;
+  //   left: 52px;
+  // }
+  // &.fav-work-restore-btn-ind3 {
+  //   position: relative;
+  //   right: 246px;
+  // }
+  // &.fav-work-restore-btn-ind4 {
+  //   position: relative;
+  //   right: 544px;
+  // }
+  span {
+    font-family: "Inconsolata";
+    font-size: 18px;
+  }
+  img {
+    width: 30px;
+    height: 30px;
+  }
+}

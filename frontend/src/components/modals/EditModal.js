@@ -48,7 +48,7 @@ export function EditModal({
       return;
     }
     const response = await fetch("/api/workouts/" + workout._id, {
-      method: "PATCH", //PUt and PATCH are equivalent
+      method: "PATCH", //PUt and PATCH are not equivalent
       body: JSON.stringify(updatedWorkout),
       headers: {
         "Content-Type": "application/json",
@@ -140,3 +140,6 @@ export function EditModal({
     </div>
   );
 }
+
+// PUT is a method of modifying resource where the client sends data that updates the entire resource .
+// PATCH is a method of modifying resources where the client sends partial data that is to be updated without modifying the entire data.

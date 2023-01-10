@@ -1,10 +1,14 @@
 import { Button, Form, Input, Select } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useStyleMediaQuery } from "../hooks/UseMediaQuery";
 import { useSignup } from "../hooks/useSignup";
 import "./login_signup_styles.scss";
 
 const Signup = ({}) => {
+  const { matches: isMobile } = useStyleMediaQuery("max", "width", 576);
+  let isDesktop = !isMobile;
+
   const [gender, setGender] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -77,20 +81,32 @@ const Signup = ({}) => {
   }, [country]);
 
   const errorMsg = (
-    <div className="errorMsg-wrapper">
-      <span className="errorMsg">
-        {`Password must include one lowercase character, one`}
-      </span>
-      <span className="errorMsg">
-        {` uppercase character,
+    <>
+      {isDesktop ? (
+        <div className="errorMsg-wrapper">
+          <span className="errorMsg">
+            {`Password must include one lowercase character, one`}
+          </span>
+          <span className="errorMsg">
+            {` uppercase character,
       a number, and a special character and `}
-      </span>
-      <span className="errorMsg">
-        {`have a minimum length of 8
+          </span>
+          <span className="errorMsg">
+            {`have a minimum length of 8
       characters !`}
-      </span>
-      {/* did 3 spans in order to center the whole sentence */}
-    </div>
+          </span>
+          {/* did 3 spans in order to center the whole sentence */}
+        </div>
+      ) : (
+        <div className="errorMsg-wrapper">
+          <span className="errorMsg">
+            Password must include one lowercase character, one uppercase
+            character, a number, and a special character and have a minimum
+            length of 8 characters
+          </span>
+        </div>
+      )}
+    </>
   );
 
   return (

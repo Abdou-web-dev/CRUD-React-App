@@ -60,7 +60,7 @@ const Workouts = ({}) => {
     if (currentPage === 10 && layoutList) {
       setmovePaginationFromBottom("0px");
     } else if (currentPage !== 10 && layoutList) {
-      setmovePaginationFromBottom("150px");
+      setmovePaginationFromBottom("120px");
     } else if (
       (layoutList && searchInput?.length > 0) ||
       (layoutGrid && searchInput?.length > 0)
@@ -185,6 +185,7 @@ const Workouts = ({}) => {
               position: "relative",
               bottom: movePaginationFromBottom,
               display: displayPagination,
+              justifyContent: "center",
             }}
             total={
               workouts.length > 0 && workouts.length <= 10
@@ -213,7 +214,7 @@ const Workouts = ({}) => {
 
         {searchInput?.length > 0 && (
           <Pagination
-            className={`
+            className={`pagination-filtered-results
             ${layoutGrid && "pagination-filtered-results-grid"}
             ${layoutList && "pagination-filtered-results-list"}
             ${
@@ -224,8 +225,7 @@ const Workouts = ({}) => {
             ${
               filteredResults?.length === 0 &&
               "pagination-filtered-results-none"
-            }
-            pagination-filtered-results`}
+            }`}
             prevIcon={
               paginationClassName === "pagination-content-loaded-grid" ? (
                 <Tooltip title="Previous page">
@@ -234,6 +234,7 @@ const Workouts = ({}) => {
                   </div>
                 </Tooltip>
               ) : (
+                //pagination-content-loaded-list
                 <Tooltip title="Previous page">
                   <div>
                     <PrevArrowList />

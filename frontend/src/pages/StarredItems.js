@@ -1,31 +1,31 @@
 import { useEffect, useState } from "react";
+import { StarredItem } from "../components/small_comp/StarredItem";
+import "./pages_styles.scss";
 
-function StarredItems() {
-  const [favoriteWorkoutsData, setfavoriteWorkoutsData] = useState();
+function StarredItems({}) {
+  const [favoriteWorkoutsData, setfavoriteWorkoutsData] = useState([]);
 
   useEffect(() => {
     const data = localStorage.getItem("selectedWorkoutsState");
-    console.log(data);
+    // console.log(data);
     if (data !== null) setfavoriteWorkoutsData(JSON.parse(data));
   }, []);
 
-  // const favoriteWorkouts = JSON.parse(
-  //   localStorage.getItem("selectedWorkoutsState")
-  // );
-
   return (
-    <div>
+    <div className="starred-items-container">
       {favoriteWorkoutsData &&
         favoriteWorkoutsData?.map((favoriteWorkout, index) => (
-          <div key={index}>
-            <div>{favoriteWorkout?.title}</div>
-            <div>{favoriteWorkout?.reps}</div>
-            <div>{favoriteWorkout?.load}</div>
-            <div>{favoriteWorkout?.createdAt}</div>
-          </div>
+          <StarredItem
+            key={favoriteWorkout?.title}
+            {...{ favoriteWorkout, index }}
+          ></StarredItem>
         ))}
     </div>
   );
 }
 
 export default StarredItems;
+
+// const favoriteWorkouts = JSON.parse(
+//   localStorage.getItem("selectedWorkoutsState")
+// );

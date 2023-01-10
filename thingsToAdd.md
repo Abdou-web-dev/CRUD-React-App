@@ -2,12 +2,14 @@
 
 2)++add fnct : if a workout already exists , dont add it , show a msg saying that it already exists . ......
 
+work on responsivness for smartphones
+
 3)++https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-react-app-with-react-i18next
 
 4)++add auth0 authentication 5) add a search input for fetching a specific workout in the list
 Note: files tracked before can be untracked by running git rm --cached filename
 
-5- authentication , maybe use Firebase or JWT ?? auth0 is not completely free and is changing rapidly
+5)- authentication , maybe use Firebase or JWT ?? auth0 is not completely free and is changing rapidly
 
 6- in the frontend , create a page divided into 2 parts : left part allows users to signup to the website, the right part allows them to login into their account.
 if the visitor clicks on signup , the left part will then occup 85% of the full width of the screen, the rest 15% and some kind of greyish background will partially hide the content behind, vice versa for the right part...

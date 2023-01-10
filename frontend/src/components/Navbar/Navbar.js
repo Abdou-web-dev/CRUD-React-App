@@ -1,16 +1,15 @@
-// import "@fontsource/open-sans";
 import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Menu, MenuItem, Stack } from "@mui/material";
 import { Button, Divider, Modal, Tooltip } from "antd";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import signUpIcon from "../../assets/img/add-user.png";
 import fallbackAvatar from "../../assets/img/fallbackAvatar.svg";
 import femaleIcon from "../../assets/img/femaleIcon.svg";
-import maleIcon from "../../assets/img/maleIcon.svg";
-
 import gym from "../../assets/img/gymBold.png";
 import helpIcon from "../../assets/img/helpIcon.png";
+import lover from "../../assets/img/lover.png";
+import maleIcon from "../../assets/img/maleIcon.svg";
 import profil from "../../assets/img/profil.png";
 import starred from "../../assets/img/starred.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -20,6 +19,8 @@ import "./navbar.scss";
 const Navbar = ({}) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
+  const currentLocation = useLocation();
+  let currentLocat = currentLocation.pathname;
 
   // get the avatar and the fullName of the user from the browser local storage when the user tries to log in
   // from Login Page
@@ -69,16 +70,31 @@ const Navbar = ({}) => {
               : "workout-navbar-icon-user-logged-out"
           }
         >
-          <ul className="navbar-ul">
-            <Link className="nav-router-link" to="/workouts">
-              <Stack className="app-nav-stack" direction={"row"} spacing={5}>
-                <li className="navbar-ul-li icon-and-word">
-                  <img className="gym-img" src={gym} alt="" />
-                  <span className="gym-word">The training gym</span>
-                </li>
-              </Stack>
-            </Link>
-          </ul>
+          <div className="nav-logo-and-lover-icon">
+            <ul
+              className={
+                currentLocat === "/starred-items"
+                  ? `navabar-logo navbar-ul`
+                  : "navbar-ul"
+              }
+            >
+              <Link className="nav-router-link" to="/workouts">
+                <Stack className="app-nav-stack" direction={"row"} spacing={5}>
+                  <li className="navbar-ul-li icon-and-word">
+                    <img className="gym-img" src={gym} alt="" />
+                    <span className="gym-word">The training gym</span>
+                  </li>
+                </Stack>
+              </Link>
+            </ul>
+            <>
+              {currentLocat === "/starred-items" ? (
+                <div className="nav-logo-lover-icon">
+                  <img className="lover-logo" src={lover} alt="heart" />
+                </div>
+              ) : null}
+            </>
+          </div>
         </div>
 
         <div
