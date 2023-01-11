@@ -7,6 +7,10 @@ import "./login_signup_styles.scss";
 
 const Signup = ({}) => {
   const { matches: isMobile } = useStyleMediaQuery("max", "width", 576);
+  // const isDesktopScreen = useMediaQuery(
+  //   "(min-width: 800px) and (max-width: 960px) "
+  // );
+
   let isDesktop = !isMobile;
 
   const [gender, setGender] = useState("");
@@ -98,6 +102,7 @@ const Signup = ({}) => {
           {/* did 3 spans in order to center the whole sentence */}
         </div>
       ) : (
+        // isMobile
         <div className="errorMsg-wrapper">
           <span className="errorMsg">
             Password must include one lowercase character, one uppercase
@@ -307,6 +312,7 @@ const Signup = ({}) => {
               <span className="signup-form-text1">
                 Have already an account ?
               </span>
+
               <Button className="signup-form-not-a-member-register-btn">
                 <Link to="/login">
                   <span className="signup-form-text2"> Login</span>

@@ -59,7 +59,7 @@ const Navbar = ({}) => {
       <nav
         className={
           user
-            ? "workout-app-navbar"
+            ? "workout-app-navbar navbar-user-logged-in"
             : "workout-app-navbar navbar-user-logged-out"
         }
       >

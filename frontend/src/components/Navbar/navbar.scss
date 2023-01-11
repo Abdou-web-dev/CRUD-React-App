@@ -1,11 +1,16 @@
 @import "@fontsource/open-sans";
+//defining screen breakpoints for responsivness
+$x-small: 0px;
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+$xx-large: 1400px;
+
 .workout-app-navbar-container {
   .workout-app-navbar {
     width: 100%;
     height: 190px;
-    &.navbar-user-logged-out {
-      height: 110px;
-    }
 
     .workout-navbar-icon-user-logged-in {
       display: flex;
@@ -267,6 +272,11 @@
         }
       }
     }
+    &.navbar-user-logged-out {
+      height: 110px;
+    }
+    &.navbar-user-logged-in {
+    }
   }
   .workout-app-navbar-divider {
     display: flex;
@@ -276,6 +286,387 @@
       min-width: auto !important;
     }
   }
+  @media screen and (max-width: $small) {
+    margin-bottom: 100px;
+    .workout-app-navbar {
+      width: 100%;
+      height: 190px;
+
+      .workout-navbar-icon-user-logged-in {
+        .nav-logo-and-lover-icon {
+          &:hover {
+            img.lover-logo {
+            }
+          }
+          .navbar-ul {
+            .app-nav-stack {
+              .icon-and-word {
+                cursor: pointer;
+                img.gym-img {
+                }
+                .gym-word {
+                  font-size: 30px;
+                }
+              }
+            }
+            .navbar-ul-li {
+              .nav-router-link {
+                span {
+                  font-family: "Open Sans";
+                  color: black;
+                }
+              }
+            }
+          }
+          .navabar-logo {
+            margin-right: 20px;
+            .nav-router-link {
+              .app-nav-stack {
+                .navbar-ul-li {
+                  .gym-img {
+                    width: 80px;
+                    height: 80px;
+                    margin-bottom: 10px;
+                  }
+                  .gym-word {
+                    font-family: "Poppins";
+                    color: gray;
+                    font-size: 15px;
+                    text-decoration: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .workout-navbar-icon-user-logged-out {
+        // margin-top: 50px;
+        position: relative;
+        top: 115px;
+        .navbar-ul {
+          .app-nav-stack {
+            .icon-and-word {
+              cursor: pointer;
+              img.gym-img {
+                width: 84px;
+                height: 84px;
+              }
+              .gym-word {
+                font-family: "Mulish";
+                color: rgb(118, 63, 63);
+                font-size: 32px;
+                font-weight: bolder;
+                letter-spacing: 1.5px;
+              }
+            }
+          }
+          .navbar-ul-li {
+            .nav-router-link {
+              span {
+                font-family: "Open Sans";
+                color: black;
+              }
+            }
+          }
+        }
+      }
+      .workout-app-navbar-user-profile-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+
+        .workout-app-navbar-login-signup {
+          background: rgba(21, 13, 13, 0.55);
+          gap: 20px;
+          // padding: 0;
+
+          .LoginOutlined-link {
+            .LoginOutlined-icon {
+              svg {
+                // border: 1px solid red;
+                width: 64px;
+                height: 64px;
+              }
+            }
+          }
+
+          span.login-text {
+            font-family: "Oswald";
+            font-size: 30px;
+            color: white;
+          }
+
+          .signUpIcon-link {
+            .signup-icon {
+              width: 64px;
+              height: 64px;
+            }
+            span.signup-text {
+              font-family: "Oswald";
+              color: white;
+              font-size: 30px;
+            }
+          }
+        }
+        .workout-app-navbar-user-profile {
+          // border: 1px solid;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 15px;
+
+          .welcome-text {
+            font-family: "Poppins";
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+          }
+          .logged-user {
+            font-family: "Poppins";
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+          }
+          .logged-avatar-btn {
+            height: fit-content;
+            margin-top: 1px;
+            .logged-avatar {
+              width: 35px;
+              height: 35px;
+              border-radius: 50%;
+            }
+          }
+
+          .workout-app-navbar-logout-btn {
+            margin-right: 5px;
+            .LogoutOutlined-icon {
+            }
+            &.adjust-btn {
+              // margin-top: 10px;
+              margin-right: 20px;
+            }
+          }
+        }
+        .workout-app-navbar-help-wrapper {
+          margin-right: 100px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+
+          .workout-app-navbar-help-btn {
+            background: none;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            .workout-app-navbar-help-text {
+            }
+            .help-icon {
+              img {
+                width: 35px;
+                height: 35px;
+              }
+            }
+          }
+        }
+        &.bg-gray {
+          background: gray;
+        }
+      }
+      &.navbar-user-logged-out {
+        height: 110px;
+      }
+      &.navbar-user-logged-in {
+      }
+    }
+    .workout-app-navbar-divider {
+      margin: 10px 0;
+
+      .the-divider {
+        min-width: auto !important;
+      }
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    margin-bottom: 100px;
+    // border: 1px solid red;
+    .workout-app-navbar {
+      width: 100%;
+      height: 190px;
+      // login and logout icons
+      .workout-app-navbar-user-profile-wrapper {
+        margin-top: 5px;
+
+        .workout-app-navbar-login-signup {
+          // border: 1px solid ;
+          background: rgba(21, 13, 13, 0.45);
+          gap: 20px;
+          width: 80%;
+          padding: 25px 0;
+
+          span.login-text {
+            display: none;
+          }
+
+          .signUpIcon-link {
+            .signup-icon {
+              width: 64px;
+              height: 64px;
+            }
+            span.signup-text {
+              display: none;
+            }
+          }
+        }
+        .workout-app-navbar-user-profile {
+          // border: 1px solid;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 15px;
+
+          .welcome-text {
+            font-family: "Poppins";
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+          }
+          .logged-user {
+            font-family: "Poppins";
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+          }
+          .logged-avatar-btn {
+            height: fit-content;
+            margin-top: 1px;
+            .logged-avatar {
+              width: 35px;
+              height: 35px;
+              border-radius: 50%;
+            }
+          }
+
+          .workout-app-navbar-logout-btn {
+            margin-right: 5px;
+            .LogoutOutlined-icon {
+            }
+            &.adjust-btn {
+              // margin-top: 10px;
+              margin-right: 20px;
+            }
+          }
+        }
+        .workout-app-navbar-help-wrapper {
+          margin-right: 100px;
+          margin-top: 5px;
+          margin-bottom: 5px;
+
+          .workout-app-navbar-help-btn {
+            background: none;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            .workout-app-navbar-help-text {
+            }
+            .help-icon {
+              img {
+                width: 35px;
+                height: 35px;
+              }
+            }
+          }
+        }
+        &.bg-gray {
+          background: gray;
+        }
+      }
+      //Training Gym and logo
+      .workout-navbar-icon-user-logged-in {
+        .nav-logo-and-lover-icon {
+          &:hover {
+            img.lover-logo {
+            }
+          }
+          .navbar-ul {
+            .app-nav-stack {
+              .icon-and-word {
+                cursor: pointer;
+                img.gym-img {
+                }
+                .gym-word {
+                  font-size: 30px;
+                }
+              }
+            }
+            .navbar-ul-li {
+              .nav-router-link {
+                span {
+                  font-family: "Open Sans";
+                  color: black;
+                }
+              }
+            }
+          }
+          .navabar-logo {
+            margin-right: 20px;
+            .nav-router-link {
+              .app-nav-stack {
+                .navbar-ul-li {
+                  .gym-img {
+                    width: 80px;
+                    height: 80px;
+                    margin-bottom: 10px;
+                  }
+                  .gym-word {
+                    font-family: "Poppins";
+                    color: gray;
+                    font-size: 15px;
+                    text-decoration: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .workout-navbar-icon-user-logged-out {
+        // margin-top: 50px;
+        position: relative;
+        top: 115px;
+        .navbar-ul {
+          .navbar-ul-li {
+            .nav-router-link {
+              span {
+                font-family: "Open Sans";
+                color: black;
+              }
+            }
+          }
+        }
+      }
+
+      &.navbar-user-logged-out {
+        height: 110px;
+      }
+      &.navbar-user-logged-in {
+      }
+    }
+    .workout-app-navbar-divider {
+      margin: 10px 0;
+
+      .the-divider {
+        min-width: auto !important;
+      }
+    }
+  }
+
+  //replace the menu with a collapsible menu when the user is logged in and when the screen is small < 450px
 }
 // do not nest this css rule inside the container
 .workout-app-navbar-avatar-menu {
