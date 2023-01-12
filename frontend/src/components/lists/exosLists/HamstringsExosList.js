@@ -1,6 +1,5 @@
 import { Stack } from "@mui/system";
 import { Button, Modal } from "antd";
-import "antd/dist/antd.css";
 import { useState } from "react";
 import { HamstringsModalContent } from "../../../components/modals/HamstringsModalContent";
 import "./exos_lists.scss";

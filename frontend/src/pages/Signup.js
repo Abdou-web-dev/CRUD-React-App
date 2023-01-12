@@ -1,6 +1,7 @@
 import { Button, Form, Input, Select } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { TextMobileStepper as SignupStepper } from "../components/steppers/SignupStepper";
 import { useStyleMediaQuery } from "../hooks/UseMediaQuery";
 import { useSignup } from "../hooks/useSignup";
 import "./login_signup_styles.scss";
@@ -82,7 +83,12 @@ const Signup = ({}) => {
     if (country !== "") {
       setcountryWidth("fit-content");
     }
-  }, [country]);
+    if (isMobile) {
+      setemailClass("signup-form-email-item-input form-input-mobile");
+      setFullNameClass("signup-form-full-name-item-input form-input-mobile");
+      setPasswordClass("signup-form-password-item-input form-input-mobile");
+    }
+  }, [country, isMobile]);
 
   const errorMsg = (
     <>
@@ -114,214 +120,248 @@ const Signup = ({}) => {
     </>
   );
 
+  const EmailInput = (
+    <Input
+      className={emailClass}
+      type="email"
+      onChange={(e) => setEmail(e.target.value)}
+      value={email}
+      placeholder="Email"
+      allowClear
+    />
+  );
+  const FullNameInput = (
+    <Input
+      className={fullNameClass}
+      onChange={(e) => setFullName(e.target.value)}
+      value={fullName}
+      type="text"
+      placeholder="Full Name"
+      allowClear
+    />
+  );
+  const GenderInput = (
+    <Select
+      className={genderClass}
+      value={gender}
+      //strangely , when using antd Select, the event will hold the value of the value keys nested in options prop
+      onChange={(value) => {
+        setGender(value);
+        // console.log(value)
+      }}
+      defaultValue=""
+      size={"large"}
+      options={[
+        {
+          value: "Male",
+          label: "Male",
+        },
+        {
+          value: "Female",
+          label: "Female",
+        },
+      ]}
+    />
+  );
+  const CountryInput = (
+    <Select
+      className={countryClass}
+      value={country}
+      onChange={(value) => setCountry(value)}
+      onClick={handleCountryClick}
+      style={{ width: countryWidth }}
+      defaultValue="Morrco"
+      size={"large"}
+      filterOption={(input, option) => (option?.value ?? "").includes(input)}
+      filterSort={(optionA, optionB) =>
+        //if optionA.value is null ou undefined then "" will be returned instead, and if it has a value , this value will be returned and used
+        (optionA?.value ?? "")
+          .toLowerCase()
+          .localeCompare((optionB?.value ?? "").toLowerCase())
+      }
+      options={[
+        { value: "Afghanistan" },
+        { value: "Morocco" },
+        { value: "United States" },
+        { value: "Åland Islands" },
+        { value: "Albania" },
+        { value: "Algeria" },
+        { value: "American Samoa" },
+        { value: "Andorra" },
+        { value: "Angola" },
+        { value: "Anguilla" },
+        { value: "Antarctica" },
+        { value: "Antigua and Barbuda" },
+        { value: "Argentina" },
+        { value: "Armenia" },
+        { value: "Aruba" },
+        { value: "Australia" },
+        { value: "Austria" },
+        { value: "Azerbaijan" },
+        { value: "Bahamas" },
+        { value: "Bahrain" },
+        { value: "Bangladesh" },
+        { value: "Barbados" },
+        { value: "Belarus" },
+        { value: "Belgium" },
+        { value: "Belize" },
+        { value: "Benin" },
+        { value: "Bermuda" },
+        { value: "Bhutan" },
+        { value: "Bolivia" },
+        { value: "Bosnia and Herzegovina" },
+        { value: "Botswana" },
+        { value: "Bouvet Island" },
+        { value: "Brazil" },
+        { value: "British Indian Ocean Territory" },
+        { value: "Brunei Darussalam" },
+        { value: "Bulgaria" },
+        { value: "Burkina Faso" },
+        { value: "Burundi" },
+        { value: "Cambodia" },
+        { value: "Cameroon" },
+        { value: "Canada" },
+        { value: "Cape Verde" },
+        { value: "Cayman Islands" },
+        { value: "Central African Republic" },
+        { value: "Chad" },
+        { value: "Chile" },
+        { value: "China" },
+        { value: "Christmas Island" },
+        { value: "Cocos (Keeling) Islands" },
+        { value: "Colombia" },
+        { value: "Comoros" },
+        { value: "Congo" },
+        { value: "Congo, The Democratic Republic of The" },
+        { value: "Cook Islands" },
+        { value: "Costa Rica" },
+        { value: "Cote D'ivoire" },
+        { value: "Croatia" },
+        { value: "Cuba" },
+        { value: "Cyprus" },
+        { value: "Czech Republic" },
+        { value: "Denmark" },
+        { value: "Djibouti" },
+        { value: "Dominica" },
+        { value: "Dominican Republic" },
+        { value: "Ecuador" },
+        { value: "Egypt" },
+        { value: "El Salvador" },
+        { value: "Equatorial Guinea" },
+        { value: "Eritrea" },
+        { value: "Estonia" },
+        { value: "Ethiopia" },
+        { value: "Falkland Islands (Malvinas)" },
+        { value: "Faroe Islands" },
+        { value: "Fiji" },
+        { value: "Finland" },
+        { value: "France" },
+        { value: "French Guiana" },
+        { value: "French Polynesia" },
+        { value: "French Southern Territories" },
+      ]}
+    />
+  );
+  const PasswordInput = (
+    <Input.Password
+      className={passwordClass}
+      type="password"
+      onChange={(e) => setPassword(e.target.value)}
+      value={password}
+      placeholder="Password"
+      allowClear
+    />
+  );
+
   return (
     <>
-      <div className="signup-form-container">
-        <div className="signup-form-inner">
-          <Form
-            className="signup-form"
-            name="form"
-            onFinish={handleSubmit}
-            initialValues={{
-              remember: true,
-            }}
-          >
-            <>
-              <label className="signup-form-email-label">Email :</label>
-              <Input
-                className={emailClass}
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                placeholder="Email"
-                allowClear
-              />
-            </>
-            <>
-              <label className="signup-form-fullName-label">Full Name : </label>
-              <Input
-                className={fullNameClass}
-                onChange={(e) => setFullName(e.target.value)}
-                value={fullName}
-                type="text"
-                placeholder="Full Name"
-                allowClear
-              />
-            </>
-            <>
-              <label className="signup-form-gender-label">Gender : </label>
-              <Select
-                className={genderClass}
-                value={gender}
-                //strangely , when using antd Select, the event will hold the value of the value keys nested in options prop
-                onChange={(value) => {
-                  setGender(value);
-                  // console.log(value)
-                }}
-                defaultValue=""
-                size={"large"}
-                options={[
-                  {
-                    value: "Male",
-                    label: "Male",
-                  },
-                  {
-                    value: "Female",
-                    label: "Female",
-                  },
-                ]}
-              />
-            </>
+      {isDesktop ? (
+        <div className="signup-form-container">
+          <div className="signup-form-inner">
+            <Form
+              className="signup-form"
+              name="form"
+              onFinish={handleSubmit}
+              initialValues={{
+                remember: true,
+              }}
+            >
+              <>
+                <label className="signup-form-email-label">Email :</label>
+                {EmailInput}
+              </>
+              <>
+                <label className="signup-form-fullName-label">
+                  Full Name :
+                </label>
+                {FullNameInput}
+              </>
+              <>
+                <label className="signup-form-gender-label">Gender : </label>
+                {GenderInput}
+              </>
 
-            <>
-              <label className="signup-form-country-label">Country : </label>
-              <Select
-                className={countryClass}
-                value={country}
-                onChange={(value) => setCountry(value)}
-                onClick={handleCountryClick}
-                style={{ width: countryWidth }}
-                defaultValue="Morrco"
-                size={"large"}
-                filterOption={(input, option) =>
-                  (option?.value ?? "").includes(input)
-                }
-                filterSort={(optionA, optionB) =>
-                  //if optionA.value is null ou undefined then "" will be returned instead, and if it has a value , this value will be returned and used
-                  (optionA?.value ?? "")
-                    .toLowerCase()
-                    .localeCompare((optionB?.value ?? "").toLowerCase())
-                }
-                options={[
-                  { value: "Afghanistan" },
-                  { value: "Morocco" },
-                  { value: "United States" },
-                  { value: "Åland Islands" },
-                  { value: "Albania" },
-                  { value: "Algeria" },
-                  { value: "American Samoa" },
-                  { value: "Andorra" },
-                  { value: "Angola" },
-                  { value: "Anguilla" },
-                  { value: "Antarctica" },
-                  { value: "Antigua and Barbuda" },
-                  { value: "Argentina" },
-                  { value: "Armenia" },
-                  { value: "Aruba" },
-                  { value: "Australia" },
-                  { value: "Austria" },
-                  { value: "Azerbaijan" },
-                  { value: "Bahamas" },
-                  { value: "Bahrain" },
-                  { value: "Bangladesh" },
-                  { value: "Barbados" },
-                  { value: "Belarus" },
-                  { value: "Belgium" },
-                  { value: "Belize" },
-                  { value: "Benin" },
-                  { value: "Bermuda" },
-                  { value: "Bhutan" },
-                  { value: "Bolivia" },
-                  { value: "Bosnia and Herzegovina" },
-                  { value: "Botswana" },
-                  { value: "Bouvet Island" },
-                  { value: "Brazil" },
-                  { value: "British Indian Ocean Territory" },
-                  { value: "Brunei Darussalam" },
-                  { value: "Bulgaria" },
-                  { value: "Burkina Faso" },
-                  { value: "Burundi" },
-                  { value: "Cambodia" },
-                  { value: "Cameroon" },
-                  { value: "Canada" },
-                  { value: "Cape Verde" },
-                  { value: "Cayman Islands" },
-                  { value: "Central African Republic" },
-                  { value: "Chad" },
-                  { value: "Chile" },
-                  { value: "China" },
-                  { value: "Christmas Island" },
-                  { value: "Cocos (Keeling) Islands" },
-                  { value: "Colombia" },
-                  { value: "Comoros" },
-                  { value: "Congo" },
-                  { value: "Congo, The Democratic Republic of The" },
-                  { value: "Cook Islands" },
-                  { value: "Costa Rica" },
-                  { value: "Cote D'ivoire" },
-                  { value: "Croatia" },
-                  { value: "Cuba" },
-                  { value: "Cyprus" },
-                  { value: "Czech Republic" },
-                  { value: "Denmark" },
-                  { value: "Djibouti" },
-                  { value: "Dominica" },
-                  { value: "Dominican Republic" },
-                  { value: "Ecuador" },
-                  { value: "Egypt" },
-                  { value: "El Salvador" },
-                  { value: "Equatorial Guinea" },
-                  { value: "Eritrea" },
-                  { value: "Estonia" },
-                  { value: "Ethiopia" },
-                  { value: "Falkland Islands (Malvinas)" },
-                  { value: "Faroe Islands" },
-                  { value: "Fiji" },
-                  { value: "Finland" },
-                  { value: "France" },
-                  { value: "French Guiana" },
-                  { value: "French Polynesia" },
-                  { value: "French Southern Territories" },
-                ]}
-              />
-            </>
-            <>
-              <label className="signup-form-password-label">Password : </label>
-              <Input.Password
-                className={passwordClass}
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                placeholder="Password"
-                allowClear
-              />
-            </>
+              <>
+                <label className="signup-form-country-label">Country : </label>
 
-            <div className="signup-form-btn-and-error">
-              <Button
-                className="signup-form-btn-item-button"
-                disabled={isLoading}
-                type="primary"
-                htmlType="submit"
-              >
-                <span>Sign up</span>
-              </Button>
-              {error && (
-                <div className="text-error">
-                  {error ===
-                  "Password must include one lowercase character, one uppercase character, a number, and a special character and have a minimum length of 8 characters" ? (
-                    errorMsg
-                  ) : (
-                    <span className="error-msg-text">{error}!</span>
-                  )}
-                </div>
-              )}
-            </div>
+                {CountryInput}
+              </>
+              <>
+                <label className="signup-form-password-label">
+                  Password :{" "}
+                </label>
 
-            <div className="signup-form-not-a-member">
-              <span className="signup-form-text1">
-                Have already an account ?
-              </span>
+                {PasswordInput}
+              </>
 
-              <Button className="signup-form-not-a-member-register-btn">
-                <Link to="/login">
-                  <span className="signup-form-text2"> Login</span>
-                </Link>
-              </Button>
-            </div>
-          </Form>
+              <div className="signup-form-btn-and-error">
+                <Button
+                  className="signup-form-btn-item-button"
+                  disabled={isLoading}
+                  type="primary"
+                  htmlType="submit"
+                >
+                  <span>Sign up</span>
+                </Button>
+                {error && (
+                  <div className="text-error">
+                    {error ===
+                    "Password must include one lowercase character, one uppercase character, a number, and a special character and have a minimum length of 8 characters" ? (
+                      errorMsg
+                    ) : (
+                      <span className="error-msg-text">{error}!</span>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <div className="signup-form-not-a-member">
+                <span className="signup-form-text1">
+                  Have already an account ?
+                </span>
+
+                <Button className="signup-form-not-a-member-register-btn">
+                  <Link to="/login">
+                    <span className="signup-form-text2"> Login</span>
+                  </Link>
+                </Button>
+              </div>
+            </Form>
+          </div>
         </div>
-      </div>
+      ) : isMobile ? (
+        <div>
+          <SignupStepper
+            {...{
+              EmailInput,
+              FullNameInput,
+              GenderInput,
+              CountryInput,
+              PasswordInput,
+            }}
+          ></SignupStepper>
+        </div>
+      ) : null}
     </>
   );
 };

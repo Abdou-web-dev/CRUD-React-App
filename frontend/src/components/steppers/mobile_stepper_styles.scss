@@ -1,0 +1,59 @@
+.stepper-box-wrapper {
+  .signup-form-email-item-input,
+  .signup-form-full-name-item-input,
+  .signup-form-password-item-input {
+    width: 100%;
+    height: 60px;
+    &.form-input-mobile {
+      .ant-input-suffix {
+        .ant-input-clear-icon {
+          .anticon-close-circle {
+            transform: scale(2) !important;
+          }
+        }
+      }
+    }
+  }
+
+  .signup-form-gender-item-select {
+    width: 150px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .signup-form-country-item-select {
+    width: 250px !important;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .active-step-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .the-stepper-container {
+    margin-bottom: 150px;
+  }
+  .mobile-stepper-next-btn {
+    border: none;
+    height: fit-content;
+    // margin-top: -360px;
+    img {
+      width: 84px;
+      height: 84px;
+    }
+  }
+  .mobile-stepper-back-btn {
+    border: none;
+    height: fit-content;
+    // margin-top: -360px;
+
+    img {
+      width: 84px;
+      height: 84px;
+    }
+  }
+}

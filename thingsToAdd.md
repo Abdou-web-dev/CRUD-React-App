@@ -1,3 +1,9 @@
+//replace the menu with a collapsible menu when the user is logged in and when the screen is small < 450px
+
+//if the overflow-x problem wont be fixed on smartphone view, replace the form with a kind of a stepper,
+// 1st the user must enter their username , email...., with a submit btn for each step
+//and make it repsonsive
+
 1)++add updte functionality to workouts
 
 2)++add fnct : if a workout already exists , dont add it , show a msg saying that it already exists . ......

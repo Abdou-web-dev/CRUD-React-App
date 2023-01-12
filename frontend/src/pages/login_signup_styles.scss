@@ -732,12 +732,13 @@ $xx-large: 1400px;
       }
     }
   }
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 500px) {
     overflow-x: hidden;
     .signup-form-inner {
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 100%;
       .signup-form {
         width: 40%;
         .signup-form-email-item-input,
