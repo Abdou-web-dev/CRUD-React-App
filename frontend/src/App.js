@@ -1,5 +1,7 @@
+import { useMediaQuery } from "@mui/material";
 import { Navigate, Route, Routes } from "react-router-dom";
 // pages & components
+import "./App.scss";
 import Navbar from "./components/Navbar/Navbar";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Help from "./pages/Help";
@@ -10,15 +12,15 @@ import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import StarredItems from "./pages/StarredItems";
 import Workouts from "./pages/Workouts";
-
 function App() {
   const { user } = useAuthContext();
-  // this usf in order to move the logo to the left, when the restore btn is clicked on the starred-items page
+  const isMobileScreen = useMediaQuery("(max-width: 576px)");
+
   return (
     <div className="App">
       <Navbar />
 
-      <div className="pages">
+      <div className={isMobileScreen ? "pages pages-cl2" : "pages"}>
         <Routes>
           <Route path="/" element={<Home />} />
 

@@ -1,4 +1,5 @@
 .stepper-box-wrapper {
+  overflow-x: hidden;
   .signup-form-email-item-input,
   .signup-form-full-name-item-input,
   .signup-form-password-item-input {
@@ -34,16 +35,33 @@
     justify-content: center;
     align-items: center;
   }
+
   .the-stepper-container {
     margin-bottom: 150px;
+    padding: 0;
+    width: 90%;
+  }
+  .the-stepper-box {
+    width: 90%;
+  }
+  .the-stepper-paper {
+    width: 90%;
   }
   .mobile-stepper-next-btn {
     border: none;
     height: fit-content;
     // margin-top: -360px;
     img {
-      width: 84px;
-      height: 84px;
+      width: 64px;
+      height: 64px;
+    }
+  }
+  .mobile-stepper-step-one-btn {
+    border: none;
+    height: fit-content;
+    img {
+      width: 44px;
+      height: 44px;
     }
   }
   .mobile-stepper-back-btn {
@@ -52,8 +70,8 @@
     // margin-top: -360px;
 
     img {
-      width: 84px;
-      height: 84px;
+      width: 64px;
+      height: 64px;
     }
   }
 }

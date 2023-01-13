@@ -350,9 +350,10 @@ const Signup = ({}) => {
           </div>
         </div>
       ) : isMobile ? (
-        <div>
+        <div className="signup-stepper-container">
           <SignupStepper
             {...{
+              //these are all components, passed as props
               EmailInput,
               FullNameInput,
               GenderInput,

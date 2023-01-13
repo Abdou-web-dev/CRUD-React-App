@@ -5,7 +5,7 @@ import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { Button } from "antd";
 import * as React from "react";
-import ChestIcon from "../../assets/img/firstStep.svg";
+import firstStep from "../../assets/img/firstStep.svg";
 import goback from "../../assets/img/goback.png";
 import next from "../../assets/img/next.png";
 import "./mobile_stepper_styles.scss";
@@ -51,6 +51,9 @@ export function TextMobileStepper({
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
+  const handleStepOne = () => {
+    setActiveStep(0);
+  };
   React.useEffect(() => {
     if (activeStep === maxSteps - 1) {
       setnextdisabled(true);
@@ -63,6 +66,7 @@ export function TextMobileStepper({
   return (
     <Box className="stepper-box-wrapper" sx={{ maxWidth: 400, flexGrow: 1 }}>
       <Paper
+        className="the-stepper-paper"
         // square
         elevation={12}
         sx={{
@@ -83,7 +87,10 @@ export function TextMobileStepper({
           {steps[activeStep].label}
         </Typography>
       </Paper>
-      <Box sx={{ height: 255, maxWidth: 400, width: "100%", p: 2 }}>
+      <Box
+        className="the-stepper-box"
+        sx={{ height: 255, maxWidth: 400, width: "100%", p: 2 }}
+      >
         <div className="active-step-description">
           {steps[activeStep].description}
         </div>
@@ -113,15 +120,16 @@ export function TextMobileStepper({
             {activeStep === lastStep ? (
               <>
                 <Button
-                  className="mobile-stepper-back-btn"
+                  className="mobile-stepper-step-one-btn"
                   style={{
                     cursor: activeStep === 0 ? "not-allowed" : "",
                   }}
+                  onClick={handleStepOne}
                   size="small"
                   // onClick={handleBack}
                   disabled={activeStep === 0}
                 >
-                  <img src={ChestIcon} alt="" />
+                  <img src={firstStep} alt="" />
                 </Button>
                 <Button
                   className="mobile-stepper-back-btn"
