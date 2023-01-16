@@ -1,10 +1,21 @@
 .stepper-box-wrapper {
   overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   .signup-form-email-item-input,
   .signup-form-full-name-item-input,
   .signup-form-password-item-input {
-    width: 100%;
+    width: 315px;
     height: 60px;
+
+    & > * {
+      // targets the text that the user types
+      font-size: larger;
+      font-family: "Oswald";
+      letter-spacing: 1px;
+    }
     &.form-input-mobile {
       .ant-input-suffix {
         .ant-input-clear-icon {
@@ -14,6 +25,38 @@
         }
       }
     }
+    .ant-input-suffix {
+      gap: 15px;
+      .anticon-eye-invisible,
+      .anticon-eye {
+        &.ant-input-password-icon {
+          transform: scale(2) !important;
+          &:hover {
+            transform: scale(2) !important;
+          }
+        }
+      }
+    }
+  }
+  .signup-form-gender-item-select,
+  .signup-form-country-item-select {
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 10px;
+    .ant-select-selector {
+      height: 60px !important;
+      .ant-select-selection-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+  .signup-form-email-item-input {
+    // height: 250px;
   }
 
   .signup-form-gender-item-select {
@@ -36,42 +79,122 @@
     align-items: center;
   }
 
-  .the-stepper-container {
-    margin-bottom: 150px;
-    padding: 0;
-    width: 90%;
-  }
   .the-stepper-box {
     width: 90%;
   }
   .the-stepper-paper {
-    width: 90%;
+    width: 45%;
+    height: 45px;
+    .the-stepper-paper-inner {
+      p {
+        font-size: 18px;
+        letter-spacing: 2.5px;
+        font-family: "Oswald";
+      }
+      .the-stepper-paper-typo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .the-stepper-paper-icon {
+          width: 35px;
+          height: 35px;
+          margin-right: 15px;
+        }
+      }
+    }
+    &.country-pap {
+      width: 55%;
+    }
   }
+  .the-stepper-container {
+    margin-bottom: 215px;
+    padding: 0;
+    width: 90%;
+    // border: 1px solid;
+    .MuiLinearProgress-root {
+      &.MuiLinearProgress-determinate {
+        &.MuiMobileStepper-progress {
+          display: none;
+        }
+      }
+    }
+  }
+
   .mobile-stepper-next-btn {
     border: none;
     height: fit-content;
-    // margin-top: -360px;
-    img {
-      width: 64px;
-      height: 64px;
+    margin-top: -320px;
+    position: relative;
+    left: 60px;
+    background: none !important;
+    &:focus,
+    &:active {
+      border: 1px solid lightgray !important;
+      // border-color: white !important;
     }
-  }
-  .mobile-stepper-step-one-btn {
-    border: none;
-    height: fit-content;
     img {
-      width: 44px;
-      height: 44px;
+      width: 50px;
+      height: 50px;
     }
   }
   .mobile-stepper-back-btn {
     border: none;
     height: fit-content;
-    // margin-top: -360px;
+    background: none !important;
+    // margin-top: -320px;
+    position: relative;
+    // left: 60px;
+    bottom: 160px;
 
+    img {
+      width: 44px;
+      height: 44px;
+    }
+  }
+  .mobile-stepper-step-one-btn {
+    border: none;
+    height: fit-content;
+    z-index: 9999 !important;
     img {
       width: 64px;
       height: 64px;
     }
+  }
+  .designed-sentence {
+    span {
+      font-family: "Mulish";
+      font-style: italic;
+    }
+  }
+}
+
+.ant-select-dropdown {
+  &.ant-select-dropdown-placement-bottomLeft {
+    // display: none;
+    .rc-virtual-list-holder {
+      .rc-virtual-list-holder-inner {
+        .ant-select-item-option {
+          height: 40px;
+          & > * {
+            // targets the text that the user types
+            font-size: 20px;
+            font-family: "Oswald";
+            letter-spacing: 1px;
+          }
+          &.ant-select-item-option-active {
+            // border: 1px solid grey;
+          }
+        }
+      }
+    }
+  }
+}
+.ant-btn {
+  &:active {
+    outline: none !important;
+    border: none !important;
+    background: none !important;
+    border-color: red !important;
   }
 }

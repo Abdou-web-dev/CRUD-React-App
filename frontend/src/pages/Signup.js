@@ -87,6 +87,8 @@ const Signup = ({}) => {
       setemailClass("signup-form-email-item-input form-input-mobile");
       setFullNameClass("signup-form-full-name-item-input form-input-mobile");
       setPasswordClass("signup-form-password-item-input form-input-mobile");
+      setgenderClass("signup-form-gender-item-select form-input-mobile");
+      setCountryClass("signup-form-country-item-select form-input-mobile");
     }
   }, [country, isMobile]);
 
@@ -165,6 +167,7 @@ const Signup = ({}) => {
   );
   const CountryInput = (
     <Select
+      // open
       className={countryClass}
       value={country}
       onChange={(value) => setCountry(value)}

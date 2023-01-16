@@ -14,6 +14,7 @@ import profil from "../../assets/img/profil.png";
 import starred from "../../assets/img/starred.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogout } from "../../hooks/useLogout";
+import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import "./navbar.scss";
 
 const Navbar = ({}) => {
@@ -54,6 +55,8 @@ const Navbar = ({}) => {
     setshowLogOutModal(true);
   };
 
+  const isDesktopScreen = useMediaQuery("(min-width: 576px)");
+
   return (
     <div className="workout-app-navbar-container">
       <nav
@@ -82,7 +85,9 @@ const Navbar = ({}) => {
                 <Stack className="app-nav-stack" direction={"row"} spacing={5}>
                   <li className="navbar-ul-li icon-and-word">
                     <img className="gym-img" src={gym} alt="" />
-                    <span className="gym-word">The training gym</span>
+                    {isDesktopScreen && (
+                      <span className="gym-word">The training gym</span>
+                    )}
                   </li>
                 </Stack>
               </Link>
