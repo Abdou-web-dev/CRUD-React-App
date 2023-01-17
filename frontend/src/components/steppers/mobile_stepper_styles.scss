@@ -4,6 +4,35 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  .stepper-error-wrapper {
+    // margin: 10px 0;
+    position: relative;
+    bottom: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    // padding: 15px 0;
+    .error-text {
+      font-size: larger;
+      font-family: "Oswald";
+      letter-spacing: 2px;
+      color: red;
+      // font-size: 25px;
+      // font-style: italic;
+    }
+    .stepper-error-btn-wrapper {
+      background: none;
+      border: none;
+      height: fit-content;
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+
   .signup-form-email-item-input,
   .signup-form-full-name-item-input,
   .signup-form-password-item-input {
@@ -81,10 +110,12 @@
 
   .the-stepper-box {
     width: 90%;
+    z-index: 999;
   }
   .the-stepper-paper {
     width: 45%;
     height: 45px;
+    padding: 25px 35px;
     .the-stepper-paper-inner {
       p {
         font-size: 18px;
@@ -111,6 +142,8 @@
     margin-bottom: 215px;
     padding: 0;
     width: 90%;
+    z-index: 999;
+
     // border: 1px solid;
     .MuiLinearProgress-root {
       &.MuiLinearProgress-determinate {
@@ -156,15 +189,51 @@
     border: none;
     height: fit-content;
     z-index: 9999 !important;
+    margin: 10px 0;
     img {
       width: 64px;
       height: 64px;
     }
   }
-  .designed-sentence {
-    span {
+  .mobile-stepper-signup-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 15px;
+
+    .mobile-stepper-reset-btn {
+      background: rgba(128, 128, 128, 0.762);
+      padding: 8px 15px;
+      height: fit-content;
+      span {
+        font-family: "Oswald";
+        font-size: 20px;
+        color: white;
+        letter-spacing: 2.5px;
+      }
+    }
+    .mobile-stepper-signup-btn {
+      // display: none;
+      // margin-top: -100px;
+      z-index: 999;
+      background: rgb(100, 177, 100);
+      height: fit-content;
+      span {
+        font-family: "Oswald";
+        font-size: 30px;
+        color: white;
+        letter-spacing: 2.5px;
+        text-transform: capitalize;
+      }
+    }
+  }
+  .designed-sentence-wrapper {
+    span.designed-sentence {
       font-family: "Mulish";
       font-style: italic;
+      position: relative;
+      z-index: 999;
     }
   }
 }
@@ -196,5 +265,64 @@
     border: none !important;
     background: none !important;
     border-color: red !important;
+  }
+}
+
+.ant-modal {
+  &.weak-password-modal {
+    .ant-modal-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .weak-password-modal-text-wrapper {
+        padding: 40px 0;
+        padding-top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        max-width: 370px;
+        .weak-password-modal-close-btn {
+          height: fit-content;
+          border: none;
+          margin-bottom: 20px;
+          img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+
+        span {
+          font-family: "Mulish";
+          font-style: italic;
+          font-size: 30px;
+          .weak-lower {
+            color: pink;
+            font-weight: bolder;
+          }
+          .weak-upper {
+            color: grey;
+            font-weight: bolder;
+          }
+          .weak-number {
+            color: rgb(147, 36, 54);
+            font-weight: bolder;
+          }
+          .weak-special {
+            color: rgb(19, 86, 76);
+            font-weight: bolder;
+          }
+        }
+      }
+    }
+    .ant-modal-content {
+      .anticon-close {
+        &.ant-modal-close-icon {
+          position: relative;
+          right: 50px;
+          bottom: 10px;
+        }
+      }
+    }
   }
 }

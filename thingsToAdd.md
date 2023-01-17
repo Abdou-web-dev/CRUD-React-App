@@ -54,3 +54,29 @@ I wrote an app in JavaScript, released it, then for the second release ported it
 For this reason alone, TypeScript is superior. It catches stupid mistakes.
 
 This was glossed over in the video as the error category of static type checking.
+
+const EmailInput = () => {
+return (
+<Input
+className={emailClass}
+type="email"
+onChange={(e) => setEmail(e.target.value)}
+value={email}
+placeholder="Email"
+allowClear
+/>
+);
+};
+// ===========> use <EmailInput></EmailInput>
+
+      const EmailInput = (
+        <Input
+          className={emailClass}
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          placeholder="Email"
+          allowClear
+        />
+      );
+      // ===========> use {EmailInput}

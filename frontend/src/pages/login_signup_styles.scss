@@ -544,14 +544,10 @@ $xx-large: 1400px;
     }
   }
   @media screen and (max-width: $small) {
-    // border: 1px solid;
-    // overflow: hidden !important;
-
     .signup-form-inner {
       margin-bottom: 100px;
       .signup-form {
         background: #c6b7a451;
-        // width: 100px;
         width: 550px;
         .signup-form-email-label {
           @include label_styles;
@@ -756,7 +752,156 @@ $xx-large: 1400px;
       }
     }
   }
+  @media screen and (min-width: $small) and (max-width: $medium) {
+    .signup-form-inner {
+      margin-bottom: 100px;
+      .signup-form {
+        background: #584b3b51;
+        width: 550px;
+        // border: 2px solid red;
+        .signup-form-email-label {
+          @include label_styles;
+          margin-top: 50px;
+          white-space: nowrap;
+        }
+        .signup-form-email-item-input {
+          width: 400px;
+          height: 60px;
+          .anticon-close-circle {
+            transform: scale(2);
+          }
+        }
+        .signup-form-email-item-input-empty {
+          border-bottom: 2px solid red;
+        }
+        .signup-form-fullName-label {
+          white-space: nowrap;
+          @include label_styles;
+        }
+        .signup-form-full-name-item-input {
+          width: 400px;
+          height: 60px;
+          .anticon-close-circle {
+            transform: scale(2);
+          }
+        }
+        .signup-form-full-name-item-input-empty {
+          border-bottom: 2px solid red;
+        }
+
+        .signup-form-gender-label {
+          white-space: nowrap;
+          @include label_styles;
+        }
+        .signup-form-gender-item-select {
+        }
+        .signup-form-gender-item-select-empty {
+          .ant-select-selector {
+            border-bottom: 2px solid red;
+          }
+          .ant-select-selection-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        .signup-form-country-label {
+          white-space: nowrap;
+          @include label_styles;
+          margin-top: 15px;
+        }
+        .signup-form-country-item-select {
+          width: 200px !important;
+        }
+        .signup-form-country-item-select-empty {
+          .ant-select-selector {
+            border-bottom: 2px solid red;
+          }
+        }
+
+        .signup-form-password-label {
+          white-space: nowrap;
+          @include label_styles;
+          margin-top: 15px;
+        }
+        .signup-form-password-item-input {
+          width: 300px;
+          height: 60px;
+
+          .ant-input-clear-icon,
+          .anticon-eye-invisible,
+          .anticon-eye {
+            transform: scale(2) !important;
+            margin-left: 10px;
+            margin-right: 10px;
+          }
+          .anticon-eye-invisible,
+          .anticon-eye {
+            margin-right: 10px;
+          }
+        }
+        .signup-form-password-item-input-empty {
+          border-bottom: 2px solid red;
+          &::after {
+            display: flex;
+            align-items: center;
+            content: "!";
+            margin-left: 10px;
+            color: red;
+            font-weight: bold;
+          }
+        }
+
+        .signup-form-btn-and-error {
+          .signup-form-btn-item-button {
+            width: 120px;
+            height: 55px;
+            background: rgba(12, 98, 127, 0.8) !important;
+            span {
+              font-size: 20px;
+            }
+          }
+          .text-error {
+            width: 300px;
+
+            span.error-msg-text {
+              font-family: "Poppins";
+              font-size: 16px;
+              color: rgb(206, 72, 72);
+              white-space: nowrap;
+            }
+          }
+        }
+
+        .signup-form-not-a-member {
+          .signup-form-text1 {
+            font-family: "Mulish";
+            font-size: 20px;
+            margin-right: 20px;
+            white-space: nowrap;
+          }
+          .signup-form-not-a-member-register-btn {
+            background: rgba(25, 131, 167, 0.5);
+            width: 120px;
+            height: 60px;
+            &:hover {
+              background: rgba(25, 131, 167, 0.8);
+            }
+            .signup-form-text2 {
+              color: white;
+              font-family: "Oswald";
+              font-size: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 .signup-stepper-container {
   overflow-x: hidden;
 }
+
+// ant-select ant-select-lg signup-form-gender-item-select signup-form-gender-item-select-empty ant-select-single ant-select-show-arrow
+
+// ant-select ant-select-lg signup-form-gender-item-select ant-select-single ant-select-show-arrow

@@ -69,6 +69,7 @@ userSchema.statics.signup = async function (
     !validator.matches(
       password,
       /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,30}$/
+      //this is a regex to verify that a pwd is strong
     )
   ) {
     throw Error(

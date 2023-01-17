@@ -362,6 +362,18 @@ const Signup = ({}) => {
               GenderInput,
               CountryInput,
               PasswordInput,
+              handleSubmit,
+              error,
+              gender,
+              email,
+              password,
+              country,
+              fullName,
+              setEmail,
+              setPassword,
+              setCountry,
+              setFullName,
+              setGender,
             }}
           ></SignupStepper>
         </div>

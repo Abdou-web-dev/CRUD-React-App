@@ -162,3 +162,29 @@
 //   handleFilterWorkouts(category.exoTitle);
 // }}
 // wont trigger the click , because of the category argument pased to the function, it must recieve no arg
+
+const EmailInput = () => {
+  return (
+    <Input
+      className={emailClass}
+      type="email"
+      onChange={(e) => setEmail(e.target.value)}
+      value={email}
+      placeholder="Email"
+      allowClear
+    />
+  );
+};
+// ===========> use       <EmailInput></EmailInput>
+
+const EmailInput = (
+  <Input
+    className={emailClass}
+    type="email"
+    onChange={(e) => setEmail(e.target.value)}
+    value={email}
+    placeholder="Email"
+    allowClear
+  />
+);
+// ===========> use {EmailInput}
