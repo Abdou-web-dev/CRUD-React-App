@@ -1,5 +1,5 @@
 .login-form-container {
-  width: auto;
+  // width: auto;
   .login-form-inner {
     margin-bottom: 100px;
     .login-form {
@@ -272,6 +272,14 @@
       top: 2px;
       margin-left: 5px;
     }
+  }
+}
+.login-form-mobile-top-container {
+  background-color: rgba(211, 211, 211, 0.377);
+  width: 92%;
+  padding: 20px 50px;
+  overflow-x: hidden;
+  .login-form-mobile-inner {
   }
 }
 .login-form-avatar-modal {

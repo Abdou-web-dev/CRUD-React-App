@@ -14,9 +14,10 @@ import avatarmale4 from "../assets/img/avatarmale4.svg";
 import avatarmale5 from "../assets/img/avatarmale5.svg";
 import avatarmale6 from "../assets/img/avatarmale6.svg";
 import edit from "../assets/img/edit.svg";
-
+import { LoginMobileForm } from "../components/forms/LoginMobileForm";
 import { ClearIcon } from "../components/icons/Icons";
 import { useLogin } from "../hooks/useLogin";
+import { useMediaQuery } from "../hooks/UseMediaQuery";
 import "./login_signup_styles.scss";
 
 const Login = ({}) => {
@@ -92,7 +93,6 @@ const Login = ({}) => {
       setShowNotification(true);
     }
   };
-
   const onChangeMale = (e, index) => {
     setCheckedMale(e.target.checked);
     if (checkedFemale === true) {
@@ -116,16 +116,16 @@ const Login = ({}) => {
     }
   };
 
+  //when the user closes the modal , show the selected avatar instead of the 2 checkboxes
+  //but still allow him to modify it
   const handleEditAvatarClick = () => {
     setshowCheckboxes(true);
     setShowSelectedAvatar(false);
     setCheckedMale(false);
     setCheckedFemale(false);
   };
-
-  //when the user closes the modal , show the selected avatar instead of the 2 checkboxes
-  //but still allow him to modify it
-
+  const isMobileScreen = useMediaQuery("(max-width: 576px)"); // returns true or false
+  let isDesktopScreen = !isMobileScreen;
   useEffect(() => {
     if (checkedMale === true) {
       setGender("Male");
@@ -136,186 +136,201 @@ const Login = ({}) => {
     if (checkedMale || checkedFemale) {
       setshowAvatarModal(true);
     }
+    // console.log(isDesktopScreen);
   }, [checkedMale, checkedFemale]);
 
   return (
-    <div className="login-form-container">
-      <div className="login-form-inner">
-        <Form className="login-form" name="form" onFinish={handleSubmit}>
-          <Form.Item
-            className="login-form-email-item"
-            label={
-              <div className="login-form-email-item-label">
-                <span>Email address</span>
-              </div>
-            }
-            name="Email address"
-            rules={[{ required: true }]}
-          >
-            <Input
-              className={emailClass}
-              type="email"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              placeholder="Email"
-              allowClear
-            />
-          </Form.Item>
+    <div
+      className={
+        isDesktopScreen
+          ? "login-form-container"
+          : "login-form-mobile-top-container"
+      }
+    >
+      {isDesktopScreen ? (
+        <div className="login-form-inner">
+          <Form className="login-form" name="form" onFinish={handleSubmit}>
+            <Form.Item
+              className="login-form-email-item"
+              label={
+                <div className="login-form-email-item-label">
+                  <span>Email address</span>
+                </div>
+              }
+              name="Email address"
+              rules={[{ required: true }]}
+            >
+              <Input
+                className={emailClass}
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                placeholder="Email"
+                allowClear
+              />
+            </Form.Item>
 
-          <Form.Item
-            className="login-form-full-name-item"
-            label={
-              <div className="login-form-full-name-item-label">
-                <span>Full name</span>
-              </div>
-            }
-            name="Full name"
-            rules={[{ required: true }]}
-          >
-            <Input
-              className={fullNameClass}
-              type="text"
-              onChange={(e) => setFullName(e.target.value.trim())}
-              value={fullName}
-              placeholder="Full Name"
-              allowClear
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  setFullName(e.target.value.trim());
-                }
-              }}
-              /**trim js method Removes the leading and trailing white space and line terminator characters from a string. */
-            />
-          </Form.Item>
+            <Form.Item
+              className="login-form-full-name-item"
+              label={
+                <div className="login-form-full-name-item-label">
+                  <span>Full name</span>
+                </div>
+              }
+              name="Full name"
+              rules={[{ required: true }]}
+            >
+              <Input
+                className={fullNameClass}
+                type="text"
+                onChange={(e) => setFullName(e.target.value.trim())}
+                value={fullName}
+                placeholder="Full Name"
+                allowClear
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    setFullName(e.target.value.trim());
+                  }
+                }}
+                /**trim js method Removes the leading and trailing white space and line terminator characters from a string. */
+              />
+            </Form.Item>
 
-          <Form.Item
-            className="login-form-gender-item"
-            label={
-              <div className="login-form-gender-item-label">
-                <span>Avatar</span>
-              </div>
-            }
-            // required
-            // name="Gender"
-            // rules={[{ required: true }]}
-            //when we remove name property , the asterisk marking that field is mandatory is removed
-          >
-            {showCheckboxes && (
-              <div className="login-form-checkboxes">
-                <Checkbox
-                  className={""}
-                  checked={checkedMale}
-                  onChange={onChangeMale}
-                >
-                  <span>Male</span>
-                </Checkbox>
-                <Checkbox
-                  className={""}
-                  checked={checkedFemale}
-                  onChange={onChangeFemale}
-                >
-                  <span>Female</span>
-                </Checkbox>
-              </div>
-            )}
-            {showSelectedAvatar && (
-              <div className="login-form-selected-avatar">
-                <img
-                  className="login-form-selected-avatar-icon"
-                  src={avatar}
-                  alt=""
-                />
-                <Tooltip title="Change this avatar">
-                  <Button
-                    onClick={handleEditAvatarClick}
-                    className="login-form-selected-avatar-edit-icon-btn"
+            <Form.Item
+              className="login-form-gender-item"
+              label={
+                <div className="login-form-gender-item-label">
+                  <span>Avatar</span>
+                </div>
+              }
+              // required
+              // name="Gender"
+              // rules={[{ required: true }]}
+              //when we remove name property , the asterisk marking that field is mandatory is removed
+            >
+              {showCheckboxes && (
+                <div className="login-form-checkboxes">
+                  <Checkbox
+                    className={""}
+                    checked={checkedMale}
+                    onChange={onChangeMale}
                   >
-                    <img
-                      className="login-form-selected-avatar-edit-icon"
-                      src={edit}
-                      alt=""
-                    />
-                  </Button>
-                </Tooltip>
-              </div>
-            )}
-          </Form.Item>
-
-          <Form.Item
-            className="login-form-password-item"
-            label={
-              <div className="login-form-password-item-label">
-                <span>Password</span>
-              </div>
-            }
-            name="password"
-            rules={[{ required: true }]}
-          >
-            <Input.Password
-              className={passwordClass}
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              placeholder="Password"
-              allowClear
-            />
-          </Form.Item>
-
-          <Form.Item
-            className="login-form-btn-item"
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <div className="login-form-btn-and-error">
-              <Button
-                className="login-form-btn-item-button"
-                disabled={isLoading}
-                type="primary"
-                htmlType="submit"
-              >
-                <span> Login</span>
-              </Button>
-
-              {error && (
-                <div className="text-error">
-                  {error ===
-                  "This is not the full name you entered when you first registered, check if you typed an extra white space" ? (
-                    <div className="errorMsg-wrapper">
-                      <span className="errorMsg">{`This is not the full name you entered`}</span>
-                      <span className="errorMsg">
-                        {`when you first registered,  !`}
-                      </span>
-                      <span className="errorMsg">
-                        {`check if you typed an extra white space`}
-                      </span>
-                    </div>
-                  ) : (
-                    <span
-                      className={
-                        error === "Please , type your email address"
-                          ? "error-msg-text small-font"
-                          : "error-msg-text"
-                      }
-                    >
-                      {error}!
-                    </span>
-                  )}
+                    <span>Male</span>
+                  </Checkbox>
+                  <Checkbox
+                    className={""}
+                    checked={checkedFemale}
+                    onChange={onChangeFemale}
+                  >
+                    <span>Female</span>
+                  </Checkbox>
                 </div>
               )}
+              {showSelectedAvatar && (
+                <div className="login-form-selected-avatar">
+                  <img
+                    className="login-form-selected-avatar-icon"
+                    src={avatar}
+                    alt=""
+                  />
+                  <Tooltip title="Change this avatar">
+                    <Button
+                      onClick={handleEditAvatarClick}
+                      className="login-form-selected-avatar-edit-icon-btn"
+                    >
+                      <img
+                        className="login-form-selected-avatar-edit-icon"
+                        src={edit}
+                        alt=""
+                      />
+                    </Button>
+                  </Tooltip>
+                </div>
+              )}
+            </Form.Item>
+
+            <Form.Item
+              className="login-form-password-item"
+              label={
+                <div className="login-form-password-item-label">
+                  <span>Password</span>
+                </div>
+              }
+              name="password"
+              rules={[{ required: true }]}
+            >
+              <Input.Password
+                className={passwordClass}
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                placeholder="Password"
+                allowClear
+              />
+            </Form.Item>
+
+            <Form.Item
+              className="login-form-btn-item"
+              wrapperCol={{
+                offset: 8,
+                span: 16,
+              }}
+            >
+              <div className="login-form-btn-and-error">
+                <Button
+                  className="login-form-btn-item-button"
+                  disabled={isLoading}
+                  type="primary"
+                  htmlType="submit"
+                >
+                  <span> Login</span>
+                </Button>
+
+                {error && (
+                  <div className="text-error">
+                    {error ===
+                    "This is not the full name you entered when you first registered, check if you typed an extra white space" ? (
+                      <div className="errorMsg-wrapper">
+                        <span className="errorMsg">{`This is not the full name you entered`}</span>
+                        <span className="errorMsg">
+                          {`when you first registered,  !`}
+                        </span>
+                        <span className="errorMsg">
+                          {`check if you typed an extra white space`}
+                        </span>
+                      </div>
+                    ) : (
+                      <span
+                        className={
+                          error === "Please , type your email address"
+                            ? "error-msg-text small-font"
+                            : "error-msg-text"
+                        }
+                      >
+                        {error}!
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
+            </Form.Item>
+            <div className="login-form-not-a-member">
+              <span className="login-form-text1"> not a member ?</span>
+              <Button className="login-form-not-a-member-register-btn">
+                <Link to="/signup">
+                  <span className="login-form-text2"> Register</span>
+                </Link>
+              </Button>
             </div>
-          </Form.Item>
-          <div className="login-form-not-a-member">
-            <span className="login-form-text1"> not a member ?</span>
-            <Button className="login-form-not-a-member-register-btn">
-              <Link to="/signup">
-                <span className="login-form-text2"> Register</span>
-              </Link>
-            </Button>
-          </div>
-        </Form>
-      </div>
+          </Form>
+        </div>
+      ) : isMobileScreen ? (
+        <div className="login-form-mobile-inner">
+          <LoginMobileForm />
+        </div>
+      ) : null}
+
+      {/* Avatar modal */}
       <>
         {showAvatarModal && (
           <div>
@@ -366,6 +381,7 @@ const Login = ({}) => {
           </div>
         )}
       </>
+      {/* Notification */}
       <>
         {showNotification && (
           <div className="notification">

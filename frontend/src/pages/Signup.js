@@ -42,7 +42,7 @@ const Signup = ({}) => {
   const { signup, error, isLoading } = useSignup();
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
+    // e.preventDefault(); no need for it , because antd Form implements it by default
     if (email.length === 0)
       setemailClass(
         "signup-form-email-item-input signup-form-email-item-input-empty"
@@ -142,7 +142,7 @@ const Signup = ({}) => {
       allowClear
     />
   );
-  const GenderInput = (
+  const GenderSelect = (
     <Select
       className={genderClass}
       value={gender}
@@ -165,7 +165,7 @@ const Signup = ({}) => {
       ]}
     />
   );
-  const CountryInput = (
+  const CountrySelect = (
     <Select
       // open
       className={countryClass}
@@ -301,13 +301,13 @@ const Signup = ({}) => {
               </>
               <>
                 <label className="signup-form-gender-label">Gender : </label>
-                {GenderInput}
+                {GenderSelect}
               </>
 
               <>
                 <label className="signup-form-country-label">Country : </label>
 
-                {CountryInput}
+                {CountrySelect}
               </>
               <>
                 <label className="signup-form-password-label">
@@ -359,8 +359,8 @@ const Signup = ({}) => {
               //these are all components, passed as props
               EmailInput,
               FullNameInput,
-              GenderInput,
-              CountryInput,
+              GenderSelect,
+              CountrySelect,
               PasswordInput,
               handleSubmit,
               error,

@@ -1,16 +1,18 @@
 import React from "react";
+import emailIcon from "../../assets/img/emailIcon.svg";
+import passwordIcon from "../../assets/img/passwordIcon.svg";
+import userIcon from "../../assets/img/userIcon.svg";
+
 import favorite from "../../assets/img/favorite.png";
 import favoriteGray from "../../assets/img/favoriteGray.png";
 import infoPNG from "../../assets/img/infoPNG.png";
-
 import left from "../../assets/img/left-arr.svg";
 import leftArrowIcon from "../../assets/img/left-arrow.png";
 import left_green from "../../assets/img/left_green.svg";
 import clearIcon from "../../assets/img/remove.png";
 import right from "../../assets/img/right-arr.svg";
-import right_green from "../../assets/img/right_green.svg";
-
 import rightArrowIcon from "../../assets/img/right-arrow.png";
+import right_green from "../../assets/img/right_green.svg";
 import rate from "../../assets/img/star.png";
 
 export const VideoPlayer = () => {
@@ -111,5 +113,21 @@ export const HeartIcon = () => {
 export const HeartIconGray = () => {
   return (
     <img style={{ width: "30px", height: "30px" }} src={favoriteGray} alt="" />
+  );
+};
+export const EmailIcon = () => {
+  return (
+    <img src={emailIcon} style={{ width: "50px", height: "50px" }} alt="" />
+  );
+};
+
+export const UserIcon = () => {
+  return (
+    <img src={userIcon} style={{ width: "50px", height: "50px" }} alt="" />
+  );
+};
+export const PasswordIcon = () => {
+  return (
+    <img src={passwordIcon} style={{ width: "50px", height: "50px" }} alt="" />
   );
 };

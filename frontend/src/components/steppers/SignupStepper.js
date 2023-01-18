@@ -21,8 +21,8 @@ import "./mobile_stepper_styles.scss";
 export function TextMobileStepper({
   EmailInput,
   FullNameInput,
-  GenderInput,
-  CountryInput,
+  GenderSelect,
+  CountrySelect,
   PasswordInput,
   handleSubmit,
   gender,
@@ -52,11 +52,11 @@ export function TextMobileStepper({
     },
     {
       label: "Gender",
-      description: <>{GenderInput}</>,
+      description: <>{GenderSelect}</>,
     },
     {
       label: "Country",
-      description: <>{CountryInput}</>,
+      description: <>{CountrySelect}</>,
     },
     {
       label: "Password",

@@ -1,0 +1,183 @@
+@mixin d_flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-mobile-form-container {
+  padding: 10px;
+  .login-mobile-form {
+    .login-mobile-form-email-item {
+      .login-mobile-form-email-input {
+        & > * {
+          color: rgb(90, 89, 89);
+          font-size: 20px;
+        }
+        .ant-input-suffix {
+          .ant-input-clear-icon {
+            .anticon-close-circle {
+              transform: scale(2);
+              //in order for the transform scale to work no matter if the user hovers or not on the close icon,
+              //you need to apply the css rule to the last class dom element , which is anticom-close-circle
+            }
+          }
+        }
+      }
+    }
+
+    .login-mobile-form-name-item {
+      .login-mobile-form-name-input {
+        & > * {
+          color: rgb(90, 89, 89);
+          font-size: 20px;
+        }
+        .ant-input-suffix {
+          .ant-input-clear-icon {
+            .anticon-close-circle {
+              transform: scale(2);
+            }
+          }
+        }
+      }
+    }
+    .login-mobile-form-gender-wrapper {
+      .login-mobile-form-gender-buttons {
+        @include d_flex;
+        gap: 15px;
+        .login-mobile-form-gender-male-button {
+          background-color: rgba(211, 211, 211, 0.7);
+          img {
+          }
+        }
+        .login-mobile-form-gender-female-button {
+          background-color: rgba(211, 211, 211, 0.7);
+          img {
+          }
+        }
+      }
+      .login-mobile-form-list-of-avatars {
+        .login-mobile-form-male-avatars-list,
+        .login-mobile-form-female-avatars-list {
+          @include d_flex;
+          gap: 5px;
+          //   max-width: 450px;
+          width: 100%;
+          //   border: 1px solid;
+          overflow-x: scroll;
+          padding-left: 300px;
+
+          &::-webkit-scrollbar {
+            width: 5px;
+            height: 14px;
+          }
+          &::-webkit-scrollbar-track {
+            border-radius: 5px;
+            background: rgba(161, 160, 160, 0.05);
+          }
+          &::-webkit-scrollbar-thumb {
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.2);
+          }
+          &::-webkit-scrollbar-thumb:hover {
+            border-radius: 5px;
+            background: rgba(23, 22, 22, 0.44);
+          }
+          .login-mobile-form-male-avatars-list-avatar,
+          .login-mobile-form-female-avatars-list-avatar {
+            //button
+            margin-bottom: 5px;
+            img {
+            }
+            &.last-avatar {
+              margin-right: 40px;
+            }
+          }
+        }
+      }
+      .login-mobile-form-selected-avatar-wrapper {
+        @include d_flex;
+        img.login-mobile-form-selected-avatar-wrapper-icon {
+          //   border: 1px solid;
+          width: 80px;
+          height: 80px;
+        }
+      }
+    }
+    .login-mobile-form-password-item {
+      .login-mobile-form-password-input {
+        & > * {
+          color: rgb(90, 89, 89);
+          font-size: 20px;
+        }
+        .ant-input-suffix {
+          gap: 15px;
+          .ant-input-clear-icon,
+          .ant-input-clear-icon-has-suffix {
+            .anticon-close-circle {
+              transform: scale(2);
+            }
+          }
+          .anticon-eye,
+          .ant-input-password-icon {
+            transform: scale(2);
+          }
+        }
+      }
+    }
+
+    .login-mobile-form-login-btn-item {
+      @include d_flex;
+      position: relative;
+      right: 40px;
+      .login-mobile-form-login-btn {
+        width: fit-content;
+        height: 60px;
+        background: rgba(195, 74, 74, 0.7);
+        border: none;
+        border-radius: 10px;
+        span {
+          font-weight: bolder;
+          font-size: 26px;
+        }
+      }
+    }
+    .login-mobile-form-error-wrapper {
+      @include d_flex;
+      .login-mobile-form-error-inner {
+        @include d_flex;
+        padding: 5px 20px;
+        span {
+          font-size: 22px;
+          color: rgba(255, 0, 0, 0.642);
+        }
+      }
+    }
+    .login-mobile-form-not-a-member {
+      @include d_flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 15px;
+      .login-form-text1 {
+        font-family: "Inconsolata";
+        color: grey;
+        font-size: 25px;
+      }
+      .login-form-not-a-member-register-btn {
+        width: fit-content;
+        height: 60px;
+        background: rgba(195, 74, 74, 0.8);
+        border: none;
+        border-radius: 10px;
+
+        span {
+          font-size: 26px;
+          color: white;
+          font-weight: bolder;
+        }
+      }
+    }
+  }
+}
+
+.ant-form-item-explain-error {
+  display: none;
+}
