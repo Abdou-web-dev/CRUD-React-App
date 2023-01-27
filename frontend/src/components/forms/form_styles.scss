@@ -1,15 +1,22 @@
 @import "@fontsource/open-sans";
 // font-family: PlusJakartaSans,,Segoe UI,Roboto,Oxygen,Cantarell,Helvetica Neue,Ubuntu,sans-serif;
+//defining screen breakpoints for responsivness
+$x-small: 0px;
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+$xx-large: 1400px;
 
 .chest-workout-form-container {
   position: relative;
+  // border: 1px solid red;
 
   .chest-suggest-btns {
     position: relative;
     right: 30px;
     margin-top: 20px;
   }
-
   .chest-workouts-form {
     border: 0.5px solid lightgray;
     margin-top: -30px;
@@ -143,7 +150,6 @@
       }
     }
   }
-
   .workouts-form-allExistentWorkouts {
     // border: 1px solid red;
 
@@ -164,11 +170,9 @@
       }
     }
   }
-
   .toggle-form-btn {
     float: right;
     position: relative;
-    // bottom: 10px;
 
     .up-btn-link {
       &:hover {
@@ -182,6 +186,142 @@
       position: relative;
       bottom: 80px;
       left: 60px;
+    }
+  }
+  @media screen and (min-width: $x-large) and (max-width: $xx-large) {
+    max-width: 250px;
+    .toggle-form-btn {
+      // float: c;
+      // position: relative;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .up-btn-link {
+        &:hover {
+          transform: scale(1.04);
+        }
+        .up-svg-icon {
+          fill: grey;
+        }
+      }
+      &.toggle-form-btn-modal {
+        position: relative;
+        bottom: 80px;
+        left: 60px;
+      }
+    }
+    .chest-workouts-form {
+      border-radius: 10px;
+      padding: 20px;
+      margin-top: 10px;
+
+      .chest-workouts-form-inner {
+        button.chest-form-btn {
+          padding: 15px 5px;
+          font-family: "Karla";
+          border-radius: 4px;
+          span {
+            font-size: 20px;
+          }
+        }
+        .form-select-exo-categ-label-and-select-component {
+          .form-select-exo-categ {
+            width: 160px !important;
+          }
+        }
+        .form-select-exo-title-and-info-icon {
+          .form-select-label-and-select-component {
+            .form-select-exo-title {
+              width: 160px !important;
+            }
+          }
+
+          .form-select-exo-title-info-btn {
+            .form-select-exo-title-info-btn-icon {
+              width: 15px;
+              height: 15px;
+            }
+          }
+        }
+        .form-title-label-and-input-component {
+          .form-input-title-and-label-wrapper {
+            .form-input-title-component {
+              width: 160px !important;
+            }
+          }
+          .form-input-title-icon-btn-wrapper {
+            .form-input-title-icon-btn {
+              .form-input-title-list-icon {
+                width: 20px;
+                height: 20px;
+              }
+            }
+          }
+        }
+        .form-load-label-and-load-input-component {
+          .form-input-load-component {
+            width: 160px !important;
+          }
+        }
+        .form-reps-label-and-reps-input-component {
+          .form-input-reps-component {
+            width: 160px !important;
+          }
+          .form-reps-label {
+            // border: 1px solid red;
+            font-family: "Inconsolata";
+            font-size: 18px;
+            display: inline-block;
+          }
+        }
+        .form-reps-label,
+        .form-load-label,
+        .form-title-label,
+        .form-select-exo-categ-label,
+        .form-select-exo-title-label {
+          font-family: "Inconsolata";
+          font-size: 18px;
+          display: inline-block;
+        }
+      }
+      div.error-msg-container {
+        display: inline-block;
+      }
+      // styles applied to the form, when the user clicks on the 3rd icon, underneath the search input
+      &.workouts-form-allExistentWorkouts {
+        padding: 5px;
+        margin-top: 30px;
+        position: relative;
+        right: 30px;
+        max-width: 130px;
+        .chest-workouts-form-inner {
+          &:hover {
+            img {
+              translate: 3px;
+              transition: 0.6s ease;
+            }
+          }
+          .form-filter-btn-plus-btn {
+            max-width: 120px;
+            // border: 1px solid red;
+            span {
+              display: inline-block;
+            }
+            padding: 0px;
+            background: rgba(211, 211, 211, 0.4);
+            &:hover {
+              background: rgba(211, 211, 211, 0.6);
+            }
+            img {
+              width: 20px;
+              height: 20px;
+              margin-right: 0px;
+            }
+          }
+        }
+      }
     }
   }
 }

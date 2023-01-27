@@ -356,24 +356,27 @@ const WorkoutForm = ({
                     <div className={"form-title-label-and-input-component"}>
                       <div className={"form-input-title-and-label-wrapper"}>
                         <label className="form-title-label">
-                          Excercise Title :{" "}
+                          Excercise Title :
                         </label>
                         <Tooltip
                           zIndex={`999`}
                           title={
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <span style={{ fontSize: "12px" }}>
-                                You can always pick the exercise you want from
-                                the list below !
-                              </span>
-                            </div>
+                            exoCategory === `Chest` ? (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                <span style={{ fontSize: "12px" }}>
+                                  You can always pick the exercise you want from
+                                  the list below !
+                                </span>
+                              </div>
+                            ) : null
                           }
                           color="rgba(74, 72, 73,0.75)"
+                          // open={exoCategory === `Chest`}
                         >
                           <Input
                             className={"form-input-title-component"}
@@ -480,7 +483,9 @@ const WorkoutForm = ({
                   />
                 </div>
                 <div className={showFormNewWindow === true ? "d_flex" : ""}>
-                  <button className="chest-form-btn">Add Workout</button>
+                  <button className="chest-form-btn">
+                    <span>Add Workout</span>
+                  </button>
                 </div>
               </>
             ) : null}
@@ -517,56 +522,70 @@ const WorkoutForm = ({
 
   return (
     <>
-      {showNotification && (
-        <div className="notification">
-          <Alert
-            className="ant-alert"
-            closeIcon={
-              <IconButton onClick={() => setShowNotification(false)}>
-                <ClearIcon />
-              </IconButton>
-            }
-            message={
-              <span className="noti-text">This workout already exists !</span>
-            }
-            banner
-            closable
-          />
-        </div>
-      )}
-      {showFormNewWindow === false && (
-        <>
-          <div className="chest-workout-form-container">
-            <>{!showFormNewWindow && formDOM}</>
-            <>{exoCategory === `Chest` && showInputTitle && chestExosList}</>
+      <>
+        {/* JSX to show a notification if the user tries to enter a workout that already exists */}
+        {showNotification && (
+          <div className="notification">
+            <Alert
+              className="ant-alert"
+              closeIcon={
+                <IconButton onClick={() => setShowNotification(false)}>
+                  <ClearIcon />
+                </IconButton>
+              }
+              message={
+                <span className="noti-text">This workout already exists !</span>
+              }
+              banner
+              closable
+            />
           </div>
-        </>
-      )}
+        )}
+      </>
 
-      {showFormNewWindow === true && (
-        <>
-          <Modal
-            className="chest-form-ant-modal"
-            open={showFormNewWindow}
-            maskClosable={true}
-            closable={false}
-            keyboard={true}
-            mask={true}
-            onOk={() => setShowFormNewWindow(false)}
-            onCancel={() => setShowFormNewWindow(false)}
-            width={"70%"}
-            footer={null}
-            title="Add a New Workout"
-          >
+      <>
+        {/* JSX to show the form on the same page */}
+        {showFormNewWindow === false && (
+          <>
             <div className="chest-workout-form-container">
-              <>
-                {showFormNewWindow || showAllExistentWorkouts ? formDOM : null}
-              </>
+              <>{!showFormNewWindow && formDOM}</>
               <>{exoCategory === `Chest` && showInputTitle && chestExosList}</>
             </div>
-          </Modal>
-        </>
-      )}
+          </>
+        )}
+      </>
+
+      <>
+        {/* JSX to show the form on a modal, and hide it on the page underneath */}
+        {showFormNewWindow === true && (
+          <>
+            <Modal
+              className="chest-form-ant-modal"
+              open={showFormNewWindow}
+              maskClosable={true}
+              closable={false}
+              keyboard={true}
+              mask={true}
+              onOk={() => setShowFormNewWindow(false)}
+              onCancel={() => setShowFormNewWindow(false)}
+              width={"70%"}
+              footer={null}
+              title="Add a New Workout"
+            >
+              <div className="chest-workout-form-container">
+                <>
+                  {showFormNewWindow || showAllExistentWorkouts
+                    ? formDOM
+                    : null}
+                </>
+                <>
+                  {exoCategory === `Chest` && showInputTitle && chestExosList}
+                </>
+              </div>
+            </Modal>
+          </>
+        )}
+      </>
     </>
   );
 };

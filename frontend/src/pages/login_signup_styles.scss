@@ -1,3 +1,11 @@
+//defining screen breakpoints for responsivness
+$x-small: 0px;
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+$xx-large: 1400px;
+
 .login-form-container {
   // width: auto;
   .login-form-inner {
@@ -283,6 +291,7 @@
   }
 }
 .login-form-avatar-modal {
+  width: 60%;
   .login-form-modal-content {
     &.login-form-list-of-avatars {
       display: flex;
@@ -328,15 +337,51 @@
       }
     }
   }
-}
+  @media screen and (min-width: $medium) and (max-width: $x-large) {
+    .login-form-modal-content {
+      // border: 1px solid;
 
-//defining screen breakpoints for responsivness
-$x-small: 0px;
-$small: 576px;
-$medium: 768px;
-$large: 992px;
-$x-large: 1200px;
-$xx-large: 1400px;
+      &.login-form-list-of-avatars {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        max-width: 60%;
+      }
+    }
+  }
+  @media screen and (min-width: $small) and (max-width: $medium) {
+    .login-form-modal-content {
+      &.login-form-list-of-avatars {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        max-width: 60%;
+        .login-form-avatar-wrapper {
+          .login-form-avatar-icon {
+            //this is the icon
+            width: 65px !important;
+            height: 65px !important;
+            // display: none;
+          }
+        }
+      }
+    }
+    .login-form-choose-btn-wrapper {
+      .login-form-choose-btn {
+        height: fit-content;
+        background: #e39ff6;
+        border: none;
+        &:hover {
+          background: #a1045a;
+        }
+        span {
+          font-family: "inconsolata";
+          font-size: 20px;
+          letter-spacing: 1.5px;
+          color: white;
+        }
+      }
+    }
+  }
+}
 
 @mixin label_styles {
   font-family: "Oswald";
@@ -913,3 +958,21 @@ $xx-large: 1400px;
 // ant-select ant-select-lg signup-form-gender-item-select signup-form-gender-item-select-empty ant-select-single ant-select-show-arrow
 
 // ant-select ant-select-lg signup-form-gender-item-select ant-select-single ant-select-show-arrow
+
+.ant-modal {
+  &.login-form-avatar-modal {
+    width: 60% !important;
+    // border: 1px solid;
+    .ant-modal-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+  @media screen and (min-width: $large) and (max-width: $xx-large) {
+    &.login-form-avatar-modal {
+      width: 80% !important;
+    }
+  }
+}

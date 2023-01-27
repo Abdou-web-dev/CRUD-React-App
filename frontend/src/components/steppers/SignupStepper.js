@@ -19,11 +19,11 @@ import planetIcon from "../../assets/img/register_icons/planetIcon.png";
 import "./mobile_stepper_styles.scss";
 
 export function TextMobileStepper({
-  EmailInput,
-  FullNameInput,
-  GenderSelect,
-  CountrySelect,
-  PasswordInput,
+  EmailInputJSX,
+  FullNameInputJSX,
+  GenderSelectJSX,
+  CountrySelectJSX,
+  PasswordInputJSX,
   handleSubmit,
   gender,
   error,
@@ -41,34 +41,35 @@ export function TextMobileStepper({
   const [nextdisabled, setnextdisabled] = React.useState(false);
   const [openModal, setopenModal] = React.useState(false);
   const [loading, setloading] = React.useState(false);
+  const [showError, setshowError] = React.useState(true);
   const steps = [
     {
       label: "Email",
-      description: <>{EmailInput}</>,
+      description: <>{EmailInputJSX}</>,
     },
     {
       label: "Full Name",
-      description: <>{FullNameInput}</>,
+      description: <>{FullNameInputJSX}</>,
     },
     {
       label: "Gender",
-      description: <>{GenderSelect}</>,
+      description: <>{GenderSelectJSX}</>,
     },
     {
       label: "Country",
-      description: <>{CountrySelect}</>,
+      description: <>{CountrySelectJSX}</>,
     },
     {
       label: "Password",
-      description: <>{PasswordInput}</>,
+      description: <>{PasswordInputJSX}</>,
     },
   ];
   const maxSteps = steps.length;
+  let lastStep = maxSteps - 1; //boolean
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
-
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
@@ -79,6 +80,7 @@ export function TextMobileStepper({
     if (!gender || !email || !password || !country || !fullName) {
       return;
     } else {
+      setshowError(true);
       setloading(true);
       setTimeout(() => {
         handleSubmit();
@@ -91,6 +93,7 @@ export function TextMobileStepper({
     setPassword("");
     setCountry("");
     setFullName("");
+    setshowError(false);
   };
 
   React.useEffect(() => {
@@ -104,26 +107,66 @@ export function TextMobileStepper({
     }
   }, [activeStep, error]);
 
-  let lastStep = maxSteps - 1; //boolean
+  let userIsTypingOrSelecting = //boolean
+    email?.length ||
+    password?.length ||
+    fullName?.length ||
+    country?.length ||
+    gender?.length;
+
   return (
-    <Box className="stepper-box-wrapper" sx={{ maxWidth: 400, flexGrow: 1 }}>
-      {error !==
-        `Password must include one lowercase character, one uppercase character, a number, and a special character and have a minimum length of 8 characters` && (
-        <div className="stepper-error-wrapper">
-          <span className="error-text">{error}</span>
-        </div>
-      )}
-      {error ===
-        `Password must include one lowercase character, one uppercase character, a number, and a special character and have a minimum length of 8 characters` && (
-        <div className="stepper-error-wrapper">
-          <span className="error-text">The password is weak</span>
+    <Box
+      className={
+        `${
+          userIsTypingOrSelecting
+            ? `stepper-box-wrapper-user-is-typing-or-selecting`
+            : ""
+        }
+      stepper-box-wrapper` //classname always applied
+      }
+      sx={{ maxWidth: 400, flexGrow: 1 }}
+    >
+      {/* next and back btns when the-stepper-container,the-stepper-paper are hidden */}
+      {userIsTypingOrSelecting ? (
+        <div className="stepper-next-back-btns">
           <Button
-            onClick={() => setopenModal(true)}
-            className="stepper-error-btn-wrapper"
+            onClick={handleBack}
+            className="stepper-back-btn"
+            disabled={activeStep === 0}
+            style={{ cursor: activeStep === 0 ? "not-allowed" : "" }}
           >
-            <img src={infoIcon} alt="" />
+            <span>BACK</span>
+          </Button>
+          <Button
+            disabled={nextdisabled}
+            onClick={handleNext}
+            className="stepper-next-btn"
+            style={{ cursor: nextdisabled ? "not-allowed" : "" }}
+          >
+            <span className={nextdisabled ? "text-greyish" : ""}>NEXT</span>
           </Button>
         </div>
+      ) : null}
+      {showError && (
+        <>
+          {error !==
+          `Password must include one lowercase character, one uppercase character, a number, and a special character and have a minimum length of 8 characters` ? (
+            <div className="stepper-error-wrapper">
+              <span className="error-text">{error}</span>
+            </div>
+          ) : error ===
+            `Password must include one lowercase character, one uppercase character, a number, and a special character and have a minimum length of 8 characters` ? (
+            <div className="stepper-error-wrapper">
+              <span className="error-text">The password is weak</span>
+              <Button
+                onClick={() => setopenModal(true)}
+                className="stepper-error-btn-wrapper"
+              >
+                <img src={infoIcon} alt="" />
+              </Button>
+            </div>
+          ) : null}
+        </>
       )}
       <Paper
         className={
@@ -168,7 +211,7 @@ export function TextMobileStepper({
               alt=""
             />
 
-            {steps[activeStep].label}
+            {steps[activeStep]?.label}
           </Typography>
         </div>
       </Paper>
@@ -177,7 +220,7 @@ export function TextMobileStepper({
         sx={{ height: 150, maxWidth: 400, width: "100%", p: 2 }}
       >
         <div className="active-step-description">
-          {steps[activeStep].description}
+          {steps[activeStep]?.description}
         </div>
       </Box>
       <MobileStepper
@@ -241,7 +284,7 @@ export function TextMobileStepper({
         </div>
       )}
       {/* back to step one btn */}
-      {activeStep === lastStep && (
+      {activeStep === lastStep && !openModal && (
         <div>
           <Button
             className="mobile-stepper-step-one-btn"
@@ -295,3 +338,6 @@ export function TextMobileStepper({
     </Box>
   );
 }
+
+// the-stepper-container
+// the-stepper-paper

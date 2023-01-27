@@ -122,7 +122,7 @@ const Signup = ({}) => {
     </>
   );
 
-  const EmailInput = (
+  const EmailInputJSX = (
     <Input
       className={emailClass}
       type="email"
@@ -132,7 +132,7 @@ const Signup = ({}) => {
       allowClear
     />
   );
-  const FullNameInput = (
+  const FullNameInputJSX = (
     <Input
       className={fullNameClass}
       onChange={(e) => setFullName(e.target.value)}
@@ -142,7 +142,7 @@ const Signup = ({}) => {
       allowClear
     />
   );
-  const GenderSelect = (
+  const GenderSelectJSX = (
     <Select
       className={genderClass}
       value={gender}
@@ -165,7 +165,7 @@ const Signup = ({}) => {
       ]}
     />
   );
-  const CountrySelect = (
+  const CountrySelectJSX = (
     <Select
       // open
       className={countryClass}
@@ -265,7 +265,7 @@ const Signup = ({}) => {
       ]}
     />
   );
-  const PasswordInput = (
+  const PasswordInputJSX = (
     <Input.Password
       className={passwordClass}
       type="password"
@@ -291,30 +291,30 @@ const Signup = ({}) => {
             >
               <>
                 <label className="signup-form-email-label">Email :</label>
-                {EmailInput}
+                {EmailInputJSX}
               </>
               <>
                 <label className="signup-form-fullName-label">
                   Full Name :
                 </label>
-                {FullNameInput}
+                {FullNameInputJSX}
               </>
               <>
                 <label className="signup-form-gender-label">Gender : </label>
-                {GenderSelect}
+                {GenderSelectJSX}
               </>
 
               <>
                 <label className="signup-form-country-label">Country : </label>
 
-                {CountrySelect}
+                {CountrySelectJSX}
               </>
               <>
                 <label className="signup-form-password-label">
                   Password :{" "}
                 </label>
 
-                {PasswordInput}
+                {PasswordInputJSX}
               </>
 
               <div className="signup-form-btn-and-error">
@@ -357,11 +357,11 @@ const Signup = ({}) => {
           <SignupStepper
             {...{
               //these are all components, passed as props
-              EmailInput,
-              FullNameInput,
-              GenderSelect,
-              CountrySelect,
-              PasswordInput,
+              EmailInputJSX,
+              FullNameInputJSX,
+              GenderSelectJSX,
+              CountrySelectJSX,
+              PasswordInputJSX,
               handleSubmit,
               error,
               gender,

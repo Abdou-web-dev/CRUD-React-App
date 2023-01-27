@@ -1,5 +1,12 @@
 @import "@fontsource/inconsolata";
 @import "@fontsource/mulish";
+//defining screen breakpoints for responsivness
+$x-small: 0px;
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+$xx-large: 1400px;
 
 .workouts-section-container {
   .workouts-section-toggle-btn-container {
@@ -105,6 +112,25 @@
         font-size: 12px;
         font-family: "Mulish";
         color: rgba(255, 0, 0, 0.66);
+      }
+    }
+  }
+  @media screen and (min-width: $x-large) and (max-width: $xx-large) {
+    .workouts-section-input {
+      // display: none;
+      .workouts-search-ant-input {
+        height: 70px;
+        & > * {
+          font-size: 25px;
+          font-family: "Inconsolata";
+        }
+      }
+      .workouts-search-ant-input-msg {
+        span {
+          font-size: 12px;
+          font-family: "Mulish";
+          color: rgba(255, 0, 0, 0.66);
+        }
       }
     }
   }

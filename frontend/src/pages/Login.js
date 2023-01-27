@@ -16,6 +16,7 @@ import avatarmale6 from "../assets/img/avatarmale6.svg";
 import edit from "../assets/img/edit.svg";
 import { LoginMobileForm } from "../components/forms/LoginMobileForm";
 import { ClearIcon } from "../components/icons/Icons";
+import { LoginAvatars } from "../components/modals/modal_content/LoginAvatars";
 import { useLogin } from "../hooks/useLogin";
 import { useMediaQuery } from "../hooks/UseMediaQuery";
 import "./login_signup_styles.scss";
@@ -158,7 +159,7 @@ const Login = ({}) => {
                 </div>
               }
               name="Email address"
-              rules={[{ required: true }]}
+              //rules={[{ required: true }]}
             >
               <Input
                 className={emailClass}
@@ -178,7 +179,7 @@ const Login = ({}) => {
                 </div>
               }
               name="Full name"
-              rules={[{ required: true }]}
+              //rules={[{ required: true }]}
             >
               <Input
                 className={fullNameClass}
@@ -205,7 +206,7 @@ const Login = ({}) => {
               }
               // required
               // name="Gender"
-              // rules={[{ required: true }]}
+              // //rules={[{ required: true }]}
               //when we remove name property , the asterisk marking that field is mandatory is removed
             >
               {showCheckboxes && (
@@ -257,7 +258,7 @@ const Login = ({}) => {
                 </div>
               }
               name="password"
-              rules={[{ required: true }]}
+              //rules={[{ required: true }]}
             >
               <Input.Password
                 className={passwordClass}
@@ -345,38 +346,16 @@ const Login = ({}) => {
               onCancel={() => setshowAvatarModal(false)}
               footer={null}
               title={`Pick an avatar`}
-              width="60%"
             >
-              <div className="login-form-modal-content login-form-list-of-avatars">
-                {avatars &&
-                  avatars?.map((avatar, index) => (
-                    <div className="login-form-avatar-wrapper" key={index}>
-                      <Button
-                        onClick={() => handleAvatarClick(index)}
-                        className="login-form-avatar-btn"
-                      >
-                        <img
-                          className="login-form-avatar-icon"
-                          src={avatar}
-                          alt=""
-                        />
-                      </Button>
-                    </div>
-                  ))}
-              </div>
-              {avatar && (
-                <div className="login-form-choose-btn-wrapper">
-                  <Button
-                    onClick={() => {
-                      setshowAvatarModal(false);
-                      setShowNotification(false);
-                    }}
-                    className="login-form-choose-btn"
-                  >
-                    <span>Choose</span>
-                  </Button>
-                </div>
-              )}
+              <LoginAvatars
+                {...{
+                  avatars,
+                  avatar,
+                  handleAvatarClick,
+                  setshowAvatarModal,
+                  setShowNotification,
+                }}
+              ></LoginAvatars>
             </Modal>
           </div>
         )}

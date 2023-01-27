@@ -156,6 +156,7 @@ const Workouts = ({}) => {
           <BackTop />
         </div>
 
+        {/* pagination of Workouts  , with the pages' numbers */}
         {searchInput?.length === 0 && !showAllExistentWorkouts && (
           <Pagination
             className={paginationClassName}
@@ -212,6 +213,7 @@ const Workouts = ({}) => {
           />
         )}
 
+        {/* pagination of Filtered Results , composed only of two arrows , without the pages' numbers */}
         {searchInput?.length > 0 && (
           <Pagination
             className={`pagination-filtered-results

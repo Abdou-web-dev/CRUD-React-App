@@ -5,22 +5,19 @@
   align-items: center;
   flex-direction: column;
   .stepper-error-wrapper {
-    // margin: 10px 0;
-    position: relative;
-    bottom: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     height: 40px;
-    // padding: 15px 0;
+    margin-top: 15px;
     .error-text {
       font-size: larger;
       font-family: "Oswald";
       letter-spacing: 2px;
       color: red;
-      // font-size: 25px;
-      // font-style: italic;
+      font-size: 20px;
+      font-weight: bold;
     }
     .stepper-error-btn-wrapper {
       background: none;
@@ -114,8 +111,7 @@
   }
   .the-stepper-paper {
     width: 45%;
-    height: 45px;
-    padding: 25px 35px;
+    padding: 20px 0px;
     .the-stepper-paper-inner {
       p {
         font-size: 18px;
@@ -128,8 +124,8 @@
         align-items: center;
 
         .the-stepper-paper-icon {
-          width: 35px;
-          height: 35px;
+          width: 32px;
+          height: 32px;
           margin-right: 15px;
         }
       }
@@ -139,6 +135,7 @@
     }
   }
   .the-stepper-container {
+    // border: 1px solid red;
     margin-bottom: 215px;
     padding: 0;
     width: 90%;
@@ -234,6 +231,42 @@
       font-style: italic;
       position: relative;
       z-index: 999;
+    }
+  }
+  .stepper-next-back-btns {
+    display: flex;
+    gap: 15px;
+    .stepper-back-btn {
+      padding: 10px 30px;
+      height: fit-content;
+      background-color: rgba(197, 213, 217, 0.322) !important;
+
+      span {
+        font-family: "Oswald";
+        font-size: 25px;
+        font-weight: bold;
+      }
+    }
+    .stepper-next-btn {
+      padding: 10px 30px;
+      height: fit-content;
+      background-color: rgba(0, 208, 255, 0.2) !important;
+
+      span {
+        font-family: "Oswald";
+        font-size: 25px;
+        color: black;
+        font-weight: bold;
+        &.text-greyish {
+          color: grey !important;
+        }
+      }
+    }
+  }
+  &.stepper-box-wrapper-user-is-typing-or-selecting {
+    .the-stepper-container,
+    .the-stepper-paper {
+      display: none;
     }
   }
 }

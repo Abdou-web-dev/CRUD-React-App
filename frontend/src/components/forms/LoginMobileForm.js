@@ -30,7 +30,7 @@ export const LoginMobileForm = ({}) => {
   const [showFemaleAvatars, setshowFemaleAvatars] = useState(false);
   const [selectedMaleAvatar, setselectedMaleAvatar] = useState(null);
   const [selectedFemaleAvatar, setselectedFemaleAvatar] = useState(null);
-
+  let isAvatar = selectedFemaleAvatar || selectedMaleAvatar;
   const [showSelectedAvatar, setshowSelectedAvatar] = useState(false);
   const maleAvatars = [
     avatarmale1,
@@ -235,7 +235,9 @@ export const LoginMobileForm = ({}) => {
           }}
         >
           <Button
-            className={`${prfx}-login-btn`}
+            className={`${prfx}-login-btn
+            ${isAvatar && email && fullName && password ? "change-bg" : ""}
+            `}
             disabled={isLoading}
             type="primary"
             htmlType="submit"

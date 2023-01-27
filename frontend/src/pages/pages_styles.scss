@@ -1,4 +1,11 @@
 @import "@fontsource/inconsolata";
+//defining screen breakpoints for responsivness
+$x-small: 0px;
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+$xx-large: 1400px;
 
 .chest-page-container {
   width: 100%;
@@ -17,6 +24,27 @@
     // flex: 30%;
   }
   .divider {
+  }
+  @media screen and (min-width: $x-large) and (max-width: $xx-large) {
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    //setting minheight to 1400px will prevent the page fro mscrolling to the top when navigating between chest sub pages
+    min-height: 1400px;
+    display: flex;
+    gap: 30px;
+    margin-left: 25px;
+    // border: 1px solid green;
+    .chest-workouts {
+      height: 100%;
+      flex: 70%;
+    }
+    .chest-form {
+      flex: 25%;
+    }
+    .divider {
+      // border: 1px solid red;
+    }
   }
 }
 .pagination-content-loaded {

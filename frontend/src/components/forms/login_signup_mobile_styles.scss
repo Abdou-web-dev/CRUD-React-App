@@ -131,12 +131,15 @@
       .login-mobile-form-login-btn {
         width: fit-content;
         height: 60px;
-        background: rgba(195, 74, 74, 0.7);
+        background: rgba(195, 74, 74, 0.15);
         border: none;
         border-radius: 10px;
         span {
           font-weight: bolder;
           font-size: 26px;
+        }
+        &.change-bg {
+          background: rgba(195, 74, 74, 0.7);
         }
       }
     }

@@ -1,7 +1,23 @@
+//defining screen breakpoints for responsivness
+$x-small: 0px;
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+$xx-large: 1400px;
 .App {
   .pages {
+    width: 100%;
+    padding: 20px;
+    @media screen and (min-width: $x-large) and (max-width: $xx-large) {
+      padding: 0;
+    }
     &.pages-cl2 {
       padding: 0;
+    }
+    .pages-login {
+      display: flex;
+      justify-content: center;
     }
   }
 }

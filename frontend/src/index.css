@@ -13,15 +13,3 @@ body {
   overflow-x: hidden;
   /* padding-left: 20px; */
 }
-
-.pages {
-  /* max-width: 1400px; */
-  width: 100%;
-  padding: 20px;
-  /* border: 1px solid red; */
-  /* margin: 0 auto; */
-}
-.pages .pages-login {
-  display: flex;
-  justify-content: center;
-}

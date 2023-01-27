@@ -103,6 +103,7 @@ export const WorkoutsSection = ({
             showAllExistentWorkouts || showAllWorkoutsCondensed ? true : false
           }
         ></Input>
+
         {showMsg && showAllExistentWorkouts && (
           <div className="workouts-search-ant-input-msg">
             <span>{msg}</span>

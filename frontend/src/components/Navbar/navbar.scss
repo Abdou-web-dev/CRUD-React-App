@@ -34,7 +34,6 @@ $xx-large: 1400px;
         .navbar-ul {
           margin-bottom: 0px;
           padding-left: 0;
-          // border: 1px solid red;
           .app-nav-stack {
             .icon-and-word {
               display: flex;
@@ -77,6 +76,8 @@ $xx-large: 1400px;
                 .gym-img {
                   width: 80px;
                   height: 80px;
+                  border: 1px solid red;
+
                   margin-bottom: 10px;
                 }
                 .gym-word {
@@ -100,10 +101,13 @@ $xx-large: 1400px;
     .workout-navbar-icon-user-logged-out {
       display: flex;
       justify-content: center;
+      // display: none;
+
       .navbar-ul {
         margin-bottom: 0px;
         padding-left: 0;
         .app-nav-stack {
+          // border: 1px solid red;
           .icon-and-word {
             display: flex;
             flex-direction: column;
@@ -288,7 +292,7 @@ $xx-large: 1400px;
     }
   }
   @media screen and (max-width: $small) {
-    margin-bottom: 100px;
+    margin-bottom: 0px !important;
     .workout-app-navbar {
       width: 100%;
       height: 190px;
@@ -343,8 +347,8 @@ $xx-large: 1400px;
       }
       .workout-navbar-icon-user-logged-out {
         // margin-top: 50px;
-        position: relative;
-        top: 115px;
+        // position: relative;
+        // top: 115px;
         .navbar-ul {
           .app-nav-stack {
             .icon-and-word {
@@ -352,8 +356,10 @@ $xx-large: 1400px;
               // position: relative;
               // bottom: 20px;
               img.gym-img {
-                width: 84px;
-                height: 84px;
+                width: 34px;
+                height: 34px;
+                position: relative;
+                top: 18px;
               }
               .gym-word {
                 font-family: "Mulish";
@@ -494,7 +500,7 @@ $xx-large: 1400px;
   }
 
   @media screen and (max-width: 480px) {
-    margin-bottom: 100px;
+    // margin-bottom: 100px;
     // border: 1px solid red;
     .workout-app-navbar {
       width: 100%;
@@ -640,8 +646,8 @@ $xx-large: 1400px;
       }
       .workout-navbar-icon-user-logged-out {
         // margin-top: 50px;
-        position: relative;
-        top: 115px;
+        // position: relative;
+        // top: 115px;
         .navbar-ul {
           .navbar-ul-li {
             .nav-router-link {
