@@ -100,6 +100,7 @@ $xx-large: 1400px;
 }
 .workouts-section {
   .workouts-section-input {
+    width: 80%;
     .workouts-search-ant-input {
       height: 70px;
       & > * {
@@ -117,7 +118,7 @@ $xx-large: 1400px;
   }
   @media screen and (min-width: $x-large) and (max-width: $xx-large) {
     .workouts-section-input {
-      // display: none;
+      width: 60%;
       .workouts-search-ant-input {
         height: 70px;
         & > * {

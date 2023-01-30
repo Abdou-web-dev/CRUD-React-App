@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import infoIcon from "../../assets/img/infoPNG.png";
 import list from "../../assets/img/list.svg";
 import plus from "../../assets/img/plus-sign.svg";
+import recycle from "../../assets/img/recycle.png";
 
 import exercisesData from "../../assets/staticData/chestExercises.json";
 import {
@@ -121,7 +122,12 @@ const WorkoutForm = ({
     setshowInputTitle(false);
     setshowSuggExoTitle(true);
   }
-
+  function handleResetFields() {
+    setTitle("");
+    setLoad("");
+    setReps("");
+    setExoCategory("");
+  }
   //3 JSX blocs
   const ButtonToggleModalJSX = (
     <Button
@@ -482,10 +488,20 @@ const WorkoutForm = ({
                     allowClear
                   />
                 </div>
-                <div className={showFormNewWindow === true ? "d_flex" : ""}>
+                <div
+                  className={
+                    showFormNewWindow === true ? "d_flex" : "chest-form-btns"
+                  }
+                >
                   <button className="chest-form-btn">
                     <span>Add Workout</span>
                   </button>
+                  <Button
+                    onClick={handleResetFields}
+                    className="chest-form-reset-btn"
+                  >
+                    <img src={recycle} alt="" />
+                  </Button>
                 </div>
               </>
             ) : null}

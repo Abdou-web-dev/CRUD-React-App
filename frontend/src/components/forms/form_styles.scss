@@ -39,14 +39,27 @@ $xx-large: 1400px;
         bottom: 60px;
         left: 240px;
       }
-      button.chest-form-btn {
-        background: var(--primary);
-        border: 0;
-        color: #fff;
-        padding: 10px;
-        font-family: "Poppins";
-        border-radius: 4px;
-        cursor: pointer;
+      .chest-form-btns {
+        display: flex;
+        align-items: center;
+        button.chest-form-btn {
+          background: var(--primary);
+          border: 0;
+          color: #fff;
+          padding: 10px;
+          font-family: "Poppins";
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        .chest-form-reset-btn {
+          &:hover {
+            transform: scale(1.05);
+          }
+          img {
+            width: 35px;
+            height: 35px;
+          }
+        }
       }
       .form-select-exo-title-and-info-icon {
         margin-top: 15px;
@@ -55,6 +68,13 @@ $xx-large: 1400px;
         justify-content: center;
         align-items: center;
         // border: 1px solid;
+        .ant-select-selector {
+          .ant-select-selection-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
         .form-select-label-and-select-component {
           display: flex;
           flex-direction: column;
@@ -82,6 +102,13 @@ $xx-large: 1400px;
           font-family: "Inconsolata";
           font-size: 18px;
           margin: 15px 0;
+        }
+        .ant-select-selector {
+          .ant-select-selection-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
         }
         .form-select-exo-categ {
         }
@@ -189,23 +216,9 @@ $xx-large: 1400px;
     }
   }
   @media screen and (min-width: $x-large) and (max-width: $xx-large) {
-    max-width: 250px;
+    margin-right: 70px;
+    width: 400px;
     .toggle-form-btn {
-      // float: c;
-      // position: relative;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      .up-btn-link {
-        &:hover {
-          transform: scale(1.04);
-        }
-        .up-svg-icon {
-          fill: grey;
-        }
-      }
       &.toggle-form-btn-modal {
         position: relative;
         bottom: 80px;
@@ -213,28 +226,37 @@ $xx-large: 1400px;
       }
     }
     .chest-workouts-form {
-      border-radius: 10px;
-      padding: 20px;
-      margin-top: 10px;
+      padding: 60px;
+      margin-top: 180px;
 
       .chest-workouts-form-inner {
-        button.chest-form-btn {
-          padding: 15px 5px;
-          font-family: "Karla";
-          border-radius: 4px;
-          span {
-            font-size: 20px;
-          }
-        }
         .form-select-exo-categ-label-and-select-component {
+          // align-self: center;
           .form-select-exo-categ {
-            width: 160px !important;
+            width: 250px !important;
+          }
+          .ant-select-selector {
+            height: 50px;
+            .ant-select-selection-item {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
           }
         }
         .form-select-exo-title-and-info-icon {
           .form-select-label-and-select-component {
             .form-select-exo-title {
-              width: 160px !important;
+              width: 250px !important;
+              // height: 50px;
+            }
+            .ant-select-selector {
+              height: 50px;
+              .ant-select-selection-item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
             }
           }
 
@@ -248,7 +270,8 @@ $xx-large: 1400px;
         .form-title-label-and-input-component {
           .form-input-title-and-label-wrapper {
             .form-input-title-component {
-              width: 160px !important;
+              width: 250px !important;
+              height: 50px;
             }
           }
           .form-input-title-icon-btn-wrapper {
@@ -262,12 +285,14 @@ $xx-large: 1400px;
         }
         .form-load-label-and-load-input-component {
           .form-input-load-component {
-            width: 160px !important;
+            width: 250px !important;
+            height: 50px;
           }
         }
         .form-reps-label-and-reps-input-component {
           .form-input-reps-component {
-            width: 160px !important;
+            width: 250px !important;
+            height: 50px;
           }
           .form-reps-label {
             // border: 1px solid red;
@@ -285,12 +310,370 @@ $xx-large: 1400px;
           font-size: 18px;
           display: inline-block;
         }
+        button.chest-form-btn {
+          padding: 15px 15px;
+          font-family: "Karla";
+          border-radius: 4px;
+          background: #1aac83d7;
+          &:hover {
+            background: #1aac83;
+          }
+          span {
+            font-size: 20px;
+          }
+        }
       }
       div.error-msg-container {
         display: inline-block;
       }
       // styles applied to the form, when the user clicks on the 3rd icon, underneath the search input
       &.workouts-form-allExistentWorkouts {
+        padding: 5px;
+        margin-top: 30px;
+        position: relative;
+        right: 30px;
+        max-width: 130px;
+        .chest-workouts-form-inner {
+          &:hover {
+            img {
+              translate: 3px;
+              transition: 0.6s ease;
+            }
+          }
+          .form-filter-btn-plus-btn {
+            max-width: 120px;
+            // border: 1px solid red;
+            span {
+              display: inline-block;
+            }
+            padding: 0px;
+            background: rgba(211, 211, 211, 0.4);
+            &:hover {
+              background: rgba(211, 211, 211, 0.6);
+            }
+            img {
+              width: 20px;
+              height: 20px;
+              margin-right: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 700px) and (max-width: $x-large) {
+    width: 300px;
+    margin-right: 70px;
+
+    .toggle-form-btn {
+      &.toggle-form-btn-modal {
+      }
+    }
+    .chest-workouts-form {
+      padding: 40px;
+      margin-top: 260px;
+
+      .chest-workouts-form-inner {
+        .form-select-exo-categ-label-and-select-component {
+          // border: 1px solid red;
+          .form-select-exo-categ {
+            width: 190px !important;
+          }
+          .ant-select-selector {
+            height: 50px;
+          }
+        }
+        .form-select-exo-title-and-info-icon {
+          .form-select-label-and-select-component {
+            .form-select-exo-title {
+              width: 190px !important;
+            }
+            .ant-select-selector {
+              height: 50px;
+            }
+          }
+        }
+        .form-title-label-and-input-component {
+          .form-input-title-and-label-wrapper {
+            .form-input-title-component {
+              width: 190px !important;
+              height: 50px;
+            }
+          }
+          .form-input-title-icon-btn-wrapper {
+            .form-input-title-icon-btn {
+              .form-input-title-list-icon {
+                width: 20px;
+                height: 20px;
+              }
+            }
+          }
+        }
+        .form-load-label-and-load-input-component {
+          .form-input-load-component {
+            width: 190px !important;
+            height: 50px;
+          }
+        }
+        .form-reps-label-and-reps-input-component {
+          .form-input-reps-component {
+            width: 190px !important;
+            height: 50px;
+          }
+          .form-reps-label {
+            font-family: "Inconsolata";
+            font-size: 18px;
+            display: inline-block;
+          }
+        }
+
+        button.chest-form-btn {
+          padding: 15px 15px;
+          font-family: "Mulish";
+          border-radius: 4px;
+          background: #1aac83d7;
+          &:hover {
+            background: #1aac83;
+          }
+          span {
+            font-size: 20px;
+          }
+        }
+      }
+      div.error-msg-container {
+        display: inline-block;
+      }
+      // styles applied to the form, when the user clicks on the 3rd icon, underneath the search input
+      &.workouts-form-allExistentWorkouts {
+        // border: 10px solid red;
+        padding: 5px;
+        margin-top: 30px;
+        position: relative;
+        right: 30px;
+        max-width: 130px;
+        .chest-workouts-form-inner {
+          &:hover {
+            img {
+              translate: 3px;
+              transition: 0.6s ease;
+            }
+          }
+          .form-filter-btn-plus-btn {
+            max-width: 120px;
+            // border: 1px solid red;
+            span {
+              display: inline-block;
+            }
+            padding: 0px;
+            background: rgba(211, 211, 211, 0.4);
+            &:hover {
+              background: rgba(211, 211, 211, 0.6);
+            }
+            img {
+              width: 20px;
+              height: 20px;
+              margin-right: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 350px) and (max-width: 700px) {
+    width: 300px;
+    margin-right: 70px;
+    // border: 1px solid red;
+
+    .chest-workouts-form {
+      padding: 40px;
+      margin-top: 260px;
+
+      .chest-workouts-form-inner {
+        .form-select-exo-categ-label-and-select-component {
+          .form-select-exo-categ {
+            width: 190px !important;
+          }
+          .ant-select-selector {
+            height: 50px;
+          }
+        }
+        .form-select-exo-title-and-info-icon {
+          .form-select-label-and-select-component {
+            .form-select-exo-title {
+              width: 190px !important;
+            }
+            .ant-select-selector {
+              height: 50px;
+            }
+          }
+        }
+        .form-title-label-and-input-component {
+          .form-input-title-and-label-wrapper {
+            .form-input-title-component {
+              width: 190px !important;
+              height: 50px;
+            }
+          }
+          .form-input-title-icon-btn-wrapper {
+            .form-input-title-icon-btn {
+              .form-input-title-list-icon {
+                width: 20px;
+                height: 20px;
+              }
+            }
+          }
+        }
+        .form-load-label-and-load-input-component {
+          .form-input-load-component {
+            width: 190px !important;
+            height: 50px;
+          }
+        }
+        .form-reps-label-and-reps-input-component {
+          .form-input-reps-component {
+            width: 190px !important;
+            height: 50px;
+          }
+          .form-reps-label {
+            font-family: "Inconsolata";
+            font-size: 18px;
+            display: inline-block;
+          }
+        }
+
+        button.chest-form-btn {
+          padding: 15px 15px;
+          font-family: "Mulish";
+          border-radius: 4px;
+          background: #1aac83d7;
+          &:hover {
+            background: #1aac83;
+          }
+          span {
+            font-size: 20px;
+          }
+        }
+      }
+      div.error-msg-container {
+        display: inline-block;
+      }
+      // styles applied to the form, when the user clicks on the 3rd icon, underneath the search input
+      &.workouts-form-allExistentWorkouts {
+        // border: 10px solid red;
+        padding: 5px;
+        margin-top: 30px;
+        position: relative;
+        right: 30px;
+        max-width: 130px;
+        .chest-workouts-form-inner {
+          &:hover {
+            img {
+              translate: 3px;
+              transition: 0.6s ease;
+            }
+          }
+          .form-filter-btn-plus-btn {
+            max-width: 120px;
+            // border: 1px solid red;
+            span {
+              display: inline-block;
+            }
+            padding: 0px;
+            background: rgba(211, 211, 211, 0.4);
+            &:hover {
+              background: rgba(211, 211, 211, 0.6);
+            }
+            img {
+              width: 20px;
+              height: 20px;
+              margin-right: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 0px) and (max-width: 350px) {
+    width: 300px;
+    margin-right: 70px;
+    border: 1px solid red;
+
+    .chest-workouts-form {
+      padding: 40px;
+      margin-top: 260px;
+
+      .chest-workouts-form-inner {
+        .form-select-exo-categ-label-and-select-component {
+          .form-select-exo-categ {
+            width: 190px !important;
+          }
+          .ant-select-selector {
+            height: 50px;
+          }
+        }
+        .form-select-exo-title-and-info-icon {
+          .form-select-label-and-select-component {
+            .form-select-exo-title {
+              width: 190px !important;
+            }
+            .ant-select-selector {
+              height: 50px;
+            }
+          }
+        }
+        .form-title-label-and-input-component {
+          .form-input-title-and-label-wrapper {
+            .form-input-title-component {
+              width: 190px !important;
+              height: 50px;
+            }
+          }
+          .form-input-title-icon-btn-wrapper {
+            .form-input-title-icon-btn {
+              .form-input-title-list-icon {
+                width: 20px;
+                height: 20px;
+              }
+            }
+          }
+        }
+        .form-load-label-and-load-input-component {
+          .form-input-load-component {
+            width: 190px !important;
+            height: 50px;
+          }
+        }
+        .form-reps-label-and-reps-input-component {
+          .form-input-reps-component {
+            width: 190px !important;
+            height: 50px;
+          }
+          .form-reps-label {
+            font-family: "Inconsolata";
+            font-size: 18px;
+            display: inline-block;
+          }
+        }
+
+        button.chest-form-btn {
+          padding: 15px 15px;
+          font-family: "Mulish";
+          border-radius: 4px;
+          background: #1aac83d7;
+          &:hover {
+            background: #1aac83;
+          }
+          span {
+            font-size: 20px;
+          }
+        }
+      }
+      div.error-msg-container {
+        display: inline-block;
+      }
+      // styles applied to the form, when the user clicks on the 3rd icon, underneath the search input
+      &.workouts-form-allExistentWorkouts {
+        // border: 10px solid red;
         padding: 5px;
         margin-top: 30px;
         position: relative;

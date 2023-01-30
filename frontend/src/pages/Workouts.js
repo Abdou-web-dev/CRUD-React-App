@@ -6,6 +6,8 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Skeleton, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import WorkoutForm from "../components/forms/WorkoutForm";
+import WorkoutsMobileForm from "../components/forms/WorkoutsMobileForm";
+
 import {
   LeftArrow as PrevIcon,
   NextArrow,
@@ -14,6 +16,7 @@ import {
   PrevArrowList,
   RightArrow as NextIcon,
 } from "../components/icons/Icons";
+import { useMediaQuery } from "../hooks/UseMediaQuery";
 
 import { WorkoutsSection } from "../components/sections/WorkoutsSection";
 import { AntdSkeleton } from "../components/skeletons/AntdSkeleton";
@@ -93,16 +96,21 @@ const Workouts = ({}) => {
     />
   );
 
+  const isDesktopScreen = useMediaQuery("(min-width: 1350px)"); // returns true or false
+  const isMobileScreen = useMediaQuery("(max-width: 700px)"); // returns true or false
+
   if (!workouts) {
     return (
       <div className="skeleton-content-not-loaded">
-        <Pagination
-          disabled
-          className={"pagination-content-not-loaded"}
-          total={50}
-          showSizeChanger={false}
-          style={{ position: "relative", bottom: `30px` }}
-        />
+        {isDesktopScreen && (
+          <Pagination
+            disabled
+            className={"pagination-content-not-loaded"}
+            total={50}
+            showSizeChanger={false}
+            style={{ position: "relative", bottom: `30px` }}
+          />
+        )}
         {/* Mui Skeleton for the container of the workout */}
         <div style={{ position: "relative", bottom: `10px` }}>
           <div style={{ marginBottom: `40px` }}> {MuiSkeletonJSX}</div>
@@ -142,16 +150,28 @@ const Workouts = ({}) => {
               }}
             ></WorkoutsSection>
           </div>
-          <div className="chest-form">
-            <WorkoutForm
-              {...{
-                setCurrentPage,
-                workouts,
-                paginationClassName,
-                showAllExistentWorkouts,
-              }}
-            />
-          </div>
+          {isMobileScreen ? (
+            <div className="workouts-mobile-form">
+              <WorkoutsMobileForm
+                {
+                  ...{
+                    // setCurrentPage,
+                  }
+                }
+              />
+            </div>
+          ) : (
+            <div className="chest-form">
+              <WorkoutForm
+                {...{
+                  setCurrentPage,
+                  workouts,
+                  paginationClassName,
+                  showAllExistentWorkouts,
+                }}
+              />
+            </div>
+          )}
 
           <BackTop />
         </div>
@@ -189,17 +209,17 @@ const Workouts = ({}) => {
               justifyContent: "center",
             }}
             total={
-              workouts.length > 0 && workouts.length <= 10
+              workouts?.length > 0 && workouts?.length <= 10
                 ? 30 //3 pages
-                : workouts.length >= 10 && workouts.length <= 20
+                : workouts?.length >= 10 && workouts?.length <= 20
                 ? 60 //6 pages
-                : workouts.length >= 20 && workouts.length <= 30
+                : workouts?.length >= 20 && workouts?.length <= 30
                 ? 90
-                : workouts.length >= 30 && workouts.length <= 40
+                : workouts?.length >= 30 && workouts?.length <= 40
                 ? 120
-                : workouts.length >= 40 && workouts.length <= 50
+                : workouts?.length >= 40 && workouts?.length <= 50
                 ? 150
-                : workouts.length >= 50 && workouts.length <= 60
+                : workouts?.length >= 50 && workouts?.length <= 60
                 ? 180
                 : 250
             }
