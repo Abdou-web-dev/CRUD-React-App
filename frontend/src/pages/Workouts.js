@@ -5,7 +5,7 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Skeleton, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import WorkoutForm from "../components/forms/WorkoutForm";
+import { WorkoutsDesktopForm } from "../components/forms/WorkoutForm";
 import WorkoutsMobileForm from "../components/forms/WorkoutsMobileForm";
 
 import {
@@ -162,7 +162,7 @@ const Workouts = ({}) => {
             </div>
           ) : (
             <div className="chest-form">
-              <WorkoutForm
+              <WorkoutsDesktopForm
                 {...{
                   setCurrentPage,
                   workouts,

@@ -28,7 +28,7 @@ import { ChestExosBtnsList as ChestExosList } from "../lists/exosLists/ChestExos
 
 import "./form_styles.scss";
 
-const WorkoutForm = ({
+export const WorkoutsDesktopForm = ({
   setCurrentPage,
   workouts,
   paginationClassName,
@@ -605,5 +605,3 @@ const WorkoutForm = ({
     </>
   );
 };
-
-export default WorkoutForm;
