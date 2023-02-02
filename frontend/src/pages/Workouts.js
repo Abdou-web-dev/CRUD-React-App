@@ -6,7 +6,6 @@ import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Skeleton, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { WorkoutsDesktopForm } from "../components/forms/WorkoutForm";
-import WorkoutsMobileForm from "../components/forms/WorkoutsMobileForm";
 
 import {
   LeftArrow as PrevIcon,
@@ -150,15 +149,9 @@ const Workouts = ({}) => {
               }}
             ></WorkoutsSection>
           </div>
-          {isMobileScreen ? (
+          {/* {isMobileScreen ? (
             <div className="workouts-mobile-form">
-              <WorkoutsMobileForm
-                {
-                  ...{
-                    // setCurrentPage,
-                  }
-                }
-              />
+              <WorkoutsMobileForm />
             </div>
           ) : (
             <div className="chest-form">
@@ -171,7 +164,15 @@ const Workouts = ({}) => {
                 }}
               />
             </div>
-          )}
+          )} */}
+          <WorkoutsDesktopForm
+            {...{
+              setCurrentPage,
+              workouts,
+              paginationClassName,
+              showAllExistentWorkouts,
+            }}
+          />
 
           <BackTop />
         </div>

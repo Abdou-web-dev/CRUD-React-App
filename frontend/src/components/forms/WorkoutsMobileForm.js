@@ -5,7 +5,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 import { ClearIcon } from "../icons/Icons";
 
-const WorkoutsMobileForm = ({}) => {
+const WorkoutsMobileForm = () => {
   const { user } = useAuthContext();
   const { dispatch } = useWorkoutsContext();
   const [error, setError] = useState(null);
@@ -179,7 +179,7 @@ const WorkoutsMobileForm = ({}) => {
           });
         }}
       >
-        <span>Add a new Workout</span>{" "}
+        <span>Add a new Workout</span>
       </Button>
       <div className="error-msg-container">
         {error && (
