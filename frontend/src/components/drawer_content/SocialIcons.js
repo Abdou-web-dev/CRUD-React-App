@@ -14,31 +14,49 @@ export function SocialIcons({ workoutTitle, layoutGrid }) {
         layoutGrid ? "social-icons-container-grid" : "social-icons-container"
       }
     >
-      <SocialIcon
-        {...{ workoutTitle, layoutGrid }}
-        social="fb"
-        icon={fbIcon}
-      ></SocialIcon>
-      <SocialIcon
-        {...{ workoutTitle, layoutGrid }}
-        social="insta"
-        icon={instaIcon}
-      ></SocialIcon>
-      <SocialIcon
-        {...{ workoutTitle, layoutGrid }}
-        social="pin"
-        icon={pinIcon}
-      ></SocialIcon>
-      <SocialIcon
-        {...{ workoutTitle, layoutGrid }}
-        social="twitter"
-        icon={twitterIcon}
-      ></SocialIcon>
-      <SocialIcon
-        {...{ workoutTitle, layoutGrid }}
-        social="yt"
-        icon={youtubeIcon}
-      ></SocialIcon>
+      <div className="social-icons-grp1">
+        <div className="social-icon-wrapper1">
+          <SocialIcon
+            {...{ workoutTitle, layoutGrid }}
+            social="fb"
+            icon={fbIcon}
+          ></SocialIcon>
+        </div>
+
+        <div className="social-icon-wrapper2">
+          <SocialIcon
+            {...{ workoutTitle, layoutGrid }}
+            social="insta"
+            icon={instaIcon}
+          ></SocialIcon>
+        </div>
+
+        <div className="social-icon-wrapper3">
+          <SocialIcon
+            {...{ workoutTitle, layoutGrid }}
+            social="pin"
+            icon={pinIcon}
+          ></SocialIcon>
+        </div>
+      </div>
+
+      <div className="social-icons-grp2">
+        <div className="social-icon-wrapper4">
+          <SocialIcon
+            {...{ workoutTitle, layoutGrid }}
+            social="twitter"
+            icon={twitterIcon}
+          ></SocialIcon>
+        </div>
+
+        <div className="social-icon-wrapper5">
+          <SocialIcon
+            {...{ workoutTitle, layoutGrid }}
+            social="yt"
+            icon={youtubeIcon}
+          ></SocialIcon>
+        </div>
+      </div>
     </div>
   );
 }

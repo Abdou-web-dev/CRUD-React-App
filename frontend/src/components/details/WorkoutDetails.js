@@ -26,6 +26,7 @@ import repetition from "../../assets/img/repetition.png";
 import ShouldersIcon from "../../assets/img/shouldersIcon.png";
 import TrapeziusIcon from "../../assets/img/TrapeziusIcon.png";
 import TricepsIcon from "../../assets/img/TricepsIcon.png";
+import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { CustomizedCheckbox } from "../checkboxes/CustomCheckBox";
 import { SocialIcons } from "../drawer_content/SocialIcons";
 import { EditModal } from "../modals/EditModal";
@@ -50,11 +51,11 @@ export const WorkoutDetails = ({
   addOrRemoveWorkout,
 }) => {
   let layoutList = detailsContClass === "workout-details-container-as-list";
-  // console.log(createdAt?.split());
   const { dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
   let createdAt = workout?.createdAt;
   let workoutCateg = workout?.exoCategory;
+  const isMobileScreen = useMediaQuery("(max-width: 1245px)"); // returns true or false
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let notShowOnFilter = !showAllExistentWorkouts && !filteredWorkout; //this means show the 4 control icon btns
   //for deleting an item, sharing ... on the 2 first sections , but not on the 3rd section
@@ -270,7 +271,9 @@ export const WorkoutDetails = ({
            index
            // this className rule must not be deleted because the drawer uses it as a container to render the content in the current container
          }
-          ${showBorder === true ? `border-selected` : ``} 
+          ${
+            showBorder === true && !isMobileScreen ? `border-selected-red` : ``
+          } 
           ${
             searchInput?.length !== 0 &&
             !showAllExistentWorkouts &&
@@ -346,7 +349,7 @@ export const WorkoutDetails = ({
                         </strong>
                       </span>
                       <span className="work-details-left-inner-load-span2">
-                        {workout?.load}
+                        &nbsp;{workout?.load}
                       </span>
                     </div>
 
@@ -535,7 +538,6 @@ export const WorkoutDetails = ({
                   open={openDrawer}
                   // closeIcon
                   getContainer={`.workout-details-container${index}`}
-                  // getContainer={false}
                   style={{
                     position: "absolute",
                   }}

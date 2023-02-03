@@ -135,6 +135,29 @@ $xx-large: 1400px;
       }
     }
   }
+
+  @media screen and (min-width: 700px) and (max-width: $large) {
+    .workouts-section-input {
+      width: 100%;
+      // border: 1px solid red;
+      position: relative;
+      right: 180px;
+      .workouts-search-ant-input {
+        height: 70px;
+        & > * {
+          font-size: 25px;
+          font-family: "Inconsolata";
+        }
+      }
+      .workouts-search-ant-input-msg {
+        span {
+          font-size: 12px;
+          font-family: "Mulish";
+          color: rgba(255, 0, 0, 0.66);
+        }
+      }
+    }
+  }
 }
 
 .workout-details-item-condensed {

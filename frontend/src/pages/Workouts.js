@@ -5,7 +5,7 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Skeleton, Tooltip } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { WorkoutsDesktopForm } from "../components/forms/WorkoutForm";
+import { WorkoutsForm } from "../components/forms/WorkoutsForm";
 
 import {
   LeftArrow as PrevIcon,
@@ -28,7 +28,6 @@ const Workouts = ({}) => {
   const { user } = useAuthContext();
 
   // let workoutsList = workouts?.map((workout) => workout._id);
-  // console.log(workoutsList, "workoutsList");
   const [filteredResults, setFilteredResults] = React.useState([]);
   const [showAllExistentWorkouts, setshowAllExistentWorkouts] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -69,8 +68,17 @@ const Workouts = ({}) => {
     ) {
       setmovePaginationFromBottom("550px");
     }
-    console.log(user);
-  }, [dispatch, searchInput, currentPage, layoutList, layoutGrid, user]);
+    if (showAllExistentWorkouts)
+      console.log(showAllExistentWorkouts, "showAllExistentWorkouts");
+  }, [
+    dispatch,
+    searchInput,
+    currentPage,
+    layoutList,
+    layoutGrid,
+    user,
+    showAllExistentWorkouts,
+  ]);
 
   const MuiSkeletonJSX = (
     <Skeleton
@@ -128,8 +136,8 @@ const Workouts = ({}) => {
   } else if (user) {
     return (
       <>
-        <div className="chest-page-container">
-          <div className="chest-workouts">
+        <div className="workouts-page-container">
+          <div className="workouts-main-section">
             <WorkoutsSection
               {...{
                 workouts,
@@ -149,30 +157,17 @@ const Workouts = ({}) => {
               }}
             ></WorkoutsSection>
           </div>
-          {/* {isMobileScreen ? (
-            <div className="workouts-mobile-form">
-              <WorkoutsMobileForm />
-            </div>
-          ) : (
-            <div className="chest-form">
-              <WorkoutsDesktopForm
-                {...{
-                  setCurrentPage,
-                  workouts,
-                  paginationClassName,
-                  showAllExistentWorkouts,
-                }}
-              />
-            </div>
-          )} */}
-          <WorkoutsDesktopForm
-            {...{
-              setCurrentPage,
-              workouts,
-              paginationClassName,
-              showAllExistentWorkouts,
-            }}
-          />
+
+          <div className="workouts-main-form">
+            <WorkoutsForm
+              {...{
+                workouts,
+                paginationClassName,
+                showAllExistentWorkouts,
+                setCurrentPage,
+              }}
+            />
+          </div>
 
           <BackTop />
         </div>

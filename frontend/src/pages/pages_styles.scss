@@ -7,7 +7,7 @@ $large: 992px;
 $x-large: 1200px;
 $xx-large: 1400px;
 
-.chest-page-container {
+.workouts-page-container {
   width: 100%;
   max-width: 1400px;
   height: 100%;
@@ -17,10 +17,10 @@ $xx-large: 1400px;
   grid-template-columns: 3fr 1fr;
   gap: 30px;
   margin-left: 50px;
-  .chest-workouts {
+  .workouts-main-section {
     height: 100%;
   }
-  .chest-form {
+  .workouts-main-form {
     // flex: 30%;
   }
   .divider {
@@ -35,15 +35,48 @@ $xx-large: 1400px;
     gap: 30px;
     margin-left: 25px;
     // border: 1px solid green;
-    .chest-workouts {
+    .workouts-main-section {
       height: 100%;
       flex: 70%;
     }
-    .chest-form {
+    .workouts-main-form {
       flex: 25%;
     }
     .divider {
       // border: 1px solid red;
+    }
+  }
+  @media screen and (min-width: $medium) and (max-width: $large) {
+    .workouts-main-section {
+      margin-left: -30px;
+    }
+  }
+  @media screen and (min-width: 700px) and (max-width: $medium) {
+    margin-left: 0px !important;
+    .workouts-main-section {
+      margin-left: -30px;
+    }
+  }
+  @media screen and (min-width: $x-small) and (max-width: $large) {
+    width: 100%;
+    max-width: 1400px;
+    height: 100%;
+    min-height: 1400px;
+    display: flex;
+    gap: 30px;
+    margin-left: 25px;
+    .workouts-main-section {
+      height: 100%;
+      flex: 70%;
+      order: 2;
+    }
+    .workouts-main-form {
+      order: 1;
+      flex: 25%;
+      // border: 1px solid red;
+      max-width: 320px;
+    }
+    .divider {
     }
   }
 }

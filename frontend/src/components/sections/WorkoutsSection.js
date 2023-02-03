@@ -1,7 +1,7 @@
 import { IconButton } from "@mui/material";
 import { Input } from "antd";
 import { formatDistanceToNow } from "date-fns";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ClearIcon } from "../icons/Icons";
 import "./sections_styles.scss";
 import {
@@ -87,6 +87,11 @@ export const WorkoutsSection = ({
       <ClearIcon />
     </IconButton>
   );
+
+  useEffect(() => {
+    if (showAllWorkoutsCondensed)
+      console.log(showAllWorkoutsCondensed, "showAllWorkoutsCondensed");
+  }, [showAllWorkoutsCondensed]);
 
   return (
     <div className="workouts-section">

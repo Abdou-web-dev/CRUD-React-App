@@ -1,14 +1,36 @@
 @import "@fontsource/open-sans";
 @import "@fontsource/inconsolata";
 @import "@fontsource/mulish";
-
+//defining screen breakpoints for responsivness
+$x-small: 0px;
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+$xx-large: 1400px;
 .social-icons-container {
   display: flex;
   justify-content: center;
+  .social-icons-grp1,
+  .social-icons-grp2 {
+    display: flex;
+  }
+  @media screen and (min-width: 650px) and (max-width: 800px) {
+    .social-icons-grp1,
+    .social-icons-grp2 {
+      display: flex;
+      flex-direction: column;
+    }
+    // .social-icon-wrapper5 {}
+  }
 }
 .social-icons-container-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  .social-icons-grp1,
+  .social-icons-grp2 {
+    display: flex;
+  }
   & > *:nth-child(4),
   & > *:nth-child(5) {
     // margin-left: 60px;

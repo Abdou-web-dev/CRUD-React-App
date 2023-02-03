@@ -319,7 +319,7 @@ export function WorkoutsList({
       setshowMoreIcon(moreIcon);
       setSpinning(false);
     }
-    console.log(selectedWorkouts);
+    if (showAllWorkouts) console.log(showAllWorkouts, "showAllWorkouts");
   }, [
     searchInput,
     showSecondGrp,
@@ -328,6 +328,7 @@ export function WorkoutsList({
     showFourthGrp,
     secondGroup,
     selectedWorkouts,
+    showAllWorkouts,
   ]);
 
   //save selectedWorkouts to the brower's local storage

@@ -5,7 +5,6 @@ import { SocialModalContent } from "./SocialModalContent";
 import "./social_links.scss";
 
 export function SocialIcon({ social, icon, workoutTitle, layoutGrid }) {
-  // console.log(workoutTitle, "here");
   const [openSocial, setopenSocial] = useState(false);
   const socialText = (text) => {
     switch (social) {
@@ -51,7 +50,6 @@ export function SocialIcon({ social, icon, workoutTitle, layoutGrid }) {
     }
     return className;
   };
-
   function imagePath() {
     let imagePath =
       workoutTitle === "Barbell Flat Bench Press"
@@ -98,16 +96,19 @@ export function SocialIcon({ social, icon, workoutTitle, layoutGrid }) {
     >
       <div className="social-icon-btn">
         {icon && (
-          <IconButton onClick={() => setopenSocial(true)}>
+          <IconButton
+            className="social-icon-btn-iconbtn"
+            onClick={() => setopenSocial(true)}
+          >
             <img src={icon} alt="" />
           </IconButton>
         )}
       </div>
       <Modal
         className={
-          setModalClassName() + layoutGrid
-            ? ` social-icon-ant-modal ant-modal-grid`
-            : ` social-icon-ant-modal`
+          layoutGrid
+            ? `${setModalClassName()} social-icon-ant-modal ant-modal-grid`
+            : `${setModalClassName()} social-icon-ant-modal`
         }
         open={openSocial}
         maskClosable={true}
