@@ -1,6 +1,7 @@
 import { Button } from "antd";
 import { useState } from "react";
 import redCloseIcon from "../../assets/img/redCloseIcon.svg";
+import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { WorkoutDetails } from "../details/WorkoutDetails";
 import "./sections_styles.scss";
 
@@ -24,27 +25,33 @@ export function WorkoutDetailsItemCondensed({
     setdisplayItem("none");
   }
 
+  const isMobileScreen = useMediaQuery("(max-width: 800px)"); // returns true or false
+
   if (showAllExistentWorkouts || showResults) {
     return (
-      <WorkoutDetails
-        {...{
-          workoutCondensed,
-          filteredWorkout,
-          showAllExistentWorkouts,
-          showResults,
-          indexx,
-          showNotification,
-          addOrRemoveWorkout,
-          //this prop prevents the exo icons from displaying on this component
-        }}
-        workout={
-          workoutFiltered
-            ? workoutFiltered
-            : workoutCondensed
-            ? workoutCondensed
-            : null
-        }
-      />
+      <>
+        {!isMobileScreen && (
+          <WorkoutDetails
+            {...{
+              workoutCondensed,
+              filteredWorkout,
+              showAllExistentWorkouts,
+              showResults,
+              indexx,
+              showNotification,
+              addOrRemoveWorkout,
+              //this prop prevents the exo icons from displaying on this component
+            }}
+            workout={
+              workoutFiltered
+                ? workoutFiltered
+                : workoutCondensed
+                ? workoutCondensed
+                : null
+            }
+          />
+        )}
+      </>
     );
   }
   //else

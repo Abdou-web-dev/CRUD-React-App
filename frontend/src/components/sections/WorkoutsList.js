@@ -35,6 +35,11 @@ export function WorkoutsList({
 }) {
   //always put state variables first , then regular variables, then useEffect statement and the other fncts
 
+  const [showFirstGrp, setshowFirstGrp] = useState(true);
+  const [showSecondGrp, setshowSecondGrp] = useState(false);
+  const [showThirdGrp, setshowThirdGrp] = useState(false);
+  const [showFourthGrp, setshowFourthGrp] = useState(false);
+  const [showFifthGrp, setshowFifthGrp] = useState(false);
   const [boxShadow, setBoxShadow] = useState("");
   const [bg, setbg] = useState("");
   const [firstIcon, setFirsticon] = useState(listIcon);
@@ -53,91 +58,6 @@ export function WorkoutsList({
   let layoutList = detailsContClass === "workout-details-container-as-list";
   let result = filteredResults?.length === 1 ? `result` : `results`;
 
-  //JSX Fragments
-
-  const [showFirstGrp, setshowFirstGrp] = useState(true);
-  const firstGroup =
-    workouts &&
-    workouts?.map(
-      (workoutCondensed, index) =>
-        index < 8 &&
-        index >= 0 && (
-          <WorkoutDetailsItemCondensed //this is the initial first group
-            {...{
-              workoutCondensed,
-              counter,
-            }}
-            key={workoutCondensed._id}
-          />
-        )
-    );
-
-  const [showSecondGrp, setshowSecondGrp] = useState(false);
-  const secondGroup =
-    workouts &&
-    workouts?.map(
-      (workoutCondensed, index) =>
-        index < 16 &&
-        index >= 8 && (
-          <div>
-            <WorkoutDetailsItemCondensed
-              {...{
-                workoutCondensed,
-                counter,
-              }}
-              key={workoutCondensed._id}
-            />
-          </div>
-        )
-    );
-  //
-  const [showThirdGrp, setshowThirdGrp] = useState(false);
-  const thirdGroup =
-    workouts &&
-    workouts?.map(
-      (workoutCondensed, index) =>
-        index < 24 &&
-        index >= 16 && (
-          <WorkoutDetailsItemCondensed
-            {...{
-              workoutCondensed,
-              counter,
-            }}
-            key={workoutCondensed._id}
-          />
-        )
-    );
-  const [showFourthGrp, setshowFourthGrp] = useState(false);
-  const fourthGroup =
-    workouts &&
-    workouts?.map(
-      (workoutCondensed, index) =>
-        index < 32 &&
-        index >= 24 && (
-          <WorkoutDetailsItemCondensed
-            {...{
-              workoutCondensed,
-              counter,
-            }}
-            key={workoutCondensed._id}
-          />
-        )
-    );
-  const [showFifthGrp, setshowFifthGrp] = useState(false);
-  const fifthGroup =
-    workouts &&
-    workouts?.map(
-      (workoutCondensed, index) =>
-        index >= 32 && (
-          <WorkoutDetailsItemCondensed
-            {...{
-              workoutCondensed,
-              counter,
-            }}
-            key={workoutCondensed._id}
-          />
-        )
-    );
   //functions
   function handleIconClick() {
     setshowAllWorkouts(true);
@@ -326,7 +246,6 @@ export function WorkoutsList({
     showThirdGrp,
     showFifthGrp,
     showFourthGrp,
-    secondGroup,
     selectedWorkouts,
     showAllWorkouts,
   ]);
@@ -500,14 +419,110 @@ export function WorkoutsList({
         <div className="chest-page-workouts-condensed-container">
           <div
             className="chest-page-workouts-condensed-inner"
-            style={{ overflowY: showThirdGrp && thirdGroup ? `scroll` : `` }}
+            style={{ overflowY: showThirdGrp ? `scroll` : `` }}
           >
             <div className="chest-page-workouts-condensed-inner-workouts">
-              <>{showFirstGrp && firstGroup}</>
-              <>{showSecondGrp && secondGroup}</>
-              <>{showThirdGrp && thirdGroup}</>
-              <>{showFourthGrp && fourthGroup}</>
-              <>{showFifthGrp && fifthGroup}</>
+              <>
+                {showFirstGrp && (
+                  <>
+                    {workouts &&
+                      workouts?.map(
+                        (workoutCondensed, index) =>
+                          index < 8 &&
+                          index >= 0 && (
+                            <WorkoutDetailsItemCondensed //this is the initial first group
+                              {...{
+                                workoutCondensed,
+                                counter,
+                              }}
+                              key={workoutCondensed._id}
+                            />
+                          )
+                      )}
+                  </>
+                )}
+              </>
+              <>
+                {showSecondGrp && (
+                  <>
+                    {workouts &&
+                      workouts?.map(
+                        (workoutCondensed, index) =>
+                          index < 16 &&
+                          index >= 8 && (
+                            <div>
+                              <WorkoutDetailsItemCondensed
+                                {...{
+                                  workoutCondensed,
+                                  counter,
+                                }}
+                                key={workoutCondensed._id}
+                              />
+                            </div>
+                          )
+                      )}
+                  </>
+                )}
+              </>
+              <>
+                {showThirdGrp && (
+                  <>
+                    {workouts &&
+                      workouts?.map(
+                        (workoutCondensed, index) =>
+                          index < 24 &&
+                          index >= 16 && (
+                            <WorkoutDetailsItemCondensed
+                              {...{
+                                workoutCondensed,
+                                counter,
+                              }}
+                              key={workoutCondensed._id}
+                            />
+                          )
+                      )}
+                  </>
+                )}
+              </>
+              <>
+                {showFourthGrp && (
+                  <>
+                    {workouts &&
+                      workouts?.map(
+                        (workoutCondensed, index) =>
+                          index < 32 &&
+                          index >= 24 && (
+                            <WorkoutDetailsItemCondensed
+                              {...{
+                                workoutCondensed,
+                                counter,
+                              }}
+                              key={workoutCondensed._id}
+                            />
+                          )
+                      )}
+                  </>
+                )}
+              </>
+              <>
+                {showFifthGrp && (
+                  <>
+                    {workouts &&
+                      workouts?.map(
+                        (workoutCondensed, index) =>
+                          index >= 32 && (
+                            <WorkoutDetailsItemCondensed
+                              {...{
+                                workoutCondensed,
+                                counter,
+                              }}
+                              key={workoutCondensed._id}
+                            />
+                          )
+                      )}
+                  </>
+                )}
+              </>
 
               <div className="chest-page-workouts-condensed-inner-more-icon">
                 {showMoreBtn && (

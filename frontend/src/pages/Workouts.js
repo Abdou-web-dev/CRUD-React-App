@@ -158,7 +158,13 @@ const Workouts = ({}) => {
             ></WorkoutsSection>
           </div>
 
-          <div className="workouts-main-form">
+          <div
+            className={
+              showAllExistentWorkouts
+                ? "workouts-main-form form-3rd-section"
+                : "workouts-main-form"
+            }
+          >
             <WorkoutsForm
               {...{
                 workouts,

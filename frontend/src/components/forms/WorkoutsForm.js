@@ -43,7 +43,7 @@ export const WorkoutsForm = ({
   const [showModal, setShowModal] = useState(false);
 
   // const isDesktopScreen = useMediaQuery("(min-width: 1350px)"); // returns true or false
-  const isMobileScreen = useMediaQuery("(max-width: 700px)"); // returns true or false
+  const isMobileScreen = useMediaQuery("(max-width: 800px)"); // returns true or false
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -210,7 +210,7 @@ export const WorkoutsForm = ({
           {/* JSX to show the form on the same page */}
           {showFormNewWindow === false && (
             <>
-              <div className="chest-workout-form-container">
+              <div className="">
                 <>
                   {!showFormNewWindow && (
                     <DesktopFormContent

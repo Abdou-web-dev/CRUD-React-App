@@ -278,7 +278,7 @@ export const WorkoutDetails = ({
             searchInput?.length !== 0 &&
             !showAllExistentWorkouts &&
             !filteredWorkout
-              ? `filtered-workouts`
+              ? `workout-details-filtered`
               : ``
           } 
           ${
@@ -286,12 +286,7 @@ export const WorkoutDetails = ({
           }  
           ${
             workoutCondensed && showAllExistentWorkouts
-              ? `condensed-workouts-all-workouts`
-              : `` //3rd btn styles
-          }
-          ${
-            workoutCondensed && showAllExistentWorkouts && CollapseContent
-              ? `condensed-workouts-all-workouts-CollapseContent`
+              ? `workouts-details-filter-btns-clicked`
               : `` //3rd btn styles
           }         
           ${

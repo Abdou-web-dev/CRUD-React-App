@@ -33,7 +33,7 @@ $xx-large: 1400px;
     background-color: white;
     margin-bottom: 20px;
     background-color: rgba(168, 200, 180, 0.16);
-    //pos relative in order to positio nthe exo icon on top in the middle on hover
+    //pos relative in order to position the exo icon on top in the middle on hover
     position: relative;
 
     &.black-border-selected {
@@ -133,7 +133,7 @@ $xx-large: 1400px;
         font-size: 18px;
       }
     }
-    &.filtered-workouts {
+    &.workout-details-filtered {
       .work-details-right-inner-iconbtn {
         align-self: center;
       }
@@ -199,7 +199,7 @@ $xx-large: 1400px;
           font-size: 18px;
         }
       }
-      &.filtered-workouts {
+      &.workout-details-filtered {
         // border: 1px solid red;
         width: 100%;
         .work-details-right-inner-iconbtn {
@@ -250,7 +250,7 @@ $xx-large: 1400px;
           font-size: 18px;
         }
       }
-      &.filtered-workouts {
+      &.workout-details-filtered {
         width: 100%;
         .work-details-right-inner-iconbtn {
           align-self: center;
@@ -309,7 +309,7 @@ $xx-large: 1400px;
           font-size: 18px;
         }
       }
-      &.filtered-workouts {
+      &.workout-details-filtered {
         width: 100%;
         .work-details-right-inner-iconbtn {
           align-self: center;
@@ -382,7 +382,7 @@ $xx-large: 1400px;
           font-size: 18px;
         }
       }
-      &.filtered-workouts {
+      &.workout-details-filtered {
         width: 100%;
         .work-details-right-inner-iconbtn {
           align-self: center;
@@ -397,6 +397,101 @@ $xx-large: 1400px;
         h4 {
           color: #1aac83cb;
           font-size: 1.3em !important;
+        }
+      }
+    }
+  }
+  //list of relevant workouts either to Chest,....
+  &.condensed-workouts-filter-results {
+    background-color: rgba(36, 40, 41, 0.25);
+    position: relative;
+    margin-bottom: 25px;
+    padding: 30px 10px;
+    padding-top: 0;
+    width: 800px;
+    &:hover {
+      background-color: rgba(36, 40, 41, 0.35);
+    }
+    .work-details-single-workout {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      .work-details-content-filters-btns-title {
+        font-size: 1.2em;
+        color: white;
+        font-weight: bolder;
+        font-family: "Inconsolata";
+        letter-spacing: 1.5px;
+      }
+      .work-details-content-filters-btns-infos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        margin-top: 25px;
+
+        .work-details-content-filters-btns-load {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin-right: 10px;
+          .work-details-load-img {
+            width: 50px;
+            height: 50px;
+          }
+          .load-span1 {
+            font-family: "Mulish";
+
+            .span1-kg {
+              font-style: italic;
+              font-family: "Inconsolata";
+            }
+          }
+          .load-span2 {
+            font-family: "Open Sans";
+          }
+        }
+        .work-details-content-filters-btns-reps {
+          margin-left: 5px;
+          .reps-inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            .reps-img {
+              width: 50px;
+              height: 50px;
+            }
+            .reps-span1 {
+              font-family: "Mulish";
+              .span1-kg {
+                font-style: italic;
+                font-family: "Inconsolata";
+              }
+            }
+            .reps-span2 {
+              font-family: "Open Sans";
+            }
+          }
+        }
+        .work-details-content-filters-btns-date {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          max-width: 90px;
+          margin-left: 10px;
+          .date-img {
+            width: 50px;
+            height: 50px;
+          }
+          .date-text {
+            font-style: italic;
+            font-family: "Inconsolata";
+          }
         }
       }
     }
@@ -495,7 +590,7 @@ $xx-large: 1400px;
       }
     }
 
-    &.filtered-workouts {
+    &.workout-details-filtered {
       border: 1px solid #727e8043;
       background: rgba(225, 214, 214, 0.15);
       padding: 5px;
@@ -524,204 +619,200 @@ $xx-large: 1400px;
       }
     }
   }
-}
+  //initial list of workouts, 3rd btn
+  &.workouts-details-filter-btns-clicked {
+    background-color: rgba(36, 40, 41, 0.48);
+    position: relative;
+    margin-bottom: 25px;
+    padding: 20px 10px;
 
-//initial list of workouts, 3rd btn
-.condensed-workouts-all-workouts {
-  background-color: rgba(36, 40, 41, 0.48);
-  position: relative;
-  margin-bottom: 25px;
-  padding: 70px 10px;
-
-  &.condensed-workouts-all-workouts-CollapseContent {
-    padding-top: 0px;
-  }
-  &:hover {
-    background-color: rgba(36, 40, 41, 0.55);
-  }
-  .work-details-single-workout {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    .work-details-content-filters-btns-title {
-      font-size: 1.2em;
-      color: white;
-      font-weight: bolder;
-      font-family: "Inconsolata";
-      letter-spacing: 1.5px;
+    &:hover {
+      background-color: rgba(36, 40, 41, 0.55);
     }
-    .work-details-content-filters-btns-infos {
+    .work-details-single-workout {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 25px;
+      flex-direction: column;
 
-      .work-details-content-filters-btns-load {
+      .work-details-content-filters-btns-title {
+        font-size: 1.2em;
+        color: white;
+        font-weight: bolder;
+        font-family: "Inconsolata";
+        letter-spacing: 1.5px;
+      }
+      .work-details-content-filters-btns-infos {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
-        margin-right: 10px;
-        .work-details-load-img {
-          width: 50px;
-          height: 50px;
-        }
-        .load-span1 {
-          font-family: "Mulish";
+        margin-top: 25px;
 
-          .span1-kg {
-            font-style: italic;
-            font-family: "Inconsolata";
-          }
-        }
-        .load-span2 {
-          font-family: "Open Sans";
-        }
-      }
-      .work-details-content-filters-btns-reps {
-        margin-left: 5px;
-        .reps-inner {
+        .work-details-content-filters-btns-load {
           display: flex;
           justify-content: center;
           align-items: center;
           flex-direction: column;
-          .reps-img {
+          margin-right: 10px;
+          .work-details-load-img {
             width: 50px;
             height: 50px;
           }
-          .reps-span1 {
+          .load-span1 {
             font-family: "Mulish";
+
             .span1-kg {
               font-style: italic;
               font-family: "Inconsolata";
             }
           }
-          .reps-span2 {
+          .load-span2 {
             font-family: "Open Sans";
           }
         }
-      }
-      .work-details-content-filters-btns-date {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        max-width: 90px;
-        margin-left: 10px;
-        .date-img {
-          width: 50px;
-          height: 50px;
+        .work-details-content-filters-btns-reps {
+          margin-left: 5px;
+          .reps-inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            .reps-img {
+              width: 50px;
+              height: 50px;
+            }
+            .reps-span1 {
+              font-family: "Mulish";
+              .span1-kg {
+                font-style: italic;
+                font-family: "Inconsolata";
+              }
+            }
+            .reps-span2 {
+              font-family: "Open Sans";
+            }
+          }
         }
-        .date-text {
-          font-style: italic;
-          font-family: "Inconsolata";
+        .work-details-content-filters-btns-date {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          max-width: 90px;
+          margin-left: 10px;
+          .date-img {
+            width: 50px;
+            height: 50px;
+          }
+          .date-text {
+            font-style: italic;
+            font-family: "Inconsolata";
+          }
         }
       }
     }
   }
+
+  @media screen and (min-width: $medium) and (max-width: $large) {
+    &.workouts-details-filter-btns-clicked {
+      background-color: rgba(36, 40, 41, 0.4);
+      padding: 0px;
+      &:hover {
+        background-color: rgba(36, 40, 41, 0.55);
+      }
+      .work-details-single-workout {
+        .work-details-content-filters-btns-title {
+          // border: 1px solid;
+          font-size: 1.2em;
+          color: white;
+          font-weight: bolder;
+          font-family: "Inconsolata";
+          letter-spacing: 1.5px;
+        }
+        .work-details-content-filters-btns-infos {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 25px;
+
+          .work-details-content-filters-btns-load {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-right: 10px;
+            .work-details-load-img {
+              width: 50px;
+              height: 50px;
+            }
+            .load-span1 {
+              font-family: "Mulish";
+
+              .span1-kg {
+                font-style: italic;
+                font-family: "Inconsolata";
+              }
+            }
+            .load-span2 {
+              font-family: "Open Sans";
+            }
+          }
+          .work-details-content-filters-btns-reps {
+            margin-left: 5px;
+            .reps-inner {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              .reps-img {
+                width: 50px;
+                height: 50px;
+              }
+              .reps-span1 {
+                font-family: "Mulish";
+                .span1-kg {
+                  font-style: italic;
+                  font-family: "Inconsolata";
+                }
+              }
+              .reps-span2 {
+                font-family: "Open Sans";
+              }
+            }
+          }
+          .work-details-content-filters-btns-date {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            max-width: 90px;
+            margin-left: 10px;
+            .date-img {
+              width: 50px;
+              height: 50px;
+            }
+            .date-text {
+              font-style: italic;
+              font-family: "Inconsolata";
+            }
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 850px) {
+    &.workouts-details-filter-btns-clicked {
+      .work-details-single-workout {
+        padding: 15px;
+      }
+    }
+  }
 }
+
 .work-details-content-filters-btns-collapse-icon {
   position: relative;
   bottom: 20px;
   // border: 1px solid red;
-}
-
-//list of relevant workouts either to Chest,....
-.condensed-workouts-filter-results {
-  background-color: rgba(36, 40, 41, 0.25);
-  position: relative;
-  margin-bottom: 25px;
-  padding: 30px 10px;
-  padding-top: 0;
-  width: 800px;
-  &:hover {
-    background-color: rgba(36, 40, 41, 0.35);
-  }
-  .work-details-single-workout {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    .work-details-content-filters-btns-title {
-      font-size: 1.2em;
-      color: white;
-      font-weight: bolder;
-      font-family: "Inconsolata";
-      letter-spacing: 1.5px;
-    }
-    .work-details-content-filters-btns-infos {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 50px;
-      margin-top: 25px;
-
-      .work-details-content-filters-btns-load {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        margin-right: 10px;
-        .work-details-load-img {
-          width: 50px;
-          height: 50px;
-        }
-        .load-span1 {
-          font-family: "Mulish";
-
-          .span1-kg {
-            font-style: italic;
-            font-family: "Inconsolata";
-          }
-        }
-        .load-span2 {
-          font-family: "Open Sans";
-        }
-      }
-      .work-details-content-filters-btns-reps {
-        margin-left: 5px;
-        .reps-inner {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          .reps-img {
-            width: 50px;
-            height: 50px;
-          }
-          .reps-span1 {
-            font-family: "Mulish";
-            .span1-kg {
-              font-style: italic;
-              font-family: "Inconsolata";
-            }
-          }
-          .reps-span2 {
-            font-family: "Open Sans";
-          }
-        }
-      }
-      .work-details-content-filters-btns-date {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        max-width: 90px;
-        margin-left: 10px;
-        .date-img {
-          width: 50px;
-          height: 50px;
-        }
-        .date-text {
-          font-style: italic;
-          font-family: "Inconsolata";
-        }
-      }
-    }
-  }
 }
 
 .border-selected-red {

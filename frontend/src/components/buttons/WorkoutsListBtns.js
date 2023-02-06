@@ -11,6 +11,7 @@ import HamstringsIcon from "../../assets/img/HamstringsIcon.svg";
 import ShouldersIcon from "../../assets/img/shouldersIcon.png";
 import TrapeziusIcon from "../../assets/img/TrapeziusIcon.png";
 import TricepsIcon from "../../assets/img/TricepsIcon.png";
+import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { WorkoutDetailsItemCondensed } from "../sections/WorkoutDetailsItemCondensed";
 import "./btns_elems.scss";
 let categories = [
@@ -143,6 +144,8 @@ export function WorkoutsListBtns({
     ? BicepsWorkouts?.length
     : null;
 
+  const isMobileScreen = useMediaQuery("(min-width: 800px)"); // returns true or false
+
   function hideAllWorkouts() {
     setShowAbsResults(false);
     setShowChestResults(false);
@@ -239,7 +242,7 @@ export function WorkoutsListBtns({
   }, [selectedWorkouts]);
 
   return (
-    <>
+    <div className="workouts-list-and-btns-container">
       {/* notification */}
       <>
         {/* show the notification only when the user clicks the 3rd btn and then clicks on on of the filter btns */}
@@ -265,17 +268,6 @@ export function WorkoutsListBtns({
         )}
       </>
       <div className="workouts-btns-and-elements">
-        {/* a msg shown under the input when the user tries to search a workout while being on the 3rd section */}
-        <>
-          {searchInput?.length !== 0 && (
-            <div className="workouts-btns-and-elements-msg">
-              <span>
-                To search for an item, clear this field and click on the 1st
-                button below !
-              </span>
-            </div>
-          )}
-        </>
         <div className="workouts-btns-and-elements-three-btns">
           {/* the 3 control btns */}
           <>
@@ -298,112 +290,122 @@ export function WorkoutsListBtns({
                 <img width={"30px"} height="30px" src={firstIcon} alt="" />
               </Button>
             </Tooltip>
-
-            <Tooltip title="Display all items in one section">
-              <Button
-                className="btn2"
-                disabled={secondBtnDisabled}
-                onClick={handleCondensedIconClick}
-                style={{ height: "fit-content", width: "fit-content" }}
-              >
-                <img width={"30px"} height="30px" src={secondIcon} alt="" />
-              </Button>
-            </Tooltip>
-
-            <Tooltip title="Filter these workouts">
-              <Button
-                className="workouts-section-filter-btn btn3"
-                disabled={filterBtnDisabled}
-                onClick={handleShowFilterBtns}
-                style={{ height: "fit-content", width: "fit-content" }}
-              >
-                <img width={"30px"} height="30px" src={filterIcon} alt="" />
-              </Button>
-            </Tooltip>
           </>
+          {isMobileScreen && (
+            <>
+              <Tooltip title="Display all items in one section">
+                <Button
+                  className="btn2"
+                  disabled={secondBtnDisabled}
+                  onClick={handleCondensedIconClick}
+                  style={{ height: "fit-content", width: "fit-content" }}
+                >
+                  <img width={"30px"} height="30px" src={secondIcon} alt="" />
+                </Button>
+              </Tooltip>
+
+              <Tooltip title="Filter these workouts">
+                <Button
+                  className="workouts-section-filter-btn btn3"
+                  disabled={filterBtnDisabled}
+                  onClick={handleShowFilterBtns}
+                  style={{ height: "fit-content", width: "fit-content" }}
+                >
+                  <img width={"30px"} height="30px" src={filterIcon} alt="" />
+                </Button>
+              </Tooltip>
+            </>
+          )}
         </div>
         {/* Filter btns */}
         <>
-          {showFilterBtns && !showAllWorkouts && !showAllWorkoutsCondensed && (
-            <>
-              <div className="workouts-btns-and-elements-categ-btns-wrapper grp1">
-                {categories &&
-                  categories?.map(
-                    (category, index) =>
-                      index < 5 && (
-                        <Button
-                          className={`
-                    workouts-btns-and-elements-categ-btn-elem
-                    workouts-btns-and-elements-categ-btn-${category?.exoTitle}-filter-btn`}
-                          key={index}
-                          onClick={() => {
-                            handleFilterWorkouts(category?.exoTitle);
-                          }}
-                          style={{
-                            height: "fit-content",
-                            width: "fit-content",
-                          }}
-                        >
-                          <span>{category?.exoTitle}</span>
-                          <img
-                            width={"30px"}
-                            height="30px"
-                            src={category?.icon}
-                            alt=""
-                          />
-                        </Button>
-                      )
-                  )}
-              </div>
-              <div className="workouts-btns-and-elements-categ-btns-wrapper grp2">
-                {categories &&
-                  categories?.map(
-                    (category, index) =>
-                      index > 5 && (
-                        <Button
-                          className={`
-                   workouts-btns-and-elements-categ-btn-elem
-                   workouts-btns-and-elements-categ-btn-${category?.exoTitle}-filter-btn`}
-                          key={index}
-                          onClick={() => {
-                            handleFilterWorkouts(category?.exoTitle);
-                          }}
-                          style={{
-                            height: "fit-content",
-                            width: "fit-content",
-                          }}
-                          // disabled={secondBtnDisabled}
-                        >
-                          <span>{category?.exoTitle}</span>
-                          <img
-                            width={"30px"}
-                            height="30px"
-                            src={category?.icon}
-                            alt=""
-                          />
-                        </Button>
-                      )
-                  )}
-              </div>
-            </>
-          )}
+          {showFilterBtns &&
+            !showAllWorkouts &&
+            !showAllWorkoutsCondensed &&
+            isMobileScreen && (
+              <>
+                <div className="workouts-btns-and-elements-categ-btns-wrapper grp1">
+                  {categories &&
+                    categories?.map(
+                      (category, index) =>
+                        index < 5 && (
+                          <Button
+                            className={`workouts-btns-and-elements-categ-btn-elem
+                           workouts-btns-and-elements-categ-btn-${category?.exoTitle}-filter-btn
+                           filter-btn${index}
+                          `}
+                            key={index}
+                            onClick={() => {
+                              handleFilterWorkouts(category?.exoTitle);
+                            }}
+                            style={{
+                              height: "fit-content",
+                              width: "fit-content",
+                            }}
+                          >
+                            <span>{category?.exoTitle}</span>
+                            <img
+                              width={"30px"}
+                              height="30px"
+                              src={category?.icon}
+                              alt=""
+                            />
+                          </Button>
+                        )
+                    )}
+                </div>
+                <div className="workouts-btns-and-elements-categ-btns-wrapper grp2">
+                  {categories &&
+                    categories?.map(
+                      (category, index) =>
+                        index > 5 && (
+                          <Button
+                            className={`
+                            workouts-btns-and-elements-categ-btn-elem
+                            workouts-btns-and-elements-categ-btn-${category?.exoTitle}-filter-btn
+                            filter-btn${index}
+                            `}
+                            key={index}
+                            onClick={() => {
+                              handleFilterWorkouts(category?.exoTitle);
+                            }}
+                            style={{
+                              height: "fit-content",
+                              width: "fit-content",
+                            }}
+                            // disabled={secondBtnDisabled}
+                          >
+                            <span>{category?.exoTitle}</span>
+                            <img
+                              width={"30px"}
+                              height="30px"
+                              src={category?.icon}
+                              alt=""
+                            />
+                          </Button>
+                        )
+                    )}
+                </div>
+              </>
+            )}
         </>
         {/* All existent workouts */}
-        <div className="chest-page-workouts showItemsAsGrid">
-          {showAllExistentWorkouts &&
-            workouts &&
-            workouts?.map((workoutCondensed) => (
-              <WorkoutDetailsItemCondensed //all items condensed
-                {...{
-                  workoutCondensed,
-                  showAllExistentWorkouts,
-                  filteredWorkout,
-                  addOrRemoveWorkout,
-                }}
-                key={workoutCondensed?._id}
-              />
-            ))}
-        </div>
+        {showAllExistentWorkouts && (
+          <div className="all-existent-workouts-as-grid">
+            {workouts &&
+              workouts?.map((workoutCondensed) => (
+                <WorkoutDetailsItemCondensed //all items condensed
+                  {...{
+                    workoutCondensed,
+                    showAllExistentWorkouts,
+                    filteredWorkout,
+                    addOrRemoveWorkout,
+                  }}
+                  key={workoutCondensed?._id}
+                />
+              ))}
+          </div>
+        )}
         {/* Filtered Results */}
         {!showAllExistentWorkouts && (
           <>
@@ -598,7 +600,7 @@ export function WorkoutsListBtns({
           </>
         )}
       </div>
-    </>
+    </div>
   );
 }
 //when the user clicks on filter btn, decrease the size of the form and of all inputs and select

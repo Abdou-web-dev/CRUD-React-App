@@ -101,7 +101,6 @@ export const WorkoutsSection = ({
           value={searchInput}
           onChange={handleChange}
           className="workouts-search-ant-input"
-          // style={{ width: "800px" }}
           placeholder=" &nbsp;Search a workout"
           onMouseOver={handleInputHover}
           disabled={

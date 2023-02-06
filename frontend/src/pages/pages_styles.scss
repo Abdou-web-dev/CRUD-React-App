@@ -57,6 +57,15 @@ $xx-large: 1400px;
       margin-left: -30px;
     }
   }
+  @media screen and (min-width: $medium) and (max-width: $large) {
+    .workouts-main-form {
+      &.form-3rd-section {
+        max-width: 140px !important;
+        margin-top: 150px;
+        margin-left: 5px;
+      }
+    }
+  }
   @media screen and (min-width: $x-small) and (max-width: $large) {
     width: 100%;
     max-width: 1400px;

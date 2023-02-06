@@ -9,6 +9,91 @@ $x-large: 1200px;
 $xx-large: 1400px;
 
 .workouts-section-container {
+  .chest-page-workouts-condensed-container {
+    .chest-page-workouts-condensed-inner {
+      height: 500px;
+
+      &::-webkit-scrollbar {
+        width: 18px;
+      }
+      &::-webkit-scrollbar-track {
+        border-radius: 10px;
+        background: rgba(128, 128, 128, 0.626);
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        background: black;
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        border-radius: 10px;
+      }
+      .chest-page-workouts-condensed-inner-workouts {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        gap: 10px;
+        margin: 0 20px;
+        .chest-page-workouts-condensed-inner-more-icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .chest-page-workouts-condensed-inner-more-icon-btn {
+            border: none;
+            background: none;
+            width: fit-content;
+            height: fit-content;
+
+            img {
+              &:hover {
+                transform: scale(1.08);
+                transition: 0.5s ease;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: $large) and (max-width: $xx-large) {
+    .chest-page-workouts-condensed-container {
+      .chest-page-workouts-condensed-inner {
+        .chest-page-workouts-condensed-inner-workouts {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 10px;
+          margin: 0 20px;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: $medium) and (max-width: $large) {
+    .chest-page-workouts-condensed-container {
+      .chest-page-workouts-condensed-inner {
+        width: 470px;
+        .chest-page-workouts-condensed-inner-workouts {
+          display: grid;
+          grid-template-columns: 200px 200px;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 800px) and (max-width: 860px) {
+    .chest-page-workouts-condensed-container {
+      .chest-page-workouts-condensed-inner {
+        width: 380px;
+        .chest-page-workouts-condensed-inner-workouts {
+          display: grid;
+          grid-template-columns: 160px 160px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 800px) {
+    .chest-page-workouts-condensed-container {
+      display: none;
+    }
+  }
+
   .workouts-section-toggle-btn-container {
     margin: 25px 0px;
     .workouts-section-toggle-btn {
@@ -52,52 +137,8 @@ $xx-large: 1400px;
       font-family: "Mulish";
     }
   }
-  .chest-page-workouts-condensed-container {
-    .chest-page-workouts-condensed-inner {
-      height: 500px;
-      // overflow-y: scroll;
-
-      &::-webkit-scrollbar {
-        width: 18px;
-      }
-      &::-webkit-scrollbar-track {
-        border-radius: 10px;
-        background: rgba(128, 128, 128, 0.626);
-      }
-      &::-webkit-scrollbar-thumb {
-        border-radius: 20px;
-        background: black;
-      }
-      &::-webkit-scrollbar-thumb:hover {
-        border-radius: 10px;
-      }
-      .chest-page-workouts-condensed-inner-workouts {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        gap: 10px;
-        margin: 0 20px;
-        .chest-page-workouts-condensed-inner-more-icon {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          .chest-page-workouts-condensed-inner-more-icon-btn {
-            border: none;
-            background: none;
-            width: fit-content;
-            height: fit-content;
-
-            img {
-              &:hover {
-                transform: scale(1.08);
-                transition: 0.5s ease;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 }
+
 .workouts-section {
   .workouts-section-input {
     width: 80%;
