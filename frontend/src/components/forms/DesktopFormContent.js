@@ -43,7 +43,7 @@ export const DesktopFormContent = ({
   showSuggExoTitle,
 }) => {
   return (
-    <div className="chest-workout-form-container">
+    <div className="workout-form-container">
       <div
         // this means that the class toggle-form-btn will always be applied , and toggle-form-btn-modal class will be added to this div element as a second class if showFormNewWindow ===true
         className={`toggle-form-btn ${
@@ -57,14 +57,14 @@ export const DesktopFormContent = ({
         ) : null}
       </div>
       <form
-        className={`chest-workouts-form
+        className={`workouts-form
           ${showAllExistentWorkouts && "workouts-form-allExistentWorkouts"}
           `}
         onSubmit={handleSubmit}
       >
-        <div className={`chest-workouts-form-inner`}>
+        <div className={`workouts-form-inner`}>
           <div
-            className={`chest-workouts-form-inner-btn-and-text`}
+            className={`workouts-form-inner-btn-and-text`}
             style={{
               display: showAllExistentWorkouts ? `flex` : ``,
               justifyContent: `center`,
@@ -370,15 +370,15 @@ export const DesktopFormContent = ({
                 </div>
                 <div
                   className={
-                    showFormNewWindow === true ? "d_flex" : "chest-form-btns"
+                    showFormNewWindow === true ? "d_flex" : "form-btns"
                   }
                 >
-                  <button className="chest-form-btn">
+                  <button className="form-btn">
                     <span>Add Workout</span>
                   </button>
                   <Button
                     onClick={handleResetFields}
-                    className="chest-form-reset-btn"
+                    className="form-reset-btn"
                   >
                     <img src={recycle} alt="" />
                   </Button>

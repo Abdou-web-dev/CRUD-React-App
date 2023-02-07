@@ -8,14 +8,14 @@ $large: 992px;
 $x-large: 1200px;
 $xx-large: 1400px;
 
-.chest-workout-form-container {
-  .chest-workouts-form {
+.workout-form-container {
+  .workouts-form {
     border: 0.5px solid lightgray;
     margin-top: -30px;
     padding: 40px;
     border-radius: 5px;
 
-    .chest-workouts-form-inner {
+    .workouts-form-inner {
       label,
       input {
         display: block;
@@ -31,11 +31,11 @@ $xx-large: 1400px;
         bottom: 60px;
         left: 240px;
       }
-      .chest-form-btns {
+      .form-btns {
         display: flex;
         align-items: center;
         gap: 10px;
-        button.chest-form-btn {
+        button.form-btn {
           background: var(--primary);
           border: 0;
           color: #fff;
@@ -47,7 +47,7 @@ $xx-large: 1400px;
             transform: scale(1.05);
           }
         }
-        .chest-form-reset-btn {
+        .form-reset-btn {
           height: fit-content;
           &:hover {
             transform: scale(1.05);
@@ -176,7 +176,7 @@ $xx-large: 1400px;
     }
   }
   .workouts-form-allExistentWorkouts {
-    .chest-workouts-form-inner {
+    .workouts-form-inner {
       .form-filter-btn-plus-btn {
         padding: 10px;
         background: rgba(211, 211, 211, 0.3);
@@ -231,11 +231,11 @@ $xx-large: 1400px;
         left: 60px;
       }
     }
-    .chest-workouts-form {
+    .workouts-form {
       padding: 60px;
       margin-top: 180px;
 
-      .chest-workouts-form-inner {
+      .workouts-form-inner {
         .form-select-exo-categ-label-and-select-component {
           .form-select-exo-categ {
             width: 250px !important;
@@ -315,7 +315,7 @@ $xx-large: 1400px;
           font-size: 18px;
           display: inline-block;
         }
-        button.chest-form-btn {
+        button.form-btn {
           padding: 15px 15px;
           font-family: "Karla";
           border-radius: 4px;
@@ -338,7 +338,7 @@ $xx-large: 1400px;
         position: relative;
         right: 30px;
         max-width: 130px;
-        .chest-workouts-form-inner {
+        .workouts-form-inner {
           &:hover {
             img {
               translate: 3px;
@@ -374,11 +374,11 @@ $xx-large: 1400px;
       &.toggle-form-btn-modal {
       }
     }
-    .chest-workouts-form {
+    .workouts-form {
       padding: 40px;
       margin-top: 260px;
 
-      .chest-workouts-form-inner {
+      .workouts-form-inner {
         .form-select-exo-categ-label-and-select-component {
           // border: 1px solid red;
           .form-select-exo-categ {
@@ -432,7 +432,7 @@ $xx-large: 1400px;
           }
         }
 
-        button.chest-form-btn {
+        button.form-btn {
           padding: 15px 15px;
           font-family: "Mulish";
           border-radius: 4px;
@@ -456,7 +456,7 @@ $xx-large: 1400px;
         position: relative;
         right: 30px;
         max-width: 130px;
-        .chest-workouts-form-inner {
+        .workouts-form-inner {
           &:hover {
             img {
               translate: 3px;
@@ -485,7 +485,7 @@ $xx-large: 1400px;
     }
   }
   @media screen and (min-width: 700px) and (max-width: $x-large) {
-    .chest-workouts-form {
+    .workouts-form {
       // border: 1px solid red;
       &.workouts-form-allExistentWorkouts {
       }
@@ -496,11 +496,11 @@ $xx-large: 1400px;
     width: 300px;
     margin-right: 70px;
 
-    .chest-workouts-form {
+    .workouts-form {
       padding: 40px;
       margin-top: 260px;
 
-      .chest-workouts-form-inner {
+      .workouts-form-inner {
         .form-select-exo-categ-label-and-select-component {
           .form-select-exo-categ {
             width: 190px !important;
@@ -553,7 +553,7 @@ $xx-large: 1400px;
           }
         }
 
-        button.chest-form-btn {
+        button.form-btn {
           padding: 15px 15px;
           font-family: "Mulish";
           border-radius: 4px;
@@ -577,7 +577,7 @@ $xx-large: 1400px;
         position: relative;
         right: 30px;
         max-width: 130px;
-        .chest-workouts-form-inner {
+        .workouts-form-inner {
           &:hover {
             img {
               translate: 3px;
@@ -610,11 +610,11 @@ $xx-large: 1400px;
     margin-right: 70px;
     border: 1px solid red;
 
-    .chest-workouts-form {
+    .workouts-form {
       padding: 40px;
       margin-top: 260px;
 
-      .chest-workouts-form-inner {
+      .workouts-form-inner {
         .form-select-exo-categ-label-and-select-component {
           .form-select-exo-categ {
             width: 190px !important;
@@ -667,7 +667,7 @@ $xx-large: 1400px;
           }
         }
 
-        button.chest-form-btn {
+        button.form-btn {
           padding: 15px 15px;
           font-family: "Mulish";
           border-radius: 4px;
@@ -691,7 +691,7 @@ $xx-large: 1400px;
         position: relative;
         right: 30px;
         max-width: 130px;
-        .chest-workouts-form-inner {
+        .workouts-form-inner {
           &:hover {
             img {
               translate: 3px;
@@ -768,7 +768,7 @@ $xx-large: 1400px;
   }
 }
 
-.chest-form-ant-modal {
+.workouts-form-ant-modal {
   padding: 60px;
 
   .ant-modal-content {

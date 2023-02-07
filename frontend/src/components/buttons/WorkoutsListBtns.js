@@ -45,10 +45,8 @@ export function WorkoutsListBtns({
   border,
   showFilterBtns,
   setshowFilterBtns,
-  searchInput,
   setDisplayPagination,
   addOrRemoveWorkout,
-  filteredResults,
 }) {
   let hideOtherWorkouts = !showAllWorkoutsCondensed && !showAllWorkouts;
   const [showChestResults, setShowChestResults] = useState(false);
@@ -270,50 +268,59 @@ export function WorkoutsListBtns({
       <div className="workouts-btns-and-elements">
         <div className="workouts-btns-and-elements-three-btns">
           {/* the 3 control btns */}
-          <>
-            <Tooltip
-              title={
-                detailsContClass === `workout-details-container-as-grid`
-                  ? `Display as list`
-                  : `Display as grid`
-              }
-            >
-              <Button
-                className="workouts-section-toggle-btn btn1"
-                onClick={handleIconClick}
-                style={{
-                  height: "fit-content",
-                  width: "fit-content",
-                  border: showAllExistentWorkouts ? border : ``,
-                }}
-              >
-                <img width={"30px"} height="30px" src={firstIcon} alt="" />
-              </Button>
-            </Tooltip>
-          </>
+
           {isMobileScreen && (
             <>
-              <Tooltip title="Display all items in one section">
-                <Button
-                  className="btn2"
-                  disabled={secondBtnDisabled}
-                  onClick={handleCondensedIconClick}
-                  style={{ height: "fit-content", width: "fit-content" }}
+              {/* 1st btn */}
+              <>
+                <Tooltip
+                  title={
+                    detailsContClass === `workout-details-container-as-grid`
+                      ? `Display as list`
+                      : `Display as grid`
+                  }
                 >
-                  <img width={"30px"} height="30px" src={secondIcon} alt="" />
-                </Button>
-              </Tooltip>
+                  <Button
+                    className="workouts-section-toggle-btn btn1"
+                    onClick={handleIconClick}
+                    style={{
+                      height: "fit-content",
+                      width: "fit-content",
+                      border: showAllExistentWorkouts ? border : ``,
+                    }}
+                  >
+                    <img width={"30px"} height="30px" src={firstIcon} alt="" />
+                  </Button>
+                </Tooltip>
+              </>
 
-              <Tooltip title="Filter these workouts">
-                <Button
-                  className="workouts-section-filter-btn btn3"
-                  disabled={filterBtnDisabled}
-                  onClick={handleShowFilterBtns}
-                  style={{ height: "fit-content", width: "fit-content" }}
-                >
-                  <img width={"30px"} height="30px" src={filterIcon} alt="" />
-                </Button>
-              </Tooltip>
+              <>
+                {/* 2nd btn */}
+                <Tooltip title="Display all items in one section">
+                  <Button
+                    className="btn2"
+                    disabled={secondBtnDisabled}
+                    onClick={handleCondensedIconClick}
+                    style={{ height: "fit-content", width: "fit-content" }}
+                  >
+                    <img width={"30px"} height="30px" src={secondIcon} alt="" />
+                  </Button>
+                </Tooltip>
+              </>
+
+              <>
+                {/* 3rd btn */}
+                <Tooltip title="Filter these workouts">
+                  <Button
+                    className="workouts-section-filter-btn btn3"
+                    disabled={filterBtnDisabled}
+                    onClick={handleShowFilterBtns}
+                    style={{ height: "fit-content", width: "fit-content" }}
+                  >
+                    <img width={"30px"} height="30px" src={filterIcon} alt="" />
+                  </Button>
+                </Tooltip>
+              </>
             </>
           )}
         </div>
@@ -398,6 +405,7 @@ export function WorkoutsListBtns({
                   {...{
                     workoutCondensed,
                     showAllExistentWorkouts,
+                    showAllWorkoutsCondensed,
                     filteredWorkout,
                     addOrRemoveWorkout,
                   }}
@@ -418,6 +426,7 @@ export function WorkoutsListBtns({
                     {...{
                       workoutFiltered,
                       showAllExistentWorkouts,
+                      showAllWorkoutsCondensed,
                       showResults,
                       filteredWorkout,
                       indexx,
@@ -437,6 +446,7 @@ export function WorkoutsListBtns({
                     {...{
                       workoutFiltered,
                       showAllExistentWorkouts,
+                      showAllWorkoutsCondensed,
                       showResults,
                       filteredWorkout,
                       indexx,
@@ -456,6 +466,7 @@ export function WorkoutsListBtns({
                     {...{
                       workoutFiltered,
                       showAllExistentWorkouts,
+                      showAllWorkoutsCondensed,
                       showResults,
                       filteredWorkout,
                       indexx,
@@ -475,6 +486,7 @@ export function WorkoutsListBtns({
                     {...{
                       workoutFiltered,
                       showAllExistentWorkouts,
+                      showAllWorkoutsCondensed,
                       showResults,
                       filteredWorkout,
                       indexx,
@@ -494,6 +506,7 @@ export function WorkoutsListBtns({
                     {...{
                       workoutFiltered,
                       showAllExistentWorkouts,
+                      showAllWorkoutsCondensed,
                       showResults,
                       indexx,
                       showNotification,
@@ -512,6 +525,7 @@ export function WorkoutsListBtns({
                     {...{
                       workoutFiltered,
                       showAllExistentWorkouts,
+                      showAllWorkoutsCondensed,
                       showResults,
                       filteredWorkout,
                       indexx,
@@ -532,6 +546,7 @@ export function WorkoutsListBtns({
                       workoutFiltered,
                       showAllExistentWorkouts,
                       showResults,
+                      showAllWorkoutsCondensed,
                       filteredWorkout,
                       indexx,
                       showNotification,
@@ -550,6 +565,7 @@ export function WorkoutsListBtns({
                     {...{
                       workoutFiltered,
                       showAllExistentWorkouts,
+                      showAllWorkoutsCondensed,
                       showResults,
                       filteredWorkout,
                       indexx,
@@ -569,6 +585,7 @@ export function WorkoutsListBtns({
                     {...{
                       workoutFiltered,
                       showAllExistentWorkouts,
+                      showAllWorkoutsCondensed,
                       showResults,
                       filteredWorkout,
                       indexx,
@@ -588,6 +605,7 @@ export function WorkoutsListBtns({
                     {...{
                       workoutFiltered,
                       showAllExistentWorkouts,
+                      showAllWorkoutsCondensed,
                       showResults,
                       filteredWorkout,
                       indexx,

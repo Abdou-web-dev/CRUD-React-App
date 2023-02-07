@@ -21,7 +21,6 @@ $xx-large: 1400px;
     height: 100%;
   }
   .workouts-main-form {
-    // flex: 30%;
   }
   .divider {
   }
@@ -88,6 +87,42 @@ $xx-large: 1400px;
     .divider {
     }
   }
+  @media screen and (min-width: 769px) and (max-width: 800px) {
+    .workouts-main-section {
+      position: relative;
+      right: 100px;
+    }
+    .workouts-main-form {
+      position: relative;
+      top: 100px;
+      left: 250px;
+    }
+  }
+  @media screen and (min-width: 600px) and (max-width: 769px) {
+    .workouts-main-section {
+      position: relative;
+      right: 0px;
+    }
+    .workouts-main-form {
+      position: relative;
+      top: 100px;
+      left: 200px;
+    }
+  }
+  @media screen and (min-width: 520px) and (max-width: 600px) {
+    .workouts-main-form {
+      position: relative;
+      top: 100px;
+      left: 200px;
+    }
+  }
+  @media screen and (min-width: 0px) and (max-width: 520px) {
+    .workouts-main-form {
+      position: relative;
+      top: 100px;
+      left: 130px;
+    }
+  }
 }
 .pagination-content-loaded {
   display: flex;
@@ -114,7 +149,6 @@ $xx-large: 1400px;
   align-items: center;
   margin-left: 215px;
   gap: 10px;
-  // border: 2px solid red;
   .ant-pagination-prev {
     img {
       width: 30px;
@@ -124,7 +158,6 @@ $xx-large: 1400px;
     justify-content: center;
     align-items: center;
   }
-
   .ant-pagination-item {
     font-family: "Inconsolata";
     &.ant-pagination-item-active {
@@ -141,6 +174,10 @@ $xx-large: 1400px;
       width: 30px;
       height: 30px;
     }
+  }
+  &.pagination-content-loaded-grid-to-bottom {
+    position: relative;
+    top: -280px;
   }
 }
 .pagination-filtered-results {

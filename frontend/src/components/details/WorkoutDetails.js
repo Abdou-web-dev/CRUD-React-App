@@ -46,6 +46,7 @@ export const WorkoutDetails = ({
   workoutCondensed,
   filteredWorkout,
   showAllExistentWorkouts,
+  showAllWorkoutsCondensed,
   indexx,
   showResults,
   addOrRemoveWorkout,
@@ -265,6 +266,16 @@ export const WorkoutDetails = ({
       </>
       <div
         className={`${detailsContClass}
+        ${
+          !showAllExistentWorkouts && !workoutIsCondensed && layoutGrid
+            ? `move_to_left_grid`
+            : ""
+        }
+        ${
+          !showAllExistentWorkouts && !workoutIsCondensed && layoutList
+            ? `move_to_left_list`
+            : ""
+        }
          site-drawer-render-in-current-wrapper
          workout-details-container
          workout-details-container${

@@ -130,49 +130,47 @@ export const WorkoutsForm = ({
     return (
       <div>
         {showModal ? (
-          <div>
-            <Modal
-              className="chest-form-ant-modal"
-              open={showModal}
-              maskClosable={true}
-              closable={false}
-              keyboard={true}
-              mask={true}
-              onOk={() => setShowModal(false)}
-              onCancel={() => setShowModal(false)}
-              width={"70%"}
-              footer={null}
-            >
-              <div>
-                <MobileFormContent
-                  {...{
-                    showFormNewWindow,
-                    showAllExistentWorkouts,
-                    handleSubmit,
-                    setShowFormNewWindow,
-                    exoCategory,
-                    setExoCategory,
-                    emptyFields,
-                    setSuggestiveListBorder,
-                    showInputTitle,
-                    handleCustomExo,
-                    setTitle,
-                    title,
-                    load,
-                    setLoad,
-                    reps,
-                    setReps,
-                    error,
-                    handleResetFields,
-                    handleListIconClick,
-                    showSuggExoTitle,
-                  }}
-                ></MobileFormContent>
-              </div>
-              {/* Change this mobileFormDOM's content , delete some className and unnecessary code */}
-              {/* and make it mobile reponsive */}
-            </Modal>
-          </div>
+          <Modal
+            className="workouts-form-ant-modal"
+            open={showModal}
+            maskClosable={true}
+            closable={false}
+            keyboard={true}
+            mask={true}
+            onOk={() => setShowModal(false)}
+            onCancel={() => setShowModal(false)}
+            width={"70%"}
+            footer={null}
+          >
+            <div>
+              <MobileFormContent
+                {...{
+                  showFormNewWindow,
+                  showAllExistentWorkouts,
+                  handleSubmit,
+                  setShowFormNewWindow,
+                  exoCategory,
+                  setExoCategory,
+                  emptyFields,
+                  setSuggestiveListBorder,
+                  showInputTitle,
+                  handleCustomExo,
+                  setTitle,
+                  title,
+                  load,
+                  setLoad,
+                  reps,
+                  setReps,
+                  error,
+                  handleResetFields,
+                  handleListIconClick,
+                  showSuggExoTitle,
+                }}
+              ></MobileFormContent>
+            </div>
+            {/* Change this mobileFormDOM's content , delete some className and unnecessary code */}
+            {/* and make it mobile reponsive */}
+          </Modal>
         ) : (
           <Button onClick={() => setShowModal(true)}>
             <span>Add a Workout</span>

@@ -2,6 +2,7 @@ import { IconButton } from "@mui/material";
 import { Input } from "antd";
 import { formatDistanceToNow } from "date-fns";
 import React, { useEffect, useState } from "react";
+import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { ClearIcon } from "../icons/Icons";
 import "./sections_styles.scss";
 import {
@@ -87,11 +88,27 @@ export const WorkoutsSection = ({
       <ClearIcon />
     </IconButton>
   );
+  const isMobileScreen = useMediaQuery("(max-width: 992px)"); // returns true or false
+  const isWideScreen = useMediaQuery(
+    "(max-width: 800px) and (min-width: 1240px)"
+  ); // returns true or false
+  const isDesktopScreen = useMediaQuery("(min-width: 1260px)"); // returns true or false
 
   useEffect(() => {
-    if (showAllWorkoutsCondensed)
+    if (showAllWorkoutsCondensed) {
       console.log(showAllWorkoutsCondensed, "showAllWorkoutsCondensed");
-  }, [showAllWorkoutsCondensed]);
+    }
+    if (isMobileScreen) {
+      setcontainerClass("chest-page-workouts showItemsAsGrid-one-per-line");
+      setDisplayPagination("none");
+    } else if (!isMobileScreen) {
+      setcontainerClass("chest-page-workouts");
+    } else if (isWideScreen) {
+      setDisplayPagination("none");
+    } else if (isDesktopScreen) {
+      setDisplayPagination("flex");
+    }
+  }, [showAllWorkoutsCondensed, isMobileScreen]);
 
   return (
     <div className="workouts-section">

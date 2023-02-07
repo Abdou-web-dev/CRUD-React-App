@@ -45,6 +45,12 @@ const Workouts = ({}) => {
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let layoutList = detailsContClass === "workout-details-container-as-list";
 
+  const isDesktopScreen = useMediaQuery("(min-width: 1350px)"); // returns true or false
+  const isMobileScreen = useMediaQuery("(max-width: 800px)"); // returns true or false
+  const isTabletScreen = useMediaQuery(
+    "(min-width: 992px) and (max-width: 1250px)"
+  ); // returns true or false
+
   useEffect(() => {
     const fetchWorkouts = async () => {
       const response = await fetch("/api/workouts", {
@@ -58,6 +64,9 @@ const Workouts = ({}) => {
     if (user) {
       fetchWorkouts();
     }
+  }, [dispatch, user]);
+
+  useEffect(() => {
     if (currentPage === 10 && layoutList) {
       setmovePaginationFromBottom("0px");
     } else if (currentPage !== 10 && layoutList) {
@@ -68,16 +77,19 @@ const Workouts = ({}) => {
     ) {
       setmovePaginationFromBottom("550px");
     }
-    if (showAllExistentWorkouts)
-      console.log(showAllExistentWorkouts, "showAllExistentWorkouts");
+    if (isMobileScreen) {
+      setdetailsContClass(`workout-details-container-as-grid`);
+    } else if (!isMobileScreen) {
+      if (layoutList) setdetailsContClass(`workout-details-container-as-list`);
+      if (layoutGrid) setdetailsContClass(`workout-details-container-as-grid`);
+    }
   }, [
-    dispatch,
     searchInput,
     currentPage,
     layoutList,
     layoutGrid,
-    user,
     showAllExistentWorkouts,
+    isMobileScreen,
   ]);
 
   const MuiSkeletonJSX = (
@@ -103,8 +115,9 @@ const Workouts = ({}) => {
     />
   );
 
-  const isDesktopScreen = useMediaQuery("(min-width: 1350px)"); // returns true or false
-  const isMobileScreen = useMediaQuery("(max-width: 700px)"); // returns true or false
+  useEffect(() => {
+    console.log(displayPagination);
+  }, [displayPagination]);
 
   if (!workouts) {
     return (
@@ -147,6 +160,7 @@ const Workouts = ({}) => {
                 searchInput,
                 setSearchInput,
                 setCurrentPage,
+                displayPagination,
                 setDisplayPagination,
                 detailsContClass,
                 setdetailsContClass,
@@ -181,7 +195,11 @@ const Workouts = ({}) => {
         {/* pagination of Workouts  , with the pages' numbers */}
         {searchInput?.length === 0 && !showAllExistentWorkouts && (
           <Pagination
-            className={paginationClassName}
+            className={`${paginationClassName} ${
+              isTabletScreen && layoutGrid
+                ? `pagination-content-loaded-grid-to-bottom`
+                : ""
+            }`}
             prevIcon={
               paginationClassName === "pagination-content-loaded-grid" ? (
                 <PrevIcon />

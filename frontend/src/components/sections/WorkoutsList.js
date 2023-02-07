@@ -8,10 +8,12 @@ import lessIcon from "../../assets/img/lessIcon.svg";
 import listIcon from "../../assets/img/listIcon.png";
 import moreIcon from "../../assets/img/plusIcon.svg";
 import redCloseIcon from "../../assets/img/redCloseIcon.svg";
+import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { WorkoutsListBtns } from "../buttons/WorkoutsListBtns";
 import "./sections_styles.scss";
 import { WorkoutDetailsItem } from "./WorkoutDetailsItem";
 import { WorkoutDetailsItemCondensed } from "./WorkoutDetailsItemCondensed";
+import { WorkoutDetailsItemMobile } from "./WorkoutDetailsItemMobile";
 
 export function WorkoutsList({
   workouts,
@@ -57,6 +59,13 @@ export function WorkoutsList({
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let layoutList = detailsContClass === "workout-details-container-as-list";
   let result = filteredResults?.length === 1 ? `result` : `results`;
+  const isMobileScreen = useMediaQuery(
+    "(min-width: 550px) and (max-width: 700px)"
+  );
+  const isSoSmallScreen = useMediaQuery(
+    "(min-width: 0px) and (max-width: 550px)"
+  );
+  const isDesktopSreen = useMediaQuery("(min-width: 700px)");
 
   //functions
   function handleIconClick() {
@@ -239,7 +248,7 @@ export function WorkoutsList({
       setshowMoreIcon(moreIcon);
       setSpinning(false);
     }
-    if (showAllWorkouts) console.log(showAllWorkouts, "showAllWorkouts");
+    // if (showAllWorkouts) console.log(showAllWorkouts, "showAllWorkouts");
   }, [
     searchInput,
     showSecondGrp,
@@ -319,45 +328,113 @@ export function WorkoutsList({
             }}
           >
             <div
-              className={`${
+              className={`${containerClass} ${
                 filteredResults?.length === 1 &&
-                detailsContClass === "workout-details-container-as-grid" &&
-                "grid-one-item"
-              }
-              ${containerClass}`}
+                detailsContClass === "workout-details-container-as-grid"
+                  ? "grid-one-item"
+                  : ""
+              }`}
             >
               {!showAllWorkoutsCondensed && (
                 <>
                   {/* list of All workouts */}
-                  {workouts &&
-                    workouts?.map((workout, index) => (
-                      <WorkoutDetailsItem
-                        {...{
-                          workout,
-                          index,
-                          setbg,
-                          detailsContClass,
-                          setdetailsContClass,
-                          setcontainerClass,
-                          currentPage,
-                          layoutGrid,
-                          showItemsPage1,
-                          showItemsPage2,
-                          showItemsPage3,
-                          showItemsPage4,
-                          showItemsPage5,
-                          showItemsPage6,
-                          showItemsPage7,
-                          showItemsPage8,
-                          showItemsPage9,
-                          showItemsPage10,
-                          searchInput,
-                          setCurrentPage,
-                          addOrRemoveWorkout,
-                        }}
-                        key={index}
-                      ></WorkoutDetailsItem>
-                    ))}
+                  {isDesktopSreen ? (
+                    <>
+                      {workouts &&
+                        workouts?.map((workout, index) => (
+                          <WorkoutDetailsItem
+                            {...{
+                              workout,
+                              index,
+                              setbg,
+                              detailsContClass,
+                              setdetailsContClass,
+                              setcontainerClass,
+                              currentPage,
+                              layoutGrid,
+                              showItemsPage1,
+                              showItemsPage2,
+                              showItemsPage3,
+                              showItemsPage4,
+                              showItemsPage5,
+                              showItemsPage6,
+                              showItemsPage7,
+                              showItemsPage8,
+                              showItemsPage9,
+                              showItemsPage10,
+                              searchInput,
+                              setCurrentPage,
+                              addOrRemoveWorkout,
+                            }}
+                            key={index}
+                          ></WorkoutDetailsItem>
+                        ))}
+                    </>
+                  ) : isMobileScreen ? (
+                    <>
+                      {workouts &&
+                        workouts?.map((workout, index) => (
+                          <WorkoutDetailsItemMobile
+                            {...{
+                              workout,
+                              index,
+                              setbg,
+                              detailsContClass,
+                              setdetailsContClass,
+                              setcontainerClass,
+                              currentPage,
+                              layoutGrid,
+                              showItemsPage1,
+                              showItemsPage2,
+                              showItemsPage3,
+                              showItemsPage4,
+                              showItemsPage5,
+                              showItemsPage6,
+                              showItemsPage7,
+                              showItemsPage8,
+                              showItemsPage9,
+                              showItemsPage10,
+                              searchInput,
+                              setCurrentPage,
+                              addOrRemoveWorkout,
+                            }}
+                            key={index}
+                          ></WorkoutDetailsItemMobile>
+                        ))}
+                    </>
+                  ) : isSoSmallScreen ? (
+                    <>
+                      {workouts &&
+                        workouts?.map((workout, index) => (
+                          <WorkoutDetailsItemMobile
+                            {...{
+                              workout,
+                              index,
+                              setbg,
+                              detailsContClass,
+                              setdetailsContClass,
+                              setcontainerClass,
+                              currentPage,
+                              layoutGrid,
+                              showItemsPage1,
+                              showItemsPage2,
+                              showItemsPage3,
+                              showItemsPage4,
+                              showItemsPage5,
+                              showItemsPage6,
+                              showItemsPage7,
+                              showItemsPage8,
+                              showItemsPage9,
+                              showItemsPage10,
+                              searchInput,
+                              setCurrentPage,
+                              addOrRemoveWorkout,
+                            }}
+                            key={index}
+                          ></WorkoutDetailsItemMobile>
+                        ))}
+                    </>
+                  ) : null}
 
                   {/* list of workouts after the search */}
                   {filteredResults &&

@@ -43,9 +43,9 @@ export const MobileFormContent = ({
 }) => {
   return (
     <>
-      <form className={`chest-workouts-mobile-form`} onSubmit={handleSubmit}>
-        <div className={`chest-workouts-form-inner`}>
-          <div className={`chest-workouts-form-inner-btn-and-text`}>
+      <form className={`workouts-mobile-form`} onSubmit={handleSubmit}>
+        <div className={`workouts-form-inner`}>
+          <div className={`workouts-form-inner-btn-and-text`}>
             {showAllExistentWorkouts && !showFormNewWindow && (
               <Button
                 onClick={() => setShowFormNewWindow(!showFormNewWindow)}
@@ -345,15 +345,15 @@ export const MobileFormContent = ({
                 </div>
                 <div
                   className={
-                    showFormNewWindow === true ? "d_flex" : "chest-form-btns"
+                    showFormNewWindow === true ? "d_flex" : "form-btns"
                   }
                 >
-                  <button className="chest-form-btn">
+                  <button className="form-btn">
                     <span>Add Workout</span>
                   </button>
                   <Button
                     onClick={handleResetFields}
-                    className="chest-form-reset-btn"
+                    className="form-reset-btn"
                   >
                     <img src={recycle} alt="" />
                   </Button>
