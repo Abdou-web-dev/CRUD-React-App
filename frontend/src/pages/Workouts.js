@@ -178,15 +178,18 @@ const Workouts = ({}) => {
                 ? "workouts-main-form form-3rd-section"
                 : "workouts-main-form"
             }
+            style={{ height: isMobileScreen ? `80px` : "" }}
           >
-            <WorkoutsForm
-              {...{
-                workouts,
-                paginationClassName,
-                showAllExistentWorkouts,
-                setCurrentPage,
-              }}
-            />
+            <div>
+              <WorkoutsForm
+                {...{
+                  workouts,
+                  paginationClassName,
+                  showAllExistentWorkouts,
+                  setCurrentPage,
+                }}
+              />
+            </div>
           </div>
 
           <BackTop />

@@ -1,0 +1,68 @@
+@mixin span_styles {
+  font-family: "Mulish";
+  font-size: 25px;
+  color: white;
+}
+@mixin btn_styles {
+  height: fit-content;
+  padding: 10px 20px;
+}
+.delete-workout-mobile-container {
+  //   border: 1px solid red;
+  //   display: none;
+  .delete-workout-mobile-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .delete-workout-mobile-text {
+      // this is how we center text of multi lines , Vertical Center Multi Lines of Text with Flexbox
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 200px;
+      //   resize: vertical;
+      max-width: 550px;
+      span {
+        font-family: "Roboto";
+        font-size: 30px;
+        text-align: center;
+      }
+    }
+    .delete-workout-mobile-btns {
+      display: flex;
+      gap: 15px;
+      .delete-workout-mobile-yes-btn {
+        @include btn_styles();
+        background: rgba(28, 151, 79, 0.6);
+
+        span {
+          @include span_styles();
+        }
+      }
+      .delete-workout-mobile-no-btn {
+        @include btn_styles();
+        background: rgba(151, 28, 44, 0.6);
+
+        span {
+          @include span_styles();
+        }
+      }
+    }
+  }
+}
+
+.logout-modal {
+  &.ant-modal {
+    .ant-modal-content {
+      //   border: 1px solid;
+      .ant-modal-close {
+        .ant-modal-close-x {
+          position: relative;
+          right: 0px;
+          bottom: 30px;
+        }
+      }
+    }
+  }
+}

@@ -59,11 +59,9 @@ export function WorkoutsList({
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let layoutList = detailsContClass === "workout-details-container-as-list";
   let result = filteredResults?.length === 1 ? `result` : `results`;
-  const isMobileScreen = useMediaQuery(
-    "(min-width: 550px) and (max-width: 700px)"
-  );
-  const isSoSmallScreen = useMediaQuery(
-    "(min-width: 0px) and (max-width: 550px)"
+
+  const isSmallScreen = useMediaQuery(
+    "(min-width: 0px) and (max-width: 700px)"
   );
   const isDesktopSreen = useMediaQuery("(min-width: 700px)");
 
@@ -370,39 +368,7 @@ export function WorkoutsList({
                           ></WorkoutDetailsItem>
                         ))}
                     </>
-                  ) : isMobileScreen ? (
-                    <>
-                      {workouts &&
-                        workouts?.map((workout, index) => (
-                          <WorkoutDetailsItemMobile
-                            {...{
-                              workout,
-                              index,
-                              setbg,
-                              detailsContClass,
-                              setdetailsContClass,
-                              setcontainerClass,
-                              currentPage,
-                              layoutGrid,
-                              showItemsPage1,
-                              showItemsPage2,
-                              showItemsPage3,
-                              showItemsPage4,
-                              showItemsPage5,
-                              showItemsPage6,
-                              showItemsPage7,
-                              showItemsPage8,
-                              showItemsPage9,
-                              showItemsPage10,
-                              searchInput,
-                              setCurrentPage,
-                              addOrRemoveWorkout,
-                            }}
-                            key={index}
-                          ></WorkoutDetailsItemMobile>
-                        ))}
-                    </>
-                  ) : isSoSmallScreen ? (
+                  ) : isSmallScreen ? (
                     <>
                       {workouts &&
                         workouts?.map((workout, index) => (

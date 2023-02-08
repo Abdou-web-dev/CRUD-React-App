@@ -1,6 +1,7 @@
 import React from "react";
 import emailIcon from "../../assets/img/emailIcon.svg";
 import passwordIcon from "../../assets/img/passwordIcon.svg";
+import trashIcon from "../../assets/img/trashIcon.svg";
 import userIcon from "../../assets/img/userIcon.svg";
 
 import favorite from "../../assets/img/favorite.png";
@@ -129,5 +130,12 @@ export const UserIcon = () => {
 export const PasswordIcon = () => {
   return (
     <img src={passwordIcon} style={{ width: "50px", height: "50px" }} alt="" />
+  );
+};
+export const TrashIcon = () => {
+  return (
+    <>
+      <img src={trashIcon} alt="" style={{ width: "30px", height: "30px" }} />
+    </>
   );
 };

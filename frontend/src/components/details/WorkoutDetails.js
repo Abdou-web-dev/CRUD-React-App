@@ -377,7 +377,6 @@ export const WorkoutDetails = ({
                         })}
                       </span>
                     </div>
-                    {/* <div>{workout?._id}</div> */}
                   </div>
                 </div>
 
@@ -463,41 +462,42 @@ export const WorkoutDetails = ({
             </Collapse>
 
             {/* this is the exo icon and exo category that shows on hover */}
-
-            {!workoutIsCondensed && (
-              <div className="exo-category-icon-wrapper">
-                <img
-                  className="exo-category-icon"
-                  src={
-                    workoutCateg === `Hamstrings`
-                      ? HamstringsIcon
-                      : workoutCateg === `Chest`
-                      ? ChestIcon
-                      : workoutCateg === `Trapezius`
-                      ? TrapeziusIcon
-                      : workoutCateg === `Shoulders`
-                      ? ShouldersIcon
-                      : workoutCateg === `Forearms`
-                      ? ForearmsIcon
-                      : workoutCateg === `Calves`
-                      ? CalvesIcon
-                      : workoutCateg === `Biceps`
-                      ? BicepsIcon
-                      : workoutCateg === `Abs`
-                      ? AbsIcon
-                      : workoutCateg === `Back`
-                      ? BackIcon
-                      : workoutCateg === `Triceps`
-                      ? TricepsIcon
-                      : null
-                  }
-                  alt=""
-                />
-                <h4 className="exo-category-workout-category">
-                  {workout?.exoCategory}
-                </h4>
-              </div>
-            )}
+            <>
+              {!workoutIsCondensed && (
+                <div className="exo-category-icon-wrapper">
+                  <img
+                    className="exo-category-icon"
+                    src={
+                      workoutCateg === `Hamstrings`
+                        ? HamstringsIcon
+                        : workoutCateg === `Chest`
+                        ? ChestIcon
+                        : workoutCateg === `Trapezius`
+                        ? TrapeziusIcon
+                        : workoutCateg === `Shoulders`
+                        ? ShouldersIcon
+                        : workoutCateg === `Forearms`
+                        ? ForearmsIcon
+                        : workoutCateg === `Calves`
+                        ? CalvesIcon
+                        : workoutCateg === `Biceps`
+                        ? BicepsIcon
+                        : workoutCateg === `Abs`
+                        ? AbsIcon
+                        : workoutCateg === `Back`
+                        ? BackIcon
+                        : workoutCateg === `Triceps`
+                        ? TricepsIcon
+                        : null
+                    }
+                    alt=""
+                  />
+                  <h4 className="exo-category-workout-category">
+                    {workout?.exoCategory}
+                  </h4>
+                </div>
+              )}
+            </>
           </>
         ) : (
           //all this content is shown when the user clicks on the 3rd (filter) btn
@@ -520,6 +520,7 @@ export const WorkoutDetails = ({
       </div>
 
       <>
+        {/* Antd Backdrop  */}
         <>
           <Backdrop
             className="workout-details-backdrop"
@@ -604,6 +605,7 @@ export const WorkoutDetails = ({
             </>
           )}
         </>
+        {/* Antd Edit Modal  */}
         <>
           <Modal
             className=""
@@ -633,4 +635,3 @@ export const WorkoutDetails = ({
     </div>
   );
 };
-//  workout-details-container${index}
