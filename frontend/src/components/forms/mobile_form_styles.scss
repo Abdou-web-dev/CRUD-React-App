@@ -1,0 +1,34 @@
+.workouts-mobile-form {
+  border: 1px solid red;
+  width: 550px;
+  .workouts-mobile-form-inner {
+    .mobile-form-select-exo-categ-label-and-select-component {
+      .mobile-form-select-exo-categ-label {
+      }
+      .mobile-form-exo-categ-select {
+      }
+    }
+
+    .mobile-form-select-exo-title-and-info-icon {
+      .mobile-form-title-select-label-and-component {
+        .mobile-form-title-select-label {
+        }
+        .mobile-form-title-select-exo-title {
+        }
+      }
+      .mobile-form-select-exo-title-info-btn {
+        .mobile-form-select-exo-title-info-btn-icon {
+        }
+      }
+    }
+  }
+}
+
+.workouts-form-ant-modal {
+  @media screen and (min-width: 650px) and (max-width: 800px) {
+    width: 650px !important;
+    padding: 0;
+    margin: 0 auto;
+    margin-top: 80px;
+  }
+}

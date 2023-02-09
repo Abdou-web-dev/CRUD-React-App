@@ -148,7 +148,6 @@ span.ant-modal-close-x {
     gap: 15px;
     .edit-modal-block1 {
       flex: 50%;
-      // height: 150px;
       padding: 50px 0;
       border: 1px solid rgba(128, 0, 128, 0.501);
       display: flex;
@@ -229,6 +228,76 @@ span.ant-modal-close-x {
     }
     .edit-modal-cancel-btn {
       background: gray;
+    }
+  }
+  // when the width of the screen is less than 700px
+  &.edit-modal-mobile {
+    .edit-modal-reps-load-wrapper {
+      .edit-modal-block1 {
+        .edit-modal-label1 {
+          color: rgb(95, 26, 26);
+          font-family: "Karla";
+          font-weight: bold;
+          font-size: 25px;
+          text-transform: capitalize;
+        }
+        .edit-modal-load-input {
+          height: 50px;
+          width: 70%;
+          font-size: 28px;
+        }
+      }
+      .edit-modal-block2 {
+        .edit-modal-label2 {
+          color: rgb(95, 26, 26);
+          font-family: "Karla";
+          font-weight: bold;
+          font-size: 25px;
+          text-transform: capitalize;
+        }
+        .edit-modal-reps-input {
+          height: 50px;
+          width: 70%;
+          font-size: 28px;
+        }
+      }
+    }
+    .edit-modal-title-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      .edit-modal-title-input {
+        height: 60px;
+        width: 70%;
+        & > * {
+          font-size: 22px !important;
+        }
+
+        &:focus {
+          height: 60px;
+          width: 60%;
+        }
+      }
+    }
+    .edit-modal-btns {
+      margin: 25px 0;
+      .edit-modal-save-btn,
+      .edit-modal-cancel-btn {
+        height: fit-content;
+        span {
+          color: white;
+          line-height: 200%;
+          font-family: "Mulish";
+          font-size: 26px;
+        }
+      }
+    }
+    .ant-input-suffix {
+      // close icon
+      transform: scale(2.2);
+      position: relative;
+      right: 5px;
     }
   }
 }

@@ -13,7 +13,6 @@ import ForearmsIcon from "../../assets/img/forearmsIcon.png";
 import HamstringsIcon from "../../assets/img/HamstringsIcon.svg";
 import ShouldersIcon from "../../assets/img/shouldersIcon.png";
 import TrapeziusIcon from "../../assets/img/TrapeziusIcon.png";
-
 import TricepsIcon from "../../assets/img/TricepsIcon.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
@@ -35,7 +34,7 @@ export function WorkoutDetailsItemMobile({
   const { user } = useAuthContext();
   let createdAt = workout?.createdAt;
   let workoutCateg = workout?.exoCategory;
-  const [showTopModal, setshowTopModal] = useState(false);
+  const [showModal, setshowModal] = useState(false);
   const [showDeleteModalContent, setshowDeleteModalContent] = useState(false);
   const [showEditModalContent, setshowEditModalContent] = useState(false);
   const [showShareModalContent, setshowShareModalContent] = useState(false);
@@ -46,6 +45,8 @@ export function WorkoutDetailsItemMobile({
   const isSoSmallScreen = useMediaQuery(
     "(min-width: 0px) and (max-width: 550px)"
   );
+  const [updatedWorkout, setUpdatedWorkout] = useState({});
+
   const handleDelete = async () => {
     if (!user) {
       return;
@@ -65,19 +66,20 @@ export function WorkoutDetailsItemMobile({
     }
   };
   const handleDeleteWorkout = () => {
-    setshowTopModal(true);
+    setshowModal(true);
     setshowDeleteModalContent(true);
     setshowEditModalContent(false);
     setshowShareModalContent(false);
   };
   const handleEdit = () => {
-    setshowTopModal(true);
+    setshowModal(true);
     setshowEditModalContent(true);
     setshowDeleteModalContent(false);
     setshowShareModalContent(false);
+    setUpdatedWorkout(workout);
   };
   const handleShare = () => {
-    setshowTopModal(true);
+    setshowModal(true);
     setshowShareModalContent(true);
     setshowDeleteModalContent(false);
     setshowEditModalContent(false);
@@ -185,34 +187,42 @@ export function WorkoutDetailsItemMobile({
       {/* Delete Modal */}
       <>
         <Modal
-          className="logout-modal"
-          open={showTopModal}
+          className={
+            showEditModalContent
+              ? "mobile-control-modal edit-modal-wrapper"
+              : "mobile-control-modal"
+          }
+          open={showModal}
           maskClosable={true}
           closable={true}
           keyboard={true}
           mask={true}
-          onOk={() => setshowTopModal(false)}
-          onCancel={() => setshowTopModal(false)}
+          onOk={() => setshowModal(false)}
+          onCancel={() => setshowModal(false)}
           // width={layoutGrid ? "50%" : "60%"}
           footer={null}
           closeIcon={<TrashIcon />}
         >
           {showDeleteModalContent && (
             <DeleteWorkoutMobile
-              {...{ handleDelete, setshowModal: setshowTopModal }}
+              {...{ handleDelete, setshowModal }}
             ></DeleteWorkoutMobile>
           )}
           {showEditModalContent && (
             <EditWorkoutMobile
-              {...{ handleDelete, setshowModal: setshowTopModal }}
+              {...{
+                workout,
+                updatedWorkout,
+                setUpdatedWorkout,
+                showModal,
+                setshowModal,
+              }}
             ></EditWorkoutMobile>
           )}
           {showShareModalContent && (
             <ShareWorkoutMobile
               {...{
-                handleDelete,
-                showTopModal,
-                setshowModal: setshowTopModal,
+                setshowModal,
               }}
             ></ShareWorkoutMobile>
           )}

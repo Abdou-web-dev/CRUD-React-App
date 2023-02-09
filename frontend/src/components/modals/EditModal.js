@@ -4,7 +4,8 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import "./modals_styles.scss";
 
 export function EditModal({
-  setopenEditModal,
+  showModal,
+  setshowModal,
   workout,
   dispatch,
   setUpdatedWorkout,
@@ -27,6 +28,8 @@ export function EditModal({
   };
   const handleLoadChange = (e) => {
     setcurrentLoad(e.target.value);
+    console.log(currentLoad);
+
     setUpdatedWorkout((prev) => {
       return {
         ...prev,
@@ -36,6 +39,7 @@ export function EditModal({
   };
   const handleTitleChange = (e) => {
     setcurrentTitle(e.target.value);
+    console.log(currentTitle);
     setUpdatedWorkout((prev) => {
       return {
         ...prev,
@@ -64,11 +68,11 @@ export function EditModal({
       console.log(updatedWorkout);
       dispatch({ type: "UPDATE_WORKOUT", payload: json });
     }
-    setopenEditModal(false);
+    setshowModal(false);
   };
 
   return (
-    <div className="edit-modal">
+    <div className={showModal ? "edit-modal edit-modal-mobile" : "edit-modal"}>
       <div className="edit-modal-title-wrapper">
         <Input
           className="edit-modal-title-input"
@@ -85,6 +89,7 @@ export function EditModal({
           allowClear
         />
       </div>
+
       <div className="edit-modal-reps-load-wrapper">
         <div className="edit-modal-block1">
           <label className="edit-modal-label1" htmlFor="load">
@@ -129,7 +134,7 @@ export function EditModal({
       <div className="edit-modal-btns">
         <Button
           className="edit-modal-cancel-btn"
-          onClick={() => setopenEditModal(false)}
+          onClick={() => setshowModal(false)}
         >
           <span>Cancel</span>
         </Button>

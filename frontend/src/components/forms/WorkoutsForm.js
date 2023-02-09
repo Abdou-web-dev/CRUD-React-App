@@ -139,8 +139,8 @@ export const WorkoutsForm = ({
             mask={true}
             onOk={() => setShowModal(false)}
             onCancel={() => setShowModal(false)}
-            width={"70%"}
             footer={null}
+            title="Add a new Workout"
           >
             <div>
               <MobileFormContent
@@ -173,7 +173,7 @@ export const WorkoutsForm = ({
           </Modal>
         ) : (
           <Button onClick={() => setShowModal(true)}>
-            <span>Add a Workout</span>
+            <span>Add a Worddkout</span>
           </Button>
         )}
       </div>
