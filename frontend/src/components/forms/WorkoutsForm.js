@@ -88,6 +88,9 @@ export const WorkoutsForm = ({
       if (showNotification === true) {
         setShowNotification(false);
       }
+      if (isMobileScreen) {
+        setShowModal(false);
+      }
     }
   };
 
@@ -128,10 +131,10 @@ export const WorkoutsForm = ({
 
   if (isMobileScreen) {
     return (
-      <div>
+      <>
         {showModal ? (
           <Modal
-            className="workouts-form-ant-modal"
+            className="mobile-form-ant-modal"
             open={showModal}
             maskClosable={true}
             closable={false}
@@ -142,32 +145,31 @@ export const WorkoutsForm = ({
             footer={null}
             title="Add a new Workout"
           >
-            <div>
-              <MobileFormContent
-                {...{
-                  showFormNewWindow,
-                  showAllExistentWorkouts,
-                  handleSubmit,
-                  setShowFormNewWindow,
-                  exoCategory,
-                  setExoCategory,
-                  emptyFields,
-                  setSuggestiveListBorder,
-                  showInputTitle,
-                  handleCustomExo,
-                  setTitle,
-                  title,
-                  load,
-                  setLoad,
-                  reps,
-                  setReps,
-                  error,
-                  handleResetFields,
-                  handleListIconClick,
-                  showSuggExoTitle,
-                }}
-              ></MobileFormContent>
-            </div>
+            <MobileFormContent
+              {...{
+                showFormNewWindow,
+                showAllExistentWorkouts,
+                handleSubmit,
+                setShowFormNewWindow,
+                exoCategory,
+                setExoCategory,
+                emptyFields,
+                setSuggestiveListBorder,
+                showInputTitle,
+                handleCustomExo,
+                setTitle,
+                title,
+                load,
+                setLoad,
+                reps,
+                setReps,
+                error,
+                handleResetFields,
+                handleListIconClick,
+                showSuggExoTitle,
+              }}
+            ></MobileFormContent>
+
             {/* Change this mobileFormDOM's content , delete some className and unnecessary code */}
             {/* and make it mobile reponsive */}
           </Modal>
@@ -176,7 +178,7 @@ export const WorkoutsForm = ({
             <span>Add a Worddkout</span>
           </Button>
         )}
-      </div>
+      </>
     );
   } else {
     return (
@@ -260,7 +262,7 @@ export const WorkoutsForm = ({
           {showFormNewWindow === true && (
             <>
               <Modal
-                className="chest-form-ant-modal"
+                className="desktop-form-ant-modal"
                 open={showFormNewWindow}
                 maskClosable={true}
                 closable={false}

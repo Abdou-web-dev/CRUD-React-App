@@ -1,34 +1,238 @@
+@mixin d_flex_column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+@mixin d_flex_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 26px;
+  color: rgba(38, 80, 164, 0.753);
+}
+@mixin label_styles {
+  font-family: "Mulish";
+  font-size: 24px;
+  font-weight: 100;
+  color: rgba(35, 90, 90, 0.876);
+  letter-spacing: 1.5px;
+}
+@mixin input_text_styles {
+  font-family: "Mulish";
+  font-size: 22px !important;
+  color: rgba(35, 90, 90, 0.876);
+  letter-spacing: 1.5px;
+}
+@mixin ant_btn_styles {
+  height: fit-content;
+  background: none;
+  border: none;
+}
+@mixin modal_styles {
+  padding: 0;
+  margin: 0 auto;
+  margin-top: 80px;
+}
+
 .workouts-mobile-form {
-  border: 1px solid red;
-  width: 550px;
+  // when the viewport width is less than 800px
+  // width: 100%;
   .workouts-mobile-form-inner {
+    // width: 90%;
+
     .mobile-form-select-exo-categ-label-and-select-component {
+      @include d_flex_column();
+      gap: 10px;
       .mobile-form-select-exo-categ-label {
+        @include label_styles();
       }
-      .mobile-form-exo-categ-select {
+      .mobile-form-select-exo-categ-icon-and-select {
+        // border: 1px solid;
+        @include d_flex_row();
+        gap: 10px;
+        width: 100%;
+
+        img {
+          height: 30px;
+        }
+        .mobile-form-exo-categ-select {
+          width: 60% !important;
+
+          .ant-select-selector {
+            height: 50px;
+            .ant-select-selection-item {
+              @include d_flex_row();
+            }
+          }
+        }
+      }
+    }
+    .mobile-form-select-exo-title-and-info-icon {
+      .mobile-form-title-select-label-and-component {
+        @include d_flex_column();
+        gap: 10px;
+        .info-icon-and-title-label-wrapper {
+          @include d_flex_row();
+          margin-top: 20px;
+
+          .mobile-form-title-select-label {
+            @include label_styles();
+          }
+          .mobile-form-select-exo-title-info-btn {
+            @include ant_btn_styles();
+
+            img.mobile-form-select-exo-title-info-btn-icon {
+              width: 30px;
+              height: 30px;
+            }
+          }
+        }
+
+        .mobile-form-select-exo-title-icon-and-select {
+          width: 100%;
+          @include d_flex_row();
+          gap: 10px;
+          .mobile-form-title-select-exo-title {
+            width: 60% !important;
+            .ant-select-selector {
+              height: 50px;
+              .ant-select-selection-item {
+                @include d_flex_row();
+              }
+            }
+          }
+        }
+      }
+    }
+    .mobile-form-title-label-and-input-component {
+      .mobile-form-input-title-and-label-wrapper {
+        @include d_flex_column();
+        gap: 10px;
+        .mobile-form-input-title-and-label-and-list-icon {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          // border: 1px solid red;
+          margin-top: 20px;
+          .mobile-form-input-title-icon-btn-wrapper {
+            .mobile-form-input-title-icon-btn {
+              height: fit-content !important;
+              background: none !important;
+              border: none !important;
+              img.mobile-form-input-title-list-icon {
+                height: 30px;
+                width: 30px;
+              }
+            }
+          }
+          .mobile-form-title-label {
+            @include label_styles();
+            // margin-top: 10px;
+          }
+        }
+
+        .mobile-form-input-title-component {
+          width: 60% !important;
+          & > * {
+            @include input_text_styles();
+          }
+        }
+      }
+    }
+    .mobile-form-load-label-and-load-input-component {
+      @include d_flex_column();
+
+      .mobile-form-load-label {
+        @include label_styles();
+      }
+      .mobile-form-input-load-component {
+        width: 60% !important;
+        & > * {
+          @include input_text_styles();
+        }
       }
     }
 
-    .mobile-form-select-exo-title-and-info-icon {
-      .mobile-form-title-select-label-and-component {
-        .mobile-form-title-select-label {
-        }
-        .mobile-form-title-select-exo-title {
+    .mobile-form-reps-label-and-reps-input-component {
+      @include d_flex_column();
+
+      .mobile-form-reps-label {
+        @include label_styles();
+      }
+      .mobile-form-input-reps-component {
+        width: 60% !important;
+        & > * {
+          @include input_text_styles();
         }
       }
-      .mobile-form-select-exo-title-info-btn {
-        .mobile-form-select-exo-title-info-btn-icon {
+    }
+
+    .mobile-form-btns {
+      margin-bottom: 100px;
+      @include d_flex_row();
+
+      .mobile-form-add-btn {
+        @include ant_btn_styles();
+        cursor: pointer;
+        span {
+          @include label_styles();
+        }
+      }
+      .mobile-form-reset-btn {
+        @include ant_btn_styles();
+
+        img {
+          width: 35px;
+          height: 35px;
         }
       }
     }
   }
+  .error-msg-container {
+    position: relative;
+    bottom: 80px;
+    @include d_flex_row();
+    span {
+      color: rgb(175, 66, 66);
+    }
+  }
 }
 
-.workouts-form-ant-modal {
-  @media screen and (min-width: 650px) and (max-width: 800px) {
-    width: 650px !important;
-    padding: 0;
-    margin: 0 auto;
-    margin-top: 80px;
+.mobile-form-ant-modal {
+  &.ant-modal {
+    // border: 1px solid;
+    .ant-modal-content {
+      margin: 0 auto;
+    }
+    @media screen and (min-width: 700px) and (max-width: 800px) {
+      width: 85% !important;
+      @include modal_styles();
+    }
+    @media screen and (min-width: 600px) and (max-width: 700px) {
+      width: 80% !important;
+      @include modal_styles();
+    }
+    @media screen and (min-width: 400px) and (max-width: 600px) {
+      width: 70% !important;
+      @include modal_styles();
+      // margin-top: 0;
+    }
+    @media screen and (min-width: 0px) and (max-width: 400px) {
+      // width: 80% !important;
+      // @include modal_styles();
+    }
+  }
+}
+.tooltip-mobile-btn {
+  // display: none;
+  @include ant_btn_styles();
+  // margin-left: 20px;
+  img.mobile-form-select-exo-title-info-btn-icon {
+    width: 20px;
+    height: 20px;
   }
 }
