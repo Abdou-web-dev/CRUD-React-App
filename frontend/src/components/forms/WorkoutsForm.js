@@ -1,5 +1,5 @@
 import { Button, IconButton } from "@mui/material";
-import { Alert, Modal } from "antd";
+import { Alert, message, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import exercisesData from "../../assets/staticData/chestExercises.json";
@@ -95,13 +95,17 @@ export const WorkoutsForm = ({
   };
 
   function handleError() {
-    setShowNotification(!showNotification);
-    setEmptyFields([]);
-    setTitle(null);
-    setLoad(null);
-    setReps(null);
-    setError(null);
-    console.log("already exists");
+    if (isMobileScreen) {
+      message.warning("This Workout already exists !", 60);
+    } else {
+      setShowNotification(!showNotification);
+      setEmptyFields([]);
+      setTitle(null);
+      setLoad(null);
+      setReps(null);
+      setError(null);
+      console.log("already exists");
+    }
   }
   function handleCustomExo() {
     setshowInputTitle(true);

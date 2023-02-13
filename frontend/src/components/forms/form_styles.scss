@@ -817,7 +817,8 @@ $xx-large: 1400px;
     align-items: center;
     width: 490px;
     position: relative;
-    bottom: 40px;
+    top: 140px;
+    right: 40px;
     padding: 15px 30px;
     &:hover {
       box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
@@ -841,5 +842,54 @@ $xx-large: 1400px;
     position: relative;
     top: 2px;
     margin-left: 5px;
+  }
+  @media screen and (min-width: $large) and (max-width: $x-large) {
+    .ant-alert {
+      // width: 390px;
+      // max-width: 00px;
+      position: relative;
+      top: 220px;
+      max-width: 370px;
+
+      .ant-alert-message {
+        // height: 100px;
+        span.noti-text {
+          align-self: center;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: $medium) and (max-width: $large) {
+    .ant-alert {
+      position: relative;
+      top: 220px;
+      max-width: 350px;
+
+      .ant-alert-message {
+        span.noti-text {
+          align-self: center;
+        }
+      }
+    }
+  }
+}
+
+.ant-message-notice {
+  .ant-message-notice-content {
+    padding: 20px;
+    .ant-message-custom-content {
+      &.ant-message-warning {
+        .anticon {
+          // width: 60px;
+          transform: scale(1.6) !important;
+          margin: 0 10px;
+        }
+        span {
+          font-family: "Mulish";
+          font-size: 23px;
+          margin: 0 10px !important;
+        }
+      }
+    }
   }
 }

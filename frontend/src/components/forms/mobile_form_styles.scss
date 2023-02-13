@@ -1,8 +1,8 @@
 @mixin d_flex_column {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 @mixin d_flex_row {
   display: flex;
@@ -16,8 +16,8 @@
 @mixin label_styles {
   font-family: "Mulish";
   font-size: 24px;
-  font-weight: 100;
-  color: rgba(35, 90, 90, 0.876);
+  font-weight: 900;
+  color: rgba(74, 174, 174, 0.876);
   letter-spacing: 1.5px;
 }
 @mixin input_text_styles {
@@ -30,6 +30,7 @@
   height: fit-content;
   background: none;
   border: none;
+  // display:none;
 }
 @mixin modal_styles {
   padding: 0;
@@ -37,12 +38,9 @@
   margin-top: 80px;
 }
 
+// when the viewport width is less than 800px
 .workouts-mobile-form {
-  // when the viewport width is less than 800px
-  // width: 100%;
   .workouts-mobile-form-inner {
-    // width: 90%;
-
     .mobile-form-select-exo-categ-label-and-select-component {
       @include d_flex_column();
       gap: 10px;
@@ -50,7 +48,6 @@
         @include label_styles();
       }
       .mobile-form-select-exo-categ-icon-and-select {
-        // border: 1px solid;
         @include d_flex_row();
         gap: 10px;
         width: 100%;
@@ -111,6 +108,7 @@
       .mobile-form-input-title-and-label-wrapper {
         @include d_flex_column();
         gap: 10px;
+
         .mobile-form-input-title-and-label-and-list-icon {
           display: flex;
           flex-direction: row;
@@ -135,51 +133,101 @@
           }
         }
 
-        .mobile-form-input-title-component {
-          width: 60% !important;
-          & > * {
-            @include input_text_styles();
+        .mobile-form-titleIcon-and-input-wrapper {
+          width: 88%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .mobile-form-input-title-component {
+            width: 70%;
+            // display: none;
+            // margin-left: 15px;
+            & > * {
+              @include input_text_styles();
+            }
+          }
+          .title-icon {
+            position: relative;
+            right: 15px;
+          }
+          .ant-input-suffix {
+            //clear icon
+            .anticon-close-circle {
+              transform: scale(2) !important;
+              position: relative;
+              right: 10px;
+            }
           }
         }
       }
     }
     .mobile-form-load-label-and-load-input-component {
       @include d_flex_column();
-
+      margin-top: 10px;
+      width: 100% !important;
       .mobile-form-load-label {
         @include label_styles();
       }
-      .mobile-form-input-load-component {
-        width: 60% !important;
-        & > * {
-          @include input_text_styles();
+
+      .mobile-form-icon-and-load-input {
+        img {
+          // display: none;
+        }
+        .mobile-form-input-load-component {
+          width: 65% !important;
+          margin-left: 60px;
+          & > * {
+            @include input_text_styles();
+          }
+        }
+      }
+    }
+    .mobile-form-input-load-component,
+    .mobile-form-input-reps-component {
+      .ant-input-suffix {
+        //clear icon
+        .anticon-close-circle {
+          transform: scale(2) !important;
+          position: relative;
+          right: 10px;
         }
       }
     }
 
     .mobile-form-reps-label-and-reps-input-component {
       @include d_flex_column();
-
+      width: 100% !important;
       .mobile-form-reps-label {
         @include label_styles();
       }
-      .mobile-form-input-reps-component {
-        width: 60% !important;
-        & > * {
-          @include input_text_styles();
+      .mobile-form-icon-and-reps-input {
+        .mobile-form-input-reps-component {
+          width: 65% !important;
+          margin-left: 60px;
+
+          & > * {
+            @include input_text_styles();
+          }
         }
       }
     }
 
     .mobile-form-btns {
-      margin-bottom: 100px;
+      margin-bottom: 40px;
+      margin-top: 30px;
       @include d_flex_row();
 
       .mobile-form-add-btn {
         @include ant_btn_styles();
+        border: 0.5px solid rgb(125, 116, 132);
+        padding: 5px 15px;
+        background: white;
+
         cursor: pointer;
         span {
           @include label_styles();
+          color: rgb(81, 51, 152);
         }
       }
       .mobile-form-reset-btn {
@@ -193,11 +241,68 @@
     }
   }
   .error-msg-container {
-    position: relative;
-    bottom: 80px;
     @include d_flex_row();
     span {
       color: rgb(175, 66, 66);
+    }
+  }
+  @media screen and (min-width: 400px) and (max-width: 600px) {
+    .mobile-form-title-label-and-input-component {
+      .mobile-form-input-title-and-label-wrapper {
+        .mobile-form-input-title-and-label-and-list-icon {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+
+          margin-top: 20px;
+          .mobile-form-input-title-icon-btn-wrapper {
+            .mobile-form-input-title-icon-btn {
+              height: fit-content !important;
+              background: none !important;
+              border: none !important;
+              img.mobile-form-input-title-list-icon {
+                height: 30px;
+                width: 30px;
+              }
+            }
+          }
+          .mobile-form-title-label {
+            @include label_styles();
+            // margin-top: 10px;
+          }
+        }
+
+        .mobile-form-titleIcon-and-input-wrapper {
+          width: 92% !important;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .mobile-form-input-title-component {
+            // border: 1px solid red;
+            width: 100% !important;
+            position: relative;
+            right: 5px;
+            & > * {
+              @include input_text_styles();
+            }
+          }
+          .title-icon {
+            position: relative;
+            right: 150px;
+            // display: none;
+          }
+          .ant-input-suffix {
+            //clear icon
+            .anticon-close-circle {
+              transform: scale(2) !important;
+              position: relative;
+              right: 10px;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -207,6 +312,7 @@
     // border: 1px solid;
     .ant-modal-content {
       margin: 0 auto;
+      // background: #cdcdcd !important;
     }
     @media screen and (min-width: 700px) and (max-width: 800px) {
       width: 85% !important;
@@ -230,9 +336,11 @@
 .tooltip-mobile-btn {
   // display: none;
   @include ant_btn_styles();
-  // margin-left: 20px;
-  img.mobile-form-select-exo-title-info-btn-icon {
+
+  img.mobile-form-select-exo-title-info-btn-icon,
+  img {
     width: 20px;
     height: 20px;
+    margin-bottom: 2px;
   }
 }

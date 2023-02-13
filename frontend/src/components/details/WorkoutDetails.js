@@ -622,12 +622,12 @@ export const WorkoutDetails = ({
           >
             <EditModal
               {...{
-                setopenEditModal,
                 workout,
                 dispatch,
                 setUpdatedWorkout,
                 updatedWorkout,
               }}
+              setshowModal={setopenEditModal}
             ></EditModal>
           </Modal>
         </>

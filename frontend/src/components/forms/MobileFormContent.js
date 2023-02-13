@@ -1,12 +1,10 @@
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
-import { Button, Input, Select, Tooltip } from "antd";
+import { Button, Input, Select } from "antd";
 import categ from "../../assets/img/categ.svg";
-import titleIcon from "../../assets/img/title.svg";
-
-import list from "../../assets/img/list.svg";
+import loadIcon from "../../assets/img/derrick.svg";
 import recycle from "../../assets/img/recycle.png";
-
-import "./mobile_form_styles.scss";
+import repeat from "../../assets/img/repeat.svg";
+import titleIcon from "../../assets/img/title.svg";
 
 import {
   AbsExos,
@@ -21,7 +19,11 @@ import {
   TricepsExos,
 } from "../../assets/staticData/exosData";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
-import { MobileFormTooltip } from "../tooltips/MobileFormTooltip";
+import {
+  MobileFormChooseTooltip,
+  MobileFormTypeTooltip,
+} from "../tooltips/MobileFormTooltips";
+import "./mobile_form_styles.scss";
 
 export const MobileFormContent = ({
   handleSubmit,
@@ -42,6 +44,8 @@ export const MobileFormContent = ({
   showSuggExoTitle,
 }) => {
   const isMobileScreen = useMediaQuery("(max-width: 600px)"); // returns true or false
+
+  function handleSubmitForm(e) {}
 
   return (
     <>
@@ -110,94 +114,90 @@ export const MobileFormContent = ({
             >
               {/* select an exo title from a dropdown menu */}
               {showSuggExoTitle && (
-                <>
-                  <div
-                    className={`mobile-form-title-select-label-and-component`}
-                  >
-                    <div className="info-icon-and-title-label-wrapper">
-                      {/* here  */}
-                      {!isMobileScreen && (
-                        <MobileFormTooltip
-                          {...{ handleCustomExo, exoCategory }}
-                        />
-                      )}
-                      {!isMobileScreen && (
-                        <label className={"mobile-form-title-select-label"}>
-                          Excercise Title :
-                        </label>
-                      )}
-                    </div>
-
-                    <div
-                      style={{ marginLeft: isMobileScreen ? "73px" : "" }}
-                      className="mobile-form-select-exo-title-icon-and-select"
-                    >
-                      {isMobileScreen && (
-                        <img style={{ width: "30px" }} src={titleIcon} alt="" />
-                      )}
-                      <Select
-                        className={"mobile-form-title-select-exo-title"}
-                        disabled={!exoCategory ? true : false}
-                        value={title}
-                        onChange={(value) => {
-                          setTitle(value);
-                          console.log(value);
-                        }}
-                        onClick={null}
-                        style={{ width: "200px" }}
-                        size={"large"}
-                        filterOption={(input, option) =>
-                          (option?.value ?? "").includes(input)
-                        }
-                        filterSort={(optionA, optionB) =>
-                          //if optionA.value is null ou undefined then "" will be returned instead, and if it has a value , this value will be returned and used
-                          (optionA?.value ?? "")
-                            .toLowerCase()
-                            .localeCompare((optionB?.value ?? "").toLowerCase())
-                        }
-                        options={
-                          exoCategory === `Hamstrings`
-                            ? HamstringsExos
-                            : exoCategory === `Chest`
-                            ? ChestExos
-                            : exoCategory === `Trapezius`
-                            ? TrapeziusExos
-                            : exoCategory === `Shoulders`
-                            ? ShouldersExos
-                            : exoCategory === `Forearms`
-                            ? ForearmsExos
-                            : exoCategory === `Calves`
-                            ? CalvesExos
-                            : exoCategory === `Biceps`
-                            ? BicepsExos
-                            : exoCategory === `Abs`
-                            ? AbsExos
-                            : exoCategory === `Back`
-                            ? BackExos
-                            : exoCategory === `Triceps`
-                            ? TricepsExos
-                            : null
-                        }
-                        status={
-                          emptyFields?.includes("title") && title?.length === 0
-                            ? "error"
-                            : ""
-                        }
-                        suffixIcon={
-                          emptyFields?.includes("title") &&
-                          title?.length === 0 ? (
-                            <PriorityHighIcon />
-                          ) : null
-                        }
+                <div className={`mobile-form-title-select-label-and-component`}>
+                  <div className="info-icon-and-title-label-wrapper">
+                    {/* here  */}
+                    {!isMobileScreen && (
+                      <MobileFormTypeTooltip
+                        {...{ handleCustomExo, exoCategory }}
                       />
-                      {isMobileScreen && (
-                        <MobileFormTooltip
-                          {...{ handleCustomExo, isMobileScreen, exoCategory }}
-                        />
-                      )}
-                    </div>
+                    )}
+                    {!isMobileScreen && (
+                      <label className={"mobile-form-title-select-label"}>
+                        Excercise Title :
+                      </label>
+                    )}
                   </div>
-                </>
+
+                  <div
+                    style={{ marginLeft: isMobileScreen ? "73px" : "" }}
+                    className="mobile-form-select-exo-title-icon-and-select"
+                  >
+                    {isMobileScreen && (
+                      <img style={{ width: "30px" }} src={titleIcon} alt="" />
+                    )}
+                    <Select
+                      className={"mobile-form-title-select-exo-title"}
+                      disabled={!exoCategory ? true : false}
+                      value={title}
+                      onChange={(value) => {
+                        setTitle(value);
+                        console.log(value);
+                      }}
+                      onClick={null}
+                      // style={{ width: "200px" }}
+                      size={"large"}
+                      filterOption={(input, option) =>
+                        (option?.value ?? "").includes(input)
+                      }
+                      filterSort={(optionA, optionB) =>
+                        //if optionA.value is null ou undefined then "" will be returned instead, and if it has a value , this value will be returned and used
+                        (optionA?.value ?? "")
+                          .toLowerCase()
+                          .localeCompare((optionB?.value ?? "").toLowerCase())
+                      }
+                      options={
+                        exoCategory === `Hamstrings`
+                          ? HamstringsExos
+                          : exoCategory === `Chest`
+                          ? ChestExos
+                          : exoCategory === `Trapezius`
+                          ? TrapeziusExos
+                          : exoCategory === `Shoulders`
+                          ? ShouldersExos
+                          : exoCategory === `Forearms`
+                          ? ForearmsExos
+                          : exoCategory === `Calves`
+                          ? CalvesExos
+                          : exoCategory === `Biceps`
+                          ? BicepsExos
+                          : exoCategory === `Abs`
+                          ? AbsExos
+                          : exoCategory === `Back`
+                          ? BackExos
+                          : exoCategory === `Triceps`
+                          ? TricepsExos
+                          : null
+                      }
+                      status={
+                        emptyFields?.includes("title") && title?.length === 0
+                          ? "error"
+                          : ""
+                      }
+                      suffixIcon={
+                        emptyFields?.includes("title") &&
+                        title?.length === 0 ? (
+                          <PriorityHighIcon />
+                        ) : null
+                      }
+                    />
+                    {isMobileScreen && (
+                      <MobileFormTypeTooltip
+                        {...{ handleCustomExo, isMobileScreen, exoCategory }}
+                      />
+                    )}
+                  </div>
+                </div>
               )}
             </div>
 
@@ -214,51 +214,65 @@ export const MobileFormContent = ({
                       <div
                         className={"mobile-form-input-title-icon-btn-wrapper"}
                       >
-                        <Tooltip title="Choose from a list of workouts">
-                          <Button
-                            className={"mobile-form-input-title-icon-btn"}
-                            onClick={handleListIconClick}
-                          >
-                            <img
-                              className={"mobile-form-input-title-list-icon"}
-                              src={list}
-                              alt=""
-                            />
-                          </Button>
-                        </Tooltip>
+                        {!isMobileScreen && (
+                          <MobileFormChooseTooltip
+                            {...{ handleListIconClick, isMobileScreen }}
+                          />
+                        )}
                       </div>
-                      <label className="mobile-form-title-label">
-                        Excercise Title :
-                      </label>
+
+                      {!isMobileScreen && (
+                        <label className="mobile-form-title-label">
+                          Excercise Title :
+                        </label>
+                      )}
                     </div>
 
-                    <Input
-                      className={"mobile-form-input-title-component"}
-                      value={title}
-                      onChange={(e) => {
-                        setTitle(e.target.value);
-                        console.log(e.target.value);
-                      }}
-                      type="text"
-                      status={
-                        emptyFields?.includes("title") && title?.length === 0
-                          ? "error"
-                          : ""
-                      }
-                      // title.length === 0 means that nothing is being typed by the user
-                      placeholder={
-                        emptyFields?.includes("title") && title?.length === 0
-                          ? `You have forgotten to type a title`
-                          : "Type a title"
-                      }
-                      prefix={
-                        emptyFields?.includes("title") &&
-                        title?.length === 0 ? (
-                          <PriorityHighIcon />
-                        ) : null
-                      }
-                      allowClear
-                    />
+                    <div
+                      style={{ marginLeft: isMobileScreen ? "85px" : "" }}
+                      className="mobile-form-titleIcon-and-input-wrapper"
+                    >
+                      {isMobileScreen && (
+                        <img
+                          className="title-icon"
+                          style={{ width: "30px" }}
+                          src={titleIcon}
+                          alt=""
+                        />
+                      )}
+                      <Input
+                        className={"mobile-form-input-title-component"}
+                        value={title}
+                        onChange={(e) => {
+                          setTitle(e.target.value);
+                          console.log(e.target.value);
+                        }}
+                        type="text"
+                        status={
+                          emptyFields?.includes("title") && title?.length === 0
+                            ? "error"
+                            : ""
+                        }
+                        // title.length === 0 means that nothing is being typed by the user
+                        placeholder={
+                          emptyFields?.includes("title") && title?.length === 0
+                            ? `You have forgotten to type a title`
+                            : "Type a title"
+                        }
+                        prefix={
+                          emptyFields?.includes("title") &&
+                          title?.length === 0 ? (
+                            <PriorityHighIcon />
+                          ) : null
+                        }
+                        allowClear
+                      />
+                      {isMobileScreen && (
+                        <MobileFormChooseTooltip
+                          {...{ handleListIconClick, isMobileScreen }}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
               )}
@@ -266,55 +280,66 @@ export const MobileFormContent = ({
 
             <div className="mobile-form-load-label-and-load-input-component">
               <label className="mobile-form-load-label">Load (in kg) :</label>
-              <Input
-                className="mobile-form-input-load-component"
-                value={load}
-                onChange={(e) => setLoad(e.target.value)}
-                type="number"
-                status={
-                  emptyFields?.includes("load") && load?.length === 0
-                    ? "error"
-                    : ""
-                }
-                placeholder={
-                  emptyFields?.includes("load") && load?.length === 0
-                    ? `You have forgotten to type a load`
-                    : "Type a load"
-                }
-                prefix={
-                  emptyFields?.includes("load") && load?.length === 0 ? (
-                    <PriorityHighIcon />
-                  ) : null
-                }
-                allowClear
-              />
+
+              <div className="mobile-form-icon-and-load-input">
+                {isMobileScreen && (
+                  <img style={{ width: "30px" }} src={loadIcon} alt="" />
+                )}
+                <Input
+                  className="mobile-form-input-load-component"
+                  value={load}
+                  onChange={(e) => setLoad(e.target.value)}
+                  type="number"
+                  status={
+                    emptyFields?.includes("load") && load?.length === 0
+                      ? "error"
+                      : ""
+                  }
+                  placeholder={
+                    emptyFields?.includes("load") && load?.length === 0
+                      ? `You have forgotten to type a load`
+                      : "Type a load"
+                  }
+                  prefix={
+                    emptyFields?.includes("load") && load?.length === 0 ? (
+                      <PriorityHighIcon />
+                    ) : null
+                  }
+                  allowClear
+                />
+              </div>
             </div>
 
             <div className="mobile-form-reps-label-and-reps-input-component">
               <label className="mobile-form-reps-label">Number of Reps :</label>
-              <Input
-                value={reps}
-                onChange={(e) => setReps(e.target.value)}
-                className="mobile-form-input-reps-component"
-                type="number"
-                status={
-                  emptyFields?.includes("reps") && reps?.length === 0
-                    ? "error"
-                    : ""
-                }
-                // reps.length === 0 means that nothing is being typed by the user
-                placeholder={
-                  emptyFields?.includes("reps") && reps?.length === 0
-                    ? `You have forgotten to type reps`
-                    : "Type reps"
-                }
-                prefix={
-                  emptyFields?.includes("reps") && reps?.length === 0 ? (
-                    <PriorityHighIcon />
-                  ) : null
-                }
-                allowClear
-              />
+              <div className="mobile-form-icon-and-reps-input">
+                {isMobileScreen && (
+                  <img style={{ width: "30px" }} src={repeat} alt="" />
+                )}
+                <Input
+                  value={reps}
+                  onChange={(e) => setReps(e.target.value)}
+                  className="mobile-form-input-reps-component"
+                  type="number"
+                  status={
+                    emptyFields?.includes("reps") && reps?.length === 0
+                      ? "error"
+                      : ""
+                  }
+                  // reps.length === 0 means that nothing is being typed by the user
+                  placeholder={
+                    emptyFields?.includes("reps") && reps?.length === 0
+                      ? `You have forgotten to type reps`
+                      : "Type reps"
+                  }
+                  prefix={
+                    emptyFields?.includes("reps") && reps?.length === 0 ? (
+                      <PriorityHighIcon />
+                    ) : null
+                  }
+                  allowClear
+                />
+              </div>
             </div>
 
             <div className={"mobile-form-btns"}>
