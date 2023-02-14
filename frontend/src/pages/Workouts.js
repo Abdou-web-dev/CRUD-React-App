@@ -131,6 +131,7 @@ const Workouts = ({}) => {
             style={{ position: "relative", bottom: `30px` }}
           />
         )}
+
         {/* Mui Skeleton for the container of the workout */}
         <div style={{ position: "relative", bottom: `10px` }}>
           <div style={{ marginBottom: `40px` }}> {MuiSkeletonJSX}</div>

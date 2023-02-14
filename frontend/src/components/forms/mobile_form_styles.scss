@@ -194,7 +194,6 @@
         }
       }
     }
-
     .mobile-form-reps-label-and-reps-input-component {
       @include d_flex_column();
       width: 100% !important;
@@ -212,7 +211,6 @@
         }
       }
     }
-
     .mobile-form-btns {
       margin-bottom: 40px;
       margin-top: 30px;
@@ -246,6 +244,49 @@
       color: rgb(175, 66, 66);
     }
   }
+  @media screen and (min-width: 600px) and (max-width: 700px) {
+    .workouts-mobile-form-inner {
+      .mobile-form-load-label-and-load-input-component {
+        @include d_flex_column();
+        margin-top: 10px;
+        width: 100% !important;
+        .mobile-form-load-label {
+          @include label_styles();
+        }
+
+        .mobile-form-icon-and-load-input {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .mobile-form-input-load-component {
+            width: 50% !important;
+            margin-left: 0px !important;
+          }
+        }
+      }
+      .mobile-form-reps-label-and-reps-input-component {
+        @include d_flex_column();
+        width: 100% !important;
+        .mobile-form-reps-label {
+          @include label_styles();
+        }
+        .mobile-form-icon-and-reps-input {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .mobile-form-input-reps-component {
+            width: 50% !important;
+            margin-left: 0px;
+
+            & > * {
+              @include input_text_styles();
+            }
+          }
+        }
+      }
+    }
+  }
+
   @media screen and (min-width: 400px) and (max-width: 600px) {
     .mobile-form-title-label-and-input-component {
       .mobile-form-input-title-and-label-wrapper {

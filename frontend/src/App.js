@@ -12,6 +12,7 @@ import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import StarredItems from "./pages/StarredItems";
 import Workouts from "./pages/Workouts";
+
 function App() {
   const { user } = useAuthContext();
   const isMobileScreen = useMediaQuery("(max-width: 576px)");
