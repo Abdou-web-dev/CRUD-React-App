@@ -1,4 +1,5 @@
 import React from "react";
+import closeX from "../../assets/img/closeX.svg";
 import emailIcon from "../../assets/img/emailIcon.svg";
 import passwordIcon from "../../assets/img/passwordIcon.svg";
 import trashIcon from "../../assets/img/trashIcon.svg";
@@ -136,6 +137,13 @@ export const TrashIcon = () => {
   return (
     <>
       <img src={trashIcon} alt="" style={{ width: "30px", height: "30px" }} />
+    </>
+  );
+};
+export const CloseX = () => {
+  return (
+    <>
+      <img src={closeX} alt="" style={{ width: "30px", height: "30px" }} />
     </>
   );
 };

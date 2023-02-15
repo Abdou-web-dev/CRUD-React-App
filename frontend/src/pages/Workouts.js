@@ -27,15 +27,16 @@ const Workouts = ({}) => {
   const { workouts, dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
 
+  let intialClassName = `workout-details-container-as-list`;
+  // let class2 = `workout-details-container-initial`;
+
   // let workoutsList = workouts?.map((workout) => workout._id);
   const [filteredResults, setFilteredResults] = React.useState([]);
   const [showAllExistentWorkouts, setshowAllExistentWorkouts] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [displayPagination, setDisplayPagination] = useState("");
-  const [detailsContClass, setdetailsContClass] = useState(
-    "workout-details-container-as-list"
-  ); //this className detailsContClass is being passed as props to children
+  const [detailsContClass, setdetailsContClass] = useState(""); //this className state var is being passed as props to children
   const [movePaginationFromBottom, setmovePaginationFromBottom] =
     useState("220px");
   const [paginationClassName, setpaginationClassName] = useState(
@@ -91,6 +92,10 @@ const Workouts = ({}) => {
     showAllExistentWorkouts,
     isMobileScreen,
   ]);
+
+  useEffect(() => {
+    setdetailsContClass(intialClassName);
+  }, []);
 
   const MuiSkeletonJSX = (
     <Skeleton

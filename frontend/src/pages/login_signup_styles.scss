@@ -7,7 +7,6 @@ $x-large: 1200px;
 $xx-large: 1400px;
 
 .login-form-container {
-  // width: auto;
   .login-form-inner {
     margin-bottom: 100px;
     .login-form {
@@ -29,6 +28,7 @@ $xx-large: 1400px;
           }
         }
         .login-form-email-item-input {
+          // border: 1px solid;
           width: 100%;
           height: 60px;
         }
@@ -105,6 +105,7 @@ $xx-large: 1400px;
           }
         }
         .login-form-checkboxes {
+          //
         }
         .login-form-selected-avatar {
           padding: 5px;
@@ -246,6 +247,66 @@ $xx-large: 1400px;
       }
     }
   }
+  @media screen and (min-width: 820px) and (max-width: 865px) {
+    .login-form-inner {
+      .login-form {
+        .login-form-email-item {
+          margin-left: 15px;
+          .ant-form-item-row {
+            .ant-form-item-label {
+              position: relative;
+              right: 50px;
+            }
+          }
+          .login-form-email-item-input {
+            width: 105%;
+            position: relative;
+            right: 15px;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 800px) and (max-width: 820px) {
+    .login-form-inner {
+      .login-form {
+        .login-form-email-item {
+          margin-left: 15px;
+          .ant-form-item-row {
+            .ant-form-item-label {
+              position: relative;
+              right: 50px;
+            }
+          }
+          .login-form-email-item-input {
+            width: 120%;
+            position: relative;
+            right: 30px;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 576px) and (max-width: 800px) {
+    .login-form-inner {
+      .login-form {
+        .login-form-email-item {
+          .ant-form-item-row {
+            .ant-form-item-label {
+              position: relative;
+              right: 40px;
+            }
+          }
+          .login-form-email-item-input {
+            width: 120%;
+            position: relative;
+            right: 20px;
+          }
+        }
+      }
+    }
+  }
+
   .notification {
     position: relative;
     bottom: 800px;
@@ -290,6 +351,7 @@ $xx-large: 1400px;
   .login-form-mobile-inner {
   }
 }
+
 .login-form-avatar-modal {
   width: 60%;
   .login-form-modal-content {

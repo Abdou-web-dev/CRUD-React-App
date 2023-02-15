@@ -46,10 +46,10 @@ export const WorkoutDetails = ({
   workoutCondensed,
   filteredWorkout,
   showAllExistentWorkouts,
-  showAllWorkoutsCondensed,
   indexx,
   showResults,
   addOrRemoveWorkout,
+  containerMarginLeft,
 }) => {
   let layoutList = detailsContClass === "workout-details-container-as-list";
   const { dispatch } = useWorkoutsContext();
@@ -57,6 +57,8 @@ export const WorkoutDetails = ({
   let createdAt = workout?.createdAt;
   let workoutCateg = workout?.exoCategory;
   const isMobileScreen = useMediaQuery("(max-width: 1245px)"); // returns true or false
+  const isScreenSize_less_992 = useMediaQuery("(max-width: 992px)"); // returns true or false
+
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let notShowOnFilter = !showAllExistentWorkouts && !filteredWorkout; //this means show the 4 control icon btns
   //for deleting an item, sharing ... on the 2 first sections , but not on the 3rd section
@@ -264,8 +266,13 @@ export const WorkoutDetails = ({
           </div>
         )}
       </>
+
       <div
-        className={`${detailsContClass}
+        className={`${
+          detailsContClass ?? ""
+          // this means that when detailsContClass is undefined or null , "" will be returned instead
+        }
+        
         ${
           !showAllExistentWorkouts && !workoutIsCondensed && layoutGrid
             ? `move_to_left_grid`
@@ -279,7 +286,8 @@ export const WorkoutDetails = ({
          site-drawer-render-in-current-wrapper
          workout-details-container
          workout-details-container${
-           index
+           index ?? 0
+           //this means that when index is undefined or null , 0 will be returned instead
            // this className rule must not be deleted because the drawer uses it as a container to render the content in the current container
          }
           ${
@@ -307,6 +315,7 @@ export const WorkoutDetails = ({
           }
          `}
         style={{
+          marginLeft: isScreenSize_less_992 && containerMarginLeft,
           boxShadow: containerBoxShadow,
           border: border,
           height:

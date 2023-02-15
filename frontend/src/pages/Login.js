@@ -163,9 +163,9 @@ const Login = ({}) => {
             >
               <Input
                 className={emailClass}
-                type="email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
+                type="email"
                 placeholder="Email"
                 allowClear
               />
@@ -315,6 +315,7 @@ const Login = ({}) => {
                 )}
               </div>
             </Form.Item>
+
             <div className="login-form-not-a-member">
               <span className="login-form-text1"> not a member ?</span>
               <Button className="login-form-not-a-member-register-btn">
@@ -363,13 +364,15 @@ const Login = ({}) => {
       {/* Notification */}
       <>
         {showNotification && (
-          <div className="notification">
+          <div className="notification please-select-noti">
             <Alert
               type="info"
               className="ant-alert"
               closeIcon={<ClearIcon />}
               message={
-                <span className="noti-text">Please, select an avatar !</span>
+                <span className="noti-text please-select">
+                  Please, select an avatar !
+                </span>
               }
               banner
               closable

@@ -123,6 +123,11 @@ $xx-large: 1400px;
       left: 130px;
     }
   }
+  @media screen and (max-width: 800px) {
+    .workouts-main-form {
+      margin-top: 30px;
+    }
+  }
 }
 .pagination-content-loaded {
   display: flex;
@@ -203,7 +208,7 @@ $xx-large: 1400px;
   }
   &.pagination-filtered-results-list {
     position: relative;
-    bottom: 790px;
+    bottom: 830px;
     .ant-pagination-prev {
       position: relative;
       bottom: 400px;
@@ -218,13 +223,13 @@ $xx-large: 1400px;
   &.pagination-filtered-results-grid {
     .ant-pagination-prev {
       position: relative;
-      bottom: 300px;
-      left: 70px;
+      bottom: 500px;
+      left: 30px;
     }
     .ant-pagination-next {
       position: relative;
-      bottom: 300px;
-      margin-left: 900px;
+      bottom: 500px;
+      margin-left: 950px;
     }
   }
 

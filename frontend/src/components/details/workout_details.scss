@@ -262,10 +262,8 @@ $xx-large: 1400px;
     }
     @media screen and (min-width: $medium) and (max-width: $large) {
       border: 2px solid lightgray;
-      // width: 95%;
       padding-left: 50px;
       margin-left: 90px;
-      // border: 1px solid red;
 
       .work-details-left-content {
         h4.work-details-left-content-inner-title {
@@ -757,7 +755,7 @@ $xx-large: 1400px;
     &.move_to_left_grid {
       width: 80%;
       position: relative;
-      left: 120px;
+      // left: 120px;
     }
     &.workouts-details-filter-btns-clicked {
       background-color: rgba(36, 40, 41, 0.4);
@@ -852,8 +850,19 @@ $xx-large: 1400px;
       }
     }
   }
+  @media screen and (min-width: 767px) and (max-width: 800px) {
+    background-color: rgba(0, 180, 216, 0.065) !important;
+    position: relative;
+    left: 50px;
+    width: 450px !important;
+  }
+  @media screen and (min-width: 700px) and (max-width: 767px) {
+    background-color: rgba(0, 180, 216, 0.09) !important;
+    position: relative;
+    right: 50px;
+    width: 450px !important;
+  }
 }
-
 .work-details-content-filters-btns-collapse-icon {
   position: relative;
   bottom: 20px;

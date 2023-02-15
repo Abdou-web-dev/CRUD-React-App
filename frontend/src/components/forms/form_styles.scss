@@ -777,7 +777,6 @@ $xx-large: 1400px;
     overflow-x: scroll;
     max-height: 650px;
     background: #f5f5f5;
-    // border: 5px solid darkgray;
     &::-webkit-scrollbar {
       width: 15px;
     }
@@ -793,6 +792,12 @@ $xx-large: 1400px;
       border-radius: 10px;
       background: rgba(119, 124, 132, 0.8);
     }
+    .ant-modal-close {
+      .ant-modal-close-x {
+        position: relative;
+        bottom: 30px;
+      }
+    }
 
     .ant-modal-header {
       display: none;
@@ -800,6 +805,26 @@ $xx-large: 1400px;
     .ant-modal-body {
       padding: 60px;
     }
+  }
+}
+
+.add-workout-btn {
+  background: rgb(79, 162, 222) !important;
+  &:hover {
+    img {
+      translate: 5px;
+      transition: 0.2s ease;
+    }
+  }
+  span {
+    color: white;
+    font-size: 22px;
+    font-family: "Mulish";
+    text-transform: initial;
+  }
+  img {
+    width: 50px;
+    height: 50px;
   }
 }
 
@@ -820,6 +845,7 @@ $xx-large: 1400px;
     top: 140px;
     right: 40px;
     padding: 15px 30px;
+    // display: none;
     &:hover {
       box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
         rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -842,6 +868,22 @@ $xx-large: 1400px;
     position: relative;
     top: 2px;
     margin-left: 5px;
+  }
+  &.please-select-noti {
+    .ant-alert {
+      // width: 490px;
+      position: relative;
+      top: 10px;
+      right: 0px;
+      padding: 15px 30px;
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+          rgba(0, 0, 0, 0.23) 0px 6px 6px;
+      }
+    }
+    span {
+      font-family: "Mulish";
+    }
   }
   @media screen and (min-width: $large) and (max-width: $x-large) {
     .ant-alert {

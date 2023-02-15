@@ -58,7 +58,10 @@ export function WorkoutsList({
 
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let layoutList = detailsContClass === "workout-details-container-as-list";
+  let eitherLayout = layoutGrid || layoutList;
+
   let result = filteredResults?.length === 1 ? `result` : `results`;
+  const [containerMarginLeft, setContainerMarginLeft] = useState(`100px`);
 
   const isSmallScreen = useMediaQuery(
     "(min-width: 0px) and (max-width: 700px)"
@@ -78,6 +81,7 @@ export function WorkoutsList({
       setmovePaginationFromBottom("180px");
       setpaginationClassName("pagination-content-loaded");
       setDisplayPagination("flex");
+      setContainerMarginLeft("0px");
     } else if (firstIcon === cardIcon) {
       setdetailsContClass(`workout-details-container-as-grid`);
       setcontainerClass("chest-page-workouts showItemsAsGrid"); //here
@@ -85,6 +89,7 @@ export function WorkoutsList({
       setmovePaginationFromBottom("590px");
       setpaginationClassName("pagination-content-loaded-grid");
       setDisplayPagination("flex");
+      setContainerMarginLeft("0px");
     }
     if (showAllWorkoutsCondensed === false) {
       setshowAllWorkouts(true);
@@ -298,22 +303,21 @@ export function WorkoutsList({
 
       <>
         {/* nbr of Results sentence */}
-        {searchInput?.length !== 0 &&
-          detailsContClass === `workout-details-container-as-grid` && (
-            <div className="workouts-section-results">
-              {filteredResults?.length !== 0 ? (
+        {searchInput?.length !== 0 && eitherLayout && (
+          <div className="workouts-section-results">
+            {filteredResults?.length !== 0 ? (
+              <span>
+                You have got {filteredResults?.length} {result} !
+              </span>
+            ) : filteredResults?.length === 0 ? (
+              <div>
                 <span>
-                  You have got {filteredResults?.length} {result} !
+                  {`Sorry, there is no item with the search criteria!`}
                 </span>
-              ) : filteredResults?.length === 0 ? (
-                <div>
-                  <span>
-                    {`Sorry, there is no item with the search criteria!`}
-                  </span>
-                </div>
-              ) : null}
-            </div>
-          )}
+              </div>
+            ) : null}
+          </div>
+        )}
       </>
       <>
         {/* workouts filtered or not and closeBtn */}
@@ -323,6 +327,7 @@ export function WorkoutsList({
             style={{
               background: bg,
               boxShadow: boxShadow,
+              height: filteredResults?.length === 0 ? "0px" : "",
             }}
           >
             <div
@@ -363,6 +368,7 @@ export function WorkoutsList({
                               searchInput,
                               setCurrentPage,
                               addOrRemoveWorkout,
+                              containerMarginLeft,
                             }}
                             key={index}
                           ></WorkoutDetailsItem>
@@ -437,6 +443,7 @@ export function WorkoutsList({
 
             <>
               {searchInput?.length !== 0 &&
+                filteredResults?.length !== 0 &&
                 detailsContClass === `workout-details-container-as-grid` && (
                   <div className={"workouts-list-close-icon-div"}>
                     <IconButton

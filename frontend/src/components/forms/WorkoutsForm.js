@@ -2,13 +2,15 @@ import { Button, IconButton } from "@mui/material";
 import { Alert, message, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import plusSign from "../../assets/img/plusSign.svg";
 import exercisesData from "../../assets/staticData/chestExercises.json";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
-import { ClearIcon } from "../icons/Icons";
+import { ClearIcon, CloseX } from "../icons/Icons";
 import { ChestExosList } from "../lists/ChestExosList";
 import { DesktopFormContent } from "./DesktopFormContent";
+
 import "./form_styles.scss";
 import { MobileFormContent } from "./MobileFormContent";
 
@@ -47,18 +49,17 @@ export const WorkoutsForm = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!user) {
-      setError("You must be logged in");
+    const workout = { title, load, reps, exoCategory };
+    if (!user || workoutsTitlesArray.includes(workout.title)) {
+      handleError();
+      console.log("You must be logged in");
       return;
     }
     //quit the function at this point, if no user is authenticated and logged in, because only logged in users can add workouts or delete them...
 
-    const workout = { title, load, reps, exoCategory };
     const response = await fetch("/api/workouts", {
       method: "POST",
-      body: JSON.stringify(
-        !workoutsTitlesArray.includes(workout.title) ? workout : handleError()
-      ),
+      body: JSON.stringify(workout),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${user.token}`,
@@ -96,8 +97,9 @@ export const WorkoutsForm = ({
 
   function handleError() {
     if (isMobileScreen) {
-      message.warning("This Workout already exists !", 60);
+      message.warning("This Workout already exists !", 1);
     } else {
+      //when isDesktopScreen
       setShowNotification(!showNotification);
       setEmptyFields([]);
       setTitle(null);
@@ -141,13 +143,14 @@ export const WorkoutsForm = ({
             className="mobile-form-ant-modal"
             open={showModal}
             maskClosable={true}
-            closable={false}
+            closable={true}
             keyboard={true}
             mask={true}
             onOk={() => setShowModal(false)}
             onCancel={() => setShowModal(false)}
             footer={null}
             title="Add a new Workout"
+            closeIcon={<CloseX />}
           >
             <MobileFormContent
               {...{
@@ -178,8 +181,12 @@ export const WorkoutsForm = ({
             {/* and make it mobile reponsive */}
           </Modal>
         ) : (
-          <Button onClick={() => setShowModal(true)}>
-            <span>Add a Worddkout</span>
+          <Button
+            className="add-workout-btn"
+            onClick={() => setShowModal(true)}
+          >
+            <img src={plusSign} alt="" />
+            <span>Add a Workout</span>
           </Button>
         )}
       </>
