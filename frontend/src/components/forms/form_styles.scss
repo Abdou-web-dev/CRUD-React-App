@@ -810,6 +810,7 @@ $xx-large: 1400px;
 
 .add-workout-btn {
   background: rgb(79, 162, 222) !important;
+  gap: 25px;
   &:hover {
     img {
       translate: 5px;
@@ -932,6 +933,24 @@ $xx-large: 1400px;
           margin: 0 10px !important;
         }
       }
+    }
+  }
+}
+// this is how we center a antd modal correctly  inside the page and set its height and width
+.loading-mobile-form-ant-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .ant-modal-content {
+    position: relative;
+    bottom: 50px;
+    height: 450px !important;
+    width: 70%;
+    border-radius: 10px;
+
+    .ant-modal-body {
+      padding-top: 140px;
+      padding-left: 50px;
     }
   }
 }

@@ -34,6 +34,7 @@ export function WorkoutsList({
   showAllExistentWorkouts,
   showAllWorkoutsCondensed,
   setshowAllWorkoutsCondensed,
+  showMobileFormModal,
 }) {
   //always put state variables first , then regular variables, then useEffect statement and the other fncts
 
@@ -381,26 +382,7 @@ export function WorkoutsList({
                           <WorkoutDetailsItemMobile
                             {...{
                               workout,
-                              index,
-                              setbg,
-                              detailsContClass,
-                              setdetailsContClass,
-                              setcontainerClass,
-                              currentPage,
-                              layoutGrid,
-                              showItemsPage1,
-                              showItemsPage2,
-                              showItemsPage3,
-                              showItemsPage4,
-                              showItemsPage5,
-                              showItemsPage6,
-                              showItemsPage7,
-                              showItemsPage8,
-                              showItemsPage9,
-                              showItemsPage10,
-                              searchInput,
-                              setCurrentPage,
-                              addOrRemoveWorkout,
+                              showMobileFormModal,
                             }}
                             key={index}
                           ></WorkoutDetailsItemMobile>

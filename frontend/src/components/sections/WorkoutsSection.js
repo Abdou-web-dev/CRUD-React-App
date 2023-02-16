@@ -25,6 +25,7 @@ export const WorkoutsSection = ({
   setFilteredResults,
   showAllExistentWorkouts,
   setshowAllExistentWorkouts,
+  showMobileFormModal,
 }) => {
   const [showfilteredResults, setshowfilteredResults] = useState(true);
   const [containerClass, setcontainerClass] = useState("chest-page-workouts");
@@ -171,6 +172,7 @@ export const WorkoutsSection = ({
             showAllExistentWorkouts,
             showAllWorkoutsCondensed,
             setshowAllWorkoutsCondensed,
+            showMobileFormModal,
           }}
         />
       )}

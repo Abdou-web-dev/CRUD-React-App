@@ -172,7 +172,6 @@
 
       .mobile-form-icon-and-load-input {
         img {
-          // display: none;
         }
         .mobile-form-input-load-component {
           width: 65% !important;
@@ -286,62 +285,307 @@
       }
     }
   }
+  @media screen and (min-width: 500px) and (max-width: 600px) {
+    .workouts-mobile-form-inner {
+      .mobile-form-select-exo-categ-label-and-select-component {
+        .mobile-form-select-exo-categ-icon-and-select {
+          .mobile-form-exo-categ-select {
+            width: 250px !important;
+          }
+        }
+      }
+      .mobile-form-select-exo-title-and-info-icon {
+        .mobile-form-title-select-label-and-component {
+          .mobile-form-select-exo-title-icon-and-select {
+            .mobile-form-title-select-exo-title {
+              width: 250px !important;
+            }
+          }
+        }
+      }
+      .mobile-form-title-label-and-input-component {
+        .mobile-form-input-title-and-label-wrapper {
+          @include d_flex_column();
+          gap: 10px;
 
-  @media screen and (min-width: 400px) and (max-width: 600px) {
-    .mobile-form-title-label-and-input-component {
-      .mobile-form-input-title-and-label-wrapper {
-        .mobile-form-input-title-and-label-and-list-icon {
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
+          .mobile-form-input-title-and-label-and-list-icon {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            // border: 1px solid red;
+            margin-top: 20px;
+            .mobile-form-input-title-icon-btn-wrapper {
+              .mobile-form-input-title-icon-btn {
+                height: fit-content !important;
+                background: none !important;
+                border: none !important;
+                img.mobile-form-input-title-list-icon {
+                  height: 30px;
+                  width: 30px;
+                }
+              }
+            }
+            .mobile-form-title-label {
+              @include label_styles();
+              // margin-top: 10px;
+            }
+          }
 
-          margin-top: 20px;
-          .mobile-form-input-title-icon-btn-wrapper {
-            .mobile-form-input-title-icon-btn {
-              height: fit-content !important;
-              background: none !important;
-              border: none !important;
-              img.mobile-form-input-title-list-icon {
-                height: 30px;
-                width: 30px;
+          .mobile-form-titleIcon-and-input-wrapper {
+            width: 88%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .mobile-form-input-title-component {
+              width: 70%;
+              // display: none;
+              // margin-left: 15px;
+              & > * {
+                @include input_text_styles();
+              }
+            }
+            .title-icon {
+              position: relative;
+              right: 15px;
+            }
+            .ant-input-suffix {
+              //clear icon
+              .anticon-close-circle {
+                transform: scale(2) !important;
+                position: relative;
+                right: 10px;
               }
             }
           }
-          .mobile-form-title-label {
-            @include label_styles();
-            // margin-top: 10px;
+        }
+      }
+      .mobile-form-load-label-and-load-input-component {
+        .mobile-form-icon-and-load-input {
+          @include d_flex_row();
+          img {
+            margin-right: 10px;
+          }
+          .mobile-form-input-load-component {
+            width: 40% !important;
+            margin-left: 0px !important;
           }
         }
+      }
+      .mobile-form-reps-label-and-reps-input-component {
+        .mobile-form-icon-and-reps-input {
+          margin-left: 0px;
+          @include d_flex_row();
 
-        .mobile-form-titleIcon-and-input-wrapper {
-          width: 92% !important;
-          display: flex;
-          justify-content: center;
-          align-items: center;
+          img {
+            margin-right: 10px;
+          }
 
-          .mobile-form-input-title-component {
-            // border: 1px solid red;
-            width: 100% !important;
-            position: relative;
-            right: 5px;
-            & > * {
-              @include input_text_styles();
-            }
+          .mobile-form-input-reps-component {
+            width: 40% !important;
+            margin-left: 0px !important;
           }
-          .title-icon {
-            position: relative;
-            right: 150px;
-            // display: none;
+        }
+      }
+      .mobile-form-btns {
+        gap: 10px;
+        .mobile-form-add-btn {
+          span {
+            font-size: smaller;
+            color: grey;
+            white-space: nowrap;
           }
-          .ant-input-suffix {
-            //clear icon
-            .anticon-close-circle {
-              transform: scale(2) !important;
+        }
+        .mobile-form-reset-btn {
+          transform: scale(1.5);
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 400px) and (max-width: 500px) {
+    .workouts-mobile-form-inner {
+      .mobile-form-select-exo-categ-label-and-select-component {
+        .mobile-form-select-exo-categ-icon-and-select {
+          @include d_flex_column();
+
+          img {
+            position: relative;
+            right: -10px;
+          }
+          .mobile-form-exo-categ-select {
+            width: 180px !important;
+            position: relative;
+            right: -10px;
+          }
+        }
+      }
+      .mobile-form-select-exo-title-and-info-icon {
+        .mobile-form-title-select-label-and-component {
+          .mobile-form-select-exo-title-icon-and-select {
+            @include d_flex_column();
+            img {
               position: relative;
-              right: 10px;
+              right: 25px;
+            }
+
+            .mobile-form-title-select-exo-title {
+              width: 180px !important;
+              position: relative;
+              right: 25px;
+              // border: 1px solid red;
             }
           }
+        }
+      }
+      .mobile-form-load-label-and-load-input-component {
+        width: 100% !important;
+
+        .mobile-form-icon-and-load-input {
+          .mobile-form-input-load-component {
+            width: 45% !important;
+            position: relative;
+            right: 20px;
+          }
+          img {
+            position: relative;
+            left: 30px;
+          }
+        }
+      }
+      .mobile-form-reps-label-and-reps-input-component {
+        .mobile-form-icon-and-reps-input {
+          .mobile-form-input-reps-component {
+            width: 45% !important;
+            position: relative;
+            right: 20px;
+          }
+          img {
+            position: relative;
+            left: 30px;
+          }
+        }
+      }
+      .mobile-form-btns {
+        margin-bottom: 40px;
+        margin-top: 30px;
+        @include d_flex_row();
+
+        .mobile-form-add-btn {
+          @include ant_btn_styles();
+          @include d_flex_row();
+          padding: 5px 15px;
+          background: rgba(128, 128, 128, 0.574);
+          height: 70px;
+          gap: 10px;
+          cursor: pointer;
+          span {
+            @include label_styles();
+            color: white;
+          }
+          img {
+            width: 50px;
+            height: 500px;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 400px) and (max-width: 445px) {
+    .workouts-mobile-form-inner {
+      .mobile-form-load-label-and-load-input-component {
+        .mobile-form-icon-and-load-input {
+          .mobile-form-input-load-component {
+            width: 45% !important;
+            position: relative;
+            right: 0px !important;
+          }
+          img {
+            position: relative;
+            left: 80px !important;
+          }
+        }
+      }
+      .mobile-form-reps-label-and-reps-input-component {
+        .mobile-form-icon-and-reps-input {
+          .mobile-form-input-reps-component {
+            width: 45% !important;
+            position: relative;
+            right: 0px !important;
+          }
+          img {
+            position: relative;
+            left: 80px !important;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 300px) and (max-width: 400px) {
+    .workouts-mobile-form-inner {
+      .mobile-form-select-exo-categ-label-and-select-component {
+        .mobile-form-select-exo-categ-icon-and-select {
+          @include d_flex_column();
+
+          .mobile-form-exo-categ-select {
+            width: 180px !important;
+            position: relative;
+            right: -10px;
+          }
+        }
+      }
+      .mobile-form-select-exo-title-and-info-icon {
+        .mobile-form-title-select-label-and-component {
+          .mobile-form-select-exo-title-icon-and-select {
+            @include d_flex_column();
+            img {
+              position: relative;
+              right: 25px;
+            }
+
+            .mobile-form-title-select-exo-title {
+              width: 180px !important;
+              position: relative;
+              right: 25px;
+            }
+          }
+        }
+      }
+      .mobile-form-load-label-and-load-input-component {
+        .mobile-form-icon-and-load-input {
+          .mobile-form-input-load-component {
+            width: 100px !important;
+            position: relative;
+            right: 20px !important;
+          }
+          img {
+            position: relative;
+            right: -80px !important;
+          }
+        }
+      }
+      .mobile-form-reps-label-and-reps-input-component {
+        .mobile-form-icon-and-reps-input {
+          .mobile-form-input-reps-component {
+            width: 100px !important;
+            position: relative;
+            right: 20px !important;
+          }
+          img {
+            position: relative;
+            right: -80px !important;
+          }
+        }
+      }
+      .mobile-form-btns {
+        @include d_flex_row();
+
+        .mobile-form-add-btn {
+          @include ant_btn_styles();
+          border: 0;
+        }
+        .mobile-form-reset-btn {
+          transform: scale(2);
         }
       }
     }

@@ -9,6 +9,7 @@ import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 import { ClearIcon, CloseX } from "../icons/Icons";
 import { ChestExosList } from "../lists/ChestExosList";
+import { NiceSpinner } from "../spinners/NiceSpinner";
 import { DesktopFormContent } from "./DesktopFormContent";
 
 import "./form_styles.scss";
@@ -19,9 +20,13 @@ export const WorkoutsForm = ({
   workouts,
   paginationClassName,
   showAllExistentWorkouts,
+  showMobileFormModal,
+  setShowMobileFormModal,
 }) => {
   const { user } = useAuthContext();
   const { dispatch } = useWorkoutsContext();
+  const isMobileScreen = useMediaQuery("(max-width: 800px)"); // returns true or false
+  const is_less_than_500px = useMediaQuery("(max-width: 500px)"); // returns true or false
 
   const [showNotification, setShowNotification] = useState(false);
   const workoutsTitlesArray = [
@@ -42,10 +47,9 @@ export const WorkoutsForm = ({
   const [showInputTitle, setshowInputTitle] = useState(false);
   const [suggestiveListBorder, setSuggestiveListBorder] = useState("");
   const [showFormNewWindow, setShowFormNewWindow] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [loading, setloading] = useState(false);
 
   // const isDesktopScreen = useMediaQuery("(min-width: 1350px)"); // returns true or false
-  const isMobileScreen = useMediaQuery("(max-width: 800px)"); // returns true or false
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -90,7 +94,7 @@ export const WorkoutsForm = ({
         setShowNotification(false);
       }
       if (isMobileScreen) {
-        setShowModal(false);
+        setShowMobileFormModal(false);
       }
     }
   };
@@ -134,48 +138,77 @@ export const WorkoutsForm = ({
       console.log(title, load, reps, exoCategory);
     }
   }, [title, load, reps, exoCategory]);
+  // this is how we use a Spinner corretly in React
+
+  // on first render of the Component, run this code :
+  useEffect(() => {
+    setloading(true);
+    setTimeout(() => {
+      setloading(false);
+    }, 1200);
+  }, []);
+  // and on evry time that the modal is opened, run this code : display the spinner, hide it after1.5s and then open the modal content
+
+  useEffect(() => {
+    if (showMobileFormModal) {
+      setloading(true);
+      setTimeout(() => {
+        setloading(false);
+      }, 1200);
+      setShowMobileFormModal(true);
+    }
+  }, [showMobileFormModal]);
 
   if (isMobileScreen) {
     return (
       <>
-        {showModal ? (
+        {showMobileFormModal ? (
           <Modal
-            className="mobile-form-ant-modal"
-            open={showModal}
+            className={
+              loading
+                ? "loading-mobile-form-ant-modal"
+                : "mobile-form-ant-modal"
+            }
+            open={showMobileFormModal}
             maskClosable={true}
-            closable={true}
+            closable={loading ? false : true}
             keyboard={true}
             mask={true}
-            onOk={() => setShowModal(false)}
-            onCancel={() => setShowModal(false)}
+            onOk={() => setShowMobileFormModal(false)}
+            onCancel={() => setShowMobileFormModal(false)}
             footer={null}
-            title="Add a new Workout"
-            closeIcon={<CloseX />}
+            title={!loading && "Add a new Workout"}
+            closeIcon={!loading ? <CloseX /> : null}
+            // style={{ height: "1000px" }}
           >
-            <MobileFormContent
-              {...{
-                showFormNewWindow,
-                showAllExistentWorkouts,
-                handleSubmit,
-                setShowFormNewWindow,
-                exoCategory,
-                setExoCategory,
-                emptyFields,
-                setSuggestiveListBorder,
-                showInputTitle,
-                handleCustomExo,
-                setTitle,
-                title,
-                load,
-                setLoad,
-                reps,
-                setReps,
-                error,
-                handleResetFields,
-                handleListIconClick,
-                showSuggExoTitle,
-              }}
-            ></MobileFormContent>
+            {loading ? (
+              <NiceSpinner></NiceSpinner>
+            ) : (
+              <MobileFormContent
+                {...{
+                  showFormNewWindow,
+                  showAllExistentWorkouts,
+                  handleSubmit,
+                  setShowFormNewWindow,
+                  exoCategory,
+                  setExoCategory,
+                  emptyFields,
+                  setSuggestiveListBorder,
+                  showInputTitle,
+                  handleCustomExo,
+                  setTitle,
+                  title,
+                  load,
+                  setLoad,
+                  reps,
+                  setReps,
+                  error,
+                  handleResetFields,
+                  handleListIconClick,
+                  showSuggExoTitle,
+                }}
+              ></MobileFormContent>
+            )}
 
             {/* Change this mobileFormDOM's content , delete some className and unnecessary code */}
             {/* and make it mobile reponsive */}
@@ -183,7 +216,9 @@ export const WorkoutsForm = ({
         ) : (
           <Button
             className="add-workout-btn"
-            onClick={() => setShowModal(true)}
+            onClick={() => {
+              setShowMobileFormModal(true);
+            }}
           >
             <img src={plusSign} alt="" />
             <span>Add a Workout</span>

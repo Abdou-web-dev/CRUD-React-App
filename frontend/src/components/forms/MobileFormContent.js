@@ -1,10 +1,16 @@
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import { Button, Input, Select } from "antd";
+import { useEffect, useState } from "react";
 import categ from "../../assets/img/categ.svg";
-import loadIcon from "../../assets/img/derrick.svg";
+import categGray from "../../assets/img/categGray.svg";
+import derrick from "../../assets/img/derrick.svg";
+import derrickGray from "../../assets/img/derrickGray.svg";
+import plusSign from "../../assets/img/plusSignDark.svg";
 import recycle from "../../assets/img/recycle.png";
 import repeat from "../../assets/img/repeat.svg";
-import titleIcon from "../../assets/img/title.svg";
+import repeatGray from "../../assets/img/repeatGray.svg";
+import alphabet from "../../assets/img/title.svg";
+import alphabetGray from "../../assets/img/titleGray.svg";
 
 import {
   AbsExos,
@@ -44,8 +50,38 @@ export const MobileFormContent = ({
   showSuggExoTitle,
 }) => {
   const isMobileScreen = useMediaQuery("(max-width: 600px)"); // returns true or false
+  const is_less_than_500px = useMediaQuery("(max-width: 500px)"); // returns true or false
+  const is_between_400px_and_800px = useMediaQuery(
+    "(min-width: 400px) and (max-width: 800px) "
+  ); // returns true or false
 
-  function handleSubmitForm(e) {}
+  const [categIcon, setCategIcon] = useState(categ);
+  const [derrickIcon, setDerrickIcon] = useState(derrick);
+  const [repeatIcon, setRepeatIcon] = useState(repeat);
+  const [alphabetIcon, setAlphabetIcon] = useState(alphabet);
+
+  useEffect(() => {
+    if (!reps) {
+      setRepeatIcon(repeatGray);
+    } else {
+      setRepeatIcon(repeat);
+    }
+    if (!load) {
+      setDerrickIcon(derrickGray);
+    } else {
+      setDerrickIcon(derrick);
+    }
+    if (!title) {
+      setAlphabetIcon(alphabetGray);
+    } else {
+      setAlphabetIcon(alphabet);
+    }
+    if (!exoCategory) {
+      setCategIcon(categGray);
+    } else {
+      setCategIcon(categ);
+    }
+  }, [exoCategory, title, load, reps]);
 
   return (
     <>
@@ -60,7 +96,7 @@ export const MobileFormContent = ({
               )}
               <div className="mobile-form-select-exo-categ-icon-and-select">
                 {isMobileScreen && (
-                  <img style={{ width: "30px" }} src={categ} alt="" />
+                  <img style={{ width: "30px" }} src={categIcon} alt="" />
                 )}
                 <Select
                   className={"mobile-form-exo-categ-select"}
@@ -134,7 +170,11 @@ export const MobileFormContent = ({
                     className="mobile-form-select-exo-title-icon-and-select"
                   >
                     {isMobileScreen && (
-                      <img style={{ width: "30px" }} src={titleIcon} alt="" />
+                      <img
+                        style={{ width: "30px" }}
+                        src={alphabetIcon}
+                        alt=""
+                      />
                     )}
                     <Select
                       className={"mobile-form-title-select-exo-title"}
@@ -191,7 +231,7 @@ export const MobileFormContent = ({
                         ) : null
                       }
                     />
-                    {isMobileScreen && (
+                    {isMobileScreen && !is_less_than_500px && (
                       <MobileFormTypeTooltip
                         {...{ handleCustomExo, isMobileScreen, exoCategory }}
                       />
@@ -236,7 +276,7 @@ export const MobileFormContent = ({
                         <img
                           className="title-icon"
                           style={{ width: "30px" }}
-                          src={titleIcon}
+                          src={alphabetIcon}
                           alt=""
                         />
                       )}
@@ -279,11 +319,13 @@ export const MobileFormContent = ({
             </>
 
             <div className="mobile-form-load-label-and-load-input-component">
-              <label className="mobile-form-load-label">Load (in kg) :</label>
+              {!isMobileScreen && (
+                <label className="mobile-form-load-label">Load (in kg) :</label>
+              )}
 
               <div className="mobile-form-icon-and-load-input">
                 {isMobileScreen && (
-                  <img style={{ width: "30px" }} src={loadIcon} alt="" />
+                  <img style={{ width: "30px" }} src={derrickIcon} alt="" />
                 )}
                 <Input
                   className="mobile-form-input-load-component"
@@ -311,10 +353,14 @@ export const MobileFormContent = ({
             </div>
 
             <div className="mobile-form-reps-label-and-reps-input-component">
-              <label className="mobile-form-reps-label">Number of Reps :</label>
+              {!isMobileScreen && (
+                <label className="mobile-form-reps-label">
+                  Number of Reps :
+                </label>
+              )}
               <div className="mobile-form-icon-and-reps-input">
                 {isMobileScreen && (
-                  <img style={{ width: "30px" }} src={repeat} alt="" />
+                  <img style={{ width: "30px" }} src={repeatIcon} alt="" />
                 )}
                 <Input
                   value={reps}
@@ -344,7 +390,25 @@ export const MobileFormContent = ({
 
             <div className={"mobile-form-btns"}>
               <button className="mobile-form-add-btn">
-                <span>Add Workout</span>
+                {is_less_than_500px ? (
+                  <img
+                    width={`50px`}
+                    height="50px"
+                    className="plus-sign"
+                    src={plusSign}
+                    alt=""
+                  />
+                ) : null}
+                <span>
+                  {"Add"} {!is_less_than_500px && "Workout"}
+                </span>
+                {load &&
+                reps &&
+                title &&
+                exoCategory &&
+                is_between_400px_and_800px ? (
+                  <span> ! </span>
+                ) : null}
               </button>
               <Button
                 onClick={handleResetFields}
@@ -365,3 +429,9 @@ export const MobileFormContent = ({
     </>
   );
 };
+
+// WOrk on Search input; when less tahn 800px
+// first display a search icon; when the user clicks on it, display the search field in a modal
+// this search fiels must be simple, with a black border and a white bg
+// when the user types its search term and clicks on enter or OK button , the modal will be closed
+// and the results will be shown , the search icon will be hidden

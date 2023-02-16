@@ -25,11 +25,7 @@ import { ShareWorkoutMobile } from "../mobile/ShareWorkoutMobile";
 import "./workout_details_mobile.scss";
 
 // import starIconGray from "../../assets/img/starIconGray.svg";
-export function WorkoutDetailsItemMobile({
-  workout,
-  layoutGrid,
-  addOrRemoveWorkout,
-}) {
+export function WorkoutDetailsItemMobile({ workout, showMobileFormModal }) {
   const { dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
   let createdAt = workout?.createdAt;
@@ -86,7 +82,13 @@ export function WorkoutDetailsItemMobile({
   };
 
   return (
-    <div className="workout-details-mobile-container">
+    <div
+      className={
+        showMobileFormModal
+          ? "workout-details-mobile-container move_a_bit_from_left"
+          : "workout-details-mobile-container"
+      }
+    >
       <div
         className="workout-details-mobile-inner"
         style={{ background: "rgb(240, 242, 245)" }}

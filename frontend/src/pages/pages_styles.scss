@@ -128,6 +128,44 @@ $xx-large: 1400px;
       margin-top: 30px;
     }
   }
+  @media screen and (min-width: 700px) and (max-width: 770px) {
+    .workouts-main-form {
+      position: relative;
+      left: 250px;
+    }
+  }
+  @media screen and (min-width: 550px) and (max-width: 630px) {
+    .workouts-main-form {
+      position: relative;
+      left: 150px;
+    }
+  }
+  @media screen and (min-width: 520px) and (max-width: 550px) {
+    .workouts-main-form {
+      position: relative;
+      left: 150px;
+    }
+  }
+  @media screen and (min-width: 400px) and (max-width: 460px) {
+    .workouts-main-form {
+      position: relative;
+      left: 100px !important;
+    }
+  }
+  @media screen and (min-width: 350px) and (max-width: 400px) {
+    .workouts-main-form {
+      // display: none;
+      position: relative;
+      left: 70px !important;
+    }
+  }
+  @media screen and (min-width: 200px) and (max-width: 350px) {
+    .workouts-main-form {
+      // display: none;
+      position: relative;
+      left: 40px !important;
+    }
+  }
 }
 .pagination-content-loaded {
   display: flex;
