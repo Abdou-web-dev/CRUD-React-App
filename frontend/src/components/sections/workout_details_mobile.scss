@@ -328,6 +328,10 @@
     position: relative;
     left: -120px !important;
   }
+  @media screen and (min-width: 0px) and (max-width: 250px) {
+    position: relative;
+    left: -150px !important;
+  }
   @media screen and (min-width: 550px) and (max-width: 600px) {
     &.move_a_bit_from_left {
       position: relative !important;

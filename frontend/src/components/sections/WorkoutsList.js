@@ -320,6 +320,7 @@ export function WorkoutsList({
           </div>
         )}
       </>
+
       <>
         {/* workouts filtered or not and closeBtn */}
         {showAllWorkouts === true && (

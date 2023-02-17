@@ -178,11 +178,24 @@ $xx-large: 1400px;
         font-family: "Inconsolata";
       }
     }
+
     .workouts-search-ant-input-msg {
       span {
         font-size: 12px;
         font-family: "Mulish";
         color: rgba(255, 0, 0, 0.66);
+      }
+    }
+  }
+  //only when less than 700px
+  .workouts-section-magnifying_glass {
+    .workouts-magnifying_glass-btn {
+      border: none;
+      background-color: none;
+      height: fit-content;
+      img {
+        width: 64px;
+        height: 64px;
       }
     }
   }
@@ -231,14 +244,14 @@ $xx-large: 1400px;
   @media screen and (min-width: 768px) and (max-width: 800px) {
     .workouts-section-input {
       position: relative;
-      right: 0px;
+      right: 50px;
     }
   }
   @media screen and (min-width: 700px) and (max-width: 768px) {
     .workouts-section-input {
       width: 100%;
       position: relative;
-      right: 100px;
+      right: 150px;
     }
   }
   @media screen and (min-width: 400px) and (max-width: 700px) {
@@ -251,6 +264,128 @@ $xx-large: 1400px;
     .workouts-section-input {
       position: relative;
       right: 70px;
+    }
+  }
+  @media screen and (min-width: 699.99px) and (max-width: 700.01px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        left: 100px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 600px) and (max-width: 700px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 0px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 525px) and (max-width: 550px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 20px;
+      }
+    }
+  }
+  @media screen and (min-width: 500px) and (max-width: 525px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 20px;
+      }
+    }
+  }
+  @media screen and (min-width: 475px) and (max-width: 500px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 30px;
+      }
+    }
+  }
+  @media screen and (min-width: 450px) and (max-width: 475px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 40px;
+      }
+    }
+  }
+  @media screen and (min-width: 425px) and (max-width: 450px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 50px;
+      }
+    }
+  }
+  @media screen and (min-width: 400px) and (max-width: 425px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 70px;
+      }
+    }
+  }
+  @media screen and (min-width: 375px) and (max-width: 400px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 80px;
+      }
+    }
+  }
+  @media screen and (min-width: 350px) and (max-width: 375px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 100px;
+      }
+    }
+  }
+  @media screen and (min-width: 325px) and (max-width: 350px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 100px;
+      }
+    }
+  }
+  @media screen and (min-width: 300px) and (max-width: 325px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 140px;
+      }
+    }
+  }
+  @media screen and (min-width: 275px) and (max-width: 300px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 150px;
+      }
+    }
+  }
+  @media screen and (min-width: 250px) and (max-width: 275px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 150px;
+      }
+    }
+  }
+  @media screen and (min-width: 200px) and (max-width: 250px) {
+    .workouts-section-magnifying_glass {
+      .workouts-magnifying_glass-btn {
+        position: relative;
+        right: 170px;
+      }
     }
   }
 }

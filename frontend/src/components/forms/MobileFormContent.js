@@ -22,12 +22,12 @@ import {
   HamstringsExos,
   ShouldersExos,
   TrapeziusExos,
-  TricepsExos,
+  TricepsExos
 } from "../../assets/staticData/exosData";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import {
   MobileFormChooseTooltip,
-  MobileFormTypeTooltip,
+  MobileFormTypeTooltip
 } from "../tooltips/MobileFormTooltips";
 import "./mobile_form_styles.scss";
 
