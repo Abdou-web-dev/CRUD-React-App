@@ -1,5 +1,6 @@
 import { Button, Input as ModalInput } from "antd";
 import { formatDistanceToNow } from "date-fns";
+import "./inputs_styles.scss";
 
 export function InputModal({
   workouts,
@@ -7,6 +8,7 @@ export function InputModal({
   setSearchValue,
   setopenSearchInputModal,
   setFilteredResultsByMobileModal,
+  openSearchInputModal,
 }) {
   const searchItems = () => {
     if (searchValue !== "") {
@@ -33,7 +35,6 @@ export function InputModal({
       setFilteredResultsByMobileModal(workouts);
     }
   };
-
   const handleChange = (e) => {
     setSearchValue(e.target.value);
   };
@@ -60,7 +61,11 @@ export function InputModal({
         }}
       />
       <Button
-        className="input-modal-container-btn"
+        className={
+          searchValue
+            ? "input-modal-container-btn user-typing"
+            : "input-modal-container-btn user-not-typing"
+        }
         onClick={(e) => {
           handleOKClick(e);
         }}

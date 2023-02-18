@@ -197,6 +197,9 @@ $xx-large: 1400px;
         width: 64px;
         height: 64px;
       }
+      .glass_clouded {
+        filter: invert(0.8);
+      }
     }
   }
   @media screen and (min-width: $x-large) and (max-width: $xx-large) {
@@ -411,6 +414,68 @@ $xx-large: 1400px;
         width: 140px;
         height: 140px;
         transition: 0.55s ease;
+      }
+    }
+  }
+}
+
+.search-field-mobile-modal {
+  .ant-modal-content {
+    max-height: 650px;
+    background: none;
+    .ant-modal-close {
+      .ant-modal-close-x {
+        position: relative;
+        bottom: 40px;
+        left: 10px;
+
+        img {
+          width: 25px !important;
+        }
+      }
+    }
+    .ant-modal-header {
+      display: none;
+    }
+    .ant-modal-body {
+      padding: 60px;
+      padding-left: 10px;
+    }
+  }
+  @media screen and (min-width: 450px) and (max-width: 570px) {
+    //this is how we center a antd modal
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .ant-modal-content {
+      width: 90%;
+      .ant-modal-close {
+        .ant-modal-close-x {
+          position: relative;
+          bottom: 40px;
+          left: 10px;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 350px) and (max-width: 480px) {
+    //this is how we center a antd modal
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .ant-modal-content {
+      width: 87%;
+      .ant-modal-close {
+        .ant-modal-close-x {
+          position: relative;
+          bottom: 40px;
+          left: 10px;
+        }
+      }
+      .ant-modal-body {
+        padding: 60px;
+        padding-left: 10px;
+        padding-right: 10px;
       }
     }
   }

@@ -1,10 +1,10 @@
 import { IconButton } from "@mui/material";
-import { Button, Input, Modal } from "antd";
+import { Button, Input, message, Modal } from "antd";
 import { formatDistanceToNow } from "date-fns";
 import React, { useEffect, useState } from "react";
 import magnifying_glass from "../../assets/img/magnifying_glass.svg";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
-import { ClearIcon } from "../icons/Icons";
+import { ClearIcon, CloseX } from "../icons/Icons";
 import { InputModal } from "../inputs/InputModal";
 
 import "./sections_styles.scss";
@@ -30,6 +30,8 @@ export const WorkoutsSection = ({
   showAllExistentWorkouts,
   setshowAllExistentWorkouts,
   showMobileFormModal,
+  openSearchInputModal,
+  setopenSearchInputModal,
 }) => {
   const [searchValue, setSearchValue] = useState(``);
   const [filteredResultsByMobileModal, setFilteredResultsByMobileModal] =
@@ -41,7 +43,6 @@ export const WorkoutsSection = ({
     useState(false);
   const [border, setBorder] = useState(``);
   const [showMsg, setshowMsg] = useState(false);
-  const [openSearchInputModal, setopenSearchInputModal] = useState(false);
   let layoutGrid = detailsContClass === "workout-details-container-as-grid"; //returns a boolean value
   let layoutList = detailsContClass === "workout-details-container-as-list";
   let msg = `To search for an item, you need to click on the 1st button below !`;
@@ -116,11 +117,17 @@ export const WorkoutsSection = ({
     }
   }, [showAllWorkoutsCondensed, isMobileScreen]);
 
-  // useEffect(() => {
-  //   if (filteredResultsByMobileModal?.length)
-  //     console.log(filteredResultsByMobileModal);
-  //   else console.log("0 results");
-  // }, [filteredResultsByMobileModal]);
+  useEffect(() => {
+    // when the modal is closed, clear the input field, and if no result is found, display this msg : No Item was found
+    if (!openSearchInputModal) {
+      if (searchValue) {
+        if (!filteredResultsByMobileModal?.length) {
+          setSearchValue("");
+          message.info("No Item was found !", 0.6); //This is a prompt message for success, and it will disappear in 0.6 seconds
+        }
+      }
+    }
+  }, [openSearchInputModal]);
 
   return (
     <div className="workouts-section">
@@ -154,7 +161,11 @@ export const WorkoutsSection = ({
             }}
             className="workouts-magnifying_glass-btn"
           >
-            <img src={magnifying_glass} alt="" />
+            <img
+              className={openSearchInputModal ? `glass_clouded` : ""}
+              src={magnifying_glass}
+              alt=""
+            />
           </Button>
         ) : null}
 
@@ -231,8 +242,9 @@ export const WorkoutsSection = ({
         )}
       </div>
 
+      {/* when the viewport width is_less_than_700px */}
       <Modal
-        className={``}
+        className={`search-field-mobile-modal`}
         open={openSearchInputModal}
         maskClosable={true}
         closable={true}
@@ -243,7 +255,13 @@ export const WorkoutsSection = ({
         // width={layoutGrid ? "50%" : "60%"}
         footer={null}
         title={null}
-        // style={{ background: "" }}
+        bodyStyle={{
+          background: "rgba(211, 211, 211, 0.38)",
+        }}
+        maskStyle={{
+          background: "rgba(211, 211, 211, 0.15)",
+        }}
+        closeIcon={<CloseX></CloseX>}
       >
         <InputModal
           {...{
@@ -253,6 +271,7 @@ export const WorkoutsSection = ({
             setFilteredResultsByMobileModal,
             filteredResultsByMobileModal,
             setopenSearchInputModal,
+            openSearchInputModal,
           }}
         ></InputModal>
       </Modal>

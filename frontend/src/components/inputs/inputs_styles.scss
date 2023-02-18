@@ -1,0 +1,38 @@
+.input-modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  .input-modal-container-input {
+    height: 60px;
+    width: 95%;
+    font-size: 25px;
+    font-family: "Mulish";
+    &:focus {
+      border: 1px solid rgba(128, 128, 128, 0.578);
+      //   box-shadow: none;
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    }
+  }
+  .input-modal-container-btn {
+    background: white;
+    border: none;
+    height: 45px;
+    span {
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      font-family: "Inconsolata";
+      letter-spacing: 1.5px;
+      position: relative;
+      bottom: 5px;
+    }
+    &.user-not-typing {
+      background: rgba(87, 190, 202, 0.473);
+    }
+    &.user-typing {
+      background: rgba(87, 190, 202, 0.7);
+    }
+  }
+}

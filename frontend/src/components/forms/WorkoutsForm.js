@@ -22,6 +22,7 @@ export const WorkoutsForm = ({
   showAllExistentWorkouts,
   showMobileFormModal,
   setShowMobileFormModal,
+  openSearchInputModal,
 }) => {
   const { user } = useAuthContext();
   const { dispatch } = useWorkoutsContext();
@@ -214,15 +215,19 @@ export const WorkoutsForm = ({
             {/* and make it mobile reponsive */}
           </Modal>
         ) : (
-          <Button
-            className="add-workout-btn"
-            onClick={() => {
-              setShowMobileFormModal(true);
-            }}
-          >
-            <img src={plusSign} alt="" />
-            <span>Add a Workout</span>
-          </Button>
+          <>
+            {!openSearchInputModal && (
+              <Button
+                className="add-workout-btn"
+                onClick={() => {
+                  setShowMobileFormModal(true);
+                }}
+              >
+                <img src={plusSign} alt="" />
+                <span>Add a Workout</span>
+              </Button>
+            )}
+          </>
         )}
       </>
     );

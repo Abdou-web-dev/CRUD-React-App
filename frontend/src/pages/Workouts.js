@@ -43,6 +43,7 @@ const Workouts = ({}) => {
     "pagination-content-loaded"
   );
   const [showMobileFormModal, setShowMobileFormModal] = useState(false);
+  const [openSearchInputModal, setopenSearchInputModal] = useState(false);
 
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let layoutList = detailsContClass === "workout-details-container-as-list";
@@ -176,6 +177,8 @@ const Workouts = ({}) => {
                 showAllExistentWorkouts,
                 setshowAllExistentWorkouts,
                 showMobileFormModal,
+                openSearchInputModal,
+                setopenSearchInputModal,
               }}
             ></WorkoutsSection>
           </div>
@@ -197,6 +200,7 @@ const Workouts = ({}) => {
                   setCurrentPage,
                   showMobileFormModal,
                   setShowMobileFormModal,
+                  openSearchInputModal,
                 }}
               />
             </div>
