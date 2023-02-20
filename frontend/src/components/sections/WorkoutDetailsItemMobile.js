@@ -3,6 +3,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { Button, Card, Divider, Modal } from "antd";
 import { formatDistanceToNow } from "date-fns";
 import { useState } from "react";
+import Highlight from "react-highlighter";
 import AbsIcon from "../../assets/img/AbsIcon.png";
 import BackIcon from "../../assets/img/backIcon.png";
 import BicepsIcon from "../../assets/img/bicepsIcon.png";
@@ -15,7 +16,6 @@ import ShouldersIcon from "../../assets/img/shouldersIcon.png";
 import TrapeziusIcon from "../../assets/img/TrapeziusIcon.png";
 import TricepsIcon from "../../assets/img/TricepsIcon.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
-import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 import { TrashIcon } from "../icons/Icons";
 import { DeleteWorkoutMobile } from "../mobile/DeleteWorkoutMobile";
@@ -25,7 +25,11 @@ import { ShareWorkoutMobile } from "../mobile/ShareWorkoutMobile";
 import "./workout_details_mobile.scss";
 
 // import starIconGray from "../../assets/img/starIconGray.svg";
-export function WorkoutDetailsItemMobile({ workout, showMobileFormModal }) {
+export function WorkoutDetailsItemMobile({
+  workout,
+  showMobileFormModal,
+  searchValue,
+}) {
   const { dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
   let createdAt = workout?.createdAt;
@@ -34,14 +38,14 @@ export function WorkoutDetailsItemMobile({ workout, showMobileFormModal }) {
   const [showDeleteModalContent, setshowDeleteModalContent] = useState(false);
   const [showEditModalContent, setshowEditModalContent] = useState(false);
   const [showShareModalContent, setshowShareModalContent] = useState(false);
-
-  const isMobileScreen = useMediaQuery(
-    "(min-width: 550px) and (max-width: 700px)"
-  );
-  const isSoSmallScreen = useMediaQuery(
-    "(min-width: 0px) and (max-width: 550px)"
-  );
   const [updatedWorkout, setUpdatedWorkout] = useState({});
+
+  // const isMobileScreen = useMediaQuery(
+  //   "(min-width: 550px) and (max-width: 700px)"
+  // );
+  // const isSoSmallScreen = useMediaQuery(
+  //   "(min-width: 0px) and (max-width: 550px)"
+  // );
 
   const handleDelete = async () => {
     if (!user) {
@@ -84,6 +88,7 @@ export function WorkoutDetailsItemMobile({ workout, showMobileFormModal }) {
   return (
     <div
       className={
+        // Add a Workout modal
         showMobileFormModal
           ? "workout-details-mobile-container move_a_bit_from_left"
           : "workout-details-mobile-container"
@@ -98,7 +103,7 @@ export function WorkoutDetailsItemMobile({ workout, showMobileFormModal }) {
           title={
             <div className="card-title">
               <div className="card-title-wrapper">
-                <span>{workout?.title}</span>
+                <Highlight search={searchValue}>{workout?.title}</Highlight>
               </div>
               <img
                 className="card-title-icon"

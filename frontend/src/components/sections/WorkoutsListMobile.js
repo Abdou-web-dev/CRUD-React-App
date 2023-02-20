@@ -1,22 +1,26 @@
-// import "./sections_styles.scss";
-
-import { WorkoutDetails } from "../details/WorkoutDetails";
+import "./sections_styles.scss";
+import { WorkoutDetailsItemMobile } from "./WorkoutDetailsItemMobile";
 
 export function WorkoutsListMobile({
   filteredResultsByMobileModal,
-  workouts,
+  showMobileFormModal,
   searchValue,
 }) {
   let result =
     filteredResultsByMobileModal?.length === 1 ? `result` : `results`;
 
   return (
-    <div className="workouts-section-container">
+    <div className="workouts-section-container workouts-section-container-mobile">
       <>
         {filteredResultsByMobileModal?.map((element, index) => (
-          <WorkoutDetails workout={element} key={index}></WorkoutDetails>
+          <WorkoutDetailsItemMobile
+            workout={element}
+            key={index}
+            {...{ searchValue, showMobileFormModal }}
+          ></WorkoutDetailsItemMobile>
         ))}
       </>
+
       <>
         {/* nbr of Results sentence */}
         {searchValue?.length !== 0 && (

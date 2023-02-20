@@ -25,6 +25,7 @@
     "react": "^18.1.0",
     "react-background-video-player": "^1.1.8",
     "react-dom": "^18.1.0",
+    "react-highlighter": "^0.4.3",
     "react-player": "^2.11.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",

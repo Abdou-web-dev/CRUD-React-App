@@ -43,7 +43,6 @@ export function ShareWorkoutMobile({ setshowModal }) {
         mask={true}
         onOk={() => setshowShareModal(false)}
         onCancel={() => setshowShareModal(false)}
-        // width={layoutGrid ? "50%" : "60%"}
         footer={null}
         closeIcon={<TrashIcon />}
       >

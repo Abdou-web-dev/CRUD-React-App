@@ -23,11 +23,12 @@ export const WorkoutsForm = ({
   showMobileFormModal,
   setShowMobileFormModal,
   openSearchInputModal,
+  filterBtnClicked,
 }) => {
   const { user } = useAuthContext();
   const { dispatch } = useWorkoutsContext();
   const isMobileScreen = useMediaQuery("(max-width: 800px)"); // returns true or false
-  const is_less_than_500px = useMediaQuery("(max-width: 500px)"); // returns true or false
+  // const is_less_than_500px = useMediaQuery("(max-width: 500px)"); // returns true or false
 
   const [showNotification, setShowNotification] = useState(false);
   const workoutsTitlesArray = [
@@ -49,8 +50,6 @@ export const WorkoutsForm = ({
   const [suggestiveListBorder, setSuggestiveListBorder] = useState("");
   const [showFormNewWindow, setShowFormNewWindow] = useState(false);
   const [loading, setloading] = useState(false);
-
-  // const isDesktopScreen = useMediaQuery("(min-width: 1350px)"); // returns true or false
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -216,17 +215,17 @@ export const WorkoutsForm = ({
           </Modal>
         ) : (
           <>
-            {!openSearchInputModal && (
-              <Button
-                className="add-workout-btn"
-                onClick={() => {
-                  setShowMobileFormModal(true);
-                }}
-              >
-                <img src={plusSign} alt="" />
-                <span>Add a Workout</span>
-              </Button>
-            )}
+            <Button
+              // when clicking on the magnifiying glass icon, hide this btn
+              style={{ visibility: openSearchInputModal ? "hidden" : "" }}
+              className="add-workout-btn"
+              onClick={() => {
+                setShowMobileFormModal(true);
+              }}
+            >
+              <img src={plusSign} alt="" />
+              <span>Add a Workout</span>
+            </Button>
           </>
         )}
       </>
@@ -261,9 +260,68 @@ export const WorkoutsForm = ({
           {/* JSX to show the form on the same page */}
           {showFormNewWindow === false && (
             <>
-              <div className="">
+              <DesktopFormContent
+                {...{
+                  showFormNewWindow,
+                  showAllExistentWorkouts,
+                  handleSubmit,
+                  setShowFormNewWindow,
+                  exoCategory,
+                  setExoCategory,
+                  emptyFields,
+                  setSuggestiveListBorder,
+                  showInputTitle,
+                  handleCustomExo,
+                  setTitle,
+                  title,
+                  load,
+                  setLoad,
+                  reps,
+                  setReps,
+                  error,
+                  handleResetFields,
+                  handleListIconClick,
+                  showSuggExoTitle,
+                  filterBtnClicked,
+                }}
+              />
+
+              <>
+                {exoCategory === `Chest` && showInputTitle && (
+                  <ChestExosList
+                    {...{
+                      currentLocat,
+                      paginationClassName,
+                      setTitle,
+                      chestExos,
+                      suggestiveListBorder,
+                    }}
+                  />
+                )}
+              </>
+            </>
+          )}
+        </>
+
+        <>
+          {/* JSX to show the form on a modal, and hide it on the page underneath */}
+          {showFormNewWindow === true && (
+            <>
+              <Modal
+                className="desktop-form-ant-modal"
+                open={showFormNewWindow}
+                maskClosable={true}
+                closable={false}
+                keyboard={true}
+                mask={true}
+                onOk={() => setShowFormNewWindow(false)}
+                onCancel={() => setShowFormNewWindow(false)}
+                width={"70%"}
+                footer={null}
+                title="Add a New Workout"
+              >
                 <>
-                  {!showFormNewWindow && (
+                  {showFormNewWindow || showAllExistentWorkouts ? (
                     <DesktopFormContent
                       {...{
                         showFormNewWindow,
@@ -288,7 +346,7 @@ export const WorkoutsForm = ({
                         showSuggExoTitle,
                       }}
                     />
-                  )}
+                  ) : null}
                 </>
                 <>
                   {exoCategory === `Chest` && showInputTitle && (
@@ -303,71 +361,6 @@ export const WorkoutsForm = ({
                     />
                   )}
                 </>
-              </div>
-            </>
-          )}
-        </>
-
-        <>
-          {/* JSX to show the form on a modal, and hide it on the page underneath */}
-          {showFormNewWindow === true && (
-            <>
-              <Modal
-                className="desktop-form-ant-modal"
-                open={showFormNewWindow}
-                maskClosable={true}
-                closable={false}
-                keyboard={true}
-                mask={true}
-                onOk={() => setShowFormNewWindow(false)}
-                onCancel={() => setShowFormNewWindow(false)}
-                width={"70%"}
-                footer={null}
-                title="Add a New Workout"
-              >
-                <div className="">
-                  <>
-                    {showFormNewWindow || showAllExistentWorkouts ? (
-                      <DesktopFormContent
-                        {...{
-                          showFormNewWindow,
-                          showAllExistentWorkouts,
-                          handleSubmit,
-                          setShowFormNewWindow,
-                          exoCategory,
-                          setExoCategory,
-                          emptyFields,
-                          setSuggestiveListBorder,
-                          showInputTitle,
-                          handleCustomExo,
-                          setTitle,
-                          title,
-                          load,
-                          setLoad,
-                          reps,
-                          setReps,
-                          error,
-                          handleResetFields,
-                          handleListIconClick,
-                          showSuggExoTitle,
-                        }}
-                      />
-                    ) : null}
-                  </>
-                  <>
-                    {exoCategory === `Chest` && showInputTitle && (
-                      <ChestExosList
-                        {...{
-                          currentLocat,
-                          paginationClassName,
-                          setTitle,
-                          chestExos,
-                          suggestiveListBorder,
-                        }}
-                      />
-                    )}
-                  </>
-                </div>
               </Modal>
             </>
           )}

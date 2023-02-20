@@ -28,7 +28,6 @@ const Workouts = ({}) => {
   const { user } = useAuthContext();
 
   let intialClassName = `workout-details-container-as-list`;
-  // let class2 = `workout-details-container-initial`;
 
   // let workoutsList = workouts?.map((workout) => workout._id);
   const [filteredResults, setFilteredResults] = React.useState([]);
@@ -44,7 +43,7 @@ const Workouts = ({}) => {
   );
   const [showMobileFormModal, setShowMobileFormModal] = useState(false);
   const [openSearchInputModal, setopenSearchInputModal] = useState(false);
-
+  const [filterBtnClicked, setfilterBtnClicked] = useState(false);
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let layoutList = detailsContClass === "workout-details-container-as-list";
 
@@ -122,10 +121,6 @@ const Workouts = ({}) => {
     />
   );
 
-  useEffect(() => {
-    console.log(displayPagination);
-  }, [displayPagination]);
-
   if (!workouts) {
     return (
       <div className="skeleton-content-not-loaded">
@@ -179,6 +174,8 @@ const Workouts = ({}) => {
                 showMobileFormModal,
                 openSearchInputModal,
                 setopenSearchInputModal,
+                filterBtnClicked,
+                setfilterBtnClicked,
               }}
             ></WorkoutsSection>
           </div>
@@ -201,6 +198,7 @@ const Workouts = ({}) => {
                   showMobileFormModal,
                   setShowMobileFormModal,
                   openSearchInputModal,
+                  filterBtnClicked,
                 }}
               />
             </div>

@@ -7,6 +7,11 @@
   height: fit-content;
   padding: 10px 20px;
 }
+@mixin d_flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .delete-workout-mobile-container {
   .delete-workout-mobile-inner {
     display: flex;
@@ -19,7 +24,6 @@
       flex-direction: column;
       justify-content: center;
       height: 200px;
-      //   resize: vertical;
       max-width: 550px;
       span {
         font-family: "Roboto";
@@ -48,12 +52,59 @@
       }
     }
   }
+  @media screen and (min-width: 0px) and (max-width: 400px) {
+    .delete-workout-mobile-inner {
+      .delete-workout-mobile-text {
+        span {
+          margin-top: 40px;
+        }
+      }
+      .delete-workout-mobile-btns {
+        margin-top: 30px;
+      }
+    }
+  }
 }
 .mobile-control-modal {
+  justify-content: center;
+  align-items: center;
+  display: flex;
   &.ant-modal {
     .ant-modal-content {
-      width: 100% !important;
-      height: 400px !important;
+      width: 95%;
+      height: 400px;
+    }
+  }
+  @media screen and (min-width: 400px) and (max-width: 600px) {
+    &.ant-modal {
+      .ant-modal-content {
+        width: 80%;
+        height: 400px;
+      }
+    }
+  }
+  @media screen and (min-width: 0px) and (max-width: 400px) {
+    &.ant-modal {
+      .ant-modal-content {
+        width: 70%;
+        height: 400px;
+      }
+    }
+  }
+  @media screen and (min-width: 0px) and (max-width: 500px) {
+    &.ant-modal {
+      .ant-modal-content {
+        .ant-modal-close {
+          .ant-modal-close-x {
+            img {
+              width: 25px !important;
+              height: 25px !important;
+              position: relative;
+              left: 5px !important;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -64,6 +115,67 @@
       height: 250px;
       margin-left: 50px;
       margin-top: 50px;
+    }
+  }
+  .share-mobile-modal-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Mulish";
+      font-size: 25px;
+    }
+    img {
+      width: 200px;
+      height: 150px;
+    }
+  }
+  @media screen and (min-width: 400px) and (max-width: 600px) {
+    @include d_flex();
+    &.ant-modal {
+      position: relative;
+      right: 20px;
+
+      .ant-modal-content {
+        width: 60%;
+        height: 300px;
+      }
+    }
+  }
+  @media screen and (min-width: 0px) and (max-width: 400px) {
+    @include d_flex();
+    &.ant-modal {
+      position: relative;
+      right: 20px;
+
+      .ant-modal-content {
+        width: 50%;
+        height: 300px;
+      }
+    }
+  }
+  @media screen and (min-width: 0px) and (max-width: 500px) {
+    @include d_flex();
+    &.ant-modal {
+      position: relative;
+      right: 20px;
+      .ant-modal-content {
+        .ant-modal-close {
+          .ant-modal-close-x {
+            img {
+              width: 25px !important;
+              height: 25px !important;
+              position: relative;
+              left: 5px !important;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -84,6 +196,8 @@
 .edit-modal-wrapper {
   &.ant-modal {
     .ant-modal-content {
+      position: relative;
+      bottom: 50px;
       height: 480px !important;
     }
   }
@@ -93,24 +207,4 @@
   justify-content: center;
   align-items: center;
   margin-top: 25%;
-}
-.share-mobile--modal {
-  .share-mobile-modal-text {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 20px;
-    span {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: "Mulish";
-      font-size: 25px;
-    }
-    img {
-      width: 200px;
-      height: 150px;
-    }
-  }
 }

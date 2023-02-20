@@ -5,14 +5,14 @@ import React, { useEffect, useState } from "react";
 import magnifying_glass from "../../assets/img/magnifying_glass.svg";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { ClearIcon, CloseX } from "../icons/Icons";
-import { InputModal } from "../inputs/InputModal";
+import { SearchInputModal } from "../inputs/SearchInputModal";
 
 import "./sections_styles.scss";
 import {
   WorkoutsList,
   WorkoutsList as WorkoutsListFiltered,
 } from "./WorkoutsList";
-import { WorkoutsListMobile } from "./WorkoutsListMobile";
+import { WorkoutsListMobile as WorkoutsListMobileFiltered } from "./WorkoutsListMobile";
 
 export const WorkoutsSection = ({
   workouts,
@@ -29,9 +29,11 @@ export const WorkoutsSection = ({
   setFilteredResults,
   showAllExistentWorkouts,
   setshowAllExistentWorkouts,
-  showMobileFormModal,
-  openSearchInputModal,
+  showMobileFormModal, //the modal that opens when the users clicks on Add Workout btn
+  openSearchInputModal, //the modal that opens when the users clicks on the search icon
   setopenSearchInputModal,
+  filterBtnClicked,
+  setfilterBtnClicked,
 }) => {
   const [searchValue, setSearchValue] = useState(``);
   const [filteredResultsByMobileModal, setFilteredResultsByMobileModal] =
@@ -58,6 +60,8 @@ export const WorkoutsSection = ({
     setSearchInput(searchValue);
     if (searchInput !== "") {
       const filteredData = workouts.filter((workout) => {
+        // const pureString = str.replace(/(?:\r\n|\r|\n)/g, '');
+
         const createdAtFormatted = formatDistanceToNow(
           new Date(workout.createdAt),
           {
@@ -65,14 +69,14 @@ export const WorkoutsSection = ({
           }
         );
         return (
-          Object.values(createdAtFormatted)
-            .join("")
-            .toLowerCase()
-            .includes(searchInput.toString().toLowerCase()) ||
-          Object.values(workout.title)
-            .join("")
-            .toLowerCase()
-            .includes(searchInput.toString().toLowerCase())
+          Object.values(createdAtFormatted).join("").toLowerCase().includes(
+            searchInput.toString().toLowerCase()
+            // .replace(/(?:\r\n|\r|\n)/g, "")
+          ) ||
+          Object.values(workout.title).join("").toLowerCase().includes(
+            searchInput.toString().toLowerCase()
+            // .replace(/(?:\r\n|\r|\n)/g, "")
+          )
           // Object.values(user.userName).join("").toLowerCase() === searchInput.toString().toLowerCase() for exact search matching
         );
       });
@@ -118,7 +122,7 @@ export const WorkoutsSection = ({
   }, [showAllWorkoutsCondensed, isMobileScreen]);
 
   useEffect(() => {
-    // when the modal is closed, clear the input field, and if no result is found, display this msg : No Item was found
+    // when the modal is closed and when there is no results regarding the search query, clear the input field, and if no result is found, display this msg : No Item was found
     if (!openSearchInputModal) {
       if (searchValue) {
         if (!filteredResultsByMobileModal?.length) {
@@ -155,18 +159,23 @@ export const WorkoutsSection = ({
             }
           ></Input>
         ) : is_less_than_700 ? (
-          <Button
-            onClick={() => {
-              setopenSearchInputModal(true);
-            }}
-            className="workouts-magnifying_glass-btn"
-          >
-            <img
-              className={openSearchInputModal ? `glass_clouded` : ""}
-              src={magnifying_glass}
-              alt=""
-            />
-          </Button>
+          <>
+            {!showMobileFormModal && (
+              //when the Add workout modal is closed, show this btn, if not : hide it
+              <Button
+                onClick={() => {
+                  setopenSearchInputModal(true);
+                }}
+                className="workouts-magnifying_glass-btn"
+              >
+                <img
+                  className={openSearchInputModal ? `glass_clouded` : ""}
+                  src={magnifying_glass}
+                  alt=""
+                />
+              </Button>
+            )}
+          </>
         ) : null}
 
         {showMsg && showAllExistentWorkouts && (
@@ -177,70 +186,93 @@ export const WorkoutsSection = ({
       </div>
 
       {/* the results and data when the user searches from the desktop text Field */}
-      <>
-        {searchInput?.length >= 1 ? ( //if something is being typed in the search input field
-          showfilteredResults === true && (
-            <WorkoutsListFiltered
-              {...{
-                filteredResults,
-                currentPage,
-                setCurrentPage,
-                searchInput,
-                setmovePaginationFromBottom,
-                setpaginationClassName,
-                showfilteredResults,
-                setshowfilteredResults,
-                detailsContClass,
-                setdetailsContClass,
-                setDisplayPagination,
-                containerClass,
-                setcontainerClass,
-              }}
-            />
-          )
-        ) : (
-          <>
-            {!searchValue?.length >= 1 && (
+      {is_more_than_700 && (
+        <>
+          {/* <span>is_more_than_700</span> */}
+          {!searchValue?.length && (
+            <>
+              {searchInput?.length >= 1 ? ( //if something is being typed in the search input field
+                showfilteredResults === true && (
+                  <WorkoutsListFiltered
+                    {...{
+                      filteredResults,
+                      currentPage,
+                      setCurrentPage,
+                      searchInput,
+                      setmovePaginationFromBottom,
+                      setpaginationClassName,
+                      showfilteredResults,
+                      setshowfilteredResults,
+                      detailsContClass,
+                      setdetailsContClass,
+                      setDisplayPagination,
+                      containerClass,
+                      setcontainerClass,
+                    }}
+                  />
+                )
+              ) : (
+                <>
+                  {!searchValue?.length >= 1 && (
+                    <WorkoutsList
+                      {...{
+                        workouts, //all workouts
+                        currentPage,
+                        setCurrentPage,
+                        searchInput,
+                        setmovePaginationFromBottom,
+                        setpaginationClassName,
+                        setDisplayPagination,
+                        detailsContClass,
+                        setdetailsContClass,
+                        setcontainerClass,
+                        containerClass,
+                        border,
+                        setshowAllExistentWorkouts,
+                        showAllExistentWorkouts,
+                        showAllWorkoutsCondensed,
+                        setshowAllWorkoutsCondensed,
+                        showMobileFormModal,
+                        filterBtnClicked,
+                        setfilterBtnClicked,
+                      }}
+                    />
+                  )}
+                </>
+              )}
+            </>
+          )}
+        </>
+      )}
+
+      {/* the results and data when the user searches from the mobile modal text Field */}
+      {is_less_than_700 && (
+        <>
+          {/* <span>is_less_than_700</span> */}
+          {searchValue?.length >= 1 && !openSearchInputModal ? (
+            <div>
+              <>
+                <WorkoutsListMobileFiltered
+                  {...{
+                    filteredResultsByMobileModal,
+                    searchValue,
+                    showMobileFormModal,
+                  }}
+                ></WorkoutsListMobileFiltered>
+              </>
+            </div>
+          ) : (
+            <>
               <WorkoutsList
                 {...{
-                  workouts, //all workouts
-                  currentPage,
-                  setCurrentPage,
-                  searchInput,
-                  setmovePaginationFromBottom,
-                  setpaginationClassName,
-                  setDisplayPagination,
-                  detailsContClass,
-                  setdetailsContClass,
-                  setcontainerClass,
-                  containerClass,
-                  border,
-                  setshowAllExistentWorkouts,
-                  showAllExistentWorkouts,
-                  showAllWorkoutsCondensed,
-                  setshowAllWorkoutsCondensed,
+                  workouts,
                   showMobileFormModal,
                 }}
               />
-            )}
-          </>
-        )}
-      </>
-
-      {/* the results and data when the user searches from the mobile modal text Field */}
-      <div>
-        {searchValue?.length >= 1 ? (
-          <div>
-            <WorkoutsListMobile
-              {...{ filteredResultsByMobileModal, searchValue }}
-            ></WorkoutsListMobile>
-          </div>
-        ) : (
-          <WorkoutsListMobile
-            {...{ workouts, searchValue }}
-          ></WorkoutsListMobile>
-        )}
-      </div>
+            </>
+          )}
+        </>
+      )}
 
       {/* when the viewport width is_less_than_700px */}
       <Modal
@@ -263,17 +295,17 @@ export const WorkoutsSection = ({
         }}
         closeIcon={<CloseX></CloseX>}
       >
-        <InputModal
+        <SearchInputModal
           {...{
             workouts,
             searchValue,
             setSearchValue,
-            setFilteredResultsByMobileModal,
             filteredResultsByMobileModal,
-            setopenSearchInputModal,
+            setFilteredResultsByMobileModal,
             openSearchInputModal,
+            setopenSearchInputModal,
           }}
-        ></InputModal>
+        ></SearchInputModal>
       </Modal>
     </div>
   );

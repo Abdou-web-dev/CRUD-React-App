@@ -95,6 +95,9 @@ $xx-large: 1400px;
         float: right;
       }
     }
+    &.workouts_small_screen {
+      padding-bottom: 200px;
+    }
   }
   .workouts-section-results {
     display: flex;
@@ -105,7 +108,8 @@ $xx-large: 1400px;
       font-family: "Mulish";
     }
   }
-
+  // &.workouts-section-container-mobile {
+  // }
   @media screen and (min-width: $large) and (max-width: $xx-large) {
     .chest-page-workouts-condensed-container {
       .chest-page-workouts-condensed-inner {
@@ -161,9 +165,97 @@ $xx-large: 1400px;
     }
   }
   @media screen and (max-width: 800px) {
-    margin-top: 140px;
+    margin-top: 220px;
     .chest-page-workouts-condensed-container {
       display: none;
+    }
+  }
+  //
+  @media screen and (min-width: 600px) and (max-width: 700px) {
+    .workouts-section-container-items-and-closebtn {
+      .workouts-section-list-container-mobile {
+        position: relative;
+        right: 70px !important;
+      }
+    }
+  }
+  @media screen and (min-width: 600px) and (max-width: 700px) {
+    .workouts-section-container-items-and-closebtn {
+      .workouts-section-list-container-mobile {
+        position: relative;
+        right: 70px !important;
+      }
+    }
+  }
+  @media screen and (min-width: 500px) and (max-width: 600px) {
+    .workouts-section-container-items-and-closebtn {
+      .workouts-section-list-container-mobile {
+        position: relative;
+        right: 70px !important;
+      }
+    }
+  }
+  @media screen and (min-width: 400px) and (max-width: 500px) {
+    .workouts-section-container-items-and-closebtn {
+      .workouts-section-list-container-mobile {
+        position: relative;
+        right: 70px !important;
+      }
+    }
+  }
+  @media screen and (min-width: 300px) and (max-width: 400px) {
+    .workouts-section-container-items-and-closebtn {
+      .workouts-section-list-container-mobile {
+        position: relative;
+        right: 70px !important;
+      }
+    }
+  }
+  @media screen and (min-width: 200px) and (max-width: 300px) {
+    .workouts-section-container-items-and-closebtn {
+      .workouts-section-list-container-mobile {
+        position: relative;
+        right: 70px !important;
+      }
+    }
+  }
+  @media screen and (min-width: 0px) and (max-width: 200px) {
+    .workouts-section-container-items-and-closebtn {
+      .workouts-section-list-container-mobile {
+        position: relative;
+        right: 70px !important;
+      }
+    }
+  }
+  //
+  &.workouts-section-container-mobile {
+    @media screen and (min-width: 600px) and (max-width: 700px) {
+      position: relative;
+      right: 70px !important;
+    }
+    @media screen and (min-width: 600px) and (max-width: 700px) {
+      position: relative;
+      right: 70px !important;
+    }
+    @media screen and (min-width: 500px) and (max-width: 600px) {
+      position: relative;
+      right: 70px !important;
+    }
+    @media screen and (min-width: 400px) and (max-width: 500px) {
+      position: relative;
+      right: 70px !important;
+    }
+    @media screen and (min-width: 300px) and (max-width: 400px) {
+      position: relative;
+      right: 90px !important;
+    }
+    @media screen and (min-width: 200px) and (max-width: 300px) {
+      position: relative;
+      right: 90px !important;
+    }
+    @media screen and (min-width: 0px) and (max-width: 200px) {
+      position: relative;
+      right: 70px !important;
     }
   }
 }

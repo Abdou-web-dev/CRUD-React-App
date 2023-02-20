@@ -47,6 +47,8 @@ export function WorkoutsListBtns({
   setshowFilterBtns,
   setDisplayPagination,
   addOrRemoveWorkout,
+  filterBtnClicked,
+  setfilterBtnClicked,
 }) {
   let hideOtherWorkouts = !showAllWorkoutsCondensed && !showAllWorkouts;
   const [showChestResults, setShowChestResults] = useState(false);
@@ -162,7 +164,6 @@ export function WorkoutsListBtns({
       case `Chest`:
         hideAllWorkouts();
         setworkoutCateg(`Chest`);
-
         setShowChestResults(true);
         break;
       case `Hamstrings`:
@@ -193,25 +194,21 @@ export function WorkoutsListBtns({
       case `Shoulders`:
         hideAllWorkouts();
         setworkoutCateg(`Shoulders`);
-
         setShowShouldersResults(true);
         break;
       case `Forearms`:
         hideAllWorkouts();
         setworkoutCateg(`Forearms`);
-
         setShowForearmsResults(true);
         break;
       case `Biceps`:
         hideAllWorkouts();
         setworkoutCateg(`Biceps`);
-
         setShowBicepsResults(true);
         break;
       case `Back`:
         hideAllWorkouts();
         setworkoutCateg(`Back`);
-
         setShowBackResults(true);
         break;
       default:
@@ -220,6 +217,8 @@ export function WorkoutsListBtns({
     setFilteredWorkout(true);
     setDisplayPagination("none");
     setshowNotification(true);
+    setfilterBtnClicked(true);
+    console.log(filterBtnClicked);
   }
   function handleShowFilterBtns() {
     //toggle logic, so that when the user clicks on the filter btn, the filter list of btns is displayed, and when he clicks again, this list is hidden
@@ -238,6 +237,12 @@ export function WorkoutsListBtns({
       JSON.stringify(selectedWorkouts)
     );
   }, [selectedWorkouts]);
+
+  useEffect(() => {
+    if (showResults) {
+      console.log("showResults !!!!");
+    }
+  }, [showResults]);
 
   return (
     <div className="workouts-list-and-btns-container">

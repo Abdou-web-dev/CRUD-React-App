@@ -2,6 +2,7 @@
   max-width: 350px;
   .workout-details-mobile-inner {
     padding: 15px 20px;
+    margin-bottom: 20px;
 
     .workout-details-mobile-card {
       .workout-details-mobile-card-content-text {
@@ -207,7 +208,7 @@
     }
   }
   @media screen and (min-width: 0px) and (max-width: 380px) {
-    border: 2px solid lightgray;
+    // border: 2px solid lightgray;
     width: 205px;
     .workout-details-mobile-inner {
       padding: 5px;
@@ -335,31 +336,31 @@
   @media screen and (min-width: 550px) and (max-width: 600px) {
     &.move_a_bit_from_left {
       position: relative !important;
-      left: 20% !important;
+      left: 10% !important;
     }
   }
   @media screen and (min-width: 500px) and (max-width: 550px) {
     &.move_a_bit_from_left {
       position: relative !important;
-      left: 20% !important;
+      left: 10% !important;
     }
   }
   @media screen and (min-width: 450px) and (max-width: 500px) {
     &.move_a_bit_from_left {
       position: relative !important;
-      left: 15% !important;
+      left: 10% !important;
     }
   }
   @media screen and (min-width: 400px) and (max-width: 450px) {
     &.move_a_bit_from_left {
       position: relative !important;
-      left: 20% !important;
+      left: 0% !important;
     }
   }
   @media screen and (min-width: 0px) and (max-width: 400px) {
     &.move_a_bit_from_left {
       position: relative !important;
-      left: 20% !important;
+      left: 0% !important;
     }
   }
 }

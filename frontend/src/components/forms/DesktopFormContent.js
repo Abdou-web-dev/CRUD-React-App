@@ -41,6 +41,7 @@ export const DesktopFormContent = ({
   handleResetFields,
   handleListIconClick,
   showSuggExoTitle,
+  filterBtnClicked,
 }) => {
   return (
     <div className="workout-form-container">
@@ -57,12 +58,13 @@ export const DesktopFormContent = ({
         ) : null}
       </div>
       <form
-        className={`workouts-form
-          ${showAllExistentWorkouts && "workouts-form-allExistentWorkouts"}
-          `}
+        className={`workouts-form ${
+          showAllExistentWorkouts ? "workouts-form-allExistentWorkouts" : ""
+        }`}
         onSubmit={handleSubmit}
       >
         <div className={`workouts-form-inner`}>
+          {/* the header of the form */}
           <div
             className={`workouts-form-inner-btn-and-text`}
             style={{
@@ -71,7 +73,7 @@ export const DesktopFormContent = ({
               alignItems: `center`,
             }}
           >
-            {showAllExistentWorkouts && !showFormNewWindow && (
+            {showAllExistentWorkouts && !showFormNewWindow ? (
               <Button
                 onClick={() => setShowFormNewWindow(!showFormNewWindow)}
                 className="form-filter-btn-plus-btn"
@@ -79,7 +81,7 @@ export const DesktopFormContent = ({
                 <img src={plus} alt="" />
                 <span>Add a New Workout</span>
               </Button>
-            )}
+            ) : null}
             {!showFormNewWindow && !showAllExistentWorkouts ? (
               <div className="form-filter-h3">
                 <h3>Add a New Workout</h3>
@@ -87,6 +89,7 @@ export const DesktopFormContent = ({
             ) : null}
           </div>
 
+          {/* this is the rest of the form content */}
           <>
             {!showAllExistentWorkouts || showFormNewWindow ? (
               <>

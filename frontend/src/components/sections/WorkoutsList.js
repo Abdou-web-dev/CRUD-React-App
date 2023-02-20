@@ -35,6 +35,8 @@ export function WorkoutsList({
   showAllWorkoutsCondensed,
   setshowAllWorkoutsCondensed,
   showMobileFormModal,
+  filterBtnClicked,
+  setfilterBtnClicked,
 }) {
   //always put state variables first , then regular variables, then useEffect statement and the other fncts
 
@@ -68,6 +70,7 @@ export function WorkoutsList({
     "(min-width: 0px) and (max-width: 700px)"
   );
   const isDesktopSreen = useMediaQuery("(min-width: 700px)");
+  const is_larger_than_980 = useMediaQuery("(min-width: 980px)");
 
   //functions
   function handleIconClick() {
@@ -237,9 +240,11 @@ export function WorkoutsList({
     if (searchInput?.length !== 0) {
       setsecondBtnDisabled(true);
       setFilterBtnDisabled(true);
-      setBoxShadow(
-        "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
-      );
+      if (is_larger_than_980) {
+        setBoxShadow(
+          "rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px"
+        );
+      }
     } else {
       setBoxShadow("");
       setFilterBtnDisabled(false);
@@ -298,6 +303,8 @@ export function WorkoutsList({
             searchInput,
             setDisplayPagination,
             addOrRemoveWorkout,
+            filterBtnClicked,
+            setfilterBtnClicked,
           }}
         />
       </div>
@@ -325,7 +332,11 @@ export function WorkoutsList({
         {/* workouts filtered or not and closeBtn */}
         {showAllWorkouts === true && (
           <div
-            className="workouts-section-container-items-and-closebtn"
+            className={
+              isSmallScreen
+                ? "workouts-section-container-items-and-closebtn workouts_small_screen"
+                : "workouts-section-container-items-and-closebtn"
+            }
             style={{
               background: bg,
               boxShadow: boxShadow,
@@ -333,7 +344,8 @@ export function WorkoutsList({
             }}
           >
             <div
-              className={`${containerClass} ${
+              // className={`${containerClass ?? ""} means that when containerClass is undefined, the className will be equal to ""
+              className={`${containerClass ?? ""} ${
                 filteredResults?.length === 1 &&
                 detailsContClass === "workout-details-container-as-grid"
                   ? "grid-one-item"
@@ -377,7 +389,7 @@ export function WorkoutsList({
                         ))}
                     </>
                   ) : isSmallScreen ? (
-                    <>
+                    <div className={"workouts-section-list-container-mobile"}>
                       {workouts &&
                         workouts?.map((workout, index) => (
                           <WorkoutDetailsItemMobile
@@ -388,7 +400,7 @@ export function WorkoutsList({
                             key={index}
                           ></WorkoutDetailsItemMobile>
                         ))}
-                    </>
+                    </div>
                   ) : null}
 
                   {/* list of workouts after the search */}

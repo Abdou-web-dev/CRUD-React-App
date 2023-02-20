@@ -2,19 +2,19 @@ import { Button, Input as ModalInput } from "antd";
 import { formatDistanceToNow } from "date-fns";
 import "./inputs_styles.scss";
 
-export function InputModal({
+export function SearchInputModal({
   workouts,
   searchValue,
   setSearchValue,
   setopenSearchInputModal,
   setFilteredResultsByMobileModal,
-  openSearchInputModal,
+  // openSearchInputModal,
 }) {
-  const searchItems = () => {
+  const searchItemsOnOkClick = () => {
     if (searchValue !== "") {
       const filteredData = workouts?.filter((workout) => {
         const createdAtFormatted = formatDistanceToNow(
-          new Date(workout.createdAt),
+          new Date(workout?.createdAt),
           {
             addSuffix: true,
           }
@@ -24,7 +24,7 @@ export function InputModal({
             .join("")
             .toLowerCase()
             .includes(searchValue.toString().toLowerCase()) ||
-          Object.values(workout.title)
+          Object.values(workout?.title)
             .join("")
             .toLowerCase()
             .includes(searchValue.toString().toLowerCase())
@@ -39,7 +39,7 @@ export function InputModal({
     setSearchValue(e.target.value);
   };
   const handleOKClick = (e) => {
-    searchItems(e.target.value);
+    searchItemsOnOkClick(e.target.value);
     setopenSearchInputModal(false);
   };
   const handlePressEnter = (e) => {
@@ -66,9 +66,7 @@ export function InputModal({
             ? "input-modal-container-btn user-typing"
             : "input-modal-container-btn user-not-typing"
         }
-        onClick={(e) => {
-          handleOKClick(e);
-        }}
+        onClick={handleOKClick}
       >
         <span>OK</span>
       </Button>

@@ -7,7 +7,6 @@ function StarredItems({}) {
 
   useEffect(() => {
     const data = localStorage.getItem("selectedWorkoutsState");
-    // console.log(data);
     if (data !== null) setfavoriteWorkoutsData(JSON.parse(data));
   }, []);
 
