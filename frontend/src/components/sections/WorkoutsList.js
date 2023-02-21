@@ -1,5 +1,3 @@
-import { CloseOutlined } from "@ant-design/icons";
-import { IconButton } from "@mui/material";
 import { Button, Spin } from "antd";
 import { useEffect, useState } from "react";
 import blocs from "../../assets/img/blocs.png";
@@ -15,6 +13,7 @@ import { WorkoutDetailsItem } from "./WorkoutDetailsItem";
 import { WorkoutDetailsItemCondensed } from "./WorkoutDetailsItemCondensed";
 import { WorkoutDetailsItemMobile } from "./WorkoutDetailsItemMobile";
 
+// delete all the code relevant to filteredResults , since a separate component called WorkoutsListFiltered has been created!!!
 export function WorkoutsList({
   workouts,
   currentPage,
@@ -23,7 +22,6 @@ export function WorkoutsList({
   filteredResults,
   searchInput,
   setCurrentPage,
-  setshowfilteredResults,
   setDisplayPagination,
   detailsContClass,
   setdetailsContClass,
@@ -61,9 +59,8 @@ export function WorkoutsList({
 
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let layoutList = detailsContClass === "workout-details-container-as-list";
-  let eitherLayout = layoutGrid || layoutList;
+  // let eitherLayout = layoutGrid || layoutList;
 
-  let result = filteredResults?.length === 1 ? `result` : `results`;
   const [containerMarginLeft, setContainerMarginLeft] = useState(`100px`);
 
   const isSmallScreen = useMediaQuery(
@@ -297,7 +294,6 @@ export function WorkoutsList({
             setshowAllExistentWorkouts,
             border,
             showFilterBtns,
-            filteredResults,
             searchInput,
             setshowFilterBtns,
             searchInput,
@@ -308,25 +304,6 @@ export function WorkoutsList({
           }}
         />
       </div>
-
-      <>
-        {/* nbr of Results sentence */}
-        {searchInput?.length !== 0 && eitherLayout && (
-          <div className="workouts-section-results">
-            {filteredResults?.length !== 0 ? (
-              <span>
-                You have got {filteredResults?.length} {result} !
-              </span>
-            ) : filteredResults?.length === 0 ? (
-              <div>
-                <span>
-                  {`Sorry, there is no item with the search criteria!`}
-                </span>
-              </div>
-            ) : null}
-          </div>
-        )}
-      </>
 
       <>
         {/* workouts filtered or not and closeBtn */}
@@ -340,17 +317,13 @@ export function WorkoutsList({
             style={{
               background: bg,
               boxShadow: boxShadow,
-              height: filteredResults?.length === 0 ? "0px" : "",
             }}
           >
             <div
               // className={`${containerClass ?? ""} means that when containerClass is undefined, the className will be equal to ""
-              className={`${containerClass ?? ""} ${
-                filteredResults?.length === 1 &&
-                detailsContClass === "workout-details-container-as-grid"
-                  ? "grid-one-item"
-                  : ""
-              }`}
+              className={`${containerClass ?? ""}
+              ${searchInput ? "apply_overlay" : ""}
+              `}
             >
               {!showAllWorkoutsCondensed && (
                 <>
@@ -402,60 +375,9 @@ export function WorkoutsList({
                         ))}
                     </div>
                   ) : null}
-
-                  {/* list of workouts after the search */}
-                  {filteredResults &&
-                    filteredResults?.map((filteredResult, index) => (
-                      <WorkoutDetailsItem
-                        {...{
-                          filteredResult,
-                          index,
-                          setbg,
-                          detailsContClass,
-                          setdetailsContClass,
-                          setcontainerClass,
-                          currentPage,
-                          layoutGrid,
-                          searchInput,
-                          showItemsPage1,
-                          showItemsPage2,
-                          showItemsPage3,
-                          showItemsPage4,
-                          showItemsPage5,
-                          showItemsPage6,
-                          setCurrentPage,
-                          showItemsPage7,
-                          showItemsPage8,
-                          showItemsPage9,
-                          showItemsPage10,
-                        }}
-                        key={index}
-                      ></WorkoutDetailsItem>
-                    ))}
                 </>
               )}
             </div>
-
-            <>
-              {searchInput?.length !== 0 &&
-                filteredResults?.length !== 0 &&
-                detailsContClass === `workout-details-container-as-grid` && (
-                  <div className={"workouts-list-close-icon-div"}>
-                    <IconButton
-                      onClick={() => {
-                        setshowfilteredResults(false);
-                        setmovePaginationFromBottom("180px");
-                      }}
-                      className="workouts-list-close-icon-btn"
-                    >
-                      <CloseOutlined
-                        className="workouts-list-close-icon"
-                        style={{ color: "red" }}
-                      ></CloseOutlined>
-                    </IconButton>
-                  </div>
-                )}
-            </>
           </div>
         )}
       </>

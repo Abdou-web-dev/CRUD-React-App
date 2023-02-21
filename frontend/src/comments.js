@@ -188,3 +188,58 @@ const EmailInput = (
   />
 );
 // ===========> use {EmailInput}
+
+{
+  /* pagination of Filtered Results , composed only of two arrows , without the pages' numbers */
+}
+{
+  searchInput?.length > 0 && isLargeScreen ? (
+    <Pagination
+      className={`pagination-filtered-results
+    ${layoutGrid && "pagination-filtered-results-grid"}
+    ${layoutList && "pagination-filtered-results-list"}
+    ${
+      filteredResults?.length >= 1 &&
+      filteredResults?.length <= 3 &&
+      "pagination-filtered-results-less-than4"
+    }
+    ${filteredResults?.length === 0 && "pagination-filtered-results-none"}`}
+      prevIcon={
+        paginationClassName === "pagination-content-loaded-grid" ? (
+          <Tooltip title="Previous page">
+            <div>
+              <PrevArrow />
+            </div>
+          </Tooltip>
+        ) : (
+          //pagination-content-loaded-list
+          <Tooltip title="Previous page">
+            <div>
+              <PrevArrowList />
+            </div>
+          </Tooltip>
+        )
+      }
+      nextIcon={
+        paginationClassName === "pagination-content-loaded-grid" ? (
+          <Tooltip title="Next page">
+            <div>
+              <NextArrow />
+            </div>
+          </Tooltip>
+        ) : (
+          <Tooltip title="Next page">
+            <div>
+              <NextArrowList />
+            </div>
+          </Tooltip>
+        )
+      }
+      current={currentPage}
+      onChange={(page, e) => {
+        setCurrentPage(page);
+      }}
+      total={`30`}
+    />
+  ) : null;
+}

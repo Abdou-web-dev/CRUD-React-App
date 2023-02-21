@@ -86,7 +86,7 @@ export const LeftArrow = () => {
 };
 export const ClearIcon = () => {
   return (
-    <img style={{ width: "20px", height: "20px" }} src={clearIcon} alt="" />
+    <img style={{ width: "40px", height: "40px" }} src={clearIcon} alt="" />
   );
 };
 export const NextArrow = () => {

@@ -264,10 +264,52 @@ $xx-large: 1400px;
   .workouts-section-input {
     width: 80%;
     .workouts-search-ant-input {
-      height: 70px;
+      height: 80px !important;
       & > * {
         font-size: 25px;
         font-family: "Inconsolata";
+      }
+      .workouts-search-input-suffix-btns {
+        padding: 5px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        &.user-typing-suffix {
+          border: 1px solid lightgray;
+        }
+        .workouts-search-input-ok-btn {
+          height: fit-content;
+          span {
+            font-size: 26px;
+            letter-spacing: 1.5px;
+            color: white;
+            font-family: "Poppins";
+          }
+          &:hover {
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px 0px,
+              rgba(0, 0, 0, 0.07) 0px 2px 2px 0px,
+              rgba(0, 0, 0, 0.07) 0px 4px 4px 0px,
+              rgba(0, 0, 0, 0.07) 0px 8px 8px 0px,
+              rgba(0, 0, 0, 0.07) 0px 16px 16px 0px;
+          }
+
+          &.user-typing {
+            background: rgba(114, 115, 115, 0.45);
+          }
+          &.user-not-typing {
+            background: rgba(114, 115, 115, 0.2);
+          }
+        }
+        .workouts-search-input-delete-btn {
+          background: none !important;
+          border-radius: 0;
+          &:hover {
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+              rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+          }
+        }
       }
     }
 
@@ -570,5 +612,11 @@ $xx-large: 1400px;
         padding-right: 10px;
       }
     }
+  }
+}
+
+.workouts-list-filtered-container {
+  .workouts-list-filtered-inner {
+    // display: none;
   }
 }

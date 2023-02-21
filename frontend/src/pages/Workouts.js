@@ -3,16 +3,12 @@ import { BackTop, Pagination, Spin } from "antd";
 import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 // components
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { Skeleton, Tooltip } from "@mui/material";
+import { Skeleton } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { WorkoutsForm } from "../components/forms/WorkoutsForm";
 
 import {
   LeftArrow as PrevIcon,
-  NextArrow,
-  NextArrowList,
-  PrevArrow,
-  PrevArrowList,
   RightArrow as NextIcon,
 } from "../components/icons/Icons";
 import { useMediaQuery } from "../hooks/UseMediaQuery";
@@ -23,19 +19,17 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import "./pages_styles.scss";
 
 const Workouts = ({}) => {
+  // let workoutsList = workouts?.map((workout) => workout._id);
   //instead of adding workouts object down to child components as props, I can use this hook in each component that needs workouts
   const { workouts, dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
-
   let intialClassName = `workout-details-container-as-list`;
-
-  // let workoutsList = workouts?.map((workout) => workout._id);
   const [filteredResults, setFilteredResults] = React.useState([]);
   const [showAllExistentWorkouts, setshowAllExistentWorkouts] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchInput, setSearchInput] = useState("");
   const [displayPagination, setDisplayPagination] = useState("");
-  const [detailsContClass, setdetailsContClass] = useState(""); //this className state var is being passed as props to children
+  const [detailsContClass, setdetailsContClass] = useState(intialClassName); //this className state var is being passed as props to children
   const [movePaginationFromBottom, setmovePaginationFromBottom] =
     useState("220px");
   const [paginationClassName, setpaginationClassName] = useState(
@@ -48,6 +42,7 @@ const Workouts = ({}) => {
   let layoutList = detailsContClass === "workout-details-container-as-list";
 
   const isDesktopScreen = useMediaQuery("(min-width: 1350px)"); // returns true or false
+  // const isLargeScreen = useMediaQuery("(min-width: 1250px)"); // returns true or false
   const isMobileScreen = useMediaQuery("(max-width: 800px)"); // returns true or false
   const isTabletScreen = useMediaQuery(
     "(min-width: 992px) and (max-width: 1250px)"
@@ -94,10 +89,6 @@ const Workouts = ({}) => {
     isMobileScreen,
   ]);
 
-  useEffect(() => {
-    setdetailsContClass(intialClassName);
-  }, []);
-
   const MuiSkeletonJSX = (
     <Skeleton
       sx={{
@@ -120,7 +111,7 @@ const Workouts = ({}) => {
       }}
     />
   );
-
+  // Work on the Skeleton's responsivness!!!
   if (!workouts) {
     return (
       <div className="skeleton-content-not-loaded">
@@ -265,60 +256,6 @@ const Workouts = ({}) => {
             }}
             showSizeChanger={false}
             showQuickJumper
-          />
-        )}
-
-        {/* pagination of Filtered Results , composed only of two arrows , without the pages' numbers */}
-        {searchInput?.length > 0 && (
-          <Pagination
-            className={`pagination-filtered-results
-            ${layoutGrid && "pagination-filtered-results-grid"}
-            ${layoutList && "pagination-filtered-results-list"}
-            ${
-              filteredResults?.length >= 1 &&
-              filteredResults?.length <= 3 &&
-              "pagination-filtered-results-less-than4"
-            }
-            ${
-              filteredResults?.length === 0 &&
-              "pagination-filtered-results-none"
-            }`}
-            prevIcon={
-              paginationClassName === "pagination-content-loaded-grid" ? (
-                <Tooltip title="Previous page">
-                  <div>
-                    <PrevArrow />
-                  </div>
-                </Tooltip>
-              ) : (
-                //pagination-content-loaded-list
-                <Tooltip title="Previous page">
-                  <div>
-                    <PrevArrowList />
-                  </div>
-                </Tooltip>
-              )
-            }
-            nextIcon={
-              paginationClassName === "pagination-content-loaded-grid" ? (
-                <Tooltip title="Next page">
-                  <div>
-                    <NextArrow />
-                  </div>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Next page">
-                  <div>
-                    <NextArrowList />
-                  </div>
-                </Tooltip>
-              )
-            }
-            current={currentPage}
-            onChange={(page, e) => {
-              setCurrentPage(page);
-            }}
-            total={`30`}
           />
         )}
       </>

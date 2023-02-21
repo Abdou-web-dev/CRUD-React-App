@@ -6,12 +6,10 @@ import magnifying_glass from "../../assets/img/magnifying_glass.svg";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { ClearIcon, CloseX } from "../icons/Icons";
 import { SearchInputModal } from "../inputs/SearchInputModal";
-
+import { AwesomeSpinner } from "../spinners/AwesomeSpinner";
 import "./sections_styles.scss";
-import {
-  WorkoutsList,
-  WorkoutsList as WorkoutsListFiltered,
-} from "./WorkoutsList";
+import { WorkoutsList } from "./WorkoutsList";
+import { WorkoutsListFiltered } from "./WorkoutsListFiltered";
 import { WorkoutsListMobile as WorkoutsListMobileFiltered } from "./WorkoutsListMobile";
 
 export const WorkoutsSection = ({
@@ -38,26 +36,28 @@ export const WorkoutsSection = ({
   const [searchValue, setSearchValue] = useState(``);
   const [filteredResultsByMobileModal, setFilteredResultsByMobileModal] =
     useState([]);
-
-  const [showfilteredResults, setshowfilteredResults] = useState(true);
+  const [openFilteredListModal, setOpenFilteredListModal] = useState(false);
+  const [displaySpinner, setdisplaySpinner] = useState(true);
   const [containerClass, setcontainerClass] = useState("chest-page-workouts");
   const [showAllWorkoutsCondensed, setshowAllWorkoutsCondensed] =
     useState(false);
   const [border, setBorder] = useState(``);
   const [showMsg, setshowMsg] = useState(false);
-  let layoutGrid = detailsContClass === "workout-details-container-as-grid"; //returns a boolean value
-  let layoutList = detailsContClass === "workout-details-container-as-list";
+  // let layoutGrid = detailsContClass === "workout-details-container-as-grid"; //returns a boolean value
+  // let layoutList = detailsContClass === "workout-details-container-as-list";
   let msg = `To search for an item, you need to click on the 1st button below !`;
   const isMobileScreen = useMediaQuery("(max-width: 992px)"); // returns true or false
   const isWideScreen = useMediaQuery(
     "(max-width: 800px) and (min-width: 1240px)"
-  ); // returns true or false
+  );
+  const is_between_700_and_800 = useMediaQuery(
+    "(min-width: 700px) and (max-width: 800px)"
+  );
   const isDesktopScreen = useMediaQuery("(min-width: 1260px)");
   const is_less_than_700 = useMediaQuery("(max-width: 700px)");
   const is_more_than_700 = !is_less_than_700;
-
-  const searchItems = (searchValue) => {
-    setSearchInput(searchValue);
+  // searchItems on Click on Ok Btn or on Enter keyboard key
+  const searchItems = () => {
     if (searchInput !== "") {
       const filteredData = workouts.filter((workout) => {
         // const pureString = str.replace(/(?:\r\n|\r|\n)/g, '');
@@ -85,18 +85,31 @@ export const WorkoutsSection = ({
       setFilteredResults(workouts);
     }
   };
+
   const handleChange = (e) => {
-    searchItems(e.target.value);
+    setSearchInput(e.target.value);
   };
+  const handleOKClick = (e) => {
+    searchItems(e.target.value);
+    if (filteredResults?.length >= 1) {
+      setOpenFilteredListModal(true);
+      setdisplaySpinner(true);
+    } else {
+      setOpenFilteredListModal(false);
+    }
+    if (!filteredResults?.length) {
+      setTimeout(() => {
+        message.info(`There is no result !`, 1); //This is a prompt message for success, and it will disappear in 0.6 seconds
+      }, 800);
+      setdisplaySpinner(false);
+    }
+  };
+  const handlePressEnter = (e) => {
+    handleOKClick(e);
+  };
+
   const handleClearClick = () => {
     setSearchInput("");
-    setshowfilteredResults(true);
-    if (layoutGrid) {
-      setcontainerClass("chest-page-workouts showItemsAsGrid");
-    }
-    if (layoutList) {
-      setcontainerClass("chest-page-workouts");
-    }
   };
   function handleInputHover() {
     if (showAllExistentWorkouts) {
@@ -133,6 +146,22 @@ export const WorkoutsSection = ({
     }
   }, [openSearchInputModal]);
 
+  let result_word = filteredResults?.length === 1 ? `result` : "results";
+
+  useEffect(() => {
+    if (openFilteredListModal) {
+      setTimeout(() => {
+        message.info(
+          `You have got ${filteredResults?.length} ${result_word}`,
+          0.6
+        ); //This is a prompt message for success, and it will disappear in 0.6 seconds
+      }, 800);
+    }
+    if (filteredResults?.length === 0) {
+      setOpenFilteredListModal(false);
+    }
+  }, [openFilteredListModal]);
+
   return (
     <div className="workouts-section">
       <div
@@ -148,12 +177,39 @@ export const WorkoutsSection = ({
             onChange={handleChange}
             className="workouts-search-ant-input"
             suffix={
-              <IconButton onClick={handleClearClick}>
-                <ClearIcon />
-              </IconButton>
+              <div
+                className={
+                  searchInput
+                    ? "workouts-search-input-suffix-btns user-typing-suffix"
+                    : "workouts-search-input-suffix-btns"
+                }
+              >
+                <Button
+                  disabled={!searchInput}
+                  className={
+                    searchInput
+                      ? "workouts-search-input-ok-btn user-typing"
+                      : "workouts-search-input-ok-btn user-not-typing"
+                  }
+                  onClick={handleOKClick}
+                >
+                  <span>OK</span>
+                </Button>
+                {searchInput ? (
+                  <IconButton
+                    className={"workouts-search-input-delete-btn"}
+                    onClick={handleClearClick}
+                  >
+                    <ClearIcon />
+                  </IconButton>
+                ) : null}
+              </div>
             }
             placeholder=" &nbsp;Search a workout"
             onMouseOver={handleInputHover}
+            onPressEnter={(e) => {
+              handlePressEnter(e);
+            }}
             disabled={
               showAllExistentWorkouts || showAllWorkoutsCondensed ? true : false
             }
@@ -185,63 +241,83 @@ export const WorkoutsSection = ({
         )}
       </div>
 
+      {/* display a spinner at the cneter of the page , when the user tries to find a workout , hide it , when the modal is open */}
+
       {/* the results and data when the user searches from the desktop text Field */}
       {is_more_than_700 && (
         <>
-          {/* <span>is_more_than_700</span> */}
-          {!searchValue?.length && (
-            <>
-              {searchInput?.length >= 1 ? ( //if something is being typed in the search input field
-                showfilteredResults === true && (
+          <>
+            {searchInput?.length >= 1 ? (
+              <>
+                {is_between_700_and_800 ? (
                   <WorkoutsListFiltered
                     {...{
                       filteredResults,
-                      currentPage,
-                      setCurrentPage,
-                      searchInput,
-                      setmovePaginationFromBottom,
-                      setpaginationClassName,
-                      showfilteredResults,
-                      setshowfilteredResults,
-                      detailsContClass,
-                      setdetailsContClass,
-                      setDisplayPagination,
-                      containerClass,
-                      setcontainerClass,
+                      showMobileFormModal,
                     }}
                   />
-                )
-              ) : (
-                <>
-                  {!searchValue?.length >= 1 && (
-                    <WorkoutsList
-                      {...{
-                        workouts, //all workouts
-                        currentPage,
-                        setCurrentPage,
-                        searchInput,
-                        setmovePaginationFromBottom,
-                        setpaginationClassName,
-                        setDisplayPagination,
-                        detailsContClass,
-                        setdetailsContClass,
-                        setcontainerClass,
-                        containerClass,
-                        border,
-                        setshowAllExistentWorkouts,
-                        showAllExistentWorkouts,
-                        showAllWorkoutsCondensed,
-                        setshowAllWorkoutsCondensed,
-                        showMobileFormModal,
-                        filterBtnClicked,
-                        setfilterBtnClicked,
+                ) : (
+                  <>
+                    <Modal
+                      className={`workouts-list-filtered-modal`}
+                      open={openFilteredListModal}
+                      maskClosable={true}
+                      closable={filteredResults?.length >= 1}
+                      keyboard={true}
+                      mask={true}
+                      onOk={() => setOpenFilteredListModal(false)}
+                      onCancel={() => setOpenFilteredListModal(false)}
+                      footer={null}
+                      title={null}
+                      bodyStyle={{
+                        background: "rgba(211, 211, 211, 0.38)",
                       }}
-                    />
-                  )}
-                </>
-              )}
-            </>
-          )}
+                      maskStyle={{
+                        background: "rgba(211, 211, 211, 0.15)",
+                      }}
+                      closeIcon={<CloseX></CloseX>}
+                    >
+                      <WorkoutsListFiltered
+                        {...{
+                          filteredResults,
+                          showMobileFormModal,
+                        }}
+                      />
+                    </Modal>
+                    {!openFilteredListModal && displaySpinner ? (
+                      <AwesomeSpinner />
+                    ) : null}
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                <WorkoutsList
+                  {...{
+                    workouts, //all workouts
+                    currentPage,
+                    setCurrentPage,
+                    searchInput,
+                    setmovePaginationFromBottom,
+                    setpaginationClassName,
+                    setDisplayPagination,
+                    detailsContClass,
+                    setdetailsContClass,
+                    setcontainerClass,
+                    containerClass,
+                    border,
+                    setshowAllExistentWorkouts,
+                    showAllExistentWorkouts,
+                    showAllWorkoutsCondensed,
+                    setshowAllWorkoutsCondensed,
+                    showMobileFormModal,
+                    filterBtnClicked,
+                    setfilterBtnClicked,
+                  }}
+                />
+              </>
+            )}
+          </>
         </>
       )}
 
@@ -250,17 +326,13 @@ export const WorkoutsSection = ({
         <>
           {/* <span>is_less_than_700</span> */}
           {searchValue?.length >= 1 && !openSearchInputModal ? (
-            <div>
-              <>
-                <WorkoutsListMobileFiltered
-                  {...{
-                    filteredResultsByMobileModal,
-                    searchValue,
-                    showMobileFormModal,
-                  }}
-                ></WorkoutsListMobileFiltered>
-              </>
-            </div>
+            <WorkoutsListMobileFiltered
+              {...{
+                filteredResultsByMobileModal,
+                searchValue,
+                showMobileFormModal,
+              }}
+            ></WorkoutsListMobileFiltered>
           ) : (
             <>
               <WorkoutsList

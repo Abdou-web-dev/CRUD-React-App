@@ -1,5 +1,6 @@
 // import starIconGray from "../../assets/img/starIconGray.svg";
 // import starIconYellow from "../../assets/img/starIconYellow.svg";
+import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { WorkoutDetails } from "../details/WorkoutDetails";
 export function WorkoutDetailsItem({
   workout,
@@ -25,235 +26,266 @@ export function WorkoutDetailsItem({
   addOrRemoveWorkout,
   containerMarginLeft,
 }) {
-  return (
-    <div
-      style={{
-        position: "relative",
-        bottom:
-          currentPage === 2 && layoutGrid
-            ? "30px"
-            : currentPage === 3 && layoutGrid
-            ? "70px"
-            : currentPage === 4 && layoutGrid
-            ? "110px"
-            : currentPage === 5 && layoutGrid
-            ? "150px"
-            : currentPage === 6 && layoutGrid
-            ? "190px"
-            : currentPage === 7 && layoutGrid
-            ? "230px"
-            : currentPage === 8 && layoutGrid
-            ? "270px"
-            : currentPage === 9 && layoutGrid
-            ? "310px"
-            : currentPage === 10 && layoutGrid
-            ? "350px"
-            : "",
-      }}
-    >
-      {showItemsPage1(index) && currentPage === 1 ? (
-        <WorkoutDetails
-          {...{
-            index,
-            setbg,
-            detailsContClass,
-            setdetailsContClass,
-            setcontainerClass,
-            searchInput,
-            addOrRemoveWorkout,
-            containerMarginLeft,
-          }}
-          workout={
-            searchInput?.length === 0
-              ? workout
-              : searchInput?.length !== 0
-              ? filteredResult
-              : null
-          }
-        />
-      ) : showItemsPage2(index) && currentPage === 2 ? (
-        <WorkoutDetails
-          {...{
-            index,
-            setbg,
-            detailsContClass,
-            setdetailsContClass,
-            setcontainerClass,
-            searchInput,
-            addOrRemoveWorkout,
-            containerMarginLeft,
-          }}
-          workout={
-            searchInput?.length === 0
-              ? workout
-              : searchInput?.length !== 0
-              ? filteredResult
-              : null
-          }
-        />
-      ) : showItemsPage3(index) && currentPage === 3 ? (
-        <WorkoutDetails
-          {...{
-            index,
-            setbg,
-            detailsContClass,
-            setdetailsContClass,
-            setcontainerClass,
-            searchInput,
-            addOrRemoveWorkout,
-            containerMarginLeft,
-          }}
-          workout={
-            searchInput?.length === 0
-              ? workout
-              : searchInput?.length !== 0
-              ? filteredResult
-              : null
-          }
-        />
-      ) : showItemsPage4(index) && currentPage === 4 ? (
-        <WorkoutDetails
-          {...{
-            index,
-            setbg,
-            detailsContClass,
-            setdetailsContClass,
-            setcontainerClass,
-            searchInput,
-            addOrRemoveWorkout,
-            containerMarginLeft,
-          }}
-          workout={
-            searchInput?.length === 0
-              ? workout
-              : searchInput?.length !== 0
-              ? filteredResult
-              : null
-          }
-        />
-      ) : showItemsPage5(index) && currentPage === 5 ? (
-        <WorkoutDetails
-          {...{
-            index,
-            setbg,
-            detailsContClass,
-            setdetailsContClass,
-            setcontainerClass,
-            searchInput,
-            addOrRemoveWorkout,
-            containerMarginLeft,
-          }}
-          workout={
-            searchInput?.length === 0
-              ? workout
-              : searchInput?.length !== 0
-              ? filteredResult
-              : null
-          }
-        />
-      ) : showItemsPage6(index) && currentPage === 6 ? (
-        <WorkoutDetails
-          {...{
-            index,
-            setbg,
-            detailsContClass,
-            setdetailsContClass,
-            setcontainerClass,
-            searchInput,
-            addOrRemoveWorkout,
-            containerMarginLeft,
-          }}
-          workout={
-            searchInput?.length === 0
-              ? workout
-              : searchInput?.length !== 0
-              ? filteredResult
-              : null
-          }
-        />
-      ) : showItemsPage7(index) && currentPage === 7 ? (
-        <WorkoutDetails
-          {...{
-            index,
-            setbg,
-            detailsContClass,
-            setdetailsContClass,
-            setcontainerClass,
-            searchInput,
-            addOrRemoveWorkout,
-            containerMarginLeft,
-          }}
-          workout={
-            searchInput?.length === 0
-              ? workout
-              : searchInput?.length !== 0
-              ? filteredResult
-              : null
-          }
-        />
-      ) : showItemsPage8(index) && currentPage === 8 ? (
-        <WorkoutDetails
-          {...{
-            index,
-            setbg,
-            detailsContClass,
-            setdetailsContClass,
-            setcontainerClass,
-            searchInput,
-            addOrRemoveWorkout,
-            containerMarginLeft,
-          }}
-          workout={
-            searchInput?.length === 0
-              ? workout
-              : searchInput?.length !== 0
-              ? filteredResult
-              : null
-          }
-        />
-      ) : showItemsPage9(index) && currentPage === 9 ? (
-        <WorkoutDetails
-          {...{
-            index,
-            setbg,
-            detailsContClass,
-            setdetailsContClass,
-            setcontainerClass,
-            searchInput,
-            addOrRemoveWorkout,
-            containerMarginLeft,
-          }}
-          workout={
-            searchInput?.length === 0
-              ? workout
-              : searchInput?.length !== 0
-              ? filteredResult
-              : null
-          }
-        />
-      ) : showItemsPage10(index) && currentPage === 10 ? (
-        <WorkoutDetails
-          {...{
-            index,
-            setbg,
-            detailsContClass,
-            setdetailsContClass,
-            setcontainerClass,
-            searchInput,
-            addOrRemoveWorkout,
-            containerMarginLeft,
-          }}
-          workout={
-            searchInput?.length === 0
-              ? workout
-              : searchInput?.length !== 0
-              ? filteredResult
-              : null
-          }
-        />
-      ) : null}
-    </div>
+  const is_between_700_and_1000 = useMediaQuery(
+    "(min-width: 700px) and (max-width: 1000px)"
   );
+
+  // when the size of the viewport is between 800 and 1000px , display all workouts, one on top of another, the pagination will be hidden
+  if (is_between_700_and_1000) {
+    return (
+      <div>
+        <WorkoutDetails
+          {...{
+            index,
+            setbg,
+            detailsContClass,
+            setdetailsContClass,
+            setcontainerClass,
+            searchInput,
+            addOrRemoveWorkout,
+            containerMarginLeft,
+          }}
+          workout={
+            searchInput?.length === 0
+              ? workout
+              : searchInput?.length !== 0
+              ? filteredResult
+              : null
+          }
+        />
+      </div>
+    );
+  } else {
+    return (
+      <div
+        style={{
+          position: "relative",
+          bottom:
+            currentPage === 2 && layoutGrid
+              ? "30px"
+              : currentPage === 3 && layoutGrid
+              ? "70px"
+              : currentPage === 4 && layoutGrid
+              ? "110px"
+              : currentPage === 5 && layoutGrid
+              ? "150px"
+              : currentPage === 6 && layoutGrid
+              ? "190px"
+              : currentPage === 7 && layoutGrid
+              ? "230px"
+              : currentPage === 8 && layoutGrid
+              ? "270px"
+              : currentPage === 9 && layoutGrid
+              ? "310px"
+              : currentPage === 10 && layoutGrid
+              ? "350px"
+              : "",
+        }}
+      >
+        {showItemsPage1(index) && currentPage === 1 ? (
+          <WorkoutDetails
+            {...{
+              index,
+              setbg,
+              detailsContClass,
+              setdetailsContClass,
+              setcontainerClass,
+              searchInput,
+              addOrRemoveWorkout,
+              containerMarginLeft,
+            }}
+            workout={
+              searchInput?.length === 0
+                ? workout
+                : searchInput?.length !== 0
+                ? filteredResult
+                : null
+            }
+          />
+        ) : showItemsPage2(index) && currentPage === 2 ? (
+          <WorkoutDetails
+            {...{
+              index,
+              setbg,
+              detailsContClass,
+              setdetailsContClass,
+              setcontainerClass,
+              searchInput,
+              addOrRemoveWorkout,
+              containerMarginLeft,
+            }}
+            workout={
+              searchInput?.length === 0
+                ? workout
+                : searchInput?.length !== 0
+                ? filteredResult
+                : null
+            }
+          />
+        ) : showItemsPage3(index) && currentPage === 3 ? (
+          <WorkoutDetails
+            {...{
+              index,
+              setbg,
+              detailsContClass,
+              setdetailsContClass,
+              setcontainerClass,
+              searchInput,
+              addOrRemoveWorkout,
+              containerMarginLeft,
+            }}
+            workout={
+              searchInput?.length === 0
+                ? workout
+                : searchInput?.length !== 0
+                ? filteredResult
+                : null
+            }
+          />
+        ) : showItemsPage4(index) && currentPage === 4 ? (
+          <WorkoutDetails
+            {...{
+              index,
+              setbg,
+              detailsContClass,
+              setdetailsContClass,
+              setcontainerClass,
+              searchInput,
+              addOrRemoveWorkout,
+              containerMarginLeft,
+            }}
+            workout={
+              searchInput?.length === 0
+                ? workout
+                : searchInput?.length !== 0
+                ? filteredResult
+                : null
+            }
+          />
+        ) : showItemsPage5(index) && currentPage === 5 ? (
+          <WorkoutDetails
+            {...{
+              index,
+              setbg,
+              detailsContClass,
+              setdetailsContClass,
+              setcontainerClass,
+              searchInput,
+              addOrRemoveWorkout,
+              containerMarginLeft,
+            }}
+            workout={
+              searchInput?.length === 0
+                ? workout
+                : searchInput?.length !== 0
+                ? filteredResult
+                : null
+            }
+          />
+        ) : showItemsPage6(index) && currentPage === 6 ? (
+          <WorkoutDetails
+            {...{
+              index,
+              setbg,
+              detailsContClass,
+              setdetailsContClass,
+              setcontainerClass,
+              searchInput,
+              addOrRemoveWorkout,
+              containerMarginLeft,
+            }}
+            workout={
+              searchInput?.length === 0
+                ? workout
+                : searchInput?.length !== 0
+                ? filteredResult
+                : null
+            }
+          />
+        ) : showItemsPage7(index) && currentPage === 7 ? (
+          <WorkoutDetails
+            {...{
+              index,
+              setbg,
+              detailsContClass,
+              setdetailsContClass,
+              setcontainerClass,
+              searchInput,
+              addOrRemoveWorkout,
+              containerMarginLeft,
+            }}
+            workout={
+              searchInput?.length === 0
+                ? workout
+                : searchInput?.length !== 0
+                ? filteredResult
+                : null
+            }
+          />
+        ) : showItemsPage8(index) && currentPage === 8 ? (
+          <WorkoutDetails
+            {...{
+              index,
+              setbg,
+              detailsContClass,
+              setdetailsContClass,
+              setcontainerClass,
+              searchInput,
+              addOrRemoveWorkout,
+              containerMarginLeft,
+            }}
+            workout={
+              searchInput?.length === 0
+                ? workout
+                : searchInput?.length !== 0
+                ? filteredResult
+                : null
+            }
+          />
+        ) : showItemsPage9(index) && currentPage === 9 ? (
+          <WorkoutDetails
+            {...{
+              index,
+              setbg,
+              detailsContClass,
+              setdetailsContClass,
+              setcontainerClass,
+              searchInput,
+              addOrRemoveWorkout,
+              containerMarginLeft,
+            }}
+            workout={
+              searchInput?.length === 0
+                ? workout
+                : searchInput?.length !== 0
+                ? filteredResult
+                : null
+            }
+          />
+        ) : showItemsPage10(index) && currentPage === 10 ? (
+          <WorkoutDetails
+            {...{
+              index,
+              setbg,
+              detailsContClass,
+              setdetailsContClass,
+              setcontainerClass,
+              searchInput,
+              addOrRemoveWorkout,
+              containerMarginLeft,
+            }}
+            workout={
+              searchInput?.length === 0
+                ? workout
+                : searchInput?.length !== 0
+                ? filteredResult
+                : null
+            }
+          />
+        ) : null}
+      </div>
+    );
+  }
 }
 
 // const [icon, seticon] = useState(starIconGray);
