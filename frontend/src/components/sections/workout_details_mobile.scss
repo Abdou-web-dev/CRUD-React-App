@@ -103,6 +103,74 @@
           }
         }
       }
+      &.workout-details-mobile-card-filtered {
+        @media screen and (min-width: 1100px) and (max-width: 1200px) {
+          // border: 1px solid;
+          width: 90% !important;
+
+          .workout-details-mobile-card-content-text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            .workout-mobile-card-content-load {
+              .span1 {
+                font-family: "Poppins";
+                font-size: 18px;
+                font-weight: 300;
+              }
+              .span2 {
+                font-family: "Karla";
+                font-size: 25px;
+              }
+            }
+            .workout-mobile-card-content-reps {
+              .span1 {
+                font-family: "Karla";
+                font-size: 20px;
+              }
+              .span2 {
+                font-family: "Poppins";
+                font-size: 25px;
+              }
+            }
+
+            .workout-mobile-card-content-date {
+              margin-top: 10px;
+              span {
+                font-family: "Mulish";
+                font-size: 20px;
+              }
+            }
+          }
+          .workout-details-mobile-card-content-icons {
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            .workout-mobile-card-content-delete-iconbtn {
+              z-index: 999;
+            }
+            .workout-mobile-card-content-share-iconbtn {
+              z-index: 999;
+            }
+            .workout-mobile-card-content-edit-iconbtn {
+              z-index: 999;
+            }
+          }
+        }
+        @media screen and (min-width: 1000px) and (max-width: 1100px) {
+          // border: 1px solid green;
+        }
+      }
+    }
+  }
+  &.workout-details-mobile-container-filtered {
+    @media screen and (min-width: 1100px) and (max-width: 1200px) {
+      .workout-details-mobile-inner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
   }
   @media screen and (min-width: 500px) and (max-width: 700px) {

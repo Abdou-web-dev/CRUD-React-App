@@ -34,6 +34,9 @@ import { Stepper } from "../steppers/Stepper";
 import "./workout_details.scss";
 import "./workout_details_styles.css";
 
+/* Split this component into Smaller components , cut the code inside detailsContClass container into 2 or 3 smaller components */
+// transform <CollapseContent /> into a separate JS component
+
 export const WorkoutDetails = ({
   workout,
   index,
@@ -51,14 +54,13 @@ export const WorkoutDetails = ({
   addOrRemoveWorkout,
   containerMarginLeft,
 }) => {
-  let layoutList = detailsContClass === "workout-details-container-as-list";
   const { dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
   let createdAt = workout?.createdAt;
   let workoutCateg = workout?.exoCategory;
   const isMobileScreen = useMediaQuery("(max-width: 1245px)"); // returns true or false
   const isScreenSize_less_992 = useMediaQuery("(max-width: 992px)"); // returns true or false
-
+  let layoutList = detailsContClass === "workout-details-container-as-list";
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let notShowOnFilter = !showAllExistentWorkouts && !filteredWorkout; //this means show the 4 control icon btns
   //for deleting an item, sharing ... on the 2 first sections , but not on the 3rd section
@@ -248,9 +250,10 @@ export const WorkoutDetails = ({
         <div className="work-details-content-filters-btns-date">
           <img className="date-img" src={clock} alt="" />
           <span className="date-text">
-            {formatDistanceToNow(new Date(createdAt), {
-              addSuffix: true,
-            })}
+            {createdAt &&
+              formatDistanceToNow(new Date(createdAt), {
+                addSuffix: true,
+              })}
           </span>
         </div>
       </div>
@@ -266,6 +269,8 @@ export const WorkoutDetails = ({
           </div>
         )}
       </>
+
+      {/* Split this component into Smaller components , cut the code inside detailsContClass container into 2 or 3 smaller components */}
 
       <div
         className={`${
@@ -381,9 +386,11 @@ export const WorkoutDetails = ({
 
                     <div className="work-details-left-inner-date">
                       <span>
-                        {formatDistanceToNow(new Date(createdAt), {
-                          addSuffix: true,
-                        })}
+                        {createdAt &&
+                          formatDistanceToNow(new Date(createdAt), {
+                            addSuffix: true,
+                          })}
+                        {/*"createdAt && "solves this error : invalid time value */}
                       </span>
                     </div>
                   </div>

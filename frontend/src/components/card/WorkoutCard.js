@@ -23,13 +23,18 @@ export function WorkoutCard({
   handleDeleteWorkout,
   handleShare,
   handleEdit,
+  filteredResult,
 }) {
   let createdAt = workout?.createdAt;
   let workoutCateg = workout?.exoCategory;
 
   return (
     <Card
-      className="workout-details-mobile-card"
+      className={
+        filteredResult
+          ? "workout-details-mobile-card workout-details-mobile-card-filtered"
+          : "workout-details-mobile-card"
+      }
       title={
         <div className="card-title">
           <div className="card-title-wrapper">

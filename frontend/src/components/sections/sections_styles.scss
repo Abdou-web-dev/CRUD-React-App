@@ -616,7 +616,81 @@ $xx-large: 1400px;
 }
 
 .workouts-list-filtered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .workouts-list-filtered-inner {
-    // display: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 50px 0;
+  }
+
+  @media screen and (min-width: 850px) and (max-width: 1000px) {
+    .workouts-list-filtered-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  @media screen and (min-width: 700px) and (max-width: 850px) {
+    .workouts-list-filtered-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media screen and (min-width: 1100px) and (max-width: 1200px) {
+    .workouts-list-filtered-inner {
+    }
+  }
+}
+
+.workouts-list-filtered-modal {
+  width: 60% !important;
+
+  &.no_scroll_bar {
+    .ant-modal-content {
+      overflow-y: auto;
+    }
+  }
+  .ant-modal-content {
+    overflow-y: scroll;
+    max-height: 650px;
+    &::-webkit-scrollbar {
+      width: 15px;
+    }
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background: white;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 20px;
+      background: rgba(119, 124, 132, 1);
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      border-radius: 10px;
+      background: rgb(90, 94, 100);
+    }
+
+    .ant-modal-body {
+    }
+    .ant-modal-close {
+      .ant-modal-close-x {
+        position: relative;
+        bottom: 30px;
+        left: 0px;
+      }
+    }
+  }
+  @media screen and (min-width: 1200px) and (max-width: 1350px) {
+    width: 65% !important;
+  }
+  @media screen and (min-width: 1100px) and (max-width: 1200px) {
+    width: 65% !important;
+  }
+  @media screen and (min-width: 850px) and (max-width: 1000px) {
+    width: 90% !important;
+  }
+  @media screen and (min-width: 700px) and (max-width: 850px) {
+    width: 95% !important;
   }
 }

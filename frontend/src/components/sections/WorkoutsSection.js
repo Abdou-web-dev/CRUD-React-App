@@ -259,7 +259,11 @@ export const WorkoutsSection = ({
                 ) : (
                   <>
                     <Modal
-                      className={`workouts-list-filtered-modal`}
+                      className={
+                        filteredResults?.length >= 2
+                          ? `workouts-list-filtered-modal`
+                          : "workouts-list-filtered-modal no_scroll_bar"
+                      }
                       open={openFilteredListModal}
                       maskClosable={true}
                       closable={filteredResults?.length >= 1}
@@ -270,10 +274,10 @@ export const WorkoutsSection = ({
                       footer={null}
                       title={null}
                       bodyStyle={{
-                        background: "rgba(211, 211, 211, 0.38)",
+                        background: "rgba(211, 211, 211, 0.9)",
                       }}
                       maskStyle={{
-                        background: "rgba(211, 211, 211, 0.15)",
+                        background: "rgba(211, 211, 211, 0.44)",
                       }}
                       closeIcon={<CloseX></CloseX>}
                     >

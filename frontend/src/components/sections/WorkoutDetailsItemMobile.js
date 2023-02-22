@@ -15,6 +15,7 @@ export function WorkoutDetailsItemMobile({
   workout,
   showMobileFormModal,
   searchValue,
+  filteredResult,
 }) {
   const { dispatch } = useWorkoutsContext();
   const { user } = useAuthContext();
@@ -64,13 +65,14 @@ export function WorkoutDetailsItemMobile({
   };
 
   return (
+    // showMobileFormModal , Add a Workout modal
     <div
-      className={
-        // Add a Workout modal
+      className={`${
         showMobileFormModal
           ? "workout-details-mobile-container move_a_bit_from_left"
           : "workout-details-mobile-container"
       }
+      ${filteredResult ? "workout-details-mobile-container-filtered" : ""}`}
     >
       <div
         className="workout-details-mobile-inner"
@@ -83,6 +85,7 @@ export function WorkoutDetailsItemMobile({
             handleDeleteWorkout,
             handleShare,
             handleEdit,
+            filteredResult,
           }}
         />
       </div>
