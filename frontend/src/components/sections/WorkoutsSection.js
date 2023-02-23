@@ -1,6 +1,8 @@
 import { IconButton } from "@mui/material";
 import { Button, Input, message, Modal } from "antd";
 import { formatDistanceToNow } from "date-fns";
+import top_arrow from "../../assets/img/top-arrow.svg";
+
 import React, { useEffect, useState } from "react";
 import magnifying_glass from "../../assets/img/magnifying_glass.svg";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
@@ -162,6 +164,13 @@ export const WorkoutsSection = ({
     }
   }, [openFilteredListModal]);
 
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="workouts-section">
       <div
@@ -240,9 +249,7 @@ export const WorkoutsSection = ({
           </div>
         )}
       </div>
-
       {/* display a spinner at the cneter of the page , when the user tries to find a workout , hide it , when the modal is open */}
-
       {/* the results and data when the user searches from the desktop text Field */}
       {is_more_than_700 && (
         <>
@@ -254,6 +261,7 @@ export const WorkoutsSection = ({
                     {...{
                       filteredResults,
                       showMobileFormModal,
+                      is_between_700_and_800,
                     }}
                   />
                 ) : (
@@ -287,6 +295,15 @@ export const WorkoutsSection = ({
                           showMobileFormModal,
                         }}
                       />
+                      <Button onClick={goToTop}>
+                        <img
+                          width={`60px`}
+                          height="60px"
+                          src={top_arrow}
+                          style={{ height: "fit-content" }}
+                          alt=""
+                        />
+                      </Button>
                     </Modal>
                     {!openFilteredListModal && displaySpinner ? (
                       <AwesomeSpinner />
@@ -324,7 +341,6 @@ export const WorkoutsSection = ({
           </>
         </>
       )}
-
       {/* the results and data when the user searches from the mobile modal text Field */}
       {is_less_than_700 && (
         <>
@@ -349,7 +365,6 @@ export const WorkoutsSection = ({
           )}
         </>
       )}
-
       {/* when the viewport width is_less_than_700px */}
       <Modal
         className={`search-field-mobile-modal`}
@@ -383,6 +398,12 @@ export const WorkoutsSection = ({
           }}
         ></SearchInputModal>
       </Modal>
+      {/* {openFilteredListModal && (
+        <>
+          <BackTop />
+          <span>BackTop</span>
+        </>
+      )} */}
     </div>
   );
 };

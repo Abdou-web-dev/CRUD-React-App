@@ -632,14 +632,34 @@ $xx-large: 1400px;
       grid-template-columns: 1fr 1fr 1fr;
     }
   }
-  @media screen and (min-width: 700px) and (max-width: 850px) {
-    .workouts-list-filtered-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+  &.workouts-list-filtered-container_700_800_not_modal {
+    @media screen and (min-width: 700px) and (max-width: 800px) {
+      .workouts-list-filtered-inner {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-top: 150px;
+      }
+    }
+    @media screen and (min-width: 700px) and (max-width: 770px) {
+      .workouts-list-filtered-inner {
+        position: relative;
+        right: 80px;
+      }
     }
   }
+
   @media screen and (min-width: 1100px) and (max-width: 1200px) {
     .workouts-list-filtered-inner {
+    }
+  }
+  @media screen and (min-width: 1000px) and (max-width: 1100px) {
+    .workouts-list-filtered-inner {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+  @media screen and (min-width: 800px) and (max-width: 1000px) {
+    .workouts-list-filtered-inner {
+      grid-template-columns: 1fr 1fr;
     }
   }
 }
@@ -686,6 +706,9 @@ $xx-large: 1400px;
   }
   @media screen and (min-width: 1100px) and (max-width: 1200px) {
     width: 65% !important;
+  }
+  @media screen and (min-width: 900px) and (max-width: 1100px) {
+    width: 95% !important;
   }
   @media screen and (min-width: 850px) and (max-width: 1000px) {
     width: 90% !important;

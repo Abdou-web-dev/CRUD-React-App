@@ -41,6 +41,8 @@ export function WorkoutCard({
             <Highlight search={searchValue}>{workout?.title}</Highlight>
           </div>
           <img
+            width={`60px`}
+            height="60px"
             className="card-title-icon"
             src={
               workoutCateg === `Hamstrings`

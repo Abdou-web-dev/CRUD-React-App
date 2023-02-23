@@ -5,87 +5,85 @@
     margin-bottom: 20px;
 
     .workout-details-mobile-card {
-      .workout-details-mobile-card-content-text {
-        .workout-mobile-card-content-load {
-          .span1 {
-            font-family: "Mulish";
-            font-size: 22px;
-          }
-          .span2 {
-            font-family: "Karla";
-            font-size: 30px;
-            font-style: italic;
-          }
-        }
-        .workout-mobile-card-content-reps {
-          .span1 {
-            font-family: "Mulish";
-            font-size: 22px;
-          }
-          .span2 {
-            font-family: "Karla";
-            font-size: 30px;
-            font-style: italic;
-          }
-        }
-
-        .workout-mobile-card-content-date {
-          span {
-            font-family: "sans-serif";
-            font-size: 26px;
-            font-style: italic;
-          }
-        }
-      }
-      .workout-details-mobile-card-content-icons {
-        display: flex;
-        gap: 20px;
-        .workout-mobile-card-content-delete-iconbtn {
-          padding: 5px;
-          height: fit-content;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          z-index: 999;
-          svg {
-            width: 44px;
-            height: 44px;
-          }
-        }
-        .workout-mobile-card-content-share-iconbtn {
-          padding: 5px;
-          height: fit-content;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 999;
-          svg {
-            width: 44px;
-            height: 44px;
-          }
-        }
-        .workout-mobile-card-content-edit-iconbtn {
-          z-index: 999;
-          padding: 5px;
-          height: fit-content;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          img {
-            width: 44px;
-            height: 44px;
-          }
-        }
-      }
-
       &.ant-card {
+        .workout-details-mobile-card-content-text {
+          .workout-mobile-card-content-load {
+            .span1 {
+              font-family: "Mulish";
+              font-size: 22px;
+            }
+            .span2 {
+              font-family: "Karla";
+              font-size: 30px;
+              font-style: italic;
+            }
+          }
+          .workout-mobile-card-content-reps {
+            .span1 {
+              font-family: "Mulish";
+              font-size: 22px;
+            }
+            .span2 {
+              font-family: "Karla";
+              font-size: 30px;
+              font-style: italic;
+            }
+          }
+
+          .workout-mobile-card-content-date {
+            span {
+              font-family: "sans-serif";
+              font-size: 26px;
+              font-style: italic;
+            }
+          }
+        }
+        .workout-details-mobile-card-content-icons {
+          display: flex;
+          gap: 20px;
+          .workout-mobile-card-content-delete-iconbtn {
+            padding: 5px;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            z-index: 999;
+            svg {
+              width: 44px;
+              height: 44px;
+            }
+          }
+          .workout-mobile-card-content-share-iconbtn {
+            padding: 5px;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            svg {
+              width: 44px;
+              height: 44px;
+            }
+          }
+          .workout-mobile-card-content-edit-iconbtn {
+            z-index: 999;
+            padding: 5px;
+            height: fit-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            img {
+              width: 44px;
+              height: 44px;
+            }
+          }
+        }
         .ant-card-head-title {
           div.card-title {
             display: flex;
             justify-content: center;
             align-items: center;
-            // gap: 0;
             img {
               width: 60px;
               height: 60px;
@@ -93,7 +91,6 @@
             }
             .card-title-wrapper {
               flex: 75%;
-              // border: 1px solid;
               span {
                 font-family: "Poppins";
                 font-size: 22px;
@@ -104,9 +101,8 @@
         }
       }
       &.workout-details-mobile-card-filtered {
-        @media screen and (min-width: 1100px) and (max-width: 1200px) {
-          // border: 1px solid;
-          width: 90% !important;
+        @media screen and (min-width: 1000px) and (max-width: 1200px) {
+          width: 100% !important;
 
           .workout-details-mobile-card-content-text {
             display: flex;
@@ -157,9 +153,16 @@
               z-index: 999;
             }
           }
+          &.ant-card {
+            .card-title-wrapper {
+              max-width: 100px;
+            }
+          }
         }
         @media screen and (min-width: 1000px) and (max-width: 1100px) {
-          // border: 1px solid green;
+          width: 100% !important;
+        }
+        @media screen and (min-width: 900px) and (max-width: 1000px) {
         }
       }
     }
@@ -170,6 +173,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0;
+      }
+    }
+    @media screen and (min-width: 1000px) and (max-width: 1100px) {
+      .workout-details-mobile-inner {
+        height: 430px;
       }
     }
   }
