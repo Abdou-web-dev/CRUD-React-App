@@ -1,8 +1,6 @@
 import { IconButton } from "@mui/material";
 import { Button, Input, message, Modal } from "antd";
 import { formatDistanceToNow } from "date-fns";
-import top_arrow from "../../assets/img/top-arrow.svg";
-
 import React, { useEffect, useState } from "react";
 import magnifying_glass from "../../assets/img/magnifying_glass.svg";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
@@ -249,123 +247,125 @@ export const WorkoutsSection = ({
           </div>
         )}
       </div>
-      {/* display a spinner at the cneter of the page , when the user tries to find a workout , hide it , when the modal is open */}
+
       {/* the results and data when the user searches from the desktop text Field */}
-      {is_more_than_700 && (
-        <>
+      <>
+        {/* display a spinner at the cneter of the page , when the user tries to find a workout , hide it , when the modal is open */}
+        {is_more_than_700 && (
           <>
-            {searchInput?.length >= 1 ? (
-              <>
-                {is_between_700_and_800 ? (
-                  <WorkoutsListFiltered
+            <>
+              {searchInput?.length >= 1 ? (
+                <>
+                  {is_between_700_and_800 ? (
+                    <WorkoutsListFiltered
+                      {...{
+                        filteredResults,
+                        showMobileFormModal,
+                        is_between_700_and_800,
+                      }}
+                    />
+                  ) : (
+                    <>
+                      <Modal
+                        className={`workouts-list-filtered-modal 
+                        ${
+                          filteredResults?.length >= 2
+                            ? `workouts-list-filtered-modal`
+                            : "workouts-list-filtered-modal no_scroll_bar"
+                        } 
+                        ${filteredResults?.length === 1 ? "one_element" : ""}`}
+                        open={openFilteredListModal}
+                        maskClosable={true}
+                        closable={filteredResults?.length >= 1}
+                        keyboard={true}
+                        mask={true}
+                        onOk={() => setOpenFilteredListModal(false)}
+                        onCancel={() => setOpenFilteredListModal(false)}
+                        footer={null}
+                        title={null}
+                        bodyStyle={{
+                          background: "rgba(211, 211, 211, 0.9)",
+                        }}
+                        maskStyle={{
+                          background: "rgba(211, 211, 211, 0.44)",
+                        }}
+                        closeIcon={<CloseX></CloseX>}
+                      >
+                        <WorkoutsListFiltered
+                          {...{
+                            filteredResults,
+                            showMobileFormModal,
+                          }}
+                        />
+                      </Modal>
+
+                      <>
+                        {!openFilteredListModal && displaySpinner ? (
+                          <AwesomeSpinner />
+                        ) : null}
+                      </>
+                    </>
+                  )}
+                </>
+              ) : (
+                <>
+                  <WorkoutsList
                     {...{
-                      filteredResults,
+                      workouts, //all workouts
+                      currentPage,
+                      setCurrentPage,
+                      searchInput,
+                      setmovePaginationFromBottom,
+                      setpaginationClassName,
+                      setDisplayPagination,
+                      detailsContClass,
+                      setdetailsContClass,
+                      setcontainerClass,
+                      containerClass,
+                      border,
+                      setshowAllExistentWorkouts,
+                      showAllExistentWorkouts,
+                      showAllWorkoutsCondensed,
+                      setshowAllWorkoutsCondensed,
                       showMobileFormModal,
-                      is_between_700_and_800,
+                      filterBtnClicked,
+                      setfilterBtnClicked,
                     }}
                   />
-                ) : (
-                  <>
-                    <Modal
-                      className={
-                        filteredResults?.length >= 2
-                          ? `workouts-list-filtered-modal`
-                          : "workouts-list-filtered-modal no_scroll_bar"
-                      }
-                      open={openFilteredListModal}
-                      maskClosable={true}
-                      closable={filteredResults?.length >= 1}
-                      keyboard={true}
-                      mask={true}
-                      onOk={() => setOpenFilteredListModal(false)}
-                      onCancel={() => setOpenFilteredListModal(false)}
-                      footer={null}
-                      title={null}
-                      bodyStyle={{
-                        background: "rgba(211, 211, 211, 0.9)",
-                      }}
-                      maskStyle={{
-                        background: "rgba(211, 211, 211, 0.44)",
-                      }}
-                      closeIcon={<CloseX></CloseX>}
-                    >
-                      <WorkoutsListFiltered
-                        {...{
-                          filteredResults,
-                          showMobileFormModal,
-                        }}
-                      />
-                      <Button onClick={goToTop}>
-                        <img
-                          width={`60px`}
-                          height="60px"
-                          src={top_arrow}
-                          style={{ height: "fit-content" }}
-                          alt=""
-                        />
-                      </Button>
-                    </Modal>
-                    {!openFilteredListModal && displaySpinner ? (
-                      <AwesomeSpinner />
-                    ) : null}
-                  </>
-                )}
-              </>
+                </>
+              )}
+            </>
+          </>
+        )}
+      </>
+
+      {/* the results and data when the user searches from the mobile modal text Field */}
+      <>
+        {is_less_than_700 && (
+          <>
+            {searchValue?.length >= 1 && !openSearchInputModal ? (
+              <WorkoutsListMobileFiltered
+                {...{
+                  filteredResultsByMobileModal,
+                  searchValue,
+                  showMobileFormModal,
+                }}
+              ></WorkoutsListMobileFiltered>
             ) : (
               <>
                 <WorkoutsList
                   {...{
-                    workouts, //all workouts
-                    currentPage,
-                    setCurrentPage,
-                    searchInput,
-                    setmovePaginationFromBottom,
-                    setpaginationClassName,
-                    setDisplayPagination,
-                    detailsContClass,
-                    setdetailsContClass,
-                    setcontainerClass,
-                    containerClass,
-                    border,
-                    setshowAllExistentWorkouts,
-                    showAllExistentWorkouts,
-                    showAllWorkoutsCondensed,
-                    setshowAllWorkoutsCondensed,
+                    workouts,
                     showMobileFormModal,
-                    filterBtnClicked,
-                    setfilterBtnClicked,
                   }}
                 />
               </>
             )}
           </>
-        </>
-      )}
-      {/* the results and data when the user searches from the mobile modal text Field */}
-      {is_less_than_700 && (
-        <>
-          {/* <span>is_less_than_700</span> */}
-          {searchValue?.length >= 1 && !openSearchInputModal ? (
-            <WorkoutsListMobileFiltered
-              {...{
-                filteredResultsByMobileModal,
-                searchValue,
-                showMobileFormModal,
-              }}
-            ></WorkoutsListMobileFiltered>
-          ) : (
-            <>
-              <WorkoutsList
-                {...{
-                  workouts,
-                  showMobileFormModal,
-                }}
-              />
-            </>
-          )}
-        </>
-      )}
-      {/* when the viewport width is_less_than_700px */}
+        )}
+      </>
+
+      {/* when the viewport width is_less_than_700px , <SearchInputModal/>*/}
       <Modal
         className={`search-field-mobile-modal`}
         open={openSearchInputModal}
@@ -375,7 +375,6 @@ export const WorkoutsSection = ({
         mask={true}
         onOk={() => setopenSearchInputModal(false)}
         onCancel={() => setopenSearchInputModal(false)}
-        // width={layoutGrid ? "50%" : "60%"}
         footer={null}
         title={null}
         bodyStyle={{
@@ -398,6 +397,7 @@ export const WorkoutsSection = ({
           }}
         ></SearchInputModal>
       </Modal>
+
       {/* {openFilteredListModal && (
         <>
           <BackTop />

@@ -2,6 +2,7 @@ import React from "react";
 import closeX from "../../assets/img/closeX.svg";
 import emailIcon from "../../assets/img/emailIcon.svg";
 import passwordIcon from "../../assets/img/passwordIcon.svg";
+import top_arrow from "../../assets/img/top-arrow.svg";
 import trashIcon from "../../assets/img/trashIcon.svg";
 import userIcon from "../../assets/img/userIcon.svg";
 
@@ -144,6 +145,18 @@ export const CloseX = () => {
   return (
     <>
       <img src={closeX} alt="" style={{ width: "30px", height: "30px" }} />
+    </>
+  );
+};
+
+export const TopArrow = () => {
+  return (
+    <>
+      <img
+        src={top_arrow}
+        alt=""
+        style={{ width: "30px", height: "30px", border: "1px solid red" }}
+      />
     </>
   );
 };

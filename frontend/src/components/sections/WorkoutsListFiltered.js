@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import "./sections_styles.scss";
 import { WorkoutDetailsItemMobile } from "./WorkoutDetailsItemMobile";
+
 // className={`${containerClass ?? ""} means that when containerClass is undefined, the className will be equal to ""
 
 export function WorkoutsListFiltered({
@@ -8,18 +8,6 @@ export function WorkoutsListFiltered({
   showMobileFormModal,
   is_between_700_and_800,
 }) {
-  const [showBackToTopBtn, setShowBackToTopBtn] = useState(false);
-
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        setShowBackToTopBtn(true);
-      } else {
-        setShowBackToTopBtn(false);
-      }
-    });
-  }, []);
-
   return (
     <div
       className={
@@ -28,7 +16,15 @@ export function WorkoutsListFiltered({
           : "workouts-list-filtered-container"
       }
     >
-      <div className={`workouts-list-filtered-inner`}>
+      <div
+        className={`workouts-list-filtered-inner
+    ${
+      filteredResults?.length === 1
+        ? "workouts-list-filtered-inner_one_element"
+        : ""
+    }  
+      `}
+      >
         <>
           {filteredResults &&
             filteredResults?.map((filteredResult, index) => (
@@ -42,14 +38,9 @@ export function WorkoutsListFiltered({
               />
             ))}
         </>
-
-        {/* <div>
-          <Button onClick={null}>
-            <img width={`60px`} height="60px" src={top_arrow} alt="" />
-            efefrf
-          </Button>
-        </div> */}
       </div>
+
+      {/* <ScrollToTop className="toooop" smooth component={<TopArrow />} /> */}
     </div>
   );
 }

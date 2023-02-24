@@ -1,3 +1,11 @@
+//defining screen breakpoints for responsivness
+$x-small: 0px;
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+$xx-large: 1400px;
+
 .fav-work-container {
   border-bottom: 1px solid lightgray;
   border-right: 1px solid lightgray;
@@ -14,8 +22,6 @@
 
       &:hover {
         border: none;
-      }
-      img {
       }
     }
   }
@@ -43,39 +49,193 @@
       font-size: 24px;
     }
   }
+  @media screen and (min-width: $large) and (max-width: $x-large) {
+    width: 240px;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .fav-work-trash-icon {
+      .fav-work-trash-icon-btn {
+        border: 1px solid grey !important;
+      }
+    }
+    .fav-work-title {
+      span {
+        font-family: "Mulish";
+      }
+    }
+    .fav-work-reps {
+      span {
+        font-family: "Karla";
+      }
+    }
+    .fav-work-load {
+      span {
+        font-family: "Poppins";
+      }
+    }
+    .fav-work-date {
+      max-width: 160px;
+      // border: 1px solid red;
+      span {
+        font-family: "Poppins";
+      }
+    }
+  }
+  @media screen and (min-width: $large) and (max-width: 1040px) {
+    width: 230px;
+  }
+  @media screen and (min-width: $medium) and (max-width: $large) {
+    width: 230px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .fav-work-trash-icon {
+      .fav-work-trash-icon-btn {
+        border: 1px solid grey !important;
+      }
+    }
+    .fav-work-title {
+      span {
+        font-family: "Mulish";
+        font-weight: bold;
+      }
+    }
+    .fav-work-reps {
+      span {
+        font-family: "Mulish";
+        font-size: 25px;
+        color: grey;
+      }
+    }
+    .fav-work-load {
+      span {
+        font-family: "Poppins";
+        color: rgb(64, 64, 133);
+      }
+    }
+    .fav-work-date {
+      max-width: 160px;
+      span {
+        font-family: "Poppins";
+        font-style: italic;
+        font-size: 20px;
+        color: rgb(36, 95, 75);
+        border-bottom: 1px solid rgba(36, 95, 75, 0.496);
+      }
+    }
+  }
+  @media screen and (min-width: $small) and (max-width: $medium) {
+    width: 220px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .fav-work-trash-icon {
+      .fav-work-trash-icon-btn {
+        border: 1px solid rgb(115, 76, 76) !important;
+      }
+    }
+    .fav-work-title {
+      span {
+        font-family: "Mulish";
+        font-weight: bold;
+        font-size: 28px;
+      }
+    }
+    .fav-work-reps {
+      span {
+        font-family: "Mulish";
+        font-size: 25px;
+        color: grey;
+        font-weight: bold;
+      }
+    }
+    .fav-work-load {
+      span {
+        font-family: "Poppins";
+        color: rgb(64, 64, 133);
+        font-size: 28px;
+      }
+    }
+    .fav-work-date {
+      max-width: 160px;
+      span {
+        font-family: "Poppins";
+        font-style: italic;
+        font-size: 20px;
+        color: rgb(36, 95, 75);
+        border-bottom: 1px solid rgba(36, 95, 75, 0.496);
+      }
+    }
+  }
+  @media screen and (min-width: $x-small) and (max-width: $small) {
+    width: 300px;
+    padding: 15px;
+    display: flex;
+
+    flex-direction: column;
+    gap: 10px;
+    .fav-work-trash-icon {
+      .fav-work-trash-icon-btn {
+        height: fit-content;
+        img {
+          width: 44px;
+        }
+      }
+    }
+    .fav-work-title {
+      span {
+        font-family: "Mulish";
+        font-weight: 500;
+        font-size: 28px;
+        font-style: italic;
+        letter-spacing: 1.4px;
+        border-bottom: 0.5px solid lightgrey;
+      }
+    }
+    .fav-work-reps {
+      align-self: center;
+      span {
+        font-family: "Mulish";
+        font-size: 25px;
+        color: grey;
+        font-weight: bold;
+      }
+    }
+    .fav-work-load {
+      align-self: center;
+      span {
+        font-family: "Poppins";
+        color: rgb(64, 64, 133);
+        font-size: 28px;
+      }
+    }
+    .fav-work-date {
+      max-width: 190px;
+      span {
+        font-family: "Poppins";
+        font-style: italic;
+        font-size: 26px;
+        color: rgb(26, 78, 61);
+        border-bottom: 1px solid rgba(36, 95, 75, 0.496);
+      }
+    }
+  }
 }
 
 .fav-work-restore-btn {
-  // position: relative;
-  // bottom: 150px;
   height: fit-content;
   min-height: 35px;
   background: rgba(211, 211, 211, 0.437) !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  // position: absolute;
-
-  // &.fav-work-restore-btn-ind0 {
-  //   position: relative;
-  //   left: 650px;
-  // }
-  // &.fav-work-restore-btn-ind1 {
-  //   position: relative;
-  //   left: 352px;
-  // }
-  // &.fav-work-restore-btn-ind2 {
-  //   position: relative;
-  //   left: 52px;
-  // }
-  // &.fav-work-restore-btn-ind3 {
-  //   position: relative;
-  //   right: 246px;
-  // }
-  // &.fav-work-restore-btn-ind4 {
-  //   position: relative;
-  //   right: 544px;
-  // }
+  &.no_text {
+    background: rgba(211, 211, 211, 0.25) !important;
+  }
   span {
     font-family: "Inconsolata";
     font-size: 18px;

@@ -76,7 +76,6 @@ $xx-large: 1400px;
                 .gym-img {
                   width: 80px;
                   height: 80px;
-                  border: 1px solid red;
 
                   margin-bottom: 10px;
                 }
@@ -101,20 +100,17 @@ $xx-large: 1400px;
     .workout-navbar-icon-user-logged-out {
       display: flex;
       justify-content: center;
-      // display: none;
 
       .navbar-ul {
         margin-bottom: 0px;
         padding-left: 0;
         .app-nav-stack {
-          // border: 1px solid red;
           .icon-and-word {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 180px;
-            // border: 1px solid;
             cursor: pointer;
             img.gym-img {
               width: 64px;

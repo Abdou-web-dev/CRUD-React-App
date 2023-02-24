@@ -1,4 +1,4 @@
-import { Button, Input as ModalInput } from "antd";
+import { Button, Input as ModalInput, message } from "antd";
 import { formatDistanceToNow } from "date-fns";
 import "./inputs_styles.scss";
 
@@ -8,8 +8,11 @@ export function SearchInputModal({
   setSearchValue,
   setopenSearchInputModal,
   setFilteredResultsByMobileModal,
-  // openSearchInputModal,
+  filteredResultsByMobileModal,
+  openSearchInputModal,
 }) {
+  let result_word =
+    filteredResultsByMobileModal?.length === 1 ? `result` : "results";
   const searchItemsOnOkClick = () => {
     if (searchValue !== "") {
       const filteredData = workouts?.filter((workout) => {
@@ -41,6 +44,12 @@ export function SearchInputModal({
   const handleOKClick = (e) => {
     searchItemsOnOkClick(e.target.value);
     setopenSearchInputModal(false);
+    if (searchValue) {
+      message.info(
+        `You have got ${filteredResultsByMobileModal?.length} ${result_word}`,
+        0.6
+      );
+    }
   };
   const handlePressEnter = (e) => {
     handleOKClick(e);

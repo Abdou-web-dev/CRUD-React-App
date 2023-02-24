@@ -353,4 +353,19 @@ $xx-large: 1400px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 10px;
+  @media screen and (min-width: $large) and (max-width: $xx-large) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  @media screen and (min-width: $medium) and (max-width: $large) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media screen and (min-width: $small) and (max-width: $medium) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (min-width: $x-small) and (max-width: $small) {
+    grid-template-columns: 1fr;
+    //this is how we center grid items at the center of the page
+    justify-items: center;
+    align-content: center;
+  }
 }
