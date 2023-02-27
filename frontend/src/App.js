@@ -2,7 +2,8 @@ import { useMediaQuery } from "@mui/material";
 import { Navigate, Route, Routes } from "react-router-dom";
 // pages & components
 import "./App.scss";
-import Navbar from "./components/Navbar/Navbar";
+import DesktopNavbar from "./components/Navbar/DesktopNavbar";
+import MobileNavbar from "./components/Navbar/MobileNavbar";
 import { useAuthContext } from "./hooks/useAuthContext";
 import Help from "./pages/Help";
 import Home from "./pages/Home";
@@ -15,13 +16,14 @@ import Workouts from "./pages/Workouts";
 
 function App() {
   const { user } = useAuthContext();
-  const isMobileScreen = useMediaQuery("(max-width: 576px)");
+  const isSmallScreen = useMediaQuery("(max-width: 576px)");
+  const isMobileScreen = useMediaQuery("(max-width: 800px)");
 
   return (
     <div className="App">
-      <Navbar />
+      <>{isMobileScreen ? <MobileNavbar /> : <DesktopNavbar />}</>
 
-      <div className={isMobileScreen ? "pages pages-cl2" : "pages"}>
+      <div className={isSmallScreen ? "pages pages-cl2" : "pages"}>
         <Routes>
           <Route path="/" element={<Home />} />
 

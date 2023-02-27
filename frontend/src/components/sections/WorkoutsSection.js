@@ -1,9 +1,12 @@
 import { IconButton } from "@mui/material";
 import { Button, Input, message, Modal } from "antd";
 import { formatDistanceToNow } from "date-fns";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import magnifying_glass from "../../assets/img/magnifying_glass.svg";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
+
+import { HamburgerMenuContext } from "../../context/HamburgerMenuContext";
+
 import { ClearIcon, CloseX } from "../icons/Icons";
 import { SearchInputModal } from "../inputs/SearchInputModal";
 import { AwesomeSpinner } from "../spinners/AwesomeSpinner";
@@ -56,6 +59,9 @@ export const WorkoutsSection = ({
   const isDesktopScreen = useMediaQuery("(min-width: 1260px)");
   const is_less_than_700 = useMediaQuery("(max-width: 700px)");
   const is_more_than_700 = !is_less_than_700;
+  const { hamburgerMenuIsOpen, setHamburgerMenuIsOpen } =
+    useContext(HamburgerMenuContext);
+
   // searchItems on Click on Ok Btn or on Enter keyboard key
   const searchItems = () => {
     if (searchInput !== "") {
@@ -162,13 +168,6 @@ export const WorkoutsSection = ({
     }
   }, [openFilteredListModal]);
 
-  const goToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <div className="workouts-section">
       <div
@@ -228,6 +227,9 @@ export const WorkoutsSection = ({
               <Button
                 onClick={() => {
                   setopenSearchInputModal(true);
+                  if (hamburgerMenuIsOpen) {
+                    setHamburgerMenuIsOpen(!hamburgerMenuIsOpen);
+                  }
                 }}
                 className="workouts-magnifying_glass-btn"
               >
@@ -374,7 +376,12 @@ export const WorkoutsSection = ({
         keyboard={true}
         mask={true}
         onOk={() => setopenSearchInputModal(false)}
-        onCancel={() => setopenSearchInputModal(false)}
+        onCancel={() => {
+          setopenSearchInputModal(false);
+          if (!hamburgerMenuIsOpen) {
+            setHamburgerMenuIsOpen(true);
+          }
+        }}
         footer={null}
         title={null}
         bodyStyle={{

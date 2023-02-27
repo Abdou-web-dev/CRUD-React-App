@@ -7,6 +7,7 @@ import exercisesData from "../../assets/staticData/chestExercises.json";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
+import { ButtonToggleModalForm } from "../buttons/ButtonToggleForm";
 import { ClearIcon, CloseX } from "../icons/Icons";
 import { ChestExosList } from "../lists/ChestExosList";
 import { NiceSpinner } from "../spinners/NiceSpinner";
@@ -318,7 +319,16 @@ export const WorkoutsForm = ({
                 onCancel={() => setShowFormNewWindow(false)}
                 width={"70%"}
                 footer={null}
-                title="Add a New Workout"
+                title={
+                  <div className="desktop-form-ant-modal-header">
+                    <span>Add a New Workout</span>
+                    <div className="desktop-form-ant-modal-header-toggle-btn">
+                      <ButtonToggleModalForm
+                        {...{ setShowFormNewWindow, showFormNewWindow }}
+                      />
+                    </div>
+                  </div>
+                }
               >
                 <>
                   {showFormNewWindow || showAllExistentWorkouts ? (

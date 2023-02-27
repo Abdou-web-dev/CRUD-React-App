@@ -6,11 +6,10 @@ export const ButtonToggleModalForm = ({
 }) => {
   return (
     <Button
-      disableRipple
-      onClick={() => setShowFormNewWindow(!showFormNewWindow)}
       className="up-btn-link"
-      sx={{
-        "&:hover": { background: "none" },
+      onClick={() => setShowFormNewWindow(!showFormNewWindow)}
+      style={{
+        height: "fit-content",
       }}
     >
       <Tooltip

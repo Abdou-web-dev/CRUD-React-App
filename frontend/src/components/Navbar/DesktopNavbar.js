@@ -1,6 +1,6 @@
 import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Menu, MenuItem, Stack } from "@mui/material";
-import { Button, Divider, Modal, Tooltip } from "antd";
+import { Button, Divider, Tooltip } from "antd";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import signUpIcon from "../../assets/img/add-user.png";
@@ -15,9 +15,10 @@ import starred from "../../assets/img/starred.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogout } from "../../hooks/useLogout";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
+import { LogoutModal } from "../modals/LogoutModal";
 import "./navbar.scss";
 
-const Navbar = ({}) => {
+const DesktopNavbar = ({}) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
   const currentLocation = useLocation();
@@ -237,42 +238,12 @@ const Navbar = ({}) => {
           <span className="avatar-menu-item-text">Logout</span>
         </MenuItem>
       </Menu>
-      <>
-        <Modal
-          className="logout-modal"
-          open={showLogOutModal}
-          maskClosable={true}
-          closable={true}
-          keyboard={true}
-          mask={true}
-          onOk={() => setshowLogOutModal(false)}
-          onCancel={() => setshowLogOutModal(false)}
-          // width={layoutGrid ? "50%" : "60%"}
-          footer={null}
-        >
-          <div className="logout-modal-wrapper">
-            <div className="logout-modal-inner">
-              <Button
-                className="logout-modal-cancelbtn"
-                onClick={() => setshowLogOutModal(false)}
-              >
-                <span>Cancel</span>
-              </Button>
-              <Button
-                className="logout-modal-logoutbtn"
-                onClick={() => {
-                  logout();
-                  setshowLogOutModal(false);
-                }}
-              >
-                <span>Logout</span>
-              </Button>
-            </div>
-          </div>
-        </Modal>
-      </>
+
+      <LogoutModal
+        {...{ showLogOutModal, setshowLogOutModal, logout }}
+      ></LogoutModal>
     </div>
   );
 };
 
-export default Navbar;
+export default DesktopNavbar;

@@ -1,0 +1,99 @@
+.workout-hamburger-navbar-container {
+  .workout-hamburger-navbar-container-inner {
+    display: flex;
+
+    // the hamburger or X icon
+    .workout-hamburger-menu-wrapper {
+      margin: 15px 0;
+      margin-left: 20px;
+      display: inline-block;
+      .workout-hamburger-menu {
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+      }
+    }
+    .workout-hamburger-menu-home {
+      align-self: center;
+      margin: 0 auto;
+      .workout-hamburger-menu-home-link {
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+  }
+
+  //the li tags
+  .workout-hamburger-menu-links {
+    // border: 1px solid;
+    .hamburger-menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 15px;
+      padding-left: 25px;
+      background: rgba(0, 179, 255, 0.3);
+      .hamburger-menu-link {
+        &:focus {
+          span {
+            border-bottom: 1px solid rgb(78, 76, 76);
+          }
+        }
+        li {
+          list-style-type: none;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 10px;
+
+          span {
+            font-family: "Poppins";
+            font-size: 26px;
+            color: rgb(78, 76, 76);
+          }
+          img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+      }
+      .hamburger-menu-logout-btn {
+        padding-left: 0;
+        height: fit-content;
+        background: none !important;
+        border: none;
+        align-self: flex-start;
+        //
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+        &:focus {
+          border-bottom: 1px solid rgb(78, 76, 76);
+        }
+        span {
+          font-family: "Poppins";
+          font-size: 26px;
+          color: rgb(78, 76, 76);
+        }
+        img {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .workout-hamburger-menu-links {
+      .hamburger-menu-list {
+        background: rgba(0, 179, 255, 0.25);
+        .hamburger-menu-link {
+        }
+        .hamburger-menu-logout-btn {
+        }
+      }
+    }
+  }
+}

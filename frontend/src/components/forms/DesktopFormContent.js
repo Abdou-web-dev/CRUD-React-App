@@ -4,7 +4,6 @@ import infoIcon from "../../assets/img/infoPNG.png";
 import list from "../../assets/img/list.svg";
 import plus from "../../assets/img/plus-sign.svg";
 import recycle from "../../assets/img/recycle.png";
-import { ButtonToggleModalForm } from "../buttons/ButtonToggleForm";
 import "./form_styles.scss";
 
 import {
@@ -19,6 +18,7 @@ import {
   TrapeziusExos,
   TricepsExos,
 } from "../../assets/staticData/exosData";
+import { ButtonToggleModalForm } from "../buttons/ButtonToggleForm";
 
 export const DesktopFormContent = ({
   showFormNewWindow,
@@ -41,20 +41,32 @@ export const DesktopFormContent = ({
   handleResetFields,
   handleListIconClick,
   showSuggExoTitle,
-  filterBtnClicked,
 }) => {
+  // const isMobileScreen = useMediaQuery("(max-width: 1300px)"); // returns true or false
+
   return (
-    <div className="workout-form-container">
+    <div
+      className={
+        showFormNewWindow
+          ? "workout-form-container workout-form_on_modal"
+          : "workout-form-container"
+      }
+    >
       <div
         // this means that the class toggle-form-btn will always be applied , and toggle-form-btn-modal class will be added to this div element as a second class if showFormNewWindow ===true
         className={`toggle-form-btn ${
           showFormNewWindow ? "toggle-form-btn-modal" : ""
         }`}
       >
-        {!showAllExistentWorkouts || showFormNewWindow ? (
-          <ButtonToggleModalForm
-            {...{ setShowFormNewWindow, showFormNewWindow }}
-          />
+        {!showAllExistentWorkouts ? (
+          <>
+            {/* when the form modal is open, ButtonToggleModalForm has been used in title ReactNode prop,and when it's closed, ButtonToggleModalForm is used as below */}
+            {!showFormNewWindow && (
+              <ButtonToggleModalForm
+                {...{ setShowFormNewWindow, showFormNewWindow }}
+              />
+            )}
+          </>
         ) : null}
       </div>
       <form
@@ -373,7 +385,9 @@ export const DesktopFormContent = ({
                 </div>
                 <div
                   className={
-                    showFormNewWindow === true ? "d_flex" : "form-btns"
+                    showFormNewWindow === true
+                      ? "d_flex form-btns"
+                      : "form-btns"
                   }
                 >
                   <button className="form-btn">
