@@ -6,6 +6,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@fontsource/convergence": "^4.5.9",
+    "@fontsource/hachi-maru-pop": "^4.5.10",
     "@fontsource/inconsolata": "^4.5.9",
     "@fontsource/mulish": "^4.5.12",
     "@fontsource/nanum-gothic": "^4.5.6",

@@ -1,3 +1,6 @@
+@import "@fontsource/convergence";
+@import "@fontsource/hachi-maru-pop";
+
 .workout-hamburger-navbar-container {
   .workout-hamburger-navbar-container-inner {
     display: flex;
@@ -7,10 +10,24 @@
       margin: 15px 0;
       margin-left: 20px;
       display: inline-block;
-      .workout-hamburger-menu {
-        cursor: pointer;
-        width: 40px;
-        height: 40px;
+      .workout-hamburger-menu-wrapper-inner {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        .workout-hamburger-menu {
+          cursor: pointer;
+          width: 40px;
+          height: 40px;
+        }
+        .workout-hamburger-menu-text {
+          span {
+            // font-family: "Convergence";
+            font-family: "Hachi Maru Pop";
+            // font-weight: bold;
+            font-size: larger;
+            text-transform: lowercase;
+          }
+        }
       }
     }
     .workout-hamburger-menu-home {

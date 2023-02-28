@@ -171,8 +171,6 @@
       }
 
       .mobile-form-icon-and-load-input {
-        img {
-        }
         .mobile-form-input-load-component {
           width: 65% !important;
           margin-left: 60px;
@@ -443,7 +441,7 @@
 
         .mobile-form-icon-and-load-input {
           .mobile-form-input-load-component {
-            width: 45% !important;
+            width: 50% !important;
             position: relative;
             right: 20px;
           }
@@ -456,7 +454,7 @@
       .mobile-form-reps-label-and-reps-input-component {
         .mobile-form-icon-and-reps-input {
           .mobile-form-input-reps-component {
-            width: 45% !important;
+            width: 50% !important;
             position: relative;
             right: 20px;
           }
@@ -483,9 +481,61 @@
             @include label_styles();
             color: white;
           }
-          img {
+
+          img.plus-sign {
             width: 50px;
-            height: 500px;
+            height: 50px;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 445px) and (max-width: 470px) {
+    .workouts-mobile-form-inner {
+      .mobile-form-load-label-and-load-input-component {
+        width: 100% !important;
+
+        .mobile-form-icon-and-load-input {
+          .mobile-form-input-load-component {
+            width: 60% !important;
+          }
+          img {
+            position: relative;
+            left: 70px;
+          }
+        }
+      }
+      .mobile-form-reps-label-and-reps-input-component {
+        .mobile-form-icon-and-reps-input {
+          .mobile-form-input-reps-component {
+            width: 60% !important;
+          }
+          img {
+            position: relative;
+            left: 70px;
+          }
+        }
+      }
+      .mobile-form-btns {
+        margin-bottom: 40px;
+        margin-top: 30px;
+        @include d_flex_row();
+
+        .mobile-form-add-btn {
+          @include ant_btn_styles();
+          @include d_flex_row();
+          padding: 5px 15px;
+          background: rgba(128, 128, 128, 0.574);
+          height: 70px;
+          gap: 10px;
+          cursor: pointer;
+          span {
+            @include label_styles();
+            color: white;
+          }
+          img.plus-sign {
+            width: 50px;
+            height: 50px;
           }
         }
       }
@@ -496,9 +546,9 @@
       .mobile-form-load-label-and-load-input-component {
         .mobile-form-icon-and-load-input {
           .mobile-form-input-load-component {
-            width: 45% !important;
+            width: 65% !important;
             position: relative;
-            right: 0px !important;
+            right: 10px !important;
           }
           img {
             position: relative;
@@ -509,9 +559,9 @@
       .mobile-form-reps-label-and-reps-input-component {
         .mobile-form-icon-and-reps-input {
           .mobile-form-input-reps-component {
-            width: 45% !important;
+            width: 65% !important;
             position: relative;
-            right: 0px !important;
+            right: 10px !important;
           }
           img {
             position: relative;

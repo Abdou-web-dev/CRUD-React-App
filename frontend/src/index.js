@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { AuthContextProvider } from "./context/AuthContext";
-import { HamburgerMenuContextProvider } from "./context/HamburgerMenuContext";
+import { MainVariablesContextProvider } from "./context/MainVariablesContext";
 import { WorkoutsContextProvider } from "./context/WorkoutsContext";
 import "./index.css";
 
@@ -12,11 +12,11 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <WorkoutsContextProvider>
-        <HamburgerMenuContextProvider>
+        <MainVariablesContextProvider>
           <BrowserRouter>
             <App />
           </BrowserRouter>
-        </HamburgerMenuContextProvider>
+        </MainVariablesContextProvider>
       </WorkoutsContextProvider>
     </AuthContextProvider>
   </React.StrictMode>

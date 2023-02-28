@@ -1,5 +1,7 @@
 import { Button, Modal } from "antd";
+import logout_exit from "../../assets/img/logout_exit.svg";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
+import { CloseX } from "../icons/Icons";
 import "../Navbar/navbar.scss";
 
 export function LogoutModal({ showLogOutModal, setshowLogOutModal, logout }) {
@@ -19,14 +21,28 @@ export function LogoutModal({ showLogOutModal, setshowLogOutModal, logout }) {
         onOk={() => setshowLogOutModal(false)}
         onCancel={() => setshowLogOutModal(false)}
         footer={null}
+        closeIcon={<CloseX></CloseX>}
+        // bodyStyle={{ background: "" }}
       >
         <div className="logout-modal-wrapper">
-          <div className="logout-modal-inner">
+          <div
+            className={
+              isMobileScreen
+                ? "logout-modal-inner exit_bg"
+                : "logout-modal-inner"
+            }
+          >
             <Button
               className="logout-modal-cancelbtn"
               onClick={() => setshowLogOutModal(false)}
             >
-              <span>Cancel</span>
+              {isMobileScreen ? (
+                <div className="logout-modal-cancelbtn-closeX">
+                  <CloseX></CloseX>
+                </div>
+              ) : (
+                <span>Cancel</span>
+              )}
             </Button>
             <Button
               className="logout-modal-logoutbtn"
@@ -35,7 +51,15 @@ export function LogoutModal({ showLogOutModal, setshowLogOutModal, logout }) {
                 setshowLogOutModal(false);
               }}
             >
-              <span>Logout</span>
+              {isMobileScreen ? (
+                <img
+                  className="logout-modal-logoutbtn-icon"
+                  src={logout_exit}
+                  alt=""
+                />
+              ) : (
+                <span>Logout</span>
+              )}
             </Button>
           </div>
         </div>

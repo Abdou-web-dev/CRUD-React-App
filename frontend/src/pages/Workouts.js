@@ -4,7 +4,7 @@ import { useWorkoutsContext } from "../hooks/useWorkoutsContext";
 // components
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Skeleton } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { WorkoutsForm } from "../components/forms/WorkoutsForm";
 
 import {
@@ -15,6 +15,7 @@ import { useMediaQuery } from "../hooks/UseMediaQuery";
 
 import { WorkoutsSection } from "../components/sections/WorkoutsSection";
 import { AntdSkeleton } from "../components/skeletons/AntdSkeleton";
+import { MainVariablesContext } from "../context/MainVariablesContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 import "./pages_styles.scss";
 
@@ -36,7 +37,10 @@ const Workouts = ({}) => {
     "pagination-content-loaded"
   );
   const [showMobileFormModal, setShowMobileFormModal] = useState(false);
-  const [openSearchInputModal, setopenSearchInputModal] = useState(false);
+
+  const { openSearchInputModal, setopenSearchInputModal } =
+    useContext(MainVariablesContext);
+
   const [filterBtnClicked, setfilterBtnClicked] = useState(false);
   let layoutGrid = detailsContClass === "workout-details-container-as-grid";
   let layoutList = detailsContClass === "workout-details-container-as-list";

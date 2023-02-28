@@ -11,7 +11,7 @@ import logout_circle from "../../assets/img/logout_circle.svg";
 import maleIcon from "../../assets/img/maleIcon.svg";
 import profil from "../../assets/img/profil.png";
 import starred from "../../assets/img/starred.png";
-import { HamburgerMenuContext } from "../../context/HamburgerMenuContext";
+import { MainVariablesContext } from "../../context/MainVariablesContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLogout } from "../../hooks/useLogout";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
@@ -48,8 +48,12 @@ const MobileNavbar = ({}) => {
 
   const [showLinks, setShowLinks] = useState(false);
 
-  const { hamburgerMenuIsOpen, setHamburgerMenuIsOpen } =
-    useContext(HamburgerMenuContext);
+  const {
+    hamburgerMenuIsOpen,
+    setHamburgerMenuIsOpen,
+    openSearchInputModal,
+    setopenSearchInputModal,
+  } = useContext(MainVariablesContext);
 
   function handleHamburgerMenuClick() {
     setHamburgerMenuIsOpen(!hamburgerMenuIsOpen);
@@ -66,6 +70,12 @@ const MobileNavbar = ({}) => {
   }
 
   useEffect(() => {
+    if (!openSearchInputModal) {
+      setHamburgerMenuIsOpen(!hamburgerMenuIsOpen);
+    }
+  }, [openSearchInputModal]);
+
+  useEffect(() => {
     if (hamburgerMenuIsOpen) console.log("menu open");
     else console.log("menu closed");
   }, [hamburgerMenuIsOpen]);
@@ -74,18 +84,38 @@ const MobileNavbar = ({}) => {
     <div className="workout-hamburger-navbar-container">
       <div className="workout-hamburger-navbar-container-inner">
         <div className="workout-hamburger-menu-wrapper">
-          <HamburgerMenu
-            className="workout-hamburger-menu"
-            isOpen={hamburgerMenuIsOpen}
-            menuClicked={handleHamburgerMenuClick}
-            // width={18}
-            // height={15}
-            strokeWidth={2.5}
-            rotate={0}
-            color="black"
-            borderRadius={0}
-            animationDuration={0.5}
-          />
+          {/* when the user clicks on magnifying_glass-btn, the hamburgerMenu Icon is hidden, when not, it's shown */}
+          {!openSearchInputModal && (
+            <div className="workout-hamburger-menu-wrapper-inner">
+              <HamburgerMenu
+                className="workout-hamburger-menu"
+                isOpen={hamburgerMenuIsOpen}
+                menuClicked={handleHamburgerMenuClick}
+                // width={18}
+                // height={15}
+                strokeWidth={2.5}
+                rotate={0}
+                color="black"
+                borderRadius={0}
+                animationDuration={0.5}
+              />
+              {!hamburgerMenuIsOpen && (
+                <div className="workout-hamburger-menu-text">
+                  <span
+                    className={`${
+                      !hamburgerMenuIsOpen
+                        ? "animate__fadeInUp animate__animated  animate__delay-1.5s"
+                        : hamburgerMenuIsOpen
+                        ? "animate__animated animate__fadeOut animate__delay-1.5s"
+                        : ""
+                    }`}
+                  >
+                    Menu
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {hamburgerMenuIsOpen && (

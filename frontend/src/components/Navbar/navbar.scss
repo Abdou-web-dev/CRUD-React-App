@@ -496,8 +496,6 @@ $xx-large: 1400px;
   }
 
   @media screen and (max-width: 480px) {
-    // margin-bottom: 100px;
-    // border: 1px solid red;
     .workout-app-navbar {
       width: 100%;
       height: 190px;
@@ -725,6 +723,12 @@ $xx-large: 1400px;
               font-size: 30px;
               font-weight: lighter;
             }
+            .logout-modal-cancelbtn-closeX {
+              img {
+                width: 64px !important;
+                height: 64px !important;
+              }
+            }
           }
           .logout-modal-logoutbtn {
             height: fit-content;
@@ -738,12 +742,48 @@ $xx-large: 1400px;
               font-size: 30px;
               font-weight: lighter;
             }
+            .logout-modal-logoutbtn-icon {
+              width: 64px;
+              height: 64px;
+            }
+          }
+          &.exit_bg {
+            background: url(../../assets/img/out-exit-emergency-logout.png)
+              no-repeat center;
+            background-size: contain;
+            // background: #ffffff url("img_tree.png") no-repeat right top;
           }
         }
       }
     }
     &.logout-modal-mobile {
-      // border: 10px solid red;
+      @media screen and (max-width: 700px) {
+        width: 85% !important;
+        .ant-modal-content {
+          .ant-modal-body {
+            .logout-modal-wrapper {
+              border: 0;
+            }
+          }
+        }
+      }
+      @media screen and (min-width: 0px) and (max-width: 800px) {
+        width: 85% !important;
+        .ant-modal-content {
+          .ant-modal-body {
+            .logout-modal-wrapper {
+              border: 0;
+            }
+          }
+          .ant-modal-close {
+            .ant-modal-close-x {
+              position: relative;
+              bottom: 30px;
+              left: 0px;
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -316,7 +316,7 @@ export const WorkoutDetails = ({
           ${
             filteredWorkout && !showAllExistentWorkouts
               ? `condensed-workouts-filter-results`
-              : `` //3rd btn styles when clicking filter btn
+              : `aaa` //3rd btn styles when clicking filter btn
           }
          `}
         style={{

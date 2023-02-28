@@ -3,10 +3,8 @@ import { Button, Input, message, Modal } from "antd";
 import { formatDistanceToNow } from "date-fns";
 import React, { useContext, useEffect, useState } from "react";
 import magnifying_glass from "../../assets/img/magnifying_glass.svg";
+import { MainVariablesContext } from "../../context/MainVariablesContext";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
-
-import { HamburgerMenuContext } from "../../context/HamburgerMenuContext";
-
 import { ClearIcon, CloseX } from "../icons/Icons";
 import { SearchInputModal } from "../inputs/SearchInputModal";
 import { AwesomeSpinner } from "../spinners/AwesomeSpinner";
@@ -31,11 +29,11 @@ export const WorkoutsSection = ({
   showAllExistentWorkouts,
   setshowAllExistentWorkouts,
   showMobileFormModal, //the modal that opens when the users clicks on Add Workout btn
-  openSearchInputModal, //the modal that opens when the users clicks on the search icon
-  setopenSearchInputModal,
   filterBtnClicked,
   setfilterBtnClicked,
 }) => {
+  // openSearchInputModal, //the modal that opens when the users clicks on the search icon
+
   const [searchValue, setSearchValue] = useState(``);
   const [filteredResultsByMobileModal, setFilteredResultsByMobileModal] =
     useState([]);
@@ -59,8 +57,12 @@ export const WorkoutsSection = ({
   const isDesktopScreen = useMediaQuery("(min-width: 1260px)");
   const is_less_than_700 = useMediaQuery("(max-width: 700px)");
   const is_more_than_700 = !is_less_than_700;
-  const { hamburgerMenuIsOpen, setHamburgerMenuIsOpen } =
-    useContext(HamburgerMenuContext);
+  const {
+    hamburgerMenuIsOpen,
+    setHamburgerMenuIsOpen,
+    openSearchInputModal,
+    setopenSearchInputModal,
+  } = useContext(MainVariablesContext);
 
   // searchItems on Click on Ok Btn or on Enter keyboard key
   const searchItems = () => {
@@ -146,7 +148,7 @@ export const WorkoutsSection = ({
       if (searchValue) {
         if (!filteredResultsByMobileModal?.length) {
           setSearchValue("");
-          message.info("No Item was found !", 0.6); //This is a prompt message for success, and it will disappear in 0.6 seconds
+          message.info("No Item was found !", 2.5); //This is a prompt message for success, and it will disappear in 0.6 seconds
         }
       }
     }
@@ -159,7 +161,7 @@ export const WorkoutsSection = ({
       setTimeout(() => {
         message.info(
           `You have got ${filteredResults?.length} ${result_word}`,
-          0.6
+          2.5
         ); //This is a prompt message for success, and it will disappear in 0.6 seconds
       }, 800);
     }
@@ -378,9 +380,9 @@ export const WorkoutsSection = ({
         onOk={() => setopenSearchInputModal(false)}
         onCancel={() => {
           setopenSearchInputModal(false);
-          if (!hamburgerMenuIsOpen) {
-            setHamburgerMenuIsOpen(true);
-          }
+
+          setHamburgerMenuIsOpen(hamburgerMenuIsOpen);
+          // console.log("onCancel clicked");
         }}
         footer={null}
         title={null}
@@ -414,3 +416,5 @@ export const WorkoutsSection = ({
     </div>
   );
 };
+
+// efljhejhfeik

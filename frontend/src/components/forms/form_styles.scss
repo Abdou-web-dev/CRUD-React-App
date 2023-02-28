@@ -285,7 +285,12 @@ $xx-large: 1400px;
           }
         }
         div.error-msg-container {
+          width: 270px;
           margin-top: 60px;
+          div.error-msg-modal {
+            // display: none;
+            // margin: 5px;
+          }
         }
       }
     }
@@ -988,6 +993,11 @@ $xx-large: 1400px;
 .ant-message-notice {
   .ant-message-notice-content {
     padding: 20px;
+    span {
+      font-family: "Mulish";
+      font-size: 24px;
+      margin: 0 10px !important;
+    }
     .ant-message-custom-content {
       &.ant-message-warning {
         .anticon {
