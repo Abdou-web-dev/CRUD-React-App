@@ -3,16 +3,16 @@ import { Alert, message, Modal } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import plusSign from "../../assets/img/plusSign.svg";
+import warning_icon from "../../assets/img/warning_icon.svg";
 import exercisesData from "../../assets/staticData/chestExercises.json";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
 import { ButtonToggleModalForm } from "../buttons/ButtonToggleForm";
-import { ClearIcon, CloseX } from "../icons/Icons";
+import { CloseX } from "../icons/Icons";
 import { ChestExosList } from "../lists/ChestExosList";
 import { NiceSpinner } from "../spinners/NiceSpinner";
 import { DesktopFormContent } from "./DesktopFormContent";
-
 import "./form_styles.scss";
 import { MobileFormContent } from "./MobileFormContent";
 
@@ -56,8 +56,17 @@ export const WorkoutsForm = ({
     e.preventDefault();
     const workout = { title, load, reps, exoCategory };
     if (!user || workoutsTitlesArray.includes(workout.title)) {
-      handleError();
-      console.log("You must be logged in");
+      // meaning if the user is logged out , or if the workout that the user tries to register has been already entered through the form
+      if (showFormNewWindow) {
+        message.info("This Workout already exists, choose another one !", 2.5); //This is a prompt message for success, and it will disappear in 0.6 seconds
+        setExoCategory("");
+      } else {
+        handleError();
+        if (!isMobileScreen) {
+          setExoCategory("");
+        }
+        // console.log("You must be logged in");
+      }
       return;
     }
     //quit the function at this point, if no user is authenticated and logged in, because only logged in users can add workouts or delete them...
@@ -160,6 +169,15 @@ export const WorkoutsForm = ({
     }
   }, [showMobileFormModal]);
 
+  useEffect(() => {
+    // const workout = { title, load, reps, exoCategory };
+    // if (showFormNewWindow && workoutsTitlesArray?.includes(workout?.title)) {
+    //   // && workoutsTitlesArray?.includes(workout?.title)
+    //   message.info("This Workout already exists, choose another one !", 2.5); //This is a prompt message for success, and it will disappear in 0.6 seconds
+    //   console.log("This Workout already exists, choose another one");
+    // }
+  }, [showFormNewWindow]);
+
   if (isMobileScreen) {
     return (
       <>
@@ -236,22 +254,25 @@ export const WorkoutsForm = ({
       <>
         <>
           {/* JSX to show a notification if the user tries to enter a workout that already exists */}
-          {showNotification && (
+          {showNotification && !showFormNewWindow && (
             <div className="notification">
               <Alert
                 className="ant-alert"
                 closeIcon={
-                  <IconButton onClick={() => setShowNotification(false)}>
-                    <ClearIcon />
+                  <IconButton
+                    className="ant-alert-close-icon-btn"
+                    // style={{ width: "40px" }}
+                    onClick={() => setShowNotification(false)}
+                  >
+                    <CloseX />
                   </IconButton>
                 }
                 message={
-                  <span className="noti-text">
-                    This workout already exists !
-                  </span>
+                  <span className="noti-text">This workout already exists</span>
                 }
                 banner
                 closable
+                icon={<img width={`40px`} src={warning_icon} alt="" />}
               />
             </div>
           )}
@@ -322,7 +343,7 @@ export const WorkoutsForm = ({
                 title={
                   <div className="desktop-form-ant-modal-header">
                     <span>Add a New Workout</span>
-                    <div className="desktop-form-ant-modal-header-toggle-btn">
+                    <div className="desktop-form-ant-modal-header-toggle-btn-wrapper">
                       <ButtonToggleModalForm
                         {...{ setShowFormNewWindow, showFormNewWindow }}
                       />

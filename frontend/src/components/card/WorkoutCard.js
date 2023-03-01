@@ -9,6 +9,7 @@ import BicepsIcon from "../../assets/img/bicepsIcon.png";
 import CalvesIcon from "../../assets/img/calvesIcon.png";
 import ChestIcon from "../../assets/img/ChestIcon.svg";
 import editIconPen from "../../assets/img/editer.png";
+import fallBackIcon from "../../assets/img/fallback.png";
 import ForearmsIcon from "../../assets/img/forearmsIcon.png";
 import HamstringsIcon from "../../assets/img/HamstringsIcon.svg";
 import ShouldersIcon from "../../assets/img/shouldersIcon.png";
@@ -65,7 +66,7 @@ export function WorkoutCard({
                 ? BackIcon
                 : workoutCateg === `Triceps`
                 ? TricepsIcon
-                : null
+                : fallBackIcon
             }
             alt=""
           />

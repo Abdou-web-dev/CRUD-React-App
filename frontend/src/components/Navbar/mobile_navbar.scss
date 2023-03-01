@@ -44,7 +44,6 @@
 
   //the li tags
   .workout-hamburger-menu-links {
-    // border: 1px solid;
     .hamburger-menu-list {
       display: flex;
       flex-direction: column;
@@ -53,11 +52,6 @@
       padding-left: 25px;
       background: rgba(0, 179, 255, 0.3);
       .hamburger-menu-link {
-        &:focus {
-          span {
-            border-bottom: 1px solid rgb(78, 76, 76);
-          }
-        }
         li {
           list-style-type: none;
           display: flex;
@@ -74,8 +68,105 @@
             width: 50px;
             height: 50px;
           }
+          &.hamburger-menu-profile-li {
+            // display: flex;
+            .hamburger-menu-profile-avatar-wrapper {
+              align-self: flex-end;
+              justify-self: flex-end;
+            }
+          }
+        }
+        &:focus {
+          span {
+            border-bottom: 1px solid rgb(78, 76, 76);
+          }
+        }
+        &.profile-anchor {
+          li {
+            width: 80px;
+          }
+          img {
+            width: 50px;
+          }
+        }
+        &.starred-items-anchor {
+          width: 260px;
+
+          @media screen and (max-width: 600px) {
+            width: 310px;
+          }
+        }
+        &.help-anchor {
+          width: 60px;
         }
       }
+
+      .hamburger-menu-profile-link-wrapper {
+        display: flex;
+        justify-content: space-between;
+        .hamburger-menu-link {
+          li {
+            list-style-type: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 10px;
+
+            span {
+              font-family: "Poppins";
+              font-size: 26px;
+              color: rgb(78, 76, 76);
+            }
+            img {
+              width: 50px;
+              height: 50px;
+            }
+            &.hamburger-menu-profile-li {
+              // display: flex;
+              .hamburger-menu-profile-avatar-wrapper {
+                align-self: flex-end;
+                justify-self: flex-end;
+              }
+            }
+          }
+
+          &.profile-anchor {
+            width: 80px;
+            display: flex;
+
+            img {
+              width: 50px;
+            }
+          }
+        }
+        .hamburger-menu-profile-avatar-wrapper {
+          display: inline-flex;
+          gap: 10px;
+          background: rgba(211, 211, 211, 0.4);
+          padding: 15px;
+          border: 1px solid grey;
+          // border-radius: 5px;
+          &.avatar-wrapper_modal_open {
+            border: 0;
+            background: none;
+          }
+
+          img.logged-avatar {
+            width: 50px;
+          }
+          .hamburger-menu-selected-avatar-edit-icon-btn {
+            height: fit-content;
+            background: none;
+            border: none;
+            padding: 0;
+            img.hamburger-menu-selected-avatar-edit-icon {
+              // border: 1px solid;
+              width: 20px;
+            }
+          }
+        }
+      }
+
       .hamburger-menu-logout-btn {
         padding-left: 0;
         height: fit-content;

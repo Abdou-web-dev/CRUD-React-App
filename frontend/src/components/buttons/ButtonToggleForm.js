@@ -6,11 +6,8 @@ export const ButtonToggleModalForm = ({
 }) => {
   return (
     <Button
-      className="up-btn-link"
       onClick={() => setShowFormNewWindow(!showFormNewWindow)}
-      style={{
-        height: "fit-content",
-      }}
+      className="minimize_btn_container"
     >
       <Tooltip
         title={

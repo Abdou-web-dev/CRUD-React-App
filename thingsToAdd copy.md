@@ -1,3 +1,4 @@
 // Work on the Skeleton's responsivness!!!
-//hambrurger menu
-//modifier mon cv , ajouter 2 exp Upwork en React , detailler l exp a NowEdge.... , laisser le dernier projet perso seulemet .
+//user's avatar on hambrurger menu
+//deploy on AWS
+Mettre une veste et une chemise pr l'entretien de jeudi

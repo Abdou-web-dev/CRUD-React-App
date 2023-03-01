@@ -405,7 +405,13 @@ export const DesktopFormContent = ({
           </>
         </div>
         {!showAllExistentWorkouts && (
-          <div className="error-msg-container">
+          <div
+            className={
+              error
+                ? "error-msg-container if_error_is_displayed"
+                : "error-msg-container"
+            }
+          >
             {error && (
               <div
                 className={

@@ -5,6 +5,8 @@ import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { WorkoutDetails } from "../details/WorkoutDetails";
 import "./sections_styles.scss";
 
+// workoutCondensed and workoutFiltered both are single elements obtained by iterating over workouts ; with js map method
+//but workoutIsCondensed is a boolean variable , always set to true
 export function WorkoutDetailsItemCondensed({
   workoutCondensed,
   workoutFiltered,
@@ -29,37 +31,44 @@ export function WorkoutDetailsItemCondensed({
 
   if (showAllExistentWorkouts || showResults) {
     return (
+      // WorkoutDetailsItemCondensed , 3rd section
       <>
         {!isMobileScreen && (
-          <WorkoutDetails
-            {...{
-              workoutCondensed,
-              filteredWorkout,
-              showAllExistentWorkouts,
-              showResults,
-              indexx,
-              showNotification,
-              addOrRemoveWorkout,
-              //this prop prevents the exo icons from displaying on this component
-            }}
-            workout={
-              workoutFiltered
-                ? workoutFiltered
-                : workoutCondensed
-                ? workoutCondensed
-                : null
-            }
-          />
+          <div className="workout-details-item-condensed__third_section_filters">
+            <WorkoutDetails
+              {...{
+                workoutCondensed,
+                filteredWorkout,
+                showAllExistentWorkouts,
+                showResults,
+                indexx,
+                showNotification,
+                addOrRemoveWorkout,
+                //this prop prevents the exo icons from displaying on this component
+              }}
+              workout={
+                workoutFiltered
+                  ? workoutFiltered
+                  : workoutCondensed
+                  ? workoutCondensed
+                  : null
+              }
+            />
+          </div>
         )}
       </>
     );
   }
   //else
   return (
+    // WorkoutDetailsItemCondensed , 2nd section
     <div
-      className={`${showClosebtn === true && "bg1"} ${showWorkout && "bg2"}
+      className={`${showClosebtn === true ? "bg1" : ""} ${
+        showWorkout ? "bg2" : ""
+      }
       workout-details-item-condensed
   `}
+      // workout-details-item-condensed , this className is applied to every workout element, on the 2nd section, when the user clicks on the 2nd btn , underneath the search field, on Desktop screens of course
       style={{ display: displayItem }}
     >
       <div

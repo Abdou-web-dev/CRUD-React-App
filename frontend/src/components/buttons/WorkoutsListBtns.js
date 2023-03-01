@@ -27,6 +27,8 @@ let categories = [
   { exoTitle: `Back`, icon: BackIcon },
 ];
 
+// Refactor this file, split it into smaller components !!!!
+
 export function WorkoutsListBtns({
   detailsContClass,
   handleIconClick,
@@ -513,6 +515,7 @@ export function WorkoutsListBtns({
                       showAllExistentWorkouts,
                       showAllWorkoutsCondensed,
                       showResults,
+                      filteredWorkout,
                       indexx,
                       showNotification,
                     }}

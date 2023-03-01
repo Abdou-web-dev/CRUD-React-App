@@ -20,7 +20,6 @@ $xx-large: 1400px;
       input {
         display: block;
       }
-
       input {
         &.form-msg-error {
           border: 1px solid var(--error);
@@ -206,7 +205,7 @@ $xx-large: 1400px;
     float: right;
     position: relative;
 
-    .up-btn-link {
+    .minimize_btn_container {
       height: fit-content !important;
       &:hover {
         transform: scale(1.04);
@@ -267,7 +266,9 @@ $xx-large: 1400px;
       }
       div.error-msg-container {
         display: inline-block;
-        border: 0.5px solid rgba(255, 0, 0, 0.2);
+        &.if_error_is_displayed {
+          border: 0.5px solid rgba(255, 0, 0, 0.2);
+        }
       }
     }
     .toggle-form-btn {
@@ -444,9 +445,6 @@ $xx-large: 1400px;
     width: 300px;
     margin-right: 70px;
 
-    // .toggle-form-btn {
-
-    // }
     .workouts-form {
       padding: 40px;
       margin-top: 260px;
@@ -564,7 +562,6 @@ $xx-large: 1400px;
       }
     }
   }
-
   @media screen and (min-width: 350px) and (max-width: 700px) {
     width: 300px;
     margin-right: 70px;
@@ -910,19 +907,27 @@ $xx-large: 1400px;
 }
 
 .notification {
+  // width: 400px;
+
   .ant-alert {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 490px;
-    position: relative;
-    top: 140px;
-    right: 40px;
+    width: 400px;
+    // position: relative;
+    // top: -40px;
+    // right: 0px;
+    // it is better to user margin here, instead of position : relative , because when hovering over the alert, if we use position : the box shadow will not be overlapping exactly on the alert...
+    margin-bottom: 50px;
     padding: 15px 30px;
-    // display: none;
-    &:hover {
-      box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
-        rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+    .ant-alert-close-icon {
+      .ant-alert-close-icon-btn {
+        img {
+          width: 50px !important;
+          height: 50px !important;
+        }
+      }
     }
   }
   span {
@@ -959,16 +964,33 @@ $xx-large: 1400px;
       font-family: "Mulish";
     }
   }
-  @media screen and (min-width: $large) and (max-width: $x-large) {
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  }
+  @media screen and (min-width: $x-large) and (max-width: $xx-large) {
+    width: 400px;
     .ant-alert {
-      // width: 390px;
-      // max-width: 00px;
-      position: relative;
-      top: 220px;
-      max-width: 370px;
+      // border: 1px solid red !important;
+      margin-bottom: -150px;
+
+      // max-width: 500px;
 
       .ant-alert-message {
-        // height: 100px;
+        span.noti-text {
+          align-self: center;
+        }
+      }
+    }
+  }
+  @media screen and (min-width: $large) and (max-width: $x-large) {
+    width: 350px;
+    .ant-alert {
+      // border: 1px solid red !important;
+      margin-bottom: -150px;
+      margin-left: -30px !important;
+      width: 350px;
+      .ant-alert-message {
         span.noti-text {
           align-self: center;
         }
@@ -976,11 +998,11 @@ $xx-large: 1400px;
     }
   }
   @media screen and (min-width: $medium) and (max-width: $large) {
+    width: 320px;
     .ant-alert {
-      position: relative;
-      top: 220px;
-      max-width: 350px;
-
+      margin-bottom: -200px;
+      margin-left: -40px;
+      width: 320px;
       .ant-alert-message {
         span.noti-text {
           align-self: center;
@@ -1049,9 +1071,10 @@ $xx-large: 1400px;
             font-family: "Mulish";
             font-size: larger;
           }
-          .desktop-form-ant-modal-header-toggle-btn {
-            // justify-self: flex-end;
-            // align-self: flex-end;
+          .desktop-form-ant-modal-header-toggle-btn-wrapper {
+            button.minimize_btn_container {
+              height: fit-content;
+            }
           }
         }
       }

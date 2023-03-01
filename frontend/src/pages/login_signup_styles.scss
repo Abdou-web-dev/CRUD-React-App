@@ -354,6 +354,33 @@ $xx-large: 1400px;
 
 .login-form-avatar-modal {
   width: 60%;
+  .ant-modal-content {
+    //isMobileScreen
+    .ant-modal-header {
+      .login-form-modal-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        span {
+          font-family: "inconsolata";
+          font-size: 20px;
+          letter-spacing: 1.5px;
+        }
+        .login-form-modal-header-close-btn-wrapper {
+          padding: 0;
+          border: none;
+          img {
+            width: 50px !important;
+            height: 50px !important;
+            position: relative;
+            bottom: 10px;
+          }
+        }
+      }
+    }
+  }
   .login-form-modal-content {
     &.login-form-list-of-avatars {
       display: flex;

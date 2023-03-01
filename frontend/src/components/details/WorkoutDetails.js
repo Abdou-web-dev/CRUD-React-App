@@ -5,7 +5,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { Backdrop, Collapse, Stack } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import { Button, Drawer, message, Modal, Popconfirm, Space } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import editIconPen from "../../assets/img/editer.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
@@ -37,6 +37,8 @@ import "./workout_details_styles.css";
 /* Split this component into Smaller components , cut the code inside detailsContClass container into 2 or 3 smaller components */
 // transform <CollapseContent /> into a separate JS component
 
+// workoutCondensed and workoutFiltered both are single elements obtained by iterating over workouts ; with js map method
+//but workoutIsCondensed is a boolean variable , always set to true
 export const WorkoutDetails = ({
   workout,
   index,
@@ -260,6 +262,11 @@ export const WorkoutDetails = ({
     </div>
   );
 
+  useEffect(() => {
+    if (filteredWorkout) console.log("filteredWorkout");
+    if (showAllExistentWorkouts) console.log("showAllExistentWorkouts");
+  }, [filteredWorkout, showAllExistentWorkouts]);
+
   return (
     <div className={showResults ? "workout-details-top-container" : ""}>
       <>
@@ -316,7 +323,7 @@ export const WorkoutDetails = ({
           ${
             filteredWorkout && !showAllExistentWorkouts
               ? `condensed-workouts-filter-results`
-              : `aaa` //3rd btn styles when clicking filter btn
+              : `` //3rd btn styles when clicking filter btn
           }
          `}
         style={{

@@ -1,4 +1,4 @@
-import { Alert, Button, Checkbox, Form, Input, Modal, Tooltip } from "antd";
+import { Alert, Button, Checkbox, Form, Input, Tooltip } from "antd";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import avatarfemale1 from "../assets/img/avatarfemale1.svg";
@@ -16,7 +16,7 @@ import avatarmale6 from "../assets/img/avatarmale6.svg";
 import edit from "../assets/img/edit.svg";
 import { LoginMobileForm } from "../components/forms/LoginMobileForm";
 import { ClearIcon } from "../components/icons/Icons";
-import { LoginAvatars } from "../components/modals/modal_content/LoginAvatars";
+import { AvatarModal } from "../components/modals/AvatarModal";
 import { useLogin } from "../hooks/useLogin";
 import { useMediaQuery } from "../hooks/UseMediaQuery";
 import "./login_signup_styles.scss";
@@ -36,6 +36,7 @@ const Login = ({}) => {
 
   // save the avatar to local storage
   localStorage.setItem("avatar", JSON.stringify(avatar));
+  localStorage.setItem("gender", JSON.stringify(gender));
 
   const [emailClass, setemailClass] = useState("login-form-email-item-input");
   const [passwordClass, setPasswordClass] = useState(
@@ -227,6 +228,7 @@ const Login = ({}) => {
                   </Checkbox>
                 </div>
               )}
+
               {showSelectedAvatar && (
                 <div className="login-form-selected-avatar">
                   <img
@@ -334,33 +336,18 @@ const Login = ({}) => {
 
       {/* Avatar modal */}
       <>
-        {showAvatarModal && (
-          <div>
-            <Modal
-              className="login-form-avatar-modal"
-              open={showAvatarModal}
-              maskClosable={true}
-              closable={true}
-              keyboard={true}
-              mask={true}
-              onOk={() => setshowAvatarModal(false)}
-              onCancel={() => setshowAvatarModal(false)}
-              footer={null}
-              title={`Pick an avatar`}
-            >
-              <LoginAvatars
-                {...{
-                  avatars,
-                  avatar,
-                  handleAvatarClick,
-                  setshowAvatarModal,
-                  setShowNotification,
-                }}
-              ></LoginAvatars>
-            </Modal>
-          </div>
-        )}
+        <AvatarModal
+          {...{
+            showAvatarModal,
+            setshowAvatarModal,
+            avatar,
+            avatars,
+            handleAvatarClick,
+            setShowNotification,
+          }}
+        />
       </>
+
       {/* Notification */}
       <>
         {showNotification && (
