@@ -2,6 +2,19 @@
 @import "@fontsource/hachi-maru-pop";
 
 .workout-hamburger-navbar-container {
+  div.hamburger-menu-logged-user-name {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+    margin-bottom: 0;
+    span.f_name {
+      font-family: "Poppins";
+      font-size: 22px;
+      text-transform: capitalize;
+      letter-spacing: 1.5px;
+      border-bottom: 1px solid lightgray;
+    }
+  }
   .workout-hamburger-navbar-container-inner {
     display: flex;
 
@@ -18,6 +31,10 @@
           cursor: pointer;
           width: 40px;
           height: 40px;
+          &.click_not_allowed {
+            // pointer-events: none;
+            cursor: not-allowed !important;
+          }
         }
         .workout-hamburger-menu-text {
           span {
@@ -37,6 +54,107 @@
         img {
           width: 50px;
           height: 50px;
+        }
+      }
+    }
+    .hamburger-menu-profile-avatar-wrapper {
+      display: inline-flex;
+      gap: 0px;
+      background: #fbfbfd;
+      padding: 5px 5px;
+      border: 0.5px solid rgba(128, 128, 128, 0.17);
+      border-radius: 50%;
+      padding: 10px;
+      margin-right: 15px;
+
+      &.avatar-wrapper_modal_open {
+        border: 0;
+        background: none;
+      }
+
+      img.logged-avatar {
+        width: 50px;
+      }
+      .hamburger-menu-selected-avatar-edit-icon-btn {
+        height: fit-content;
+        background: none;
+        border: none;
+        padding: 0;
+        img.hamburger-menu-selected-avatar-edit-icon {
+          // border: 1px solid;
+          width: 20px;
+        }
+      }
+      .hamburger-menu-selected-avatar {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 2px;
+        img.hamburger-menu-selected-avatar-icon {
+          border-radius: 50%;
+        }
+      }
+      &.avatar-wrapper_hamburger_menu_closed {
+        border: none;
+        align-self: flex-start;
+      }
+    }
+  }
+
+  .workout-hamburger-list-of-avatars {
+    // display: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    gap: 14px;
+    max-height: 300px;
+    overflow-y: scroll;
+    margin: 15px 0;
+    width: 90%;
+    &::-webkit-scrollbar {
+      width: 15px;
+    }
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background: rgba(161, 160, 160, 0.05);
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      border-radius: 10px;
+      background: rgba(23, 22, 22, 0.44);
+    }
+    .workout-hamburger-avatar-wrapper {
+      .workout-hamburger-avatar-btn {
+        height: fit-content;
+        border: none;
+        &:hover {
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        .workout-hamburger-avatar {
+        }
+      }
+      &.workout-hamburger-avatar_search_modal_open {
+        filter: blur(3px);
+      }
+    }
+    .workout-hamburger-cancel-btn {
+      height: fit-content;
+      align-self: center;
+      background: rgba(128, 128, 128, 0.12);
+      margin-top: 8px;
+      position: relative;
+      left: 5px;
+      span {
+        font-family: "Poppins";
+        font-size: 20px;
+        font-style: italic;
+      }
+      &:hover {
+        span {
+          color: initial;
         }
       }
     }
@@ -136,32 +254,6 @@
 
             img {
               width: 50px;
-            }
-          }
-        }
-        .hamburger-menu-profile-avatar-wrapper {
-          display: inline-flex;
-          gap: 10px;
-          background: rgba(211, 211, 211, 0.4);
-          padding: 15px;
-          border: 1px solid grey;
-          // border-radius: 5px;
-          &.avatar-wrapper_modal_open {
-            border: 0;
-            background: none;
-          }
-
-          img.logged-avatar {
-            width: 50px;
-          }
-          .hamburger-menu-selected-avatar-edit-icon-btn {
-            height: fit-content;
-            background: none;
-            border: none;
-            padding: 0;
-            img.hamburger-menu-selected-avatar-edit-icon {
-              // border: 1px solid;
-              width: 20px;
             }
           }
         }
