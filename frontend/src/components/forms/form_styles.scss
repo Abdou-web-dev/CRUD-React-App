@@ -963,6 +963,31 @@ $xx-large: 1400px;
     span {
       font-family: "Mulish";
     }
+    &.no_box_shadow {
+      margin-top: -40px;
+      width: 370px;
+      position: relative;
+      left: 170px;
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+    &.noti_avatar_modal_open {
+      position: relative;
+      right: 0px;
+      margin-top: -100px;
+      width: 370px;
+      .ant-alert {
+        border: 1px dashed red;
+      }
+      @media screen and (min-width: $x-large) and (max-width: $xx-large) {
+        margin-top: -125px;
+        .ant-alert {
+          border: 1px dashed red;
+        }
+      }
+    }
   }
   &:hover {
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,

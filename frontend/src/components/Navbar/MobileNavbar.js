@@ -61,6 +61,14 @@ import { AwesomeSpinner } from "../spinners/AwesomeSpinner";
 
 import "./mobile_navbar.scss";
 
+//do the same , when the user tries to register through a device mobile
+// const loggedAvatarMobile = JSON.parse(
+//   localStorage.getItem("avatarMobileScreen")
+// );
+// loggedUserMobile to be added
+// loggedFNameMobile to be added
+// registeredGenderMobile to be added
+
 const MobileNavbar = ({}) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
@@ -81,6 +89,9 @@ const MobileNavbar = ({}) => {
   const [showSelectedAvatar, setShowSelectedAvatar] = useState(false);
 
   const loggedGender = JSON.parse(localStorage.getItem("gender")); //an icon
+  const loggedGenderMobile = JSON.parse(
+    localStorage.getItem("genderMobileScreen")
+  ); //an icon
 
   const maleAvatarsList = [
     avatarmale1,
@@ -129,11 +140,11 @@ const MobileNavbar = ({}) => {
   ];
 
   const avatars =
-    loggedGender === "Male"
+    loggedGender === "Male" || loggedGenderMobile === "Male"
       ? isMobileScreen
         ? maleAvatarsList.concat(maleAvatarsAdditionalList)
         : maleAvatarsList
-      : loggedGender === "Female"
+      : loggedGender === "Female" || loggedGenderMobile === "Female"
       ? isMobileScreen
         ? femaleAvatarsList.concat(femaleAvatarsAdditionalList)
         : femaleAvatarsList
@@ -143,8 +154,12 @@ const MobileNavbar = ({}) => {
   // from Login Page
   const loggedUser = JSON.parse(localStorage.getItem("user")); //we can acces email and fullName
   const loggedAvatar = JSON.parse(localStorage.getItem("avatar")); //an icon
-
   let loggedFName = loggedUser?.fullName;
+
+  //do the same , when the user tries to register through a device mobile
+  const loggedAvatarMobile = JSON.parse(
+    localStorage.getItem("avatarMobileScreen")
+  );
 
   // get the gender and fullName from Signup Page to local storage
   const registeredFullName = JSON.parse(
@@ -205,6 +220,10 @@ const MobileNavbar = ({}) => {
     } else {
       setshowAvatarModal(true);
     }
+
+    // so the avatars list wont show on the user is logged in through a mobile devicePixelRatio, because , the 'loggedGender' variable's value was an empty string, that's because it didnt get registered in the browser's local storage and then get retrieved here
+    //hence , the avatars array is also empty ,
+    // console.log(avatars, loggedGenderMobile && loggedGenderMobile, "avatars");
   };
 
   // a function that returns the selected avatar, the one that is displayed on the Ui once the user chooses it from the list
@@ -231,12 +250,29 @@ const MobileNavbar = ({}) => {
     else console.log("menu closed");
   }, [hamburgerMenuIsOpen]);
 
+  useEffect(() => {
+    if (user) {
+      if (loggedAvatar) console.log(loggedAvatar);
+      else console.log("no avatar");
+      if (loggedGenderMobile) console.log(loggedGenderMobile);
+    }
+    // showSelectedAvatar
+  }, [user, loggedAvatar, loggedGenderMobile]);
+
   // add avatar on hamburger menu !!!!!!!!!!!!!!!
 
   return (
     <div className="workout-hamburger-navbar-container">
       <div className="hamburger-menu-logged-user-name">
-        <span className="f_name">{loggedFName}</span>
+        <span className="f_name">
+          {loggedFName ? (
+            loggedFName
+          ) : registeredFullName ? (
+            registeredFullName
+          ) : (
+            <span>fallback full name</span>
+          )}
+        </span>
       </div>
 
       <div className="workout-hamburger-navbar-container-inner">
@@ -288,16 +324,26 @@ const MobileNavbar = ({}) => {
         <>
           {hamburgerMenuIsOpen && (
             <div className="workout-hamburger-menu-home">
-              <Link className="workout-hamburger-menu-home-link" to="/workouts">
-                <img src={home} alt="" />
-              </Link>
+              <Button
+                disabled={!user}
+                // meaning that when the user is logged out , this btn will be disabled
+                style={{ height: "fit-content", border: "none" }}
+              >
+                <Link
+                  className="workout-hamburger-menu-home-link"
+                  to="/workouts"
+                >
+                  <img src={home} alt="" />
+                </Link>
+              </Button>
             </div>
           )}
         </>
 
-        {/* avatar icon and edit icon */}
-        <div
-          className={`hamburger-menu-profile-avatar-wrapper
+        {/* avatar icon and edit icon, to be displayed only if the user is authenticated and logged in */}
+        {user ? (
+          <div
+            className={`hamburger-menu-profile-avatar-wrapper
                 ${showAvatarModal ? `avatar-wrapper_modal_open` : ""}
                 ${
                   !hamburgerMenuIsOpen
@@ -305,45 +351,50 @@ const MobileNavbar = ({}) => {
                     : ""
                 }
                 `}
-        >
-          <>
-            {/* the selected avatar or spinner */}
-            {showSelectedAvatar ? (
-              <div className="hamburger-menu-selected-avatar">
-                {!showAvatarModal ? (
-                  <>
-                    <img
-                      width={`50px`}
-                      className="hamburger-menu-selected-avatar-icon"
-                      src={setSelectedAvatar()}
-                      alt=""
-                    />
-                  </>
-                ) : (
-                  // when the modal is open, and while the user still decides which avatar to choose, display a spinner , instead of the avatar
-                  <AwesomeSpinner></AwesomeSpinner>
-                )}
-              </div>
-            ) : (
-              <img className="logged-avatar" src={loggedAvatar} alt="" />
-            )}
-          </>
-          {/* edit pen icon */}
-          {hamburgerMenuIsOpen && (
-            <Tooltip title="Change this avatar">
-              <Button
-                onClick={handleEditClick}
-                className="hamburger-menu-selected-avatar-edit-icon-btn"
-              >
+          >
+            <>
+              {/* the selected avatar or spinner */}
+              {showSelectedAvatar ? (
+                <div className="hamburger-menu-selected-avatar">
+                  {!showAvatarModal ? (
+                    <>
+                      <img
+                        width={`50px`}
+                        className="hamburger-menu-selected-avatar-icon"
+                        src={setSelectedAvatar()}
+                        alt=""
+                      />
+                    </>
+                  ) : (
+                    // when the modal is open, and while the user still decides which avatar to choose, display a spinner , instead of the avatar
+                    <AwesomeSpinner></AwesomeSpinner>
+                  )}
+                </div>
+              ) : (
                 <img
-                  className="hamburger-menu-selected-avatar-edit-icon"
-                  src={edit}
-                  alt=""
+                  className="logged-avatar"
+                  src={loggedAvatar || loggedAvatarMobile}
+                  alt="logged-avatar"
                 />
-              </Button>
-            </Tooltip>
-          )}
-        </div>
+              )}
+            </>
+            {/* edit pen icon */}
+            {hamburgerMenuIsOpen && (
+              <Tooltip title="Change this avatar">
+                <Button
+                  onClick={handleEditClick}
+                  className="hamburger-menu-selected-avatar-edit-icon-btn"
+                >
+                  <img
+                    className="hamburger-menu-selected-avatar-edit-icon"
+                    src={edit}
+                    alt=""
+                  />
+                </Button>
+              </Tooltip>
+            )}
+          </div>
+        ) : null}
       </div>
 
       <>
@@ -383,6 +434,8 @@ const MobileNavbar = ({}) => {
                   </Link>
 
                   <Button
+                    disabled={!user}
+                    style={{ filter: !user ? "blur(1.5px)" : "" }}
                     className="hamburger-menu-logout-btn"
                     onClick={handleLogout}
                   >

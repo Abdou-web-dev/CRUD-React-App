@@ -1,5 +1,5 @@
 import { Button, Form, Input } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import avatarFemale from "../../assets/img/avatarFemale.svg";
 import avatarfemale1 from "../../assets/img/avatarfemale1.svg";
@@ -24,14 +24,21 @@ export const LoginMobileForm = ({}) => {
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
+  const [avatar, setAvatar] = useState(null);
+  const [gender, setGender] = useState("");
   const [showGenderIcon, setShowGenderIcon] = useState(true);
   const [showAvatars, setshowAvatars] = useState(false);
   const [showMaleAvatars, setshowMaleAvatars] = useState(false);
   const [showFemaleAvatars, setshowFemaleAvatars] = useState(false);
+  // selectedMaleAvatar and selectedFemaleAvatar are not boolean , but rather objects
   const [selectedMaleAvatar, setselectedMaleAvatar] = useState(null);
   const [selectedFemaleAvatar, setselectedFemaleAvatar] = useState(null);
   let isAvatar = selectedFemaleAvatar || selectedMaleAvatar;
   const [showSelectedAvatar, setshowSelectedAvatar] = useState(false);
+
+  localStorage.setItem("avatarMobileScreen", JSON.stringify(avatar));
+  localStorage.setItem("genderMobileScreen", JSON.stringify(gender));
+
   const maleAvatars = [
     avatarmale1,
     avatarmale2,
@@ -57,6 +64,7 @@ export const LoginMobileForm = ({}) => {
     }
   };
   let prfx = "login-mobile-form";
+  // login-mobile-form-gender-wrapper
 
   function handleMaleAvatarClick() {
     setshowAvatars(true);
@@ -83,6 +91,34 @@ export const LoginMobileForm = ({}) => {
     setshowAvatars(false);
     setShowGenderIcon(false);
   };
+
+  useEffect(() => {
+    if (showMaleAvatars) {
+      setAvatar(selectedMaleAvatar);
+    } else {
+      setAvatar(selectedFemaleAvatar);
+    }
+    //
+    if (selectedMaleAvatar !== null) {
+      setGender("Male");
+    }
+    if (selectedFemaleAvatar !== null) {
+      setGender("Female");
+    }
+  }, [showMaleAvatars, selectedMaleAvatar, selectedFemaleAvatar]);
+
+  function setSelectedAvatar() {
+    // let selectedAvatar = null;
+    // if (showMaleAvatars) {
+    //   setAvatar(selectedMaleAvatar);
+    // } else {
+    //   setAvatar(selectedFemaleAvatar);
+    // }
+    // return avatar;
+    // setAvatar(selectedAvatar);
+    // return selectedAvatar;
+    // showMaleAvatars ? selectedMaleAvatar : selectedFemaleAvatar
+  }
 
   // useEffect(() => {}, [selectedMaleAvatar, selectedFemaleAvatar]);
   return (
@@ -202,9 +238,7 @@ export const LoginMobileForm = ({}) => {
             <div className={`${prfx}-selected-avatar-wrapper`}>
               <img
                 className={`${prfx}-selected-avatar-wrapper-icon`}
-                src={
-                  showMaleAvatars ? selectedMaleAvatar : selectedFemaleAvatar
-                }
+                src={avatar}
                 alt=""
               />
             </div>

@@ -15,7 +15,6 @@ import avatarmale5 from "../assets/img/avatarmale5.svg";
 import avatarmale6 from "../assets/img/avatarmale6.svg";
 import edit from "../assets/img/edit.svg";
 import { LoginMobileForm } from "../components/forms/LoginMobileForm";
-import { ClearIcon } from "../components/icons/Icons";
 import { AvatarModal } from "../components/modals/AvatarModal";
 import { useLogin } from "../hooks/useLogin";
 import { useMediaQuery } from "../hooks/UseMediaQuery";
@@ -92,7 +91,7 @@ const Login = ({}) => {
       await login(email, password, fullName, gender);
     }
     if (!avatar) {
-      setShowNotification(true);
+      if (showNotification === false) setShowNotification(true);
     }
   };
   const onChangeMale = (e, index) => {
@@ -128,6 +127,8 @@ const Login = ({}) => {
   };
   const isMobileScreen = useMediaQuery("(max-width: 576px)"); // returns true or false
   let isDesktopScreen = !isMobileScreen;
+  const isLargeScreen = useMediaQuery("(min-width: 1240px)"); // returns true or false
+
   useEffect(() => {
     if (checkedMale === true) {
       setGender("Male");
@@ -138,8 +139,10 @@ const Login = ({}) => {
     if (checkedMale || checkedFemale) {
       setshowAvatarModal(true);
     }
-    // console.log(isDesktopScreen);
-  }, [checkedMale, checkedFemale]);
+    if (avatar) {
+      setShowNotification(false);
+    }
+  }, [checkedMale, checkedFemale, avatar]);
 
   return (
     <div
@@ -351,18 +354,23 @@ const Login = ({}) => {
       {/* Notification */}
       <>
         {showNotification && (
-          <div className="notification please-select-noti">
+          <div
+            className={`notification please-select-noti
+            ${isLargeScreen ? "no_box_shadow" : ""}
+            ${showAvatarModal ? "noti_avatar_modal_open" : ""}
+          `}
+          >
             <Alert
               type="info"
               className="ant-alert"
-              closeIcon={<ClearIcon />}
+              // closeIcon={<ClearIcon />}
               message={
                 <span className="noti-text please-select">
                   Please, select an avatar !
                 </span>
               }
               banner
-              closable
+              // closable
             />
           </div>
         )}

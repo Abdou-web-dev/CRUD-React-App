@@ -25,7 +25,7 @@ export function AvatarModal({
           className="login-form-avatar-modal"
           open={showAvatarModal}
           maskClosable={true}
-          closable={isMobileScreen ? false : true}
+          closable={isMobileScreen || !isMobileScreen ? false : null}
           keyboard={true}
           mask={true}
           onOk={() => setshowAvatarModal(false)}
@@ -33,7 +33,7 @@ export function AvatarModal({
           footer={null}
           // this is how we display ant modal title and close Icon perfectly as flex , with the icon at the right , and the title on the left
           title={
-            isMobileScreen ? (
+            isMobileScreen || !isMobileScreen ? (
               <div className="login-form-modal-header">
                 <span>Pick an avatar</span>
                 <Button
@@ -43,9 +43,7 @@ export function AvatarModal({
                   <CloseX></CloseX>
                 </Button>
               </div>
-            ) : (
-              `Pick an avatar`
-            )
+            ) : null
           }
         >
           <LoginAvatars

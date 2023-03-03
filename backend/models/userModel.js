@@ -147,3 +147,26 @@ module.exports = mongoose.model("User", userSchema);
 // ObjectId.
 // Mixed.
 // Array.
+
+
+***************************
+
+// let regEmail = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]$/;
+//   let regEmail = /^[a-zA-Z0-9]+@[gmail]+\.[com]$/;
+//   if (!regEmail.test(email)) {
+//     // return "Invalid Email";
+//     throw Error("The email you entered is not valid");
+//   }
+
+//   end*****
+//   if (
+//     !validator.matches(
+//       email,
+//       /^[A-Z0-9. _%+-]+@[A-Z0-9. -]+/
+//       //this is a regex to verify that an email is valid
+//     )
+//   ) {
+//     throw Error("The email you entered is not valid");
+//   }
+
+  
