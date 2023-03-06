@@ -102,8 +102,8 @@
   }
 
   .workout-hamburger-list-of-avatars {
-    // display: none;
     display: grid;
+    // display: none;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     gap: 14px;
@@ -213,15 +213,22 @@
           @media screen and (max-width: 600px) {
             width: 310px;
           }
+          &.no_user {
+            filter: blur(1.5px);
+          }
         }
         &.help-anchor {
           width: 60px;
+        }
+        &.no_user {
+          filter: blur(1.5px);
         }
       }
 
       .hamburger-menu-profile-link-wrapper {
         display: flex;
-        justify-content: space-between;
+        // justify-content: space-between;
+        // border: 1px solid red;
         .hamburger-menu-link {
           li {
             list-style-type: none;

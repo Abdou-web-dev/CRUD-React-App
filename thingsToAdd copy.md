@@ -6,3 +6,4 @@ Mettre une veste et une chemise pr l'entretien de jeudi
 const loggedAvatarMobile = JSON.parse(
 localStorage.getItem("avatarMobileScreen")
 );
+//add toggle btn for the color of the background of the app ------ implemet a dark mode.

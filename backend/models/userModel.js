@@ -148,8 +148,7 @@ module.exports = mongoose.model("User", userSchema);
 // Mixed.
 // Array.
 
-
-***************************
+// ***************************
 
 // let regEmail = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]$/;
 //   let regEmail = /^[a-zA-Z0-9]+@[gmail]+\.[com]$/;
@@ -168,5 +167,3 @@ module.exports = mongoose.model("User", userSchema);
 //   ) {
 //     throw Error("The email you entered is not valid");
 //   }
-
-  
