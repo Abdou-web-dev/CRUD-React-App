@@ -107,20 +107,14 @@ export const LoginMobileForm = ({}) => {
     }
   }, [showMaleAvatars, selectedMaleAvatar, selectedFemaleAvatar]);
 
-  function setSelectedAvatar() {
-    // let selectedAvatar = null;
-    // if (showMaleAvatars) {
-    //   setAvatar(selectedMaleAvatar);
-    // } else {
-    //   setAvatar(selectedFemaleAvatar);
-    // }
-    // return avatar;
-    // setAvatar(selectedAvatar);
-    // return selectedAvatar;
-    // showMaleAvatars ? selectedMaleAvatar : selectedFemaleAvatar
-  }
+  useEffect(() => {
+    // localStorage.setItem("user_country", JSON.stringify(country));
+    localStorage.setItem(
+      "user_fullName_login_mobile",
+      JSON.stringify(fullName)
+    );
+  }, [fullName]);
 
-  // useEffect(() => {}, [selectedMaleAvatar, selectedFemaleAvatar]);
   return (
     <div className="login-mobile-form-container">
       <Form className="login-mobile-form" name="form" onFinish={handleSubmit}>

@@ -21,6 +21,26 @@ import avatarmale7 from "../../assets/img/avatars/male/avatarmale7.svg";
 import avatarmale8 from "../../assets/img/avatars/male/avatarmale8.svg";
 import avatarmale9 from "../../assets/img/avatars/male/avatarmale9.svg";
 //
+import avatarmale15 from "../../assets/img/avatars/male/avatarmale15.svg";
+import avatarmale16 from "../../assets/img/avatars/male/avatarmale16.svg";
+import avatarmale17 from "../../assets/img/avatars/male/avatarmale17.svg";
+import avatarmale18 from "../../assets/img/avatars/male/avatarmale18.svg";
+import avatarmale19 from "../../assets/img/avatars/male/avatarmale19.svg";
+import avatarmale20 from "../../assets/img/avatars/male/avatarmale20.svg";
+import avatarmale21 from "../../assets/img/avatars/male/avatarmale21.svg";
+import avatarmale22 from "../../assets/img/avatars/male/avatarmale22.svg";
+import avatarmale23 from "../../assets/img/avatars/male/avatarmale23.svg";
+import avatarmale24 from "../../assets/img/avatars/male/avatarmale24.svg";
+import avatarmale25 from "../../assets/img/avatars/male/avatarmale25.svg";
+import avatarmale26 from "../../assets/img/avatars/male/avatarmale26.svg";
+import avatarmale27 from "../../assets/img/avatars/male/avatarmale27.png";
+import avatarmale28 from "../../assets/img/avatars/male/avatarmale28.png";
+import avatarmale29 from "../../assets/img/avatars/male/avatarmale29.png";
+import avatarmale30 from "../../assets/img/avatars/male/avatarmale30.png";
+import avatarmale31 from "../../assets/img/avatars/male/avatarmale31.png";
+import avatarmale32 from "../../assets/img/avatars/male/avatarmale32.png";
+
+//
 import avatarfemale10 from "../../assets/img/avatars/female/avatarfemale10.svg";
 import avatarfemale11 from "../../assets/img/avatars/female/avatarfemale11.svg";
 import avatarfemale12 from "../../assets/img/avatars/female/avatarfemale12.svg";
@@ -37,6 +57,24 @@ import avatarfemale18 from "../../assets/img/avatars/female/avatarfemale18.svg";
 import avatarfemale19 from "../../assets/img/avatars/female/avatarfemale19.svg";
 import avatarfemale20 from "../../assets/img/avatars/female/avatarfemale20.svg";
 import avatarfemale21 from "../../assets/img/avatars/female/avatarfemale21.svg";
+//
+import avatarfemale22 from "../../assets/img/avatars/female/avatarfemale22.svg";
+import avatarfemale23 from "../../assets/img/avatars/female/avatarfemale23.svg";
+import avatarfemale24 from "../../assets/img/avatars/female/avatarfemale24.svg";
+import avatarfemale25 from "../../assets/img/avatars/female/avatarfemale25.svg";
+import avatarfemale26 from "../../assets/img/avatars/female/avatarfemale26.svg";
+import avatarfemale27 from "../../assets/img/avatars/female/avatarfemale27.svg";
+import avatarfemale28 from "../../assets/img/avatars/female/avatarfemale28.svg";
+import avatarfemale29 from "../../assets/img/avatars/female/avatarfemale29.png";
+import avatarfemale30 from "../../assets/img/avatars/female/avatarfemale30.png";
+import avatarfemale31 from "../../assets/img/avatars/female/avatarfemale31.png";
+import avatarfemale32 from "../../assets/img/avatars/female/avatarfemale32.png";
+import avatarfemale33 from "../../assets/img/avatars/female/avatarfemale33.png";
+import avatarfemale34 from "../../assets/img/avatars/female/avatarfemale34.png";
+import avatarfemale35 from "../../assets/img/avatars/female/avatarfemale35.png";
+import avatarfemale36 from "../../assets/img/avatars/female/avatarfemale36.png";
+import avatarfemale37 from "../../assets/img/avatars/female/avatarfemale37.png";
+
 export const maleAvatarsList = [
   avatarmale1,
   avatarmale2,
@@ -66,6 +104,27 @@ export const maleAvatarsAdditionalList = [
   avatarmale14,
 ];
 
+export const maleAvatarsAdditionalList_2 = [
+  avatarmale22,
+  avatarmale21,
+  avatarmale20,
+  avatarmale19,
+  avatarmale18,
+  avatarmale17,
+  avatarmale16,
+  avatarmale15,
+  avatarmale23,
+  avatarmale24,
+  avatarmale25,
+  avatarmale26,
+  avatarmale27,
+  avatarmale28,
+  avatarmale29,
+  avatarmale30,
+  avatarmale31,
+  avatarmale32,
+];
+
 export const femaleAvatarsAdditionalList = [
   avatarfemale7,
   avatarfemale8,
@@ -82,4 +141,23 @@ export const femaleAvatarsAdditionalList = [
   avatarfemale19,
   avatarfemale20,
   avatarfemale21,
+];
+
+export const femaleAvatarsAdditionalList_2 = [
+  avatarfemale22,
+  avatarfemale23,
+  avatarfemale24,
+  avatarfemale25,
+  avatarfemale26,
+  avatarfemale27,
+  avatarfemale28,
+  avatarfemale29,
+  avatarfemale30,
+  avatarfemale31,
+  avatarfemale32,
+  avatarfemale33,
+  avatarfemale34,
+  avatarfemale35,
+  avatarfemale36,
+  avatarfemale37,
 ];

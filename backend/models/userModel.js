@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
+var node_validator = require("node-email-validation");
 
 const Schema = mongoose.Schema;
 
@@ -61,7 +62,11 @@ userSchema.statics.signup = async function (
   if (!country) {
     throw Error("Please, select a country ");
   }
-  if (!validator.isEmail(email)) {
+  // if (!validator.isEmail(email)) {
+  //   throw Error("Email not valid");
+  // }
+
+  if (!node_validator.is_email_valid(email)) {
     throw Error("Email not valid");
   }
 

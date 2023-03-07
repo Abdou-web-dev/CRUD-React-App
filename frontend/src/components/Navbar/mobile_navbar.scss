@@ -100,7 +100,6 @@
       }
     }
   }
-
   .workout-hamburger-list-of-avatars {
     display: grid;
     // display: none;
@@ -300,6 +299,65 @@
         }
         .hamburger-menu-logout-btn {
         }
+      }
+    }
+  }
+}
+.list-of-avatars-mobile-singup {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
+  gap: 0px;
+  max-height: 300px;
+  overflow-y: scroll;
+  margin: 15px 0;
+  width: 90%;
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(161, 160, 160, 0.05);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    border-radius: 10px;
+    background: rgba(23, 22, 22, 0.44);
+  }
+  .workout-hamburger-avatar-wrapper {
+    .workout-hamburger-avatar-btn {
+      height: fit-content;
+      border: none;
+      padding: 3px;
+      margin: 15px 0;
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      }
+    }
+    &.workout-hamburger-avatar_search_modal_open {
+      filter: blur(3px);
+    }
+  }
+  .workout-hamburger-cancel-btn {
+    height: fit-content;
+    align-self: center;
+    background: rgba(128, 128, 128, 0.99);
+    margin-top: 8px;
+    position: relative;
+    left: 5px;
+    span {
+      font-family: "Mulish";
+      text-transform: uppercase;
+      font-size: 20px;
+      font-style: italic;
+      color: white;
+    }
+    &:hover {
+      span {
+        color: initial;
       }
     }
   }

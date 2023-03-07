@@ -1,16 +1,20 @@
 import "animate.css";
 import { Button } from "antd";
+import "../Navbar/mobile_navbar.scss";
 
 export function AvatarsListMobile({
   avatars,
   openSearchInputModal,
   setShowAvatarsSection,
   handleAvatarClickMobile,
+  openAvatarsList,
 }) {
   return (
     <div
-      className="animate__fadeInUp animate__animated  animate__delay-1.5s 
-      workout-hamburger-list-of-avatars"
+      className={`animate__fadeInUp animate__animated  animate__delay-1.5s 
+      workout-hamburger-list-of-avatars
+      ${openAvatarsList ? "list-of-avatars-mobile-singup" : ""}
+      `}
     >
       <>
         {avatars &&

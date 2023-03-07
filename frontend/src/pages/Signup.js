@@ -1,6 +1,7 @@
 import { Button, Form, Input, Select } from "antd";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import validator from "validator";
+import { AlreadyMember } from "../components/small_comp/AlreadyMember";
 import { TextMobileStepper as SignupStepper } from "../components/steppers/SignupStepper";
 import { useStyleMediaQuery } from "../hooks/UseMediaQuery";
 import { useSignup } from "../hooks/useSignup";
@@ -122,11 +123,21 @@ const Signup = ({}) => {
     </>
   );
 
+  const validateEmail = (e) => {
+    setEmail(e.target.value);
+    if (validator.isEmail(email)) {
+      console.log("Thank you");
+    } else {
+      console.log("Please, enter valid Email!");
+    }
+  };
+
   const EmailInputJSX = (
     <Input
       className={emailClass}
       type="email"
-      onChange={(e) => setEmail(e.target.value)}
+      // onChange={(e) => setEmail(e.target.value)}
+      onChange={(e) => validateEmail(e)}
       value={email}
       placeholder="Email"
       allowClear
@@ -338,17 +349,7 @@ const Signup = ({}) => {
                 )}
               </div>
 
-              <div className="signup-form-not-a-member">
-                <span className="signup-form-text1">
-                  Have already an account ?
-                </span>
-
-                <Button className="signup-form-not-a-member-register-btn">
-                  <Link to="/login">
-                    <span className="signup-form-text2"> Login</span>
-                  </Link>
-                </Button>
-              </div>
+              <AlreadyMember />
             </Form>
           </div>
         </div>

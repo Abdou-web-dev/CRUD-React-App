@@ -163,83 +163,93 @@
 // }}
 // wont trigger the click , because of the category argument pased to the function, it must recieve no arg
 
-const EmailInput = () => {
-  return (
-    <Input
-      className={emailClass}
-      type="email"
-      onChange={(e) => setEmail(e.target.value)}
-      value={email}
-      placeholder="Email"
-      allowClear
-    />
-  );
-};
-// ===========> use       <EmailInput></EmailInput>
+// const EmailInput = () => {
+//   return (
+//     <Input
+//       className={emailClass}
+//       type="email"
+//       onChange={(e) => setEmail(e.target.value)}
+//       value={email}
+//       placeholder="Email"
+//       allowClear
+//     />
+//   );
+// };
+// // ===========> use       <EmailInput></EmailInput>
 
-const EmailInput = (
-  <Input
-    className={emailClass}
-    type="email"
-    onChange={(e) => setEmail(e.target.value)}
-    value={email}
-    placeholder="Email"
-    allowClear
-  />
-);
-// ===========> use {EmailInput}
+// const EmailInput = (
+//   <Input
+//     className={emailClass}
+//     type="email"
+//     onChange={(e) => setEmail(e.target.value)}
+//     value={email}
+//     placeholder="Email"
+//     allowClear
+//   />
+// );
+// // ===========> use {EmailInput}
 
-{
-  /* pagination of Filtered Results , composed only of two arrows , without the pages' numbers */
-}
-{
-  searchInput?.length > 0 && isLargeScreen ? (
-    <Pagination
-      className={`pagination-filtered-results
-    ${layoutGrid && "pagination-filtered-results-grid"}
-    ${layoutList && "pagination-filtered-results-list"}
-    ${
-      filteredResults?.length >= 1 &&
-      filteredResults?.length <= 3 &&
-      "pagination-filtered-results-less-than4"
-    }
-    ${filteredResults?.length === 0 && "pagination-filtered-results-none"}`}
-      prevIcon={
-        paginationClassName === "pagination-content-loaded-grid" ? (
-          <Tooltip title="Previous page">
-            <div>
-              <PrevArrow />
-            </div>
-          </Tooltip>
-        ) : (
-          //pagination-content-loaded-list
-          <Tooltip title="Previous page">
-            <div>
-              <PrevArrowList />
-            </div>
-          </Tooltip>
-        )
-      }
-      nextIcon={
-        paginationClassName === "pagination-content-loaded-grid" ? (
-          <Tooltip title="Next page">
-            <div>
-              <NextArrow />
-            </div>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Next page">
-            <div>
-              <NextArrowList />
-            </div>
-          </Tooltip>
-        )
-      }
-      current={currentPage}
-      onChange={(page, e) => {
-        setCurrentPage(page);
-      }}
-      total={`30`}
-    />
-  ) : null;
-}
+// {
+//   /* pagination of Filtered Results , composed only of two arrows , without the pages' numbers */
+// }
+// {
+//   searchInput?.length > 0 && isLargeScreen ? (
+//     <Pagination
+//       className={`pagination-filtered-results
+//     ${layoutGrid && "pagination-filtered-results-grid"}
+//     ${layoutList && "pagination-filtered-results-list"}
+//     ${
+//       filteredResults?.length >= 1 &&
+//       filteredResults?.length <= 3 &&
+//       "pagination-filtered-results-less-than4"
+//     }
+//     ${filteredResults?.length === 0 && "pagination-filtered-results-none"}`}
+//       prevIcon={
+//         paginationClassName === "pagination-content-loaded-grid" ? (
+//           <Tooltip title="Previous page">
+//             <div>
+//               <PrevArrow />
+//             </div>
+//           </Tooltip>
+//         ) : (
+//         //pagination-content-loaded-list
+//         <Tooltip title="Previous page">
+//           <div>
+//             <PrevArrowList />
+//           </div>
+//         </Tooltip>
+//       )
+//     }
+//     nextIcon={
+//       paginationClassName === "pagination-content-loaded-grid" ? (
+//         <Tooltip title="Next page">
+//           <div>
+//             <NextArrow />
+//           </div>
+//         </Tooltip>
+//       ) : (
+//         <Tooltip title="Next page">
+//           <div>
+//             <NextArrowList />
+//           </div>
+//         </Tooltip>
+//       )
+//     }
+//     current={currentPage}
+//     onChange={(page, e) => {
+//       setCurrentPage(page);
+//     }}
+//     total={`30`}
+//   />
+// ) : null;
+// }
+// *************************
+// persist data after refresh
+// const [setSelectedAvatarIcon, setsetSelectedAvatarIcon] = useState();
+//   useEffect(() => {
+//     setSelectedAvatarIcon(JSON.parse(localStorage.getItem("selectedAvatar"))); //an icon
+//   }, []);
+
+//   useEffect(() => {
+//     localStorage.setItem("selectedAvatar", JSON.stringify(avatar));
+//   }, [avatar]);

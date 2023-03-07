@@ -17,12 +17,17 @@ import planetIcon from "../../assets/img/register_icons/planetIcon.png";
 import revenir from "../../assets/img/register_icons/revenir.png";
 import {
   femaleAvatarsAdditionalList,
+  femaleAvatarsAdditionalList_2,
   femaleAvatarsList,
   maleAvatarsAdditionalList,
+  maleAvatarsAdditionalList_2,
   maleAvatarsList,
 } from "../../assets/staticData/avatars";
 import { MainVariablesContext } from "../../context/MainVariablesContext";
+import { useSignup } from "../../hooks/useSignup";
+import "../../pages/login_signup_styles.scss";
 import { AvatarsListMobile } from "../lists/AvatarsListMobile";
+import { AlreadyMember } from "../small_comp/AlreadyMember";
 import "./mobile_stepper_styles.scss";
 
 export function TextMobileStepper({
@@ -31,9 +36,7 @@ export function TextMobileStepper({
   GenderSelectJSX,
   CountrySelectJSX,
   PasswordInputJSX,
-  handleSubmit,
   gender,
-  error,
   email,
   password,
   country,
@@ -53,6 +56,7 @@ export function TextMobileStepper({
   const [avatar, setAvatar] = useState(null);
   const { hamburgerMenuIsOpen, openSearchInputModal } =
     useContext(MainVariablesContext);
+  const { error, signup } = useSignup();
 
   const steps = [
     {
@@ -79,6 +83,34 @@ export function TextMobileStepper({
   const maxSteps = steps.length;
   let lastStep = maxSteps - 1; //boolean
 
+  localStorage.setItem("genderMobileScreenSignUp", JSON.stringify(gender));
+  localStorage.setItem("avatarSignUpStepper", JSON.stringify(avatar));
+
+  useEffect(() => {
+    localStorage.setItem("user_country", JSON.stringify(country));
+    localStorage.setItem("user_fullName", JSON.stringify(fullName));
+  }, [country, fullName]);
+
+  let userIsTypingOrSelecting = //boolean
+    email?.length ||
+    password?.length ||
+    fullName?.length ||
+    country?.length ||
+    gender?.length;
+
+  const avatars =
+    gender === "Male"
+      ? maleAvatarsList.concat(
+          maleAvatarsAdditionalList,
+          maleAvatarsAdditionalList_2
+        )
+      : gender === "Female"
+      ? femaleAvatarsList.concat(
+          femaleAvatarsAdditionalList,
+          femaleAvatarsAdditionalList_2
+        )
+      : [];
+
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -88,31 +120,28 @@ export function TextMobileStepper({
   const handleStepOne = () => {
     setActiveStep(0);
   };
-  const handleSignUp = () => {
+
+  const handleAvatarClickMobile = async (index) => {
+    const selectedItem = avatars[index];
+    if (selectedItem) {
+      setAvatar(selectedItem);
+      console.log(selectedItem);
+    }
     if (!gender || !email || !password || !country || !fullName) {
       return;
     } else {
-      if (error) {
-        setshowError(true);
+      if (avatar) {
+        await signup(email, password, fullName, gender, country);
       }
-      // setloading(true);
-      else {
-        setOpenAvatarsList(true);
+      if (avatar && error) {
+        setOpenAvatarsList(false);
       }
     }
   };
 
-  // const handleSignUp = () => {
-  //   if (error) {
-  //     setOpenAvatarsList(false);
-  //   } else {
-  //     if (!gender || !email || !password || !country || !fullName) {
-  //       return;
-  //     } else {
-  //       setOpenAvatarsList(true);
-  //     }
-  //   }
-  // };
+  const handleSignUp = () => {
+    setOpenAvatarsList(true);
+  };
 
   const handleResetFields = () => {
     setGender("");
@@ -142,34 +171,6 @@ export function TextMobileStepper({
     }
   }, [gender]);
 
-  localStorage.setItem("genderMobileScreenSignUp", JSON.stringify(gender));
-  localStorage.setItem("avatarSignUpStepper", JSON.stringify(avatar));
-
-  let userIsTypingOrSelecting = //boolean
-    email?.length ||
-    password?.length ||
-    fullName?.length ||
-    country?.length ||
-    gender?.length;
-
-  const avatars =
-    gender === "Male"
-      ? maleAvatarsList.concat(maleAvatarsAdditionalList)
-      : gender === "Female"
-      ? femaleAvatarsList.concat(femaleAvatarsAdditionalList)
-      : [];
-
-  const handleAvatarClickMobile = (index) => {
-    const selectedItem = avatars[index];
-    if (selectedItem) {
-      setAvatar(selectedItem);
-      console.log(selectedItem);
-    }
-    if (avatar) {
-      handleSubmit();
-    }
-  };
-
   if (openAvatarsList) {
     return (
       <>
@@ -178,6 +179,7 @@ export function TextMobileStepper({
             avatars,
             openSearchInputModal,
             handleAvatarClickMobile,
+            openAvatarsList,
           }}
           setShowAvatarsSection={setOpenAvatarsList}
         />
@@ -297,7 +299,7 @@ export function TextMobileStepper({
         {!hamburgerMenuIsOpen && (
           <MobileStepper
             className="the-stepper-container"
-            variant="progress"
+            variant="dots"
             steps={maxSteps} // The total steps number
             position="bottom"
             activeStep={activeStep}
@@ -332,7 +334,7 @@ export function TextMobileStepper({
           />
         )}
 
-        {/* submit btn */}
+        {/* singup and reset btns */}
         {activeStep === lastStep && (
           <div className="mobile-stepper-signup-btn-wrapper">
             {/* reset btn */}
@@ -357,6 +359,7 @@ export function TextMobileStepper({
             </Button>
           </div>
         )}
+
         {/* back to step one btn */}
         {activeStep === lastStep && !openModal && (
           <div>
@@ -373,12 +376,17 @@ export function TextMobileStepper({
             </Button>
           </div>
         )}
-        <div className="signup-stepper-progress-dots">{/* progress */}</div>
+
+        <>
+          <AlreadyMember />
+        </>
+
         <div className="designed-sentence-wrapper">
           <span className="designed-sentence">
             2023, designed by Abdelmounim SIFELHAK.
           </span>
         </div>
+
         <div>
           <Modal
             className="weak-password-modal"

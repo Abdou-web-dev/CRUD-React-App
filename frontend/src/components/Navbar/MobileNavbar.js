@@ -3,12 +3,9 @@ import { Button, message, Tooltip } from "antd";
 import { useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import edit from "../../assets/img/edit.svg";
-import fallbackAvatar from "../../assets/img/fallbackAvatar.svg";
-import femaleIcon from "../../assets/img/femaleIcon.svg";
 import helpIcon from "../../assets/img/helpIcon.svg";
 import home from "../../assets/img/home.svg";
 import logout_circle from "../../assets/img/logout_circle.svg";
-import maleIcon from "../../assets/img/maleIcon.svg";
 import profil from "../../assets/img/profil.png";
 import starred from "../../assets/img/starred.png";
 import {
@@ -28,14 +25,6 @@ import { LogoutModal } from "../modals/LogoutModal";
 import { AwesomeSpinner } from "../spinners/AwesomeSpinner";
 
 import "./mobile_navbar.scss";
-
-//do the same , when the user tries to register through a device mobile
-// const loggedAvatarMobile = JSON.parse(
-//   localStorage.getItem("avatarMobileScreen")
-// );
-// loggedUserMobile to be added
-// loggedFNameMobile to be added
-// registeredGenderMobile to be added
 
 // - implemet a dark mode.
 
@@ -58,6 +47,9 @@ const MobileNavbar = ({}) => {
   const [showAvatarsSection, setShowAvatarsSection] = useState(false);
   const [avatar, setAvatar] = useState(null);
   const [showSelectedAvatar, setShowSelectedAvatar] = useState(false);
+
+  localStorage.setItem("selectedAvatar", JSON.stringify(avatar));
+  const selectedAvatarIcon = JSON.parse(localStorage.getItem("selectedAvatar")); //an icon
 
   const loggedGender = JSON.parse(localStorage.getItem("gender")); //an icon
   const loggedGenderMobileLogin = JSON.parse(
@@ -102,18 +94,10 @@ const MobileNavbar = ({}) => {
   const registeredFullName = JSON.parse(
     localStorage.getItem("registeredFullName")
   ); //a string
-  const registeredGender = JSON.parse(localStorage.getItem("registeredGender")); //a string
-
-  let fallbackAvatarIcon =
-    registeredGender === `Male`
-      ? maleIcon
-      : registeredGender === `Female`
-      ? femaleIcon
-      : fallbackAvatar;
-
+  // const registeredGender = JSON.parse(localStorage.getItem("registeredGender")); //a string
+  // let fallbackAvatarIcon =''
   // get the avatar and the fullName of the user from the browser local storage when the user tries to log in
   // from Login Page
-
   function handleHamburgerMenuClick() {
     setHamburgerMenuIsOpen(!hamburgerMenuIsOpen);
     if (!hamburgerMenuIsOpen) {
@@ -127,7 +111,6 @@ const MobileNavbar = ({}) => {
   function handleLogout() {
     setshowLogOutModal(true);
   }
-
   const handleAvatarClick = (index) => {
     const selectedItem = avatars[index];
     if (selectedItem) {
@@ -135,7 +118,6 @@ const MobileNavbar = ({}) => {
       // console.log(selectedItem);
     }
   };
-
   const handleAvatarClickMobile = (index) => {
     const selectedItem = avatars[index];
     if (selectedItem) {
@@ -147,7 +129,6 @@ const MobileNavbar = ({}) => {
       setShowAvatarsSection(false);
     }
   };
-
   // when the user clicks on the pen iconbtn
   const handleEditClick = () => {
     // when the viewport of the screen is smaller than 600px, show rather a section containing a list of avatars
@@ -164,17 +145,7 @@ const MobileNavbar = ({}) => {
   };
 
   // a function that returns the selected avatar, the one that is displayed on the Ui once the user chooses it from the list
-  const setSelectedAvatar = () => {
-    let selectedAvatar = null;
-    if (isMobileScreen) {
-      selectedAvatar = avatar;
-    } else {
-      if (!showAvatarModal) {
-        selectedAvatar = avatar;
-      }
-    }
-    return selectedAvatar;
-  };
+  const setSelectedAvatar = () => {};
 
   useEffect(() => {
     if (!openSearchInputModal) {
@@ -200,8 +171,6 @@ const MobileNavbar = ({}) => {
     if (!user)
       message.info("You must be logged in to access your profile !", 1.5); // will disappear in 1.5 seconds
   }
-
-  // add avatar on hamburger menu !!!!!!!!!!!!!!!
 
   return (
     <div className="workout-hamburger-navbar-container">
@@ -303,7 +272,7 @@ const MobileNavbar = ({}) => {
                       <img
                         width={`50px`}
                         className="hamburger-menu-selected-avatar-icon"
-                        src={setSelectedAvatar()}
+                        src={avatar}
                         alt=""
                       />
                     </>
@@ -317,9 +286,11 @@ const MobileNavbar = ({}) => {
                   className="logged-avatar"
                   // src={loggedAvatar || loggedAvatarMobileLogin}
                   src={
-                    loggedAvatar ||
-                    loggedAvatarMobileLogin ||
-                    avatarSignupStepper
+                    selectedAvatarIcon
+                      ? selectedAvatarIcon
+                      : loggedAvatar ||
+                        loggedAvatarMobileLogin ||
+                        avatarSignupStepper
                   }
                   alt="logged-avatar"
                 />
@@ -459,3 +430,13 @@ const MobileNavbar = ({}) => {
 };
 
 export default MobileNavbar;
+
+// persist data after refresh
+// const [setSelectedAvatarIcon, setsetSelectedAvatarIcon] = useState();
+//   useEffect(() => {
+//     setSelectedAvatarIcon(JSON.parse(localStorage.getItem("selectedAvatar"))); //an icon
+//   }, []);
+
+//   useEffect(() => {
+//     localStorage.setItem("selectedAvatar", JSON.stringify(avatar));
+//   }, [avatar]);
