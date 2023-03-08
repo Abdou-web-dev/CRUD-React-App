@@ -1,0 +1,109 @@
+@mixin d_flex {
+  display: flex;
+  //   justify-content: center;
+  align-items: center;
+}
+
+@mixin text_styles {
+  font-family: "Poppins";
+  font-size: 22px;
+  //   text-transform: capitalize;
+  letter-spacing: 1.5px;
+  border-bottom: 1px solid lightgray;
+}
+@mixin text_btn_styles {
+  font-family: "Inconsolata";
+  font-size: 17px;
+  text-transform: initial;
+  letter-spacing: 1.4px;
+  color: white;
+  font-weight: bold;
+  //   border-bottom: 1px solid lightgray;
+}
+
+.profile-page-container {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  .profile-email-wrapper {
+    @include d_flex;
+    gap: 25px;
+    .email_bloc1 {
+      @include d_flex;
+      gap: 15px;
+
+      img {
+        width: 60px;
+        height: 60px;
+      }
+      span {
+        @include text_styles();
+      }
+    }
+
+    .profile-copy-edit-btn-wrapper {
+      @include d_flex;
+      gap: 25px;
+
+      .profile-email-copy-btn {
+        height: fit-content;
+        padding: 5px;
+        margin-right: 15px;
+        img {
+          // border: 1px solid;
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
+  .profile-fullName-wrapper {
+    @include d_flex;
+    gap: 25px;
+    img {
+      width: 60px;
+      height: 60px;
+    }
+    span.name {
+      @include text_styles();
+    }
+    .profile-email-copy-btn {
+      height: fit-content;
+      padding: 5px;
+      margin-right: 15px;
+      img {
+        // border: 1px solid;
+        width: 30px;
+        height: 30px;
+      }
+    }
+    .profile-edit-btn-wrapper {
+      //   .profile-edit-btn {
+      //     height: fit-content;
+      //     padding: 5px;
+      //     margin-right: 15px;
+      //     background: rgba(163, 94, 175, 0.3);
+
+      //     span {
+      //       @include text_btn_styles();
+      //     }
+      //   }
+    }
+  }
+  .profile-country_icon-wrapper {
+    @include d_flex;
+    gap: 25px;
+    span.country_text {
+      @include text_styles();
+    }
+    .profile-email-copy-btn {
+      height: fit-content;
+      padding: 5px;
+      margin-right: 15px;
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}

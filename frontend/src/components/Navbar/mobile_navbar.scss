@@ -102,12 +102,14 @@
   }
   .workout-hamburger-list-of-avatars {
     display: grid;
-    // display: none;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
     gap: 14px;
     max-height: 300px;
     overflow-y: scroll;
+    overflow-x: hidden;
+    padding-bottom: 100px;
+    padding-top: 30px;
     margin: 15px 0;
     width: 90%;
     &::-webkit-scrollbar {

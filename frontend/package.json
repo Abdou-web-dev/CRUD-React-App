@@ -27,6 +27,7 @@
     "date-fns": "^2.28.0",
     "react": "^18.1.0",
     "react-background-video-player": "^1.1.8",
+    "react-country-flag": "^3.0.2",
     "react-dom": "^18.1.0",
     "react-hamburger-menu": "^1.2.1",
     "react-highlighter": "^0.4.3",

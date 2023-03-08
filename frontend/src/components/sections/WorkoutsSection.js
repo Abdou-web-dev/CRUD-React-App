@@ -157,12 +157,13 @@ export const WorkoutsSection = ({
   let result_word = filteredResults?.length === 1 ? `result` : "results";
 
   useEffect(() => {
+    //This is a prompt message for success, and it will disappear in 0.6 seconds
     if (openFilteredListModal) {
       setTimeout(() => {
         message.info(
           `You have got ${filteredResults?.length} ${result_word}`,
           2.5
-        ); //This is a prompt message for success, and it will disappear in 0.6 seconds
+        );
       }, 800);
     }
     if (filteredResults?.length === 0) {

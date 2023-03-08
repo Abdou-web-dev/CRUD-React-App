@@ -5,7 +5,15 @@ $medium: 768px;
 $large: 992px;
 $x-large: 1200px;
 $xx-large: 1400px;
-
+@mixin text_btn_styles {
+  font-family: "Inconsolata";
+  font-size: 17px;
+  text-transform: initial;
+  letter-spacing: 1.4px;
+  color: white;
+  font-weight: bold;
+  //   border-bottom: 1px solid lightgray;
+}
 .workouts-list-and-btns-container {
   .filtered-results-notification {
     margin-left: 400px;
@@ -191,5 +199,16 @@ $xx-large: 1400px;
         }
       }
     }
+  }
+}
+
+.profile-edit-btn {
+  height: fit-content !important;
+  padding: 5px 12px !important;
+  margin-right: 15px !important;
+  background: rgba(94, 144, 175, 0.65) !important;
+
+  span {
+    @include text_btn_styles();
   }
 }
