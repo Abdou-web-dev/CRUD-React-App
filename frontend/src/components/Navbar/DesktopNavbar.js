@@ -21,6 +21,7 @@ import "./navbar.scss";
 const DesktopNavbar = ({}) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
+
   const currentLocation = useLocation();
   let currentLocat = currentLocation.pathname;
 

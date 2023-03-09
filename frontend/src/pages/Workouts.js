@@ -93,6 +93,10 @@ const Workouts = ({}) => {
     isMobileScreen,
   ]);
 
+  // useEffect(() => {
+  //   if (user) console.log("user infos from Workouts", user);
+  // }, [user]);
+
   const MuiSkeletonJSX = (
     <Skeleton
       sx={{

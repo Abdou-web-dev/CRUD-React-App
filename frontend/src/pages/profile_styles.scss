@@ -11,6 +11,13 @@
   letter-spacing: 1.5px;
   border-bottom: 1px solid lightgray;
 }
+@mixin text_styles_2 {
+  font-family: "Mulish";
+  font-size: 17px;
+  color: rgba(255, 0, 0, 0.77);
+  letter-spacing: 1.2px;
+  border-bottom: 1px solid rgba(255, 0, 0, 0.33);
+}
 @mixin text_btn_styles {
   font-family: "Inconsolata";
   font-size: 17px;
@@ -40,7 +47,6 @@
         @include text_styles();
       }
     }
-
     .profile-copy-edit-btn-wrapper {
       @include d_flex;
       gap: 25px;
@@ -56,7 +62,66 @@
         }
       }
     }
+    &.user_typing_email {
+      .email_bloc1 {
+        position: relative;
+        bottom: 2.8px;
+        img {
+          width: 35px;
+          height: 35px;
+          transition: 0.85s ease !important;
+        }
+        span {
+          font-size: 16px;
+          transition: 0.85s ease !important;
+        }
+      }
+    }
   }
+
+  .profile-page-email-input-cancel_btn-not_valid-wrapper {
+    @include d_flex;
+    flex-direction: column;
+    .profile-page-email-input-wrapper {
+      @include d_flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 10px 0;
+      width: 100%;
+      .profile-page-email-input {
+        //=== ant-input-affix-wrapper
+        width: 35%;
+        margin: 0;
+        .ant-input {
+          height: 35px;
+          font-size: 17px;
+          font-family: "Poppins";
+          color: gray;
+        }
+        .ok_suffix-btn {
+          //
+        }
+        &.ok_clicked_email_invalid {
+          border: 1px solid rgba(255, 0, 0, 0.648);
+          box-shadow: none !important;
+        }
+      }
+      .x_icon-btn {
+        height: fit-content;
+        padding: 0;
+        .x_icon {
+          width: 55px;
+          height: 55px;
+        }
+      }
+    }
+    .not_valid_sentence {
+      span {
+        @include text_styles_2();
+      }
+    }
+  }
+
   .profile-fullName-wrapper {
     @include d_flex;
     gap: 25px;
