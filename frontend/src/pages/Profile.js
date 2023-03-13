@@ -47,7 +47,8 @@ function Profile() {
       setShowEmailInput(false);
       setEmailValue("");
       setEmail(emailValue);
-      localStorage.setItem("email_adress", JSON.stringify(email));
+      localStorage.setItem("email_adress", JSON.stringify(emailValue));
+      setEmail(JSON.parse(localStorage.getItem("email_adress")));
     } else {
       return;
     }
@@ -59,13 +60,23 @@ function Profile() {
     setCountry(JSON.parse(localStorage.getItem("user_country_from_signup")));
   }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("email_adress", JSON.stringify(email));
-  // }, [email]);
-
+  //at first render
   useEffect(() => {
-    setEmail(JSON.parse(localStorage.getItem("email_adress")));
+    setEmail(user?.email);
   }, []);
+
+  // const new_email = JSON.parse(localStorage.getItem("email_adress"));
+  // useEffect(() => {
+  //   window.onbeforeunload = function () {
+  //     console.log("page refreshed !!");
+  //     if (new_email) {
+  //       setEmail(new_email);
+  //     }
+  //   };
+  //   return () => {
+  //     window.onbeforeunload = null;
+  //   };
+  // }, [new_email]);
 
   function getCountryCode() {
     let code = "";
@@ -91,7 +102,7 @@ function Profile() {
       >
         <div className={`email_bloc1`}>
           <img src={at_logo} alt="" />
-          <span>{email || user?.email} </span>
+          <span>{email} </span>
         </div>
         <div className="profile-copy-edit-btn-wrapper">
           <CopyBtn handleCopyClick={copyToClipboard}></CopyBtn>
@@ -205,6 +216,13 @@ export default Profile;
 // const emailString = useRef("");
 // const isMobileScreen = useMediaQuery("(max-width: 600px)");
 /* display the exact icon of any country */
-{
-  /* ${emailValue ? "user_typing_email" : ""}  */
-}
+
+/* ${emailValue ? "user_typing_email" : ""}  */
+
+// localStorage.setItem("email_adress", JSON.stringify(emailValue));
+//       const new_email_adress = JSON.parse(localStorage.getItem("email_adress"));
+//       if (new_email_adress !== null) {
+//         setEmail(new_email_adress);
+//       }
+
+//       // const data = localStorage.g
