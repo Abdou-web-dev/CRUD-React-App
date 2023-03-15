@@ -1,13 +1,15 @@
-import { Button, Input, message } from "antd";
+import { message } from "antd";
 import { useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import validator from "validator";
 import { countries } from "../../src/assets/staticData/countries";
 import at_logo from "../assets/img/at.png";
-import cancelIcon from "../assets/img/cancelIcon.svg";
 import name_icon from "../assets/img/signature.png";
 import { CopyBtn } from "../components/buttons/CopyBtn";
 import { EditBTn } from "../components/buttons/EditBtn";
+import { EditInput } from "../components/inputs/EditInput";
+import { NiceSelect } from "../components/select/Select";
+
 import { useAuthContext } from "../hooks/useAuthContext";
 import "./profile_styles.scss";
 
@@ -24,6 +26,8 @@ function Profile() {
   const [countryValue, setCountryValue] = useState(``);
   const [showEmailInput, setShowEmailInput] = useState(false);
   const [showFullNameInput, setShowFullNameInput] = useState(false);
+  const [showCountrySelect, setShowCountrySelect] = useState(false);
+
   const [okBtnClicked, setOkBtnClicked] = useState(false);
   // const [showFullNameInput, setShowFullNameInput] = useState(false);
 
@@ -35,9 +39,12 @@ function Profile() {
   function handleEmailChange(e) {
     setEmailValue(e.target.value);
   }
-  //validateEmail on the frontend
+  function handleFullNameChange(e) {
+    setFullNameValue(e.target.value);
+  }
+  //validateEmail on the frontend,  * Check if the string is an email.
   let emailIsValid = emailValue && validator.isEmail(emailValue);
-  function handleEmailOKClick() {
+  function handleEmailSubmit() {
     if (showEmailInput) {
       setOkBtnClicked(true);
     } else {
@@ -54,29 +61,36 @@ function Profile() {
     }
   }
 
+  //for fullName
+  // * isAlpha : Check if the string contains only letters (a-zA-Z).
+  let fullNameIsValid = fullNameValue && validator.isAlpha(fullNameValue);
+  function handleFullNameSubmit() {
+    if (showFullNameInput) {
+      setOkBtnClicked(true);
+    } else {
+      setOkBtnClicked(false);
+    }
+    if (fullNameIsValid) {
+      setShowFullNameInput(false);
+      setFullNameValue("");
+      setFullName(fullNameValue);
+      localStorage.setItem("full_name", JSON.stringify(fullNameValue));
+      setFullName(JSON.parse(localStorage.getItem("full_name")));
+    } else {
+      return;
+    }
+  }
+
   // persist data after refresh and get it from local storage
   useEffect(() => {
     setFullName(JSON.parse(localStorage.getItem("user_fullName_from_signup")));
     setCountry(JSON.parse(localStorage.getItem("user_country_from_signup")));
   }, []);
 
-  //at first render
+  // at first render
   useEffect(() => {
     setEmail(user?.email);
   }, []);
-
-  // const new_email = JSON.parse(localStorage.getItem("email_adress"));
-  // useEffect(() => {
-  //   window.onbeforeunload = function () {
-  //     console.log("page refreshed !!");
-  //     if (new_email) {
-  //       setEmail(new_email);
-  //     }
-  //   };
-  //   return () => {
-  //     window.onbeforeunload = null;
-  //   };
-  // }, [new_email]);
 
   function getCountryCode() {
     let code = "";
@@ -116,48 +130,18 @@ function Profile() {
 
       <>
         {showEmailInput ? (
-          <div className="profile-page-email-input-cancel_btn-not_valid-wrapper">
-            <div className="profile-page-email-input-wrapper">
-              <Input
-                className={`profile-page-email-input
-                ${
-                  okBtnClicked && showEmailInput && emailValue && !emailIsValid
-                    ? "ok_clicked_email_invalid"
-                    : ""
-                }
-                `}
-                value={emailValue}
-                onChange={handleEmailChange}
-                suffix={
-                  <Button
-                    className="ok_suffix-btn"
-                    disabled={!emailValue}
-                    onClick={handleEmailOKClick}
-                  >
-                    <span>OK</span>
-                  </Button>
-                }
-                placeholder=" &nbsp;Email..."
-                onPressEnter={handleEmailOKClick}
-                disabled={null}
-              />
-              <Button
-                className="x_icon-btn"
-                onClick={() => {
-                  setShowEmailInput(false);
-                }}
-              >
-                <img className="x_icon" src={cancelIcon} alt="" />
-              </Button>
-            </div>
-            <>
-              {!emailIsValid && emailValue && (
-                <div className="not_valid_sentence">
-                  <span>This email address is not valid</span>
-                </div>
-              )}
-            </>
-          </div>
+          <EditInput
+            {...{
+              okBtnClicked,
+            }}
+            showEditInput={showEmailInput}
+            setShowEditInput={setShowEmailInput}
+            value={emailValue}
+            setValue={setEmailValue}
+            valueIsValid={emailIsValid}
+            handleChange={handleEmailChange}
+            handleOkClick={handleEmailSubmit}
+          />
         ) : null}
       </>
 
@@ -174,12 +158,28 @@ function Profile() {
           <EditBTn
             showInput={showFullNameInput}
             inputValue={fullNameValue}
-            // handleEditclick={() => setShowEmailInput(true)}
+            handleEditclick={() => setShowFullNameInput(true)}
           />
         </div>
       </div>
 
-      {/* {showfullNamenput ? ( // make this into a new component */}
+      <>
+        {showFullNameInput ? (
+          <EditInput
+            {...{
+              okBtnClicked,
+              fullNameValue,
+            }}
+            showEditInput={showFullNameInput}
+            setShowEditInput={setShowFullNameInput}
+            value={fullNameValue}
+            setValue={setFullNameValue}
+            valueIsValid={fullNameIsValid}
+            handleChange={handleFullNameChange}
+            handleOkClick={handleFullNameSubmit}
+          />
+        ) : null}
+      </>
 
       <div className="profile-country_icon-wrapper">
         {/* <img src={setCountryFlag()} alt={country} /> */}
@@ -202,10 +202,13 @@ function Profile() {
           }}
         />
         <EditBTn
-          EditDisabled={countryValue}
-          // handleEditclick={() => setFullNameValue(true)}
+          showCountrySelect={showCountrySelect}
+          handleEditclick={() => setShowCountrySelect(true)}
         />
       </div>
+
+      <>{showCountrySelect === true ? <NiceSelect></NiceSelect> : null}</>
+      {/* <NiceSelect /> */}
     </div>
   );
 }
@@ -226,3 +229,17 @@ export default Profile;
 //       }
 
 //       // const data = localStorage.g
+//this useEffect code must be placed in this component , not in App.js
+//  useEffect(() => {
+//   if (!user) {
+//     // localStorage.clear(); //to be used only if there is a need to remove all data from local storage
+//     // localStorage.removeItem("name of localStorage variable you want to remove");
+//     localStorage.removeItem("email_adress");
+//   }
+// }, [user]);
+// useEffect(() => {
+//   if (user) {
+//     const new_email = JSON.parse(localStorage.getItem("email_adress"));
+//     setEmail(new_email);
+//   }
+// }, [user]);

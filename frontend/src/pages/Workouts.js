@@ -84,6 +84,9 @@ const Workouts = ({}) => {
       if (layoutList) setdetailsContClass(`workout-details-container-as-list`);
       if (layoutGrid) setdetailsContClass(`workout-details-container-as-grid`);
     }
+    if (workouts) {
+      console.log(Array.isArray(workouts), workouts.length);
+    }
   }, [
     searchInput,
     currentPage,
@@ -91,11 +94,8 @@ const Workouts = ({}) => {
     layoutGrid,
     showAllExistentWorkouts,
     isMobileScreen,
+    workouts,
   ]);
-
-  // useEffect(() => {
-  //   if (user) console.log("user infos from Workouts", user);
-  // }, [user]);
 
   const MuiSkeletonJSX = (
     <Skeleton
@@ -207,68 +207,80 @@ const Workouts = ({}) => {
         </div>
 
         {/* pagination of Workouts  , with the pages' numbers */}
-        {searchInput?.length === 0 && !showAllExistentWorkouts && (
-          <Pagination
-            className={`${paginationClassName} ${
-              isTabletScreen && layoutGrid
-                ? `pagination-content-loaded-grid-to-bottom`
-                : ""
-            }`}
-            prevIcon={
-              paginationClassName === "pagination-content-loaded-grid" ? (
-                <PrevIcon />
-              ) : (
-                <LeftOutlined />
-              )
-            }
-            nextIcon={
-              paginationClassName === "pagination-content-loaded-grid" ? (
-                <NextIcon />
-              ) : (
-                <RightOutlined />
-              )
-            }
-            style={{
-              border:
-                paginationClassName === "pagination-content-loaded-grid"
-                  ? ""
-                  : `1px solid lightgray`,
-              padding:
-                paginationClassName === "pagination-content-loaded-grid"
-                  ? "10px 0"
-                  : `50px 0`,
-              position: "relative",
-              bottom: movePaginationFromBottom,
-              display: displayPagination,
-              justifyContent: "center",
-            }}
-            total={
-              workouts?.length > 0 && workouts?.length <= 10
-                ? 30 //3 pages
-                : workouts?.length >= 10 && workouts?.length <= 20
-                ? 60 //6 pages
-                : workouts?.length >= 20 && workouts?.length <= 30
-                ? 90
-                : workouts?.length >= 30 && workouts?.length <= 40
-                ? 120
-                : workouts?.length >= 40 && workouts?.length <= 50
-                ? 150
-                : workouts?.length >= 50 && workouts?.length <= 60
-                ? 180
-                : 250
-            }
-            // total={200} //200 means 20 page
-            current={currentPage}
-            onChange={(page, e) => {
-              setCurrentPage(page);
-            }}
-            showSizeChanger={false}
-            showQuickJumper
-          />
-        )}
+        {/* display the pagination only if there are some workouts  */}
+        {workouts.length !== 0 ? (
+          <>
+            {searchInput?.length === 0 && !showAllExistentWorkouts && (
+              <Pagination
+                className={`${paginationClassName} ${
+                  isTabletScreen && layoutGrid
+                    ? `pagination-content-loaded-grid-to-bottom`
+                    : ""
+                }`}
+                prevIcon={
+                  paginationClassName === "pagination-content-loaded-grid" ? (
+                    <PrevIcon />
+                  ) : (
+                    <LeftOutlined />
+                  )
+                }
+                nextIcon={
+                  paginationClassName === "pagination-content-loaded-grid" ? (
+                    <NextIcon />
+                  ) : (
+                    <RightOutlined />
+                  )
+                }
+                style={{
+                  border:
+                    paginationClassName === "pagination-content-loaded-grid"
+                      ? ""
+                      : `1px solid lightgray`,
+                  padding:
+                    paginationClassName === "pagination-content-loaded-grid"
+                      ? "10px 0"
+                      : `50px 0`,
+                  position: "relative",
+                  bottom: movePaginationFromBottom,
+                  display: displayPagination,
+                  justifyContent: "center",
+                }}
+                total={
+                  workouts?.length > 0 && workouts?.length <= 10
+                    ? 30 //3 pages
+                    : workouts?.length >= 10 && workouts?.length <= 20
+                    ? 60 //6 pages
+                    : workouts?.length >= 20 && workouts?.length <= 30
+                    ? 90
+                    : workouts?.length >= 30 && workouts?.length <= 40
+                    ? 120
+                    : workouts?.length >= 40 && workouts?.length <= 50
+                    ? 150
+                    : workouts?.length >= 50 && workouts?.length <= 60
+                    ? 180
+                    : 250
+                }
+                // total={200} //200 means 20 page
+                current={currentPage}
+                onChange={(page, e) => {
+                  setCurrentPage(page);
+                }}
+                showSizeChanger={false}
+                showQuickJumper
+              />
+            )}
+          </>
+        ) : null}
       </>
     );
   }
 };
 
 export default Workouts;
+
+// if (workouts === null) {
+//   console.log(Array.isArray(workouts)); false , workouts is an Object
+// }
+// useEffect(() => {
+//   if (user) console.log("user infos from Workouts", user);
+// }, [user]);

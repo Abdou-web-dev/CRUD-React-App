@@ -19,10 +19,6 @@ function App() {
   const isSmallScreen = useMediaQuery("(max-width: 576px)");
   const isMobileScreen = useMediaQuery("(max-width: 800px)");
 
-  // useEffect(() => {
-  //   if (user) console.log("user infos from App", user);
-  // }, [user]);
-
   return (
     <div className="App">
       <>{isMobileScreen ? <MobileNavbar /> : <DesktopNavbar />}</>

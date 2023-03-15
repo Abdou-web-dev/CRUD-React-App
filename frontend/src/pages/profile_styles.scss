@@ -101,6 +101,10 @@
         .ok_suffix-btn {
           //
         }
+        .clear_suffix-btn {
+          border: none;
+          padding: 0;
+        }
         &.ok_clicked_email_invalid {
           border: 1px solid rgba(255, 0, 0, 0.648);
           box-shadow: none !important;

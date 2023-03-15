@@ -344,6 +344,7 @@ export function WorkoutsListBtns({
                       (category, index) =>
                         index < 5 && (
                           <Button
+                            disabled={showAllExistentWorkouts}
                             className={`workouts-btns-and-elements-categ-btn-elem
                            workouts-btns-and-elements-categ-btn-${category?.exoTitle}-filter-btn
                            filter-btn${index}
@@ -374,6 +375,7 @@ export function WorkoutsListBtns({
                       (category, index) =>
                         index > 5 && (
                           <Button
+                            disabled={showAllExistentWorkouts}
                             className={`
                             workouts-btns-and-elements-categ-btn-elem
                             workouts-btns-and-elements-categ-btn-${category?.exoTitle}-filter-btn
@@ -421,6 +423,17 @@ export function WorkoutsListBtns({
               ))}
           </div>
         )}
+
+        <>
+          {showAllExistentWorkouts && (
+            <div className="no_workout">
+              <span>
+                First, add some workouts to your page , using the form on the +
+                button above !
+              </span>
+            </div>
+          )}
+        </>
         {/* Filtered Results */}
         {!showAllExistentWorkouts && (
           <>
