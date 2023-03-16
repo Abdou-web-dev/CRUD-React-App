@@ -141,10 +141,15 @@ export const TrashIcon = () => {
     </>
   );
 };
-export const CloseX = () => {
+export const CloseX = ({ handleClick }) => {
   return (
     <>
-      <img src={closeX} alt="" style={{ width: "30px", height: "30px" }} />
+      <img
+        onClick={handleClick}
+        src={closeX}
+        alt=""
+        style={{ width: "30px", height: "30px" }}
+      />
     </>
   );
 };

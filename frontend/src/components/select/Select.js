@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Select from "react-select";
-
+import { OkBtn } from "../buttons/OkBtn";
+import { CloseX } from "../icons/Icons";
+import "./select.scss";
 const countries = [
   { value: "Afghanistan", label: "Afghanistan", code: "AF" },
   { value: "land Islands", label: "land Islands", code: "AX" },
@@ -308,51 +310,82 @@ const countries = [
   { value: "Zimbabwe", label: null, code: "ZW" },
 ];
 
-export const NiceSelect = () => {
-  const [country, setCountry] = useState(``);
-
-  const handleChange = (selectedCountry) => {
-    // selectedCountry is an Object , like this one : {value: 'American Samoa', label: 'American Samoa', code: 'AS'}
-    setCountry(selectedCountry.value);
-    console.log(selectedCountry.value, country);
-  };
-
+const ClearIndicator = (props) => {
+  const {
+    children = <CloseX />, //handleClick={() => console.log("clear icon clicked")}
+    getStyles,
+    innerProps: { ref, ...restInnerProps },
+  } = props;
   return (
-    <>
-      <Select
-        placeholder="Select a country..."
-        className="basic-single"
-        classNamePrefix="select"
-        defaultValue={countries[100].label ? countries[99] : null} //Iceland
-        defaultMenuIsOpen={false}
-        isClearable={true}
-        isSearchable={true}
-        value={country?.value}
-        onChange={handleChange}
-        options={countries}
-        // options={colourOptions}
-        // isDisabled={isDisabled}
-        // isLoading={isLoading}
-        // isRtl={isRtl}
-        // onMenuScrollToBottom={() => message.info("Select a country", 1)} //not working
-      />
-      {/* <div>
-        <span>{country}</span>
-      </div> */}
-    </>
+    <div
+      {...restInnerProps}
+      ref={ref}
+      style={getStyles("clearIndicator", props)}
+    >
+      <div style={{ padding: "0px 5px" }}>{children}</div>
+    </div>
   );
 };
 
-/* <Checkbox
-          checked={isClearable}
-          onChange={() => setIsClearable((state) => !state)}
-        >
-          Clearable
-        </Checkbox> */
+export const NiceSelect = ({
+  selectedCountry,
+  setSelectedCountry,
+  setShowCountrySelect,
+  setCountry,
+}) => {
+  const handleChange = (selectedCountryItem) => {
+    // selectedCountryItem is an Object , like this one : {value: 'American Samoa', label: 'American Samoa', code: 'AS'}
+    setSelectedCountry(selectedCountryItem?.value);
+    // console.log(selectedCountryItem.value, selectedCountry);
+  };
 
-// const Checkbox = ({ children, ...props }) => (
-//     <label style={{ marginRight: "1em" }}>
-//       <input type="checkbox" {...props} />
-//       {children}
-//     </label>
-//   );
+  const handleChooseNewCountry = () => {
+    if (selectedCountry) {
+      setShowCountrySelect(false);
+      setSelectedCountry("");
+      setCountry(selectedCountry);
+      // localStorage.setItem("full_name", JSON.stringify(fullNameValue));
+      // setFullName(JSON.parse(localStorage.getItem("full_name")));
+    } else {
+      return;
+    }
+  };
+
+  useEffect(() => {
+    if (selectedCountry) console.log(selectedCountry);
+  }, [selectedCountry]);
+
+  return (
+    <>
+      <div className="nice-react-select-container">
+        <Select
+          // menuIsOpen={true}
+          className="nice-react-select"
+          placeholder="Select a country..."
+          classNamePrefix="select"
+          // defaultValue={countries[100].label ? countries[99] : null} //Iceland
+          defaultMenuIsOpen={false}
+          isClearable={true}
+          components={{ ClearIndicator }}
+          isSearchable={true}
+          value={selectedCountry?.value}
+          onChange={handleChange}
+          options={countries}
+          noOptionsMessage={() => "No country found"}
+          // options={colourOptions}
+          // isDisabled={isDisabled}
+          isLoading={selectedCountry ? false : true}
+          // isRtl={isRtl}
+          // onMenuScrollToBottom={() => message.info("Select a country", 1)} //not working
+        />
+        <div className="nice-react-select-ok-btn-wrapper">
+          <OkBtn
+            {...{ selectedCountry }}
+            value={selectedCountry}
+            handleOkClick={handleChooseNewCountry}
+          ></OkBtn>
+        </div>
+      </div>
+    </>
+  );
+};

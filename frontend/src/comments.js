@@ -253,3 +253,49 @@
 //   useEffect(() => {
 //     localStorage.setItem("selectedAvatar", JSON.stringify(avatar));
 //   }, [avatar]);
+
+// **<Profile className="js">
+  
+  {/* /* maybe, user a package that allows to display the country flag, later !!!! */
+// const emailString = useRef("");
+// const isMobileScreen = useMediaQuery("(max-width: 600px)");
+/* display the exact icon of any country */
+
+/* ${emailValue ? "user_typing_email" : ""}  */
+
+// localStorage.setItem("email_adress", JSON.stringify(emailValue));
+//       const new_email_adress = JSON.parse(localStorage.getItem("email_adress"));
+//       if (new_email_adress !== null) { */}
+//         setEmail(new_email_adress);
+//       }
+
+//       // const data = localStorage.g
+//this useEffect code must be placed in this component , not in App.js
+//  useEffect(() => {
+//   if (!user) {
+//     // localStorage.clear(); //to be used only if there is a need to remove all data from local storage
+//     // localStorage.removeItem("name of localStorage variable you want to remove");
+//     localStorage.removeItem("email_adress");
+//   }
+// }, [user]);
+// useEffect(() => {
+//   if (user) {
+//     const new_email = JSON.parse(localStorage.getItem("email_adress"));
+//     setEmail(new_email);
+//   }
+// }, [user]);
+// </Profile>
+
+/* <Checkbox
+          checked={isClearable}
+          onChange={() => setIsClearable((state) => !state)}
+        >
+          Clearable
+        </Checkbox> */
+
+// const Checkbox = ({ children, ...props }) => (
+//     <label style={{ marginRight: "1em" }}>
+//       <input type="checkbox" {...props} />
+//       {children}
+//     </label>
+//   );

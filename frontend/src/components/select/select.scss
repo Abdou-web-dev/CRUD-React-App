@@ -1,0 +1,51 @@
+.nice-react-select-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  .nice-react-select {
+    width: 50%;
+
+    .select__control {
+      width: 100%;
+      font-size: 30px;
+    }
+    .select__menu {
+      .select__menu-list {
+        & > * {
+          font-family: "Mulish" !important;
+          font-size: 22px;
+          color: grey;
+        }
+        .select__option {
+          &.select__option--is-selected {
+            color: white;
+            background: rgba(12, 121, 164, 0.6);
+          }
+        }
+        &::-webkit-scrollbar {
+          width: 25px;
+          // height: 50px;
+        }
+        &::-webkit-scrollbar-track {
+          border-radius: 10px;
+          background: rgba(161, 160, 160, 0.05);
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+        &::-webkit-scrollbar-thumb {
+          border-radius: 20px;
+          background: rgba(0, 0, 0, 0.2);
+        }
+        &::-webkit-scrollbar-thumb:hover {
+          border-radius: 10px;
+          background: rgba(23, 22, 22, 0.44);
+        }
+      }
+    }
+  }
+
+  .nice-react-select-ok-btn-wrapper {
+    //
+  }
+}

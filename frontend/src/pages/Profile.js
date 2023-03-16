@@ -7,9 +7,9 @@ import at_logo from "../assets/img/at.png";
 import name_icon from "../assets/img/signature.png";
 import { CopyBtn } from "../components/buttons/CopyBtn";
 import { EditBTn } from "../components/buttons/EditBtn";
+import { CustomDivider } from "../components/dividers/CustomDivider";
 import { EditInput } from "../components/inputs/EditInput";
 import { NiceSelect } from "../components/select/Select";
-
 import { useAuthContext } from "../hooks/useAuthContext";
 import "./profile_styles.scss";
 
@@ -27,9 +27,8 @@ function Profile() {
   const [showEmailInput, setShowEmailInput] = useState(false);
   const [showFullNameInput, setShowFullNameInput] = useState(false);
   const [showCountrySelect, setShowCountrySelect] = useState(false);
-
+  const [selectedCountry, setSelectedCountry] = useState(""); //the console tells that selectedCountry is a string
   const [okBtnClicked, setOkBtnClicked] = useState(false);
-  // const [showFullNameInput, setShowFullNameInput] = useState(false);
 
   function copyToClipboard() {
     navigator.clipboard.writeText(email); // Promise
@@ -61,7 +60,7 @@ function Profile() {
     }
   }
 
-  //for fullName
+  //fullName validation on the frontend
   // * isAlpha : Check if the string contains only letters (a-zA-Z).
   let fullNameIsValid = fullNameValue && validator.isAlpha(fullNameValue);
   function handleFullNameSubmit() {
@@ -109,137 +108,141 @@ function Profile() {
   return (
     // add the possibility to edit the email , full name and country
     <div className="profile-page-container">
-      <div
-        className={`profile-email-wrapper ${
-          emailValue ? "user_typing_email" : ""
-        } `}
-      >
-        <div className={`email_bloc1`}>
-          <img src={at_logo} alt="" />
-          <span>{email} </span>
-        </div>
-        <div className="profile-copy-edit-btn-wrapper">
-          <CopyBtn handleCopyClick={copyToClipboard}></CopyBtn>
-          <EditBTn
-            showInput={showEmailInput}
-            inputValue={emailValue}
-            handleEditclick={() => setShowEmailInput(true)}
-          />
-        </div>
-      </div>
-
       <>
-        {showEmailInput ? (
-          <EditInput
-            {...{
-              okBtnClicked,
-            }}
-            showEditInput={showEmailInput}
-            setShowEditInput={setShowEmailInput}
-            value={emailValue}
-            setValue={setEmailValue}
-            valueIsValid={emailIsValid}
-            handleChange={handleEmailChange}
-            handleOkClick={handleEmailSubmit}
-          />
-        ) : null}
+        <div
+          className={`profile-email-wrapper ${
+            emailValue && showEmailInput ? "user_typing_email" : ""
+            //this allows the img and the text to move a bit to top and left when the user types smth in the input field
+          } `}
+        >
+          <div className={`email_bloc1`}>
+            <img src={at_logo} alt="" />
+            <span>{email} </span>
+          </div>
+          <div className="profile-copy-edit-btn-wrapper">
+            <CopyBtn handleCopyClick={copyToClipboard}></CopyBtn>
+            <EditBTn
+              showInput={showEmailInput}
+              inputValue={emailValue}
+              handleEditclick={() => setShowEmailInput(true)}
+            />
+          </div>
+        </div>
+
+        <>
+          {showEmailInput ? (
+            <EditInput
+              {...{
+                okBtnClicked,
+              }}
+              showEditInput={showEmailInput}
+              setShowEditInput={setShowEmailInput}
+              value={emailValue}
+              setValue={setEmailValue}
+              valueIsValid={emailIsValid}
+              handleChange={handleEmailChange}
+              handleOkClick={handleEmailSubmit}
+            />
+          ) : null}
+        </>
       </>
 
-      <div className="profile-fullName-wrapper">
-        <img src={name_icon} alt="" />
-        <span className="name">{fullName} </span>
-        <CopyBtn
-          handleCopyClick={() => {
-            navigator.clipboard.writeText(fullName);
-            message.info("Name copied !", 0.85);
-          }}
-        />
-        <div className="profile-edit-btn-wrapper">
-          <EditBTn
-            showInput={showFullNameInput}
-            inputValue={fullNameValue}
-            handleEditclick={() => setShowFullNameInput(true)}
-          />
-        </div>
-      </div>
+      <CustomDivider />
 
       <>
-        {showFullNameInput ? (
-          <EditInput
-            {...{
-              okBtnClicked,
-              fullNameValue,
+        <div
+          className={`profile-fullName-wrapper ${
+            fullNameValue && showFullNameInput ? "user_typing_fullName" : ""
+          } `}
+        >
+          <div className={`fullName_bloc1`}>
+            <img src={name_icon} alt="" />
+            <span className="name">{fullName} </span>
+          </div>
+
+          <CopyBtn
+            handleCopyClick={() => {
+              navigator.clipboard.writeText(fullName);
+              message.info("Name copied !", 0.85);
             }}
-            showEditInput={showFullNameInput}
-            setShowEditInput={setShowFullNameInput}
-            value={fullNameValue}
-            setValue={setFullNameValue}
-            valueIsValid={fullNameIsValid}
-            handleChange={handleFullNameChange}
-            handleOkClick={handleFullNameSubmit}
           />
-        ) : null}
+          <div className="profile-edit-btn-wrapper">
+            <EditBTn
+              showInput={showFullNameInput}
+              inputValue={fullNameValue}
+              handleEditclick={() => setShowFullNameInput(true)}
+            />
+          </div>
+        </div>
+
+        <>
+          {showFullNameInput ? (
+            <EditInput
+              {...{
+                okBtnClicked,
+                fullNameValue,
+              }}
+              showEditInput={showFullNameInput}
+              setShowEditInput={setShowFullNameInput}
+              value={fullNameValue}
+              setValue={setFullNameValue}
+              valueIsValid={fullNameIsValid}
+              handleChange={handleFullNameChange}
+              handleOkClick={handleFullNameSubmit}
+            />
+          ) : null}
+        </>
       </>
 
-      <div className="profile-country_icon-wrapper">
-        {/* <img src={setCountryFlag()} alt={country} /> */}
-        <div className="country_flag">
-          <ReactCountryFlag
-            className="country_code"
-            countryCode={getCountryCode()}
-            style={{
-              fontSize: "3.25em",
-              lineHeight: "2em",
+      <CustomDivider />
+
+      <>
+        <div className="profile-country_icon-wrapper">
+          {/* <img src={setCountryFlag()} alt={country} /> */}
+          <div className="country_flag">
+            <ReactCountryFlag
+              className="country_code"
+              countryCode={getCountryCode()}
+              style={{
+                fontSize: "3.25em",
+                lineHeight: "2em",
+              }}
+              svg
+            />
+          </div>
+          <span className="country_text">{country} </span>
+          <CopyBtn
+            handleCopyClick={() => {
+              navigator.clipboard.writeText(country);
+              message.info("Country copied !", 0.85);
             }}
-            svg
+          />
+          <EditBTn
+            showCountrySelect={showCountrySelect}
+            handleEditclick={() => setShowCountrySelect(true)}
+            {...{ selectedCountry }}
           />
         </div>
-        <span className="country_text">{country} </span>
-        <CopyBtn
-          handleCopyClick={() => {
-            navigator.clipboard.writeText(country);
-            message.info("Country copied !", 0.85);
-          }}
-        />
-        <EditBTn
-          showCountrySelect={showCountrySelect}
-          handleEditclick={() => setShowCountrySelect(true)}
-        />
-      </div>
 
-      <>{showCountrySelect === true ? <NiceSelect></NiceSelect> : null}</>
-      {/* <NiceSelect /> */}
+        <>
+          {showCountrySelect === true ? (
+            <>
+              <NiceSelect
+                {...{
+                  selectedCountry,
+                  setSelectedCountry,
+                  setShowCountrySelect,
+                  setCountry,
+                }}
+              ></NiceSelect>
+            </>
+          ) : null}
+        </>
+      </>
     </div>
   );
 }
 
 export default Profile;
 
-/* maybe, user a package that allows to display the country flag, later !!!! */
-// const emailString = useRef("");
-// const isMobileScreen = useMediaQuery("(max-width: 600px)");
-/* display the exact icon of any country */
-
-/* ${emailValue ? "user_typing_email" : ""}  */
-
-// localStorage.setItem("email_adress", JSON.stringify(emailValue));
-//       const new_email_adress = JSON.parse(localStorage.getItem("email_adress"));
-//       if (new_email_adress !== null) {
-//         setEmail(new_email_adress);
-//       }
-
-//       // const data = localStorage.g
-//this useEffect code must be placed in this component , not in App.js
-//  useEffect(() => {
-//   if (!user) {
-//     // localStorage.clear(); //to be used only if there is a need to remove all data from local storage
-//     // localStorage.removeItem("name of localStorage variable you want to remove");
-//     localStorage.removeItem("email_adress");
-//   }
-// }, [user]);
-// useEffect(() => {
-//   if (user) {
-//     const new_email = JSON.parse(localStorage.getItem("email_adress"));
-//     setEmail(new_email);
-//   }
-// }, [user]);
+// 50 lines is a good rule of thumb for the body of your component (for class components, that is the render method). If looking at the total lines of the file is easier, most component files should not exceed 250 lines. Under 100 is ideal.

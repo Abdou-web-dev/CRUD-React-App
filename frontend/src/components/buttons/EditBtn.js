@@ -7,6 +7,7 @@ export function EditBTn({
   showInput,
   inputValue,
   showCountrySelect,
+  selectedCountry,
 }) {
   const [editDisabled, setEditDisabled] = useState(false);
   useEffect(() => {
@@ -30,6 +31,12 @@ export function EditBTn({
       setEditDisabled(true);
     }
   }, [showCountrySelect]);
+
+  useEffect(() => {
+    if (selectedCountry) {
+      setEditDisabled(false);
+    }
+  }, [selectedCountry]);
 
   return (
     <Button

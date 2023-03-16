@@ -32,6 +32,7 @@
   display: flex;
   gap: 20px;
   flex-direction: column;
+  padding-bottom: 400px;
   .profile-email-wrapper {
     @include d_flex;
     gap: 25px;
@@ -78,6 +79,9 @@
       }
     }
   }
+  .profile-divider {
+    // width: 80% ;
+  }
 
   .profile-page-email-input-cancel_btn-not_valid-wrapper {
     @include d_flex;
@@ -99,7 +103,6 @@
           color: gray;
         }
         .ok_suffix-btn {
-          //
         }
         .clear_suffix-btn {
           border: none;
@@ -146,17 +149,20 @@
         height: 30px;
       }
     }
-    .profile-edit-btn-wrapper {
-      //   .profile-edit-btn {
-      //     height: fit-content;
-      //     padding: 5px;
-      //     margin-right: 15px;
-      //     background: rgba(163, 94, 175, 0.3);
-
-      //     span {
-      //       @include text_btn_styles();
-      //     }
-      //   }
+    &.user_typing_fullName {
+      .fullName_bloc1 {
+        position: relative;
+        bottom: 2.8px;
+        img {
+          width: 35px;
+          height: 35px;
+          transition: 0.85s ease !important;
+        }
+        span {
+          font-size: 16px;
+          transition: 0.85s ease !important;
+        }
+      }
     }
   }
   .profile-country_icon-wrapper {
@@ -174,5 +180,13 @@
         height: 30px;
       }
     }
+  }
+}
+.country_selected {
+  border: 1px solid green !important;
+  height: 50px !important;
+  span {
+    font-weight: bold !important;
+    font-size: 25px !important;
   }
 }

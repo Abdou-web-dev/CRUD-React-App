@@ -1,5 +1,6 @@
 import { Button, Input } from "antd";
 import cancelIcon from "../../assets/img/cancelIcon.svg";
+import { OkBtn } from "../buttons/OkBtn";
 import { CloseX } from "../icons/Icons";
 
 export function EditInput({
@@ -39,13 +40,7 @@ export function EditInput({
                   </Button>
                 )}
 
-                <Button
-                  className="ok_suffix-btn"
-                  disabled={!value}
-                  onClick={handleOkClick}
-                >
-                  <span>OK</span>
-                </Button>
+                <OkBtn {...{ value, handleOkClick }} />
               </>
             }
             placeholder={
