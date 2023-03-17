@@ -492,7 +492,8 @@ export function WorkoutsList({
               </>
 
               <div className="chest-page-workouts-condensed-inner-more-icon">
-                {showMoreBtn && (
+                {/* avoid using condtion && <Component/>, type instead condition ?  <Component/>, : null , beause in this case , 0 appeard on the page when using && */}
+                {showMoreBtn && workouts?.length ? (
                   <Button
                     onClick={handleClick}
                     className="chest-page-workouts-condensed-inner-more-icon-btn"
@@ -505,7 +506,7 @@ export function WorkoutsList({
                       alt=""
                     />
                   </Button>
-                )}
+                ) : null}
 
                 <Spin spinning={spinning} size="large" />
               </div>

@@ -1,5 +1,6 @@
 import { Button, Input } from "antd";
 import cancelIcon from "../../assets/img/cancelIcon.svg";
+import { CloseBtn } from "../buttons/CloseBtn";
 import { OkBtn } from "../buttons/OkBtn";
 import { CloseX } from "../icons/Icons";
 
@@ -49,14 +50,8 @@ export function EditInput({
             onPressEnter={handleOkClick}
             disabled={null}
           />
-          <Button
-            className="x_icon-btn"
-            onClick={() => {
-              setShowEditInput(false);
-            }}
-          >
-            <img className="x_icon" src={cancelIcon} alt="" />
-          </Button>
+
+          <CloseBtn {...{ cancelIcon, setShowEditInput }} />
         </div>
         <>
           {!valueIsValid && value && (

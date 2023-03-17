@@ -1,6 +1,6 @@
-import { Button, Input } from "antd";
-import { useState } from "react";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { Button, Modal } from "antd";
+import { CloseX } from "../icons/Icons";
+import { EditModalContent } from "./EditModalContent";
 import "./modals_styles.scss";
 
 export function EditModal({
@@ -10,139 +10,48 @@ export function EditModal({
   dispatch,
   setUpdatedWorkout,
   updatedWorkout,
+  openEditModal,
+  setopenEditModal,
+  layoutGrid,
 }) {
-  const { user } = useAuthContext();
-
-  const [currentReps, setcurrentReps] = useState(updatedWorkout?.reps);
-  const [currentLoad, setcurrentLoad] = useState(updatedWorkout?.load);
-  const [currentTitle, setcurrentTitle] = useState(updatedWorkout?.title);
-
-  const handleRepsChange = (e) => {
-    setcurrentReps(e.target.value);
-    setUpdatedWorkout((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
-  const handleLoadChange = (e) => {
-    setcurrentLoad(e.target.value);
-    console.log(currentLoad);
-
-    setUpdatedWorkout((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
-  const handleTitleChange = (e) => {
-    setcurrentTitle(e.target.value);
-    console.log(currentTitle);
-    setUpdatedWorkout((prev) => {
-      return {
-        ...prev,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
-  const handleSaveEdit = async () => {
-    if (!user) {
-      return;
-    }
-    const response = await fetch("/api/workouts/" + workout._id, {
-      method: "PATCH", //PUt and PATCH are not equivalent
-      body: JSON.stringify(updatedWorkout),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-    const json = await response.json();
-
-    if (!response.ok) {
-      console.log("error occured during updating");
-    }
-    if (response.ok) {
-      console.log(updatedWorkout);
-      dispatch({ type: "UPDATE_WORKOUT", payload: json });
-    }
-    setshowModal(false);
-  };
-
   return (
-    <div className={showModal ? "edit-modal edit-modal-mobile" : "edit-modal"}>
-      <div className="edit-modal-title-wrapper">
-        <Input
-          className="edit-modal-title-input"
-          value={currentTitle}
-          onChange={handleTitleChange}
-          type="text"
-          name="title"
-          onClick={() => {
-            setcurrentTitle("");
+    <>
+      <Modal
+        className="ant-edit-modal"
+        open={openEditModal}
+        maskClosable={true}
+        closable={false}
+        keyboard={true}
+        mask={true}
+        onOk={() => setopenEditModal(false)}
+        onCancel={() => setopenEditModal(false)}
+        width={layoutGrid ? "50%" : "60%"}
+        footer={null}
+        // title={`Edit this workout`}
+        title={
+          <>
+            <span>Edit this workout</span>
+            <Button
+              onClick={() => setopenEditModal(false)}
+              className="ant-edit-modal-close-btn"
+            >
+              <CloseX></CloseX>
+            </Button>
+          </>
+        }
+      >
+        <EditModalContent
+          {...{
+            showModal,
+            setshowModal,
+            workout,
+            dispatch,
+            setUpdatedWorkout,
+            updatedWorkout,
           }}
-          onBlur={() => {
-            setcurrentTitle(updatedWorkout?.title);
-          }}
-          allowClear
-        />
-      </div>
-
-      <div className="edit-modal-reps-load-wrapper">
-        <div className="edit-modal-block1">
-          <label className="edit-modal-label1" htmlFor="load">
-            load :
-          </label>
-
-          <Input
-            className="edit-modal-load-input"
-            value={currentLoad}
-            onChange={handleLoadChange}
-            type="number"
-            name="load"
-            onClick={() => {
-              setcurrentLoad("");
-            }}
-            onBlur={() => {
-              setcurrentLoad(updatedWorkout?.load);
-            }}
-          />
-        </div>
-
-        <div className="edit-modal-block2">
-          <label className="edit-modal-label2" htmlFor="reps">
-            reps :
-          </label>
-          <Input
-            className="edit-modal-reps-input"
-            value={currentReps}
-            onChange={handleRepsChange}
-            type="number"
-            name="reps"
-            onClick={() => {
-              setcurrentReps("");
-            }}
-            onBlur={() => {
-              setcurrentReps(updatedWorkout?.reps);
-            }}
-          />
-        </div>
-      </div>
-
-      <div className="edit-modal-btns">
-        <Button
-          className="edit-modal-cancel-btn"
-          onClick={() => setshowModal(false)}
-        >
-          <span>Cancel</span>
-        </Button>
-        <Button className="edit-modal-save-btn" onClick={handleSaveEdit}>
-          <span>Save</span>
-        </Button>
-      </div>
-    </div>
+        ></EditModalContent>
+      </Modal>
+    </>
   );
 }
 

@@ -13,6 +13,7 @@ import TrapeziusIcon from "../../assets/img/TrapeziusIcon.png";
 import TricepsIcon from "../../assets/img/TricepsIcon.png";
 import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import { WorkoutDetailsItemCondensed } from "../sections/WorkoutDetailsItemCondensed";
+import { AddWorkoutBtn } from "./AddWorkoutBtn";
 import "./btns_elems.scss";
 let categories = [
   { exoTitle: `Triceps`, icon: TricepsIcon },
@@ -344,7 +345,7 @@ export function WorkoutsListBtns({
                       (category, index) =>
                         index < 5 && (
                           <Button
-                            disabled={showAllExistentWorkouts}
+                            disabled={!workouts?.length}
                             className={`workouts-btns-and-elements-categ-btn-elem
                            workouts-btns-and-elements-categ-btn-${category?.exoTitle}-filter-btn
                            filter-btn${index}
@@ -375,7 +376,8 @@ export function WorkoutsListBtns({
                       (category, index) =>
                         index > 5 && (
                           <Button
-                            disabled={showAllExistentWorkouts}
+                            // if there is no workout on the list, then this btn will be disabled
+                            disabled={!workouts?.length}
                             className={`
                             workouts-btns-and-elements-categ-btn-elem
                             workouts-btns-and-elements-categ-btn-${category?.exoTitle}-filter-btn
@@ -427,10 +429,9 @@ export function WorkoutsListBtns({
         <>
           {showAllExistentWorkouts && (
             <div className="no_workout">
-              <span>
-                First, add some workouts to your page , using the form on the +
-                button above !
-              </span>
+              <span>First, add some workouts to your page , through the </span>
+              <AddWorkoutBtn AddWorkoutBtnDisabled={true} />
+              <span> button above !</span>
             </div>
           )}
         </>

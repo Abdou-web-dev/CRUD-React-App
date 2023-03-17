@@ -1,6 +1,14 @@
 @import "@fontsource/nanum-gothic";
 @import "@fontsource/reem-kufi";
 
+@mixin input_text_styles {
+  font-family: "open Sans";
+  letter-spacing: 2px;
+  font-weight: bold;
+  font-size: 22px;
+  color: rgb(78, 76, 76);
+}
+
 .hamstring-modal-content-container {
   padding: 20px 150px;
   background-color: #91dcc72f;
@@ -167,6 +175,7 @@ span.ant-modal-close-x {
       .edit-modal-load-input {
         height: 40px;
         width: 50%;
+        @include input_text_styles();
       }
     }
     .edit-modal-block2 {
@@ -190,6 +199,7 @@ span.ant-modal-close-x {
       .edit-modal-reps-input {
         width: 50%;
         height: 40px;
+        @include input_text_styles();
       }
     }
   }
@@ -201,6 +211,10 @@ span.ant-modal-close-x {
     .edit-modal-title-input {
       height: 40px;
       width: 50%;
+      & > * {
+        @include input_text_styles();
+        // border-bottom: 0.5px solid rgba(128, 128, 128, 0.332);
+      }
       &:hover,
       &:focus {
         height: 60px;
@@ -298,6 +312,39 @@ span.ant-modal-close-x {
       transform: scale(2.2);
       position: relative;
       right: 5px;
+    }
+  }
+}
+
+//
+.ant-edit-modal {
+  .ant-modal-content {
+    .ant-modal-header {
+      .ant-modal-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .ant-edit-modal-close-btn {
+          border: none;
+          padding: 0;
+          width: 50px;
+          img {
+            width: 50px !important;
+            height: 50px !important;
+          }
+        }
+        span {
+          font-family: "open Sans";
+          letter-spacing: 2px;
+          font-weight: bold;
+          font-size: 22px;
+          color: grey;
+          border-bottom: 0.5px solid rgba(128, 128, 128, 0.332);
+        }
+      }
+    }
+
+    .ant-modal-body {
     }
   }
 }

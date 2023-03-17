@@ -11,6 +11,7 @@ import { CustomDivider } from "../components/dividers/CustomDivider";
 import { EditInput } from "../components/inputs/EditInput";
 import { NiceSelect } from "../components/select/Select";
 import { useAuthContext } from "../hooks/useAuthContext";
+
 import "./profile_styles.scss";
 
 // https://stackoverflow.com/questions/28314368/how-to-maintain-state-after-a-page-refresh-in-react-js

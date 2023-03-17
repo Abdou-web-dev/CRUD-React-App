@@ -2,7 +2,6 @@ import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import { Button, Divider, Input, Select, Tooltip } from "antd";
 import infoIcon from "../../assets/img/infoPNG.png";
 import list from "../../assets/img/list.svg";
-import plus from "../../assets/img/plus-sign.svg";
 import recycle from "../../assets/img/recycle.png";
 import "./form_styles.scss";
 
@@ -18,6 +17,7 @@ import {
   TrapeziusExos,
   TricepsExos,
 } from "../../assets/staticData/exosData";
+import { AddWorkoutBtn } from "../buttons/AddWorkoutBtn";
 import { ButtonToggleModalForm } from "../buttons/ButtonToggleForm";
 
 export const DesktopFormContent = ({
@@ -86,13 +86,12 @@ export const DesktopFormContent = ({
             }}
           >
             {showAllExistentWorkouts && !showFormNewWindow ? (
-              <Button
-                onClick={() => setShowFormNewWindow(!showFormNewWindow)}
-                className="form-filter-btn-plus-btn"
-              >
-                <img src={plus} alt="" />
-                <span>Add a New Workout</span>
-              </Button>
+              <AddWorkoutBtn
+                {...{
+                  setShowFormNewWindow,
+                  showFormNewWindow,
+                }}
+              />
             ) : null}
             {!showFormNewWindow && !showAllExistentWorkouts ? (
               <div className="form-filter-h3">

@@ -4,7 +4,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ShareIcon from "@mui/icons-material/Share";
 import { Backdrop, Collapse, Stack } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import { Button, Drawer, message, Modal, Popconfirm, Space } from "antd";
+import { Button, Drawer, message, Popconfirm, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import editIconPen from "../../assets/img/editer.png";
 import { useAuthContext } from "../../hooks/useAuthContext";
@@ -630,29 +630,18 @@ export const WorkoutDetails = ({
         </>
         {/* Antd Edit Modal  */}
         <>
-          <Modal
-            className=""
-            open={openEditModal}
-            maskClosable={true}
-            closable={true}
-            keyboard={true}
-            mask={true}
-            onOk={() => setopenEditModal(false)}
-            onCancel={() => setopenEditModal(false)}
-            width={layoutGrid ? "50%" : "60%"}
-            footer={null}
-            title={`Edit this workout`}
-          >
-            <EditModal
-              {...{
-                workout,
-                dispatch,
-                setUpdatedWorkout,
-                updatedWorkout,
-              }}
-              setshowModal={setopenEditModal}
-            ></EditModal>
-          </Modal>
+          <EditModal
+            {...{
+              workout,
+              dispatch,
+              setUpdatedWorkout,
+              updatedWorkout,
+              openEditModal,
+              setopenEditModal,
+              layoutGrid,
+            }}
+            setshowModal={setopenEditModal}
+          ></EditModal>
         </>
       </>
     </div>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useWorkoutsContext } from "../../hooks/useWorkoutsContext";
-import { EditModal } from "../modals/EditModal";
+import { EditModalMobile } from "../modals/EditModalMobile";
 import "./delete_details_mobile.scss";
 
 export function EditWorkoutMobile({
@@ -16,7 +16,7 @@ export function EditWorkoutMobile({
 
   return (
     <div className="edit-workout-mobile-container">
-      <EditModal
+      <EditModalMobile
         {...{
           showModal,
           setshowModal,

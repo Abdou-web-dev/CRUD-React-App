@@ -38,6 +38,12 @@ export function EditBTn({
     }
   }, [selectedCountry]);
 
+  useEffect(() => {
+    if (!showCountrySelect) {
+      setEditDisabled(false);
+    }
+  }, [showCountrySelect]);
+
   return (
     <Button
       disabled={editDisabled}

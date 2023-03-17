@@ -218,3 +218,33 @@ $xx-large: 1400px;
     @include text_btn_styles();
   }
 }
+//
+.x_icon-btn {
+  height: fit-content !important;
+  padding: 0 !important;
+  .x_icon {
+    width: 55px;
+    height: 55px;
+  }
+}
+.form-filter-btn-plus-btn {
+  padding: 10px !important;
+  background: rgba(211, 211, 211, 0.3) !important;
+  height: fit-content !important;
+  padding: 5px 10px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  &:hover {
+    background: rgba(211, 211, 211, 0.5) !important;
+  }
+  img {
+    width: 25px;
+    height: 25px;
+    margin-right: 15px;
+  }
+  span {
+    white-space: normal;
+  }
+}

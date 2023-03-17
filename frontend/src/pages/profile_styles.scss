@@ -36,6 +36,8 @@
   .profile-email-wrapper {
     @include d_flex;
     gap: 25px;
+    padding: 25px 0;
+
     .email_bloc1 {
       @include d_flex;
       gap: 15px;
@@ -77,6 +79,9 @@
           transition: 0.85s ease !important;
         }
       }
+    }
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
   }
   .profile-divider {
@@ -132,6 +137,11 @@
   .profile-fullName-wrapper {
     @include d_flex;
     gap: 25px;
+    padding: 25px 0;
+
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
     img {
       width: 60px;
       height: 60px;
@@ -168,6 +178,11 @@
   .profile-country_icon-wrapper {
     @include d_flex;
     gap: 25px;
+    padding: 25px 0;
+
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
     span.country_text {
       @include text_styles();
     }

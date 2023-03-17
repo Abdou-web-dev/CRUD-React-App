@@ -10,7 +10,6 @@ import { EditWorkoutMobile } from "../mobile/EditWorkoutMobile";
 import { ShareWorkoutMobile } from "../mobile/ShareWorkoutMobile";
 import "./workout_details_mobile.scss";
 
-// import starIconGray from "../../assets/img/starIconGray.svg";
 export function WorkoutDetailsItemMobile({
   workout,
   showMobileFormModal,
@@ -30,7 +29,7 @@ export function WorkoutDetailsItemMobile({
     if (!user) {
       return;
     }
-    //if there is no user, do not bother and run the code below, so the handleClick is abandoned
+    //if there is no user, do not bother and run the code below, so the handleDelete is abandoned
 
     const response = await fetch("/api/workouts/" + workout._id, {
       method: "DELETE",
@@ -56,6 +55,7 @@ export function WorkoutDetailsItemMobile({
     setshowDeleteModalContent(false);
     setshowShareModalContent(false);
     setUpdatedWorkout(workout);
+    console.log(showModal, showEditModalContent);
   };
   const handleShare = () => {
     setshowModal(true);
