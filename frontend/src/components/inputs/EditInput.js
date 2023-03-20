@@ -17,7 +17,10 @@ export function EditInput({
 }) {
   return (
     <>
-      <div className="profile-page-email-input-cancel_btn-not_valid-wrapper">
+      <div
+        className="profile-page-email-input-cancel_btn-not_valid-wrapper"
+        // style={{ border: "1px solid red" }}
+      >
         <div className="profile-page-email-input-wrapper">
           <Input
             className={`profile-page-email-input

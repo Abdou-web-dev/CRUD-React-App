@@ -43,8 +43,8 @@
       gap: 15px;
 
       img {
-        width: 60px;
-        height: 60px;
+        width: 44px;
+        height: 44px;
       }
       span {
         @include text_styles();
@@ -52,14 +52,13 @@
     }
     .profile-copy-edit-btn-wrapper {
       @include d_flex;
-      gap: 25px;
+      // gap: 25px;
 
       .profile-email-copy-btn {
         height: fit-content;
         padding: 5px;
         margin-right: 15px;
         img {
-          // border: 1px solid;
           width: 30px;
           height: 30px;
         }
@@ -139,26 +138,33 @@
     gap: 25px;
     padding: 25px 0;
 
+    .fullName_bloc1 {
+      @include d_flex;
+      gap: 15px;
+    }
     &:hover {
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
     img {
-      width: 60px;
-      height: 60px;
+      width: 44px;
+      height: 44px;
     }
     span.name {
       @include text_styles();
     }
-    .profile-email-copy-btn {
-      height: fit-content;
-      padding: 5px;
-      margin-right: 15px;
-      img {
-        // border: 1px solid;
-        width: 30px;
-        height: 30px;
+
+    .profile-copy-edit-btn-wrapper {
+      .profile-email-copy-btn {
+        height: fit-content;
+        padding: 5px;
+        margin-right: 15px;
+        img {
+          width: 30px;
+          height: 30px;
+        }
       }
     }
+
     &.user_typing_fullName {
       .fullName_bloc1 {
         position: relative;
@@ -196,7 +202,49 @@
       }
     }
   }
+  @media screen and (max-width: 600px) {
+    .profile-page-email-input-cancel_btn-not_valid-wrapper {
+      .profile-page-email-input-wrapper {
+        .profile-page-email-input {
+          //=== ant-input-affix-wrapper
+          width: 65%;
+          margin: 0;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 380px) {
+    .profile-email-wrapper,
+    .profile-fullName-wrapper {
+      .email_bloc1,
+      .fullName_bloc1 {
+        span {
+          @include text_styles();
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  &.profile-page-container_small_screen {
+    padding-left: 25px;
+    .profile-email-wrapper,
+    .profile-fullName-wrapper,
+    .profile-country_icon-wrapper {
+      @include d_flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 25px;
+      padding: 25px 0;
+
+      .profile-copy-edit-btn-wrapper {
+        // border: 1px solid red;
+        gap: 0px;
+        margin-left: 15px;
+      }
+    }
+  }
 }
+//
 .country_selected {
   border: 1px solid green !important;
   height: 50px !important;

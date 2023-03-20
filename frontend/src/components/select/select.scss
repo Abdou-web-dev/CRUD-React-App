@@ -9,6 +9,11 @@
     .select__control {
       width: 100%;
       font-size: 30px;
+      .select__value-container {
+        .select__placeholder {
+          // display: none;
+        }
+      }
     }
     .select__menu {
       .select__menu-list {
@@ -44,8 +49,88 @@
       }
     }
   }
+  .nice-react-select-ok-btn-and-close-btn-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    .nice-react-select-ok-btn-wrapper {
+    }
+    .nice-react-select-close-btn-wrapper {
+      // border: 1px solid;
+    }
+  }
 
-  .nice-react-select-ok-btn-wrapper {
-    //
+  @media screen and (min-width: 600px) and (max-width: 780px) {
+    // border: 1px solid red;
+    .nice-react-select {
+      width: 70%;
+
+      .select__control {
+        width: 100%;
+        font-size: 30px;
+        .select__value-container {
+          .select__placeholder {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 400px) and (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    .nice-react-select {
+      width: 70%;
+
+      .select__control {
+        width: 100%;
+        font-size: 30px;
+        .select__value-container {
+          .select__placeholder {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+    .nice-react-select-ok-btn-and-close-btn-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      .nice-react-select-ok-btn-wrapper {
+      }
+      .nice-react-select-close-btn-wrapper {
+        // border: 1px solid;
+      }
+    }
+  }
+  @media screen and (min-width: 200px) and (max-width: 430px) {
+    display: flex;
+    flex-direction: column;
+    .nice-react-select {
+      width: 90%;
+
+      .select__control {
+        width: 100%;
+        font-size: 30px;
+        .select__value-container {
+          .select__placeholder {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    .nice-react-select-ok-btn-and-close-btn-wrapper {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      .nice-react-select-ok-btn-wrapper {
+      }
+      .nice-react-select-close-btn-wrapper {
+        // border: 1px solid;
+      }
+    }
   }
 }

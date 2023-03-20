@@ -1,5 +1,7 @@
 import { Button } from "antd";
 import { useEffect, useState } from "react";
+import edit_icon from "../../assets/img/edit_icon.png";
+import { useMediaQuery } from "../../hooks/UseMediaQuery";
 import "./btns_elems.scss";
 
 export function EditBTn({
@@ -43,14 +45,15 @@ export function EditBTn({
       setEditDisabled(false);
     }
   }, [showCountrySelect]);
+  const isSmallScreen = useMediaQuery("(max-width: 550px)");
 
   return (
     <Button
+      className={isSmallScreen ? "profile-edit-btn-small" : "profile-edit-btn"}
       disabled={editDisabled}
-      className="profile-edit-btn"
       onClick={handleEditclick}
     >
-      <span>Edit</span>
+      {!isSmallScreen ? <span>Edit</span> : <img src={edit_icon} alt="" />}
     </Button>
   );
 }

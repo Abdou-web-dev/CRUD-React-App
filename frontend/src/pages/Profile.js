@@ -11,6 +11,7 @@ import { CustomDivider } from "../components/dividers/CustomDivider";
 import { EditInput } from "../components/inputs/EditInput";
 import { NiceSelect } from "../components/select/Select";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useMediaQuery } from "../hooks/UseMediaQuery";
 
 import "./profile_styles.scss";
 
@@ -24,12 +25,12 @@ function Profile() {
   const [fullName, setFullName] = useState("");
   const [emailValue, setEmailValue] = useState(``);
   const [fullNameValue, setFullNameValue] = useState(``);
-  const [countryValue, setCountryValue] = useState(``);
   const [showEmailInput, setShowEmailInput] = useState(false);
   const [showFullNameInput, setShowFullNameInput] = useState(false);
   const [showCountrySelect, setShowCountrySelect] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(""); //the console tells that selectedCountry is a string
   const [okBtnClicked, setOkBtnClicked] = useState(false);
+  const isSmallScreen = useMediaQuery("(max-width: 550px)");
 
   function copyToClipboard() {
     navigator.clipboard.writeText(email); // Promise
@@ -108,7 +109,13 @@ function Profile() {
 
   return (
     // add the possibility to edit the email , full name and country
-    <div className="profile-page-container">
+    <div
+      className={
+        isSmallScreen
+          ? "profile-page-container profile-page-container_small_screen"
+          : "profile-page-container"
+      }
+    >
       <>
         <div
           className={`profile-email-wrapper ${
@@ -161,13 +168,13 @@ function Profile() {
             <span className="name">{fullName} </span>
           </div>
 
-          <CopyBtn
-            handleCopyClick={() => {
-              navigator.clipboard.writeText(fullName);
-              message.info("Name copied !", 0.85);
-            }}
-          />
-          <div className="profile-edit-btn-wrapper">
+          <div className="profile-copy-edit-btn-wrapper">
+            <CopyBtn
+              handleCopyClick={() => {
+                navigator.clipboard.writeText(fullName);
+                message.info("Name copied !", 0.85);
+              }}
+            />
             <EditBTn
               showInput={showFullNameInput}
               inputValue={fullNameValue}
@@ -212,17 +219,19 @@ function Profile() {
             />
           </div>
           <span className="country_text">{country} </span>
-          <CopyBtn
-            handleCopyClick={() => {
-              navigator.clipboard.writeText(country);
-              message.info("Country copied !", 0.85);
-            }}
-          />
-          <EditBTn
-            showCountrySelect={showCountrySelect}
-            handleEditclick={() => setShowCountrySelect(true)}
-            {...{ selectedCountry }}
-          />
+          <div className="profile-copy-edit-btn-wrapper">
+            <CopyBtn
+              handleCopyClick={() => {
+                navigator.clipboard.writeText(country);
+                message.info("Country copied !", 0.85);
+              }}
+            />
+            <EditBTn
+              showCountrySelect={showCountrySelect}
+              handleEditclick={() => setShowCountrySelect(true)}
+              {...{ selectedCountry }}
+            />
+          </div>
         </div>
 
         <>

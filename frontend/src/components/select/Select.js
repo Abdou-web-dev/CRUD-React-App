@@ -30,6 +30,8 @@ export const NiceSelect = ({
   setShowCountrySelect,
   setCountry,
 }) => {
+  const [searchValue, setsearchValue] = useState("");
+
   const handleChange = (selectedCountryItem) => {
     // selectedCountryItem is an Object , like this one : {value: 'American Samoa', label: 'American Samoa', code: 'AS'}
     setSelectedCountry(selectedCountryItem?.value);
@@ -47,7 +49,6 @@ export const NiceSelect = ({
       return;
     }
   };
-  const [searchValue, setsearchValue] = useState("");
 
   useEffect(() => {
     // if (selectedCountry) console.log(selectedCountry);
@@ -83,15 +84,17 @@ export const NiceSelect = ({
           // isRtl={isRtl}
           // onMenuScrollToBottom={() => message.info("Select a country", 1)} //not working
         />
-        <div className="nice-react-select-ok-btn-wrapper">
-          <OkBtn
-            {...{ selectedCountry }}
-            value={selectedCountry}
-            handleOkClick={handleChooseNewCountry}
-          ></OkBtn>
-        </div>
-        <div>
-          <CloseBtn setShowEditInput={setShowCountrySelect} />
+        <div className="nice-react-select-ok-btn-and-close-btn-wrapper">
+          <div className="nice-react-select-ok-btn-wrapper">
+            <OkBtn
+              {...{ selectedCountry }}
+              value={selectedCountry}
+              handleOkClick={handleChooseNewCountry}
+            ></OkBtn>
+          </div>
+          <div className="nice-react-select-close-btn-wrapper">
+            <CloseBtn setShowEditInput={setShowCountrySelect} />
+          </div>
         </div>
       </div>
     </>
